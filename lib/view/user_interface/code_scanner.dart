@@ -238,8 +238,7 @@ class _QRScanState extends State<QRScan> {
       setState(() {
        
         result = scanData;
-        wifiSSID = scanData.code!.split(';')[1].substring(2);
-        wifiPassword = scanData.code!.split(';')[2].substring(2);
+        
         
       });
     });
