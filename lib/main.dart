@@ -11,7 +11,7 @@ import 'package:flutter_application_1/view/user_interface/main_page.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
- // mohammed sbiHI11@GMAIL.COM_inbranche test
+  
   //pour changer la couleur le la bar de notification de la même couleur de notre théme
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color.fromRGBO(47, 103, 23, 1)));
