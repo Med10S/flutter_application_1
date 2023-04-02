@@ -8,6 +8,7 @@ import 'package:flutter_application_1/utilities/routes.dart';
 import 'package:flutter_application_1/view/fist_pages/page1.dart';
 import 'package:flutter_application_1/view/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/view/user_interface/main_page.dart';
+import 'package:flutter_application_1/view/user_interface/chart2.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
@@ -16,6 +17,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color.fromRGBO(47, 103, 23, 1)));
   // WidgetsFlutterBinding.ensureInitialized();
+  
   //debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:flutter_application_1/view/user_interface/chart.dart';
+import 'package:flutter_application_1/view/user_interface/chart2.dart';
 
 import '../welcome.dart';
 import 'code_scanner.dart';
@@ -141,7 +143,12 @@ class _User_Main_PageState extends State<User_Main_Page> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset("images/chart.png"),
+                  InkWell(onTap: (){
+                    Navigator.push(context, CupertinoPageRoute(
+                              builder: (_) => chartDays(),
+                    ));
+                  },
+                    child: Image.asset("images/chart.png")),
                   const Text(
                     "Statistique",
                     style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
