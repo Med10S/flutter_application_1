@@ -32,9 +32,9 @@ class _User_Main_PageState extends State<User_Main_Page> {
     });
   }
 
-  List<String> time = ["09/03/2023", "10/03/2023", "15/03/2023", "15/03/2023"];
+  List<String> time = ["09/03/2023", "10/03/2023", "15/03/2023", "15/03/2023","15/03/2023"];
 
-  List<double> quantite = [3, 10, 6, 10];
+  List<double> quantite = [3, 10, 6, 10,20];
 
 //openssl
   @override
@@ -72,28 +72,34 @@ class _User_Main_PageState extends State<User_Main_Page> {
             ),
           ),
           Expanded(
-            child: ListTileTheme(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+                color: Color.fromARGB(255, 218, 218, 218),
               ),
-              child: ListView.builder(
-                itemCount: time.length,
-                // Appliquer un BorderRadius de 16 à tous les éléments de la liste
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.all(8),
-                    child: Material(
-                      color: const Color.fromRGBO(184, 184, 184, 1),
-                      borderRadius: BorderRadius.circular(20),
-                      child: ListTileTheme(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+              child: ListTileTheme(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: ListView.builder(
+                  itemCount: time.length,
+                  // Appliquer un BorderRadius de 20 à tous les éléments de la liste
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      padding: EdgeInsets.only(top: Dimenssio.width16dp),
+                      child: Material(
+                        color: Color.fromARGB(255, 194, 194, 194),
+                        borderRadius: BorderRadius.circular(20),
+                        child: ListTileTheme(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: itemBuilder(context, index),
                         ),
-                        child: itemBuilder(context, index),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -101,11 +107,13 @@ class _User_Main_PageState extends State<User_Main_Page> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () { Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => QRScan(),
-                            ));},
+        onPressed: () {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (_) => QRScan(),
+              ));
+        },
         backgroundColor: const Color.fromRGBO(39, 87, 19, 1),
         child: Image.asset('images/QR.png'),
       ),
@@ -143,12 +151,15 @@ class _User_Main_PageState extends State<User_Main_Page> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  InkWell(onTap: (){
-                    Navigator.push(context, CupertinoPageRoute(
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
                               builder: (_) => chartDays(),
-                    ));
-                  },
-                    child: Image.asset("images/chart.png")),
+                            ));
+                      },
+                      child: Image.asset("images/chart.png")),
                   const Text(
                     "Statistique",
                     style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),

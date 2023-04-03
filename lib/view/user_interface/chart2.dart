@@ -72,6 +72,7 @@ class _chartDaysState extends State<chartDays> {
                   ],
                 )),
             SfCircularChart(
+              margin: EdgeInsets.all(-Dimenssio.height20dp/4),
               backgroundColor: Colors.transparent,
               legend: Legend(
                   isVisible: true,
@@ -97,7 +98,7 @@ class _chartDaysState extends State<chartDays> {
 
   List<quatitedechet> getchardata() {
     final List<quatitedechet> chartData = [
-      quatitedechet("platique", 9),
+      quatitedechet("platique", 12),
       quatitedechet("verre", 2),
       quatitedechet("metalle", 6),
       quatitedechet("organique", 4),
