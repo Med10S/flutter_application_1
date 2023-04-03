@@ -32,20 +32,20 @@ class _statistiqueState extends State<statistique> {
      var list =[1.2,2.2,3.1];
      list.add(10.2);
      List<ChartData> chartData = <ChartData>[
-      ChartData('2/04/2022', list[list.length-1], 9, 5, 4, 0),
-      ChartData('3/04/2022', 3, 0, 5, 0, 2),
-      ChartData('4/04/2022', 5, 4, 0, 1, 1),
-      ChartData('6/04/2022', 6, 2, 2, 0, 2),
-      ChartData('5/04/2022', 1, 8, 5, 4, 0),
+      ChartData('2/04', list[list.length-1], 9, 5, 4, 0),
+      ChartData('3/04', 3, 0, 5, 0, 2),
+      ChartData('4/04', 5, 4, 0, 1, 1),
+      ChartData('5/04', 6, 2, 2, 0, 2),
+      ChartData('6/04', 1, 8, 5, 4, 0),
     ];
     //cette boocle est une demonstration comment tu peut ajouter les donnes depuis firebase 
     //tu les engresitre dans une list apres tu extracte les elements de la list
 
     for(int i=7;i<11;i++){
-      chartData.add(ChartData('$i/04/2022', 1, 8, 5, 4, 0),);
+      chartData.add(ChartData('$i/04', 1, 8, 5, 4, 0),);
 
     }
-    chartData.add(ChartData('11/04/2022', 1, 8, 5, 1, 0),);
+    chartData.add(ChartData('11/04', 1, 8, 5, 1, 0),);
     return SafeArea(
       child: Scaffold(
           floatingActionButtonLocation:
@@ -166,7 +166,7 @@ class _statistiqueState extends State<statistique> {
               SizedBox(
                   height: Dimenssio.FirstPagesImageHeight,
                   child: SfCartesianChart(
-                    zoomPanBehavior: ZoomPanBehavior(enablePanning: true,enableDoubleTapZooming: true,enableSelectionZooming: true,enablePinching: true),
+                    zoomPanBehavior: ZoomPanBehavior(enablePanning: true,enablePinching: true),
                       legend: Legend(
                           overflowMode: LegendItemOverflowMode.wrap,
                           isVisible: true,
