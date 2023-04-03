@@ -36,7 +36,7 @@ class _statistiqueState extends State<statistique> {
       ChartData('3/04', 3, 0, 5, 0, 2),
       ChartData('4/04', 5, 4, 0, 1, 1),
       ChartData('5/04', 6, 2, 2, 0, 2),
-      ChartData('6/04', 1, 8, 5, 4, 0),
+      ChartData('6/04', 1, 8, 5, 4, 0),//teste
     ];
     //cette boocle est une demonstration comment tu peut ajouter les donnes depuis firebase 
     //tu les engresitre dans une list apres tu extracte les elements de la list
