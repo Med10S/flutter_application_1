@@ -39,8 +39,8 @@ class _statistiqueState extends State<statistique> {
       ChartData('5/04/2022', 1, 8, 5, 4, 0),
     ];
     //cette boocle est une demonstration comment tu peut ajouter les donnes depuis firebase 
-    //tu les engesitre dans une list apres tu extracte les elements de la list
-    
+    //tu les engresitre dans une list apres tu extracte les elements de la list
+
     for(int i=7;i<11;i++){
       chartData.add(ChartData('$i/04/2022', 1, 8, 5, 4, 0),);
 
