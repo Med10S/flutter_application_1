@@ -1,3 +1,6 @@
+
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -26,16 +29,25 @@ class _statistiqueState extends State<statistique> {
 
   @override
   Widget build(BuildContext context) {
-    final List<ChartData> chartData = <ChartData>[
-      ChartData('Metale', 128, 129, 101),
-      ChartData('plastique', 123, 92, 93),
-      ChartData('verre', 107, 106, 90),
-      ChartData('carton', 87, 95, 71),
-      ChartData('organique', 87, 95, 71),
+     var list =[1.2,2.2,3.1];
+     list.add(10.2);
+     List<ChartData> chartData = <ChartData>[
+      ChartData('2/04/2022', list[list.length-1], 9, 5, 4, 0),
+      ChartData('3/04/2022', 3, 0, 5, 0, 2),
+      ChartData('4/04/2022', 5, 4, 0, 1, 1),
+      ChartData('6/04/2022', 6, 2, 2, 0, 2),
+      ChartData('5/04/2022', 1, 8, 5, 4, 0),
     ];
+    //cette boocle est une demonstration comment tu peut ajouter les donnes depuis firebase 
+    //tu les engesitre dans une list apres tu extracte les elements de la list
+    
+    for(int i=7;i<11;i++){
+      chartData.add(ChartData('$i/04/2022', 1, 8, 5, 4, 0),);
+
+    }
+    chartData.add(ChartData('11/04/2022', 1, 8, 5, 1, 0),);
     return SafeArea(
       child: Scaffold(
-        
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
@@ -148,24 +160,50 @@ class _statistiqueState extends State<statistique> {
                   width: Dimenssio.screenWidth,
                   color: const Color.fromRGBO(47, 103, 23, 1),
                   child: Image.asset('images/logo.png')),
-                  SizedBox(height: Dimenssio.height20dp*3,),
+              SizedBox(
+                height: Dimenssio.height20dp * 3,
+              ),
               SizedBox(
                   height: Dimenssio.FirstPagesImageHeight,
                   child: SfCartesianChart(
+                    zoomPanBehavior: ZoomPanBehavior(enablePanning: true,enableDoubleTapZooming: true,enableSelectionZooming: true,enablePinching: true),
+                      legend: Legend(
+                          overflowMode: LegendItemOverflowMode.wrap,
+                          isVisible: true,
+                          position: LegendPosition.bottom,
+                          alignment: ChartAlignment.center),
                       primaryXAxis: CategoryAxis(),
                       series: <CartesianSeries>[
                         LineSeries<ChartData, String>(
+                            legendIconType: LegendIconType.pentagon,
+                            legendItemText: 'plastique',
                             dataSource: chartData,
                             xValueMapper: (ChartData data, _) => data.x,
                             yValueMapper: (ChartData data, _) => data.y),
                         LineSeries<ChartData, String>(
+                            legendIconType: LegendIconType.pentagon,
+                            legendItemText: 'carton',
                             dataSource: chartData,
                             xValueMapper: (ChartData data, _) => data.x,
                             yValueMapper: (ChartData data, _) => data.y1),
                         LineSeries<ChartData, String>(
+                            legendIconType: LegendIconType.pentagon,
+                            legendItemText: 'verre',
                             dataSource: chartData,
                             xValueMapper: (ChartData data, _) => data.x,
-                            yValueMapper: (ChartData data, _) => data.y2)
+                            yValueMapper: (ChartData data, _) => data.y2),
+                        LineSeries<ChartData, String>(
+                            legendIconType: LegendIconType.pentagon,
+                            legendItemText: 'metale',
+                            dataSource: chartData,
+                            xValueMapper: (ChartData data, _) => data.x,
+                            yValueMapper: (ChartData data, _) => data.y3),
+                        LineSeries<ChartData, String>(
+                            dataSource: chartData,
+                            legendItemText: 'organique',
+                            legendIconType: LegendIconType.pentagon,
+                            xValueMapper: (ChartData data, _) => data.x,
+                            yValueMapper: (ChartData data, _) => data.y4)
                       ])),
             ],
           ))),
@@ -174,9 +212,11 @@ class _statistiqueState extends State<statistique> {
 }
 
 class ChartData {
-  ChartData(this.x, this.y, this.y1, this.y2);
+  ChartData(this.x, this.y, this.y1, this.y2, this.y3, this.y4);
   final String x;
   final double? y;
   final double? y1;
   final double? y2;
+  final double? y3;
+  final double? y4;
 }
