@@ -151,7 +151,7 @@ class _AuthPageState extends State<AuthPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.asset("images/Google.png"),
+                        Image.asset("images/google.png"),
                         Text(
                           'continué avec Google',
                           style: TextStyle(fontSize: Dimenssio.width16dp),
