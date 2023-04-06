@@ -4,7 +4,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:flutter_application_1/utilities/string.dart';
+import 'package:flutter_application_1/view/adulte_pages/pollution/nature.dart';
 
+import '../../../colors/colors.dart';
 import '../first_page.dart';
 import 'definition.dart';
 
@@ -66,6 +69,11 @@ class Pollution extends StatelessWidget {
                                 builder: (_) => definition(),
                               ));
                         },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                               const Color.fromRGBO(238, 238, 238, 0.64),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimenssio.width30dp / 2),
@@ -78,22 +86,26 @@ class Pollution extends StatelessWidget {
                                     color: Colors.black,
                                     fontSize: Dimenssio.width16dp),
                               ),
-                              Icon(Icons.arrow_forward_ios,
+                             const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
                             ],
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Color.fromRGBO(238, 238, 238, 0.64),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
                       ),
                     ),
                     SizedBox(
                       height: Dimenssio.height55dp,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) => naturePollution(),
+                              ));},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(238, 238, 238, 0.64),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimenssio.width30dp / 2),
@@ -101,21 +113,16 @@ class Pollution extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Nature de pollution",
+                                strings.Nature_Pollution,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: Dimenssio.width16dp),
                               ),
-                              Icon(Icons.arrow_forward_ios,
+                             const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
                             ],
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Color.fromRGBO(238, 238, 238, 0.64),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
                       ),
                     ),
                     SizedBox(

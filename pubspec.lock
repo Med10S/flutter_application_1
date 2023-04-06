@@ -118,6 +118,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_circular_chart:
+    dependency: "direct main"
+    description:
+      name: flutter_circular_chart
+      sha256: "0c3f42ff3364d70094a66d00556c8ab139dd136ec71bd8a7a341e6ebd527a9e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:

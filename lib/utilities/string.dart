@@ -1,0 +1,4 @@
+class strings{
+   static String Nature_Pollution='Nature de pollution';
+   static String pollutionDefinition='La pollution est la dégradation ou l\'altération de l\'environnement,gé,eralemnt associée aux activités humaines par la diffusion direct ou indirecte de substances chimiques, physique ou biologique potentitillement toxique pour les organismes vivant ou qui interfèrent plus au moins avec les fonction naturalles des écosystèmes.Outre son impact sur la santé humaine et animale, il peut entraîner la migration ou l\'extinction de certaines espèces qui ne peuvent s\'adapter aux modifiaction de leur milieu naturel';
+}

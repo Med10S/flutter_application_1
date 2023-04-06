@@ -24,7 +24,7 @@ class naturePollution extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                  height: Dimenssio.FirstPagesImageHeight/2.5,
+                    height: Dimenssio.FirstPagesImageHeight / 2.5,
                     alignment: Alignment.topRight,
                     child: Image.asset('images/terre.png')),
                 Image.asset('images/logo.png')
@@ -44,38 +44,62 @@ class naturePollution extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'pollution physique',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: Dimenssio.width16dp),
+            InkWell(
+              onTap: (){},
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color.fromARGB(255, 52, 172, 42),
                 ),
-                Image.asset('images/physique.png')
-              ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'pollution physique',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: Dimenssio.width16dp),
+                    ),
+                    Image.asset('images/physique.png')
+                  ],
+                ),
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'pollution chimique2',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: Dimenssio.width16dp),
-                ),
-                Image.asset('images/chimique.png')
-              ],
+            Container(
+               margin: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color.fromARGB(255, 52, 172, 42),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    'pollution chimique2',
+                    style: TextStyle(
+                        color: Colors.white, fontSize: Dimenssio.width16dp),
+                  ),
+                  Image.asset('images/chimique.png')
+                ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'pollution biologique',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: Dimenssio.width16dp),
-                ),
-                Image.asset('images/biologique.png')
-              ],
+            Container(
+               margin: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color.fromARGB(255, 52, 172, 42),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    'pollution biologique',
+                    style: TextStyle(
+                        color: Colors.white, fontSize: Dimenssio.width16dp),
+                  ),
+                  Image.asset('images/biologique.png')
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -92,10 +116,10 @@ class naturePollution extends StatelessWidget {
                       size: Dimenssio.height40dp,
                     )),
                 InkWell(
-                    onTap: () {
-                      /* Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) => Pollution()));
-                      */ // Fonction appelée lors du clic sur le bouton
+                    onTap: () {/*
+                       Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => CalendarWithGraphs(data: [],)));*/
+                      // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
                       Icons.arrow_forward_ios,
@@ -109,4 +133,7 @@ class naturePollution extends StatelessWidget {
       )),
     );
   }
+  
 }
+
+
