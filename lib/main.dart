@@ -10,7 +10,7 @@ import 'package:flutter_application_1/view/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/view/user_interface/main_page.dart';
 import 'package:flutter_application_1/view/user_interface/chart2.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-//AYA : sbihi CV ?? 
+//AYA : sbihi CV ?? ouu cv hmd
 void main() {
   
   //pour changer la couleur le la bar de notification de la même couleur de notre théme
