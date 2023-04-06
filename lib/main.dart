@@ -12,7 +12,7 @@ import 'package:flutter_application_1/view/user_interface/chart2.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 //AYA : sbihi CV ?? HHHHHssssss
 void main() {
-  //test
+
   //pour changer la couleur le la bar de notification de la même couleur de notre théme
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color.fromRGBO(47, 103, 23, 1)));
