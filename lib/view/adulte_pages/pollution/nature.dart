@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/view/adulte_pages/pollution/definition.dart';
 
 import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
+import 'Pollution.dart';//init
 
 class naturePollution extends StatelessWidget {
   const naturePollution({super.key});
