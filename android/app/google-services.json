@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "846847477035",
+    "project_id": "garbeco-f0f8b",
+    "storage_bucket": "garbeco-f0f8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846847477035:android:1cb03d5236bf17a59ff16e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846847477035-6i9ddhj0krhpll5bpkbtrg5lumlueiaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG5pN48VIdeFsmA-Mu_ozipiwiEqZzoXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846847477035-6i9ddhj0krhpll5bpkbtrg5lumlueiaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
