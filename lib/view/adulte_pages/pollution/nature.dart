@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/view/adulte_pages/pollution/definition.dart';
 
 import '../../../utilities/dimention.dart';
@@ -16,7 +17,7 @@ class naturePollution extends StatelessWidget {
       body: SafeArea(
           child: Container(
         alignment: Alignment.center,
-        color: const Color.fromRGBO(47, 103, 23, 1),
+        color: Mcolors.couleurPrincipal,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -50,7 +51,7 @@ class naturePollution extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 52, 172, 42),
+                  color: Mcolors.couleurPrincipal2,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -69,7 +70,7 @@ class naturePollution extends StatelessWidget {
                margin: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 52, 172, 42),
+                color: Mcolors.couleurPrincipal2,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -87,7 +88,7 @@ class naturePollution extends StatelessWidget {
                margin: EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 52, 172, 42),
+                color: Mcolors.couleurPrincipal2,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

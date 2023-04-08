@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/view/welcome.dart';
 
 import '../../utilities/dimention.dart';
@@ -20,7 +21,7 @@ class firstPage extends StatelessWidget {
             left: Dimenssio.width80dp / 3,
             top: Dimenssio.height40dp
             ),
-        color: const Color.fromRGBO(47, 103, 23, 1),
+        color: Mcolors.couleurPrincipal,
         alignment: Alignment.topCenter,
         child: Column(
           children: [
@@ -56,7 +57,7 @@ class firstPage extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(247, 191, 95, 1),
+                            Mcolors.couleurSecondaire,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Text(
@@ -80,7 +81,7 @@ class firstPage extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(247, 191, 95, 1),
+                                Mcolors.couleurSecondaire,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Text(

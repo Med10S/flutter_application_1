@@ -25,7 +25,7 @@ class Pollution extends StatelessWidget {
             top: Dimenssio.height20dp * 1.5,
           ),
           //alignment: Alignment.center,
-          color: const Color.fromRGBO(47, 103, 23, 1),
+          color: Mcolors.couleurPrincipal,
           child: Column(
             children: [
               Container(
@@ -71,7 +71,7 @@ class Pollution extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                               const Color.fromRGBO(238, 238, 238, 0.64),
+                               Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
@@ -103,7 +103,7 @@ class Pollution extends StatelessWidget {
                               ));},
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(238, 238, 238, 0.64),
+                                Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
@@ -148,7 +148,7 @@ class Pollution extends StatelessWidget {
                         ),
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                Color.fromRGBO(238, 238, 238, 0.64),
+                                Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
@@ -176,7 +176,7 @@ class Pollution extends StatelessWidget {
                         ),
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                Color.fromRGBO(238, 238, 238, 0.64),
+                                Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
