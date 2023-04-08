@@ -39,6 +39,8 @@ dependencies:
   calendar_appbar: 
   #flutter_circular_chart: ^0.1.0
   charts_flutter: 
+  firebase_core_platform_interface: ^4.6.0
+
  
 
 
