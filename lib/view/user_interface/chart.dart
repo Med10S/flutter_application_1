@@ -48,6 +48,7 @@ class _statistiqueState extends State<statistique> {
     chartData.add(ChartData('11/04', 1, 8, 5, 1, 0),);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).cardColor,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
@@ -58,13 +59,13 @@ class _statistiqueState extends State<statistique> {
                     builder: (_) => QRScan(),
                   ));
             },
-            backgroundColor: const Color.fromRGBO(39, 87, 19, 1),
+            backgroundColor: Theme.of(context).primaryColor,
             child: Image.asset('images/QR.png'),
           ),
           bottomNavigationBar: BottomAppBar(
             notchMargin: 5,
             shape: const CircularNotchedRectangle(),
-            color: const Color.fromRGBO(39, 87, 19, 1),
+            color: Theme.of(context).primaryColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.max,
@@ -158,7 +159,7 @@ class _statistiqueState extends State<statistique> {
             children: [
               Container(
                   width: Dimenssio.screenWidth,
-                  color: const Color.fromRGBO(47, 103, 23, 1),
+                  color: Theme.of(context).primaryColor,
                   child: Image.asset('images/logo.png')),
               SizedBox(
                 height: Dimenssio.height20dp * 3,
@@ -166,8 +167,10 @@ class _statistiqueState extends State<statistique> {
               SizedBox(
                   height: Dimenssio.FirstPagesImageHeight,
                   child: SfCartesianChart(
+                    backgroundColor: Theme.of(context).cardColor,
                     zoomPanBehavior: ZoomPanBehavior(enablePanning: true,enablePinching: true),
                       legend: Legend(
+                        backgroundColor: Theme.of(context).cardColor,
                           overflowMode: LegendItemOverflowMode.wrap,
                           isVisible: true,
                           position: LegendPosition.bottom,

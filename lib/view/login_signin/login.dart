@@ -25,7 +25,7 @@ class _AuthPageState extends State<AuthPage> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        color: const Color.fromRGBO(47, 103, 23, 1),
+        color: Theme.of(context).primaryColor,
         padding: EdgeInsets.only(
             right: Dimenssio.width32dp,
             left: Dimenssio.width32dp,

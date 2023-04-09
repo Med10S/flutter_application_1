@@ -35,7 +35,7 @@ class _MyScreenState extends State<MyScreen> {
           Container(
             width: double.infinity,
             decoration:
-                BoxDecoration(color: const Color.fromRGBO(47, 103, 23, 1)),
+                BoxDecoration(color: Theme.of(context).primaryColor),
             child: DotsIndicator(
               dotsCount: pages.length,
               position: _currentPageIndex.toDouble(),

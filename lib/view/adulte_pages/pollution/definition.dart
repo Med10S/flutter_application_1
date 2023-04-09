@@ -19,7 +19,7 @@ class definition extends StatelessWidget {
           child: Container(
           
         alignment: Alignment.center,
-        color: Mcolors.couleurPrincipal,
+        color: Theme.of(context).primaryColor,
         child: Column(
           children: [
             Stack(

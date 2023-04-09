@@ -17,7 +17,7 @@ class naturePollution extends StatelessWidget {
       body: SafeArea(
           child: Container(
         alignment: Alignment.center,
-        color: Mcolors.couleurPrincipal,
+        color: Theme.of(context).primaryColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

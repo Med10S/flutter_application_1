@@ -41,10 +41,31 @@ class _QRScanState extends State<QRScan> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+              await controller?.toggleFlash();
+              setState(() {});
+            },
+            backgroundColor: Theme.of(context).primaryColor,
+            child: FutureBuilder(
+              future: controller?.getFlashStatus(),
+              builder: (context, snapshot) {
+                return InkWell(
+                    child: Image.asset(
+                      snapshot.data == true
+                          ? "images/flash_on.png"
+                          : "images/no-flash.png",
+                      height: 40,
+                      color: const Color.fromRGBO(230, 198, 84, 1),
+                    ));
+              },
+            )),
         bottomNavigationBar: BottomAppBar(
           notchMargin: 5,
           shape: const CircularNotchedRectangle(),
-          color: const Color.fromRGBO(39, 87, 19, 1),
+          color: Theme.of(context).primaryColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.max,
@@ -120,93 +141,45 @@ class _QRScanState extends State<QRScan> {
             ],
           ),
         ),
-        backgroundColor: const Color.fromRGBO(47, 103, 23, 1),
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           children: <Widget>[
             Image.asset('images/logo.png'),
             Expanded(flex: 3, child: _buildQrView(context)),
             Expanded(
               flex: 1,
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    if (result != null)
-                      Text(
-                        'wifiSSID ${result!.code!.split(';')[0].substring(6)}  password ${result!.code!.split(';')[2].substring(1)}',
-                      )
-                    else
-                      const Text('Scan a code'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  if (result != null)
+                    Text(
+                      'wifiSSID ${result!.code!.split(';')[0].substring(6)}  password ${result!.code!.split(';')[2].substring(1)}',
+                    )
+                  else
+                    const Text('Scan a code'),
+                  Container(
+                    padding: EdgeInsets.all(Dimenssio.height20dp),
+                    width: Dimenssio.screenWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        const Color.fromRGBO(47, 103, 23, 1)),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                              ),
-                              onPressed: () async {
-                                await controller?.toggleFlash();
-                                setState(() {});
-                              },
-                              child: FutureBuilder(
-                                future: controller?.getFlashStatus(),
-                                builder: (context, snapshot) {
-                                  return InkWell(
-                                      child: Column(
-                                    children: [
-                                      Image.asset(
-                                        snapshot.data == true
-                                            ? "images/flash_on.png"
-                                            : "images/no-flash.png",
-                                        height: 40,
-                                        color: const Color.fromRGBO(
-                                            230, 198, 84, 1),
-                                      ),
-                                      Text('Flash: ${snapshot.data}'),
-                                    ],
-                                  ));
-                                },
-                              )),
+                        InkWell(
+                          onTap: () async {
+                            await controller?.pauseCamera();
+                          },
+                          child:  Image.asset('images/pause.png',height: Dimenssio.height5dp*5),
                         ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.pauseCamera();
-                            },
-                            child: const Text('pause',
-                                style: TextStyle(fontSize: 20)),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await controller?.resumeCamera();
-                            },
-                            child: const Text('resume',
-                                style: TextStyle(fontSize: 20)),
-                          ),
+                        InkWell(
+                          onTap: () async {
+                            await controller?.resumeCamera();
+                          },
+                          child: Image.asset('images/resume.png',height: Dimenssio.height5dp*5,),
                         )
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             )
           ],
@@ -236,13 +209,11 @@ class _QRScanState extends State<QRScan> {
     });
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-       
         result = scanData;
-        
-        
       });
     });
   }
+
   //modifier la fonction precedente par se code pour l'adapter a l'esp
   /**Notez que dans ce code, nous utilisons la bibliothèque WiFi
    * pour se connecter au réseau WiFi généré par ESP, 

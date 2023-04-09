@@ -21,7 +21,7 @@ class firstPage extends StatelessWidget {
             left: Dimenssio.width80dp / 3,
             top: Dimenssio.height40dp
             ),
-        color: Mcolors.couleurPrincipal,
+        color:Theme.of(context).primaryColor,
         alignment: Alignment.topCenter,
         child: Column(
           children: [

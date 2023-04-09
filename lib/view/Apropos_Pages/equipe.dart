@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:flutter_application_1/view/Apropos_Pages/stategie.dart';
 
 class Equipe extends StatelessWidget {
   const Equipe({super.key});
@@ -13,10 +15,16 @@ class Equipe extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(30),
           alignment: Alignment.center,
-          color: const Color.fromRGBO(47, 103, 23, 1),
+          color: Theme.of(context).primaryColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Container(alignment: Alignment.topRight,child: InkWell(onTap: (){Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (_) => Strategie(),
+                        ));}
+                ,child: Text("skip",style: TextStyle(color: Colors.white),))),
               Image.asset('images/logo.png'),
               Image.asset('images/equipe.png'),
               Text(
@@ -34,7 +42,7 @@ class Equipe extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Image.asset('images/next.png')
+              Image.asset('images/next.png',height: Dimenssio.height20dp*2)
             ],
           ),
         ),

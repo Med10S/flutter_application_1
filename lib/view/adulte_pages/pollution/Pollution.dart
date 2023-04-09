@@ -25,7 +25,7 @@ class Pollution extends StatelessWidget {
             top: Dimenssio.height20dp * 1.5,
           ),
           //alignment: Alignment.center,
-          color: Mcolors.couleurPrincipal,
+          color: Theme.of(context).primaryColor,
           child: Column(
             children: [
               Container(
