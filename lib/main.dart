@@ -3,8 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/utilities/router.dart';
-import 'package:flutter_application_1/utilities/routes.dart';
 import 'package:flutter_application_1/view/fist_pages/page1.dart';
 import 'package:flutter_application_1/view/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/view/user_interface/main_page.dart';

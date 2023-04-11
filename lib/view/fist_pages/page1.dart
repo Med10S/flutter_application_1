@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/utilities/routes.dart';
 import 'package:flutter_application_1/view/fist_pages/page2.dart';
 
 import '../../utilities/dimention.dart';
