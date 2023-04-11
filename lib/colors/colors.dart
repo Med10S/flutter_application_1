@@ -2,5 +2,8 @@ import 'package:flutter/material.dart';
 
 class Mcolors  {
   
-  Color principale =  Color(0x002f6717);
+static final couleurPrincipal = Color.fromRGBO(47, 103, 23, 1);  
+static final couleurPrincipal2=Color.fromARGB(255, 52, 172, 42);
+static final couleurSecondaire =const Color.fromRGBO(247, 191, 95, 1);
+static final Cbackground= Color.fromRGBO(238, 238, 238, 0.64);
 }

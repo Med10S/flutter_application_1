@@ -12,9 +12,11 @@ import 'package:flutter_application_1/view/user_interface/chart2.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
-  
+
   //pour changer la couleur le la bar de notification de la même couleur de notre théme
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+       statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: Brightness.light,
       statusBarColor: Color.fromRGBO(47, 103, 23, 1)));
   // WidgetsFlutterBinding.ensureInitialized();
   
@@ -30,9 +32,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      
+      darkTheme: ThemeData(brightness: Brightness.dark,
+      primaryColorDark:Color.fromARGB(255, 194, 194, 194),
+      primaryColor:Color.fromRGBO(26, 98, 114, 1) ,
+      cardColor:Color.fromRGBO(14, 77, 89, 1) ),
+      
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFE5E5E5),
-        primaryColor: Color.fromRGBO(247, 191, 95, 1),
+        primaryColor: Color.fromRGBO(47, 103, 23, 1),
+        
+        primaryColorDark: Color.fromARGB(255, 245, 245, 245),
         inputDecorationTheme: InputDecorationTheme(
           
             labelStyle: Theme.of(context).textTheme.labelLarge,

@@ -32,16 +32,23 @@ class _User_Main_PageState extends State<User_Main_Page> {
     });
   }
 
-  List<String> time = ["09/03/2023", "10/03/2023", "15/03/2023", "15/03/2023","15/03/2023"];
+  List<String> time = [
+    "09/03/2023",
+    "10/03/2023",
+    "15/03/2023",
+    "15/03/2023",
+    "15/03/2023"
+  ];
 
-  List<double> quantite = [3, 10, 6, 10,20];
+  List<double> quantite = [3, 10, 6, 10, 20];
 
 //openssl
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
-      backgroundColor: const Color.fromRGBO(47, 103, 23, 1),
+      backgroundColor: Theme.of(context).primaryColor,
       body: Column(
         children: [
           Image.asset('images/logo.png'),
@@ -49,7 +56,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
             margin: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: const Color.fromRGBO(39, 87, 19, 1),
+              color: Theme.of(context).cardColor,
             ),
             height: Dimenssio.FirstPagesImageHeight / 2,
             width: Dimenssio.screenWidth,
@@ -71,36 +78,45 @@ class _User_Main_PageState extends State<User_Main_Page> {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                color: Color.fromARGB(255, 218, 218, 218),
-              ),
-              child: ListTileTheme(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ListView.builder(
-                  itemCount: time.length,
-                  // Appliquer un BorderRadius de 20 à tous les éléments de la liste
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: EdgeInsets.only(top: Dimenssio.width16dp),
-                      child: Material(
-                        color: Color.fromARGB(255, 194, 194, 194),
-                        borderRadius: BorderRadius.circular(20),
-                        child: ListTileTheme(
-                          shape: RoundedRectangleBorder(
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            ),
+            child: Column(
+              children: [
+                Image.asset('images/line.png'),
+                Container(
+                  height: Dimenssio.height250dp,
+                  child: ListTileTheme(
+                    tileColor: Theme.of(context).cardColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListView.builder(
+                      itemCount: time.length,
+                      // Appliquer un BorderRadius de 20 à tous les éléments de la liste
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          padding: EdgeInsets.only(top: Dimenssio.width16dp),
+                          child: Material(
+                            color: Theme.of(context).primaryColorDark,
                             borderRadius: BorderRadius.circular(20),
+                            child: ListTileTheme(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: itemBuilder(context, index),
+                            ),
                           ),
-                          child: itemBuilder(context, index),
-                        ),
-                      ),
-                    );
-                  },
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
@@ -114,13 +130,13 @@ class _User_Main_PageState extends State<User_Main_Page> {
                 builder: (_) => QRScan(),
               ));
         },
-        backgroundColor: const Color.fromRGBO(39, 87, 19, 1),
+        backgroundColor: Theme.of(context).primaryColor,
         child: Image.asset('images/QR.png'),
       ),
       bottomNavigationBar: BottomAppBar(
         notchMargin: 5,
         shape: const CircularNotchedRectangle(),
-        color: const Color.fromRGBO(39, 87, 19, 1),
+        color: Theme.of(context).primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
@@ -208,17 +224,22 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   itemBuilder(BuildContext context, int index) {
+    
     return ListTile(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             time[index],
-            style: TextStyle(fontSize: Dimenssio.width24dp / 1.2),
+            style: TextStyle(
+                fontSize: Dimenssio.width24dp / 1.2,
+                color: Theme.of(context).brightness == Brightness.dark ?  Colors.white : Color.fromRGBO(14, 77, 89, 1),),
           ),
           Text(
             quantite[index].toString() + " Point(s)",
-            style: TextStyle(fontSize: Dimenssio.width24dp / 1.3),
+            style: TextStyle(
+                fontSize: Dimenssio.width24dp / 1.3,
+                color: Theme.of(context).brightness == Brightness.dark ?  Colors.white : Color.fromRGBO(14, 77, 89, 1),),
           ),
         ],
       ),

@@ -19,11 +19,13 @@ class _Page1State extends State<Page1> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: const Color.fromRGBO(47, 103, 23, 1),
+          color: Theme.of(context).primaryColor,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 child: Stack(
@@ -76,10 +78,9 @@ class _Page1State extends State<Page1> {
                   ),
                   Container(
                       margin: EdgeInsets.only(
-                          right: Dimenssio.width30dp,
                           top: Dimenssio.height5dp * 5),
-                      alignment: Alignment.topRight,
-                      child: Image.asset('images/next.png'))
+                      alignment: Alignment.center,
+                      child: Image.asset('images/next.png',height: Dimenssio.height20dp*2,))
                 ],
               ),
             ],

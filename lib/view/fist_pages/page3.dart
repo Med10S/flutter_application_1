@@ -16,25 +16,24 @@ class Page3 extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: const Color.fromRGBO(47, 103, 23, 1),
+          color: Theme.of(context).primaryColor,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset(
-                      'images/back.png',
-                      width: Dimenssio.screenWidth,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    Image.asset(
-                      'images/Group3.png',
-                      height: Dimenssio.FirstPagesImageHeight,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  ],
-                ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'images/back.png',
+                    width: Dimenssio.screenWidth,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Image.asset(
+                    'images/Group3.png',
+                    height: Dimenssio.FirstPagesImageHeight,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ],
               ),
               Column(
                 children: [
@@ -44,7 +43,7 @@ class Page3 extends StatelessWidget {
                         right: Dimenssio.width55dp,
                         top: Dimenssio.height5dp),
                     alignment: Alignment.center,
-                    child:  Text(
+                    child: Text(
                       "ZERO PLASTIC",
                       style: TextStyle(
                           color: Colors.white,
@@ -53,9 +52,7 @@ class Page3 extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(
-                        
-                        top: Dimenssio.height5dp),
+                    padding: EdgeInsets.only(top: Dimenssio.height5dp),
                     child: Text(
                       "Pour un avenir sans plastique, agissons dès aujourd'hui.",
                       textAlign: TextAlign.center,
@@ -67,7 +64,6 @@ class Page3 extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
@@ -82,7 +78,7 @@ class Page3 extends StatelessWidget {
                                 const Color.fromRGBO(247, 191, 95, 1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
-                        child:  Text(
+                        child: Text(
                           'Terminer',
                           style: TextStyle(fontSize: Dimenssio.width20dp),
                         ),

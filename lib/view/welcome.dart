@@ -77,7 +77,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
         body: SafeArea(
             child: Container(
           alignment: Alignment.center,
-          color: const Color.fromRGBO(47, 103, 23, 1),
+          color: Theme.of(context).primaryColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -174,6 +174,8 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                             child: InkWell(
                               child: Image.asset(
                                 'images/NEXTTOP.png',
+                                height: Dimenssio.height20dp*3,
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                           ),
@@ -183,7 +185,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                                 'A PROPOS DE NOUS',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: const Color.fromRGBO(47, 103, 23, 1),
+                                    color: Theme.of(context).primaryColor,
                                     fontSize: Dimenssio.width80dp / 2,
                                     fontWeight: FontWeight.bold),
                               ))

@@ -12,24 +12,25 @@ class Page2 extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: const Color.fromRGBO(47, 103, 23, 1),
+          color: Theme.of(context).primaryColor,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset(
-                      'images/back2.png',
-                      width: Dimenssio.screenWidth,
-                      fit: BoxFit.fill,
-                    ),
-                    Image.asset(
-                        height: Dimenssio.FirstPagesImageHeight,
-                      'images/Group2.png',
-                    ),
-                  ],
-                ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'images/back2.png',
+                    width: Dimenssio.screenWidth,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Image.asset(
+                                        fit: BoxFit.scaleDown,
+
+                    height: Dimenssio.FirstPagesImageHeight,
+                    'images/Group2.png',
+                  ),
+                ],
               ),
               Column(
                 children: [
@@ -39,7 +40,7 @@ class Page2 extends StatelessWidget {
                         right: Dimenssio.width55dp,
                         top: Dimenssio.height5dp),
                     alignment: Alignment.center,
-                    child:  Text(
+                    child: Text(
                       "CLEAN EARTH",
                       style: TextStyle(
                           color: Colors.white,
@@ -48,10 +49,8 @@ class Page2 extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(
-                        
-                        top: Dimenssio.height5dp),
-                    child:  Text(
+                    padding: EdgeInsets.only(top: Dimenssio.height5dp),
+                    child: Text(
                       "Une planète propre pour un avenir durable",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -62,12 +61,10 @@ class Page2 extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(
-                          right: Dimenssio.width30dp,
-                          top: Dimenssio.height5dp
-                          ),
-                      alignment: Alignment.topRight,
-                      child: Image.asset('images/next.png'))
+                      margin: EdgeInsets.only(                          
+                          top: Dimenssio.height5dp),
+                      alignment: Alignment.center,
+                      child: Image.asset('images/next.png',height: Dimenssio.height20dp*2,))
                 ],
               ),
             ],

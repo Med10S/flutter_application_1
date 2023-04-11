@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/utilities/string.dart';
 import 'package:flutter_application_1/view/adulte_pages/pollution/nature.dart';
 
 import '../../../utilities/dimention.dart';
@@ -15,8 +17,9 @@ class definition extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Container(
+          
         alignment: Alignment.center,
-        color: const Color.fromRGBO(47, 103, 23, 1),
+        color: Theme.of(context).primaryColor,
         child: Column(
           children: [
             Stack(
@@ -32,12 +35,12 @@ class definition extends StatelessWidget {
             Text('Definition',
                 style: TextStyle(
                   fontSize: Dimenssio.width24dp,
-                  color: const Color.fromRGBO(247, 191, 95, 1),
+                  color: Mcolors.couleurSecondaire,
                 )),
             Container(
               margin: EdgeInsets.symmetric(vertical: Dimenssio.height40dp, horizontal: Dimenssio.width24dp),
               child: Text(
-                'On appelle pollution une dégradation ou une altération de l\'environnement, en général liée à l\'activité humaine par diffusion directe ou indirecte de substances chimiques, physiques ou biologiques qui sont potentiellement toxiques pour les organismes vivants ou qui perturbent de manière plus ou moins importante le fonctionnement naturel des écosystèmes. Outre ses effets sur la santé humaine et animale, elle peut avoir pour conséquences la migration ou l\'extinction de certaines espèces qui sont incapables de s\'adapter à l\'évolution de leur milieu naturel.',
+                strings.pollutionDefinition,
                 style: TextStyle(
                     fontSize: Dimenssio.width16dp, color: Colors.white),
                 textAlign: TextAlign.center,

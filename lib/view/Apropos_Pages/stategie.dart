@@ -16,7 +16,7 @@ class Strategie extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(10),
         alignment: Alignment.center,
-        color: const Color.fromRGBO(47, 103, 23, 1),
+        color: Theme.of(context).primaryColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -14,7 +14,7 @@ class Objective extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(20),
         alignment: Alignment.center,
-        color: const Color.fromRGBO(47, 103, 23, 1),
+        color: Theme.of(context).primaryColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -35,7 +35,7 @@ class Objective extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            Image.asset('images/next.png')
+            Image.asset('images/next.png',height: Dimenssio.height20dp*2)
           ],
         ),
       ),
