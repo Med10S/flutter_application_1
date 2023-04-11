@@ -50,6 +50,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
         child: Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset('images/logo.png'),
           Container(
@@ -79,44 +80,39 @@ class _User_Main_PageState extends State<User_Main_Page> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(top: 5),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              borderRadius: BorderRadius.all(
+                  Radius.circular(20)),
             ),
-            child: Column(
-              children: [
-                Image.asset('images/line.png'),
-                Container(
-                  height: Dimenssio.height250dp,
-                  child: ListTileTheme(
-                    tileColor: Theme.of(context).cardColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListView.builder(
-                      itemCount: time.length,
-                      // Appliquer un BorderRadius de 20 à tous les éléments de la liste
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding: EdgeInsets.only(top: Dimenssio.width16dp),
-                          child: Material(
-                            color: Theme.of(context).primaryColorDark,
-                            borderRadius: BorderRadius.circular(20),
-                            child: ListTileTheme(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: itemBuilder(context, index),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+            child: SizedBox(
+              height: Dimenssio.height250dp/1,
+              child: ListTileTheme(
+                tileColor: Theme.of(context).cardColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ],
+                child: ListView.builder(
+                  itemCount: time.length,
+                  // Appliquer un BorderRadius de 20 à tous les éléments de la liste
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      padding: EdgeInsets.only(top: Dimenssio.width16dp),
+                      child: Material(
+                        color: Theme.of(context).primaryColorDark,
+                        borderRadius: BorderRadius.circular(20),
+                        child: ListTileTheme(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: itemBuilder(context, index),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ],
