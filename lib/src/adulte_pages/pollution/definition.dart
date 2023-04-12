@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/view/adulte_pages/pollution/nature.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
 
 import '../../../utilities/dimention.dart';
 import 'Pollution.dart';

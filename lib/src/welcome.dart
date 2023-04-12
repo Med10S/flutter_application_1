@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/view/adulte_pages/first_page.dart';
-import 'package:flutter_application_1/view/fist_pages/page1.dart';
+import 'package:flutter_application_1/src/adulte_pages/first_page.dart';
+import 'package:flutter_application_1/src/fist_pages/page1.dart';
 
 import 'Apropos_Pages/equipe.dart';
 import 'Apropos_Pages/pageDePassage.dart';
-import 'login_signin/login.dart';
+import 'authentification/screens/login/Login_screen.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -105,7 +105,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => AuthPage(),
+                                builder: (_) => LoginScreen(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(

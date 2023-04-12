@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/view/Apropos_Pages/pageDePassage.dart';
-import 'package:flutter_application_1/view/fist_pages/page2.dart';
-import 'package:flutter_application_1/view/fist_pages/pageDePassage.dart';
-import 'package:flutter_application_1/view/welcome.dart';
+import 'package:flutter_application_1/src/Apropos_Pages/pageDePassage.dart';
+import 'package:flutter_application_1/src/fist_pages/page2.dart';
+import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
+import 'package:flutter_application_1/src/welcome.dart';
 
 class Page3 extends StatelessWidget {
   const Page3({super.key});

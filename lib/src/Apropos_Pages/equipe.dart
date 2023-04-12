@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/view/Apropos_Pages/stategie.dart';
+import 'package:flutter_application_1/src/Apropos_Pages/stategie.dart';
 
 class Equipe extends StatelessWidget {
   const Equipe({super.key});

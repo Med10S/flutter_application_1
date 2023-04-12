@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/view/user_interface/chart.dart';
-import 'package:flutter_application_1/view/user_interface/chart2.dart';
+import 'package:flutter_application_1/src/user_interface/chart.dart';
+import 'package:flutter_application_1/src/user_interface/chart2.dart';
 
 import '../welcome.dart';
 import 'code_scanner.dart';
-import 'info.dart';
+import 'compte.dart';
 
 class User_Main_Page extends StatefulWidget {
   User_Main_Page({super.key});
@@ -21,7 +21,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     User_Main_Page(),
-    const info_client(),
+    const compte(),
     const Welcome(),
     QRScan()
   ];
@@ -184,7 +184,15 @@ class _User_Main_PageState extends State<User_Main_Page> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset("images/info_client.png"),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => compte(),
+                            ));
+                    },
+                    child: Image.asset("images/info_client.png")),
                   const Text(
                     "Compte",
                     style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),

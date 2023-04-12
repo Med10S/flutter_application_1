@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/view/welcome.dart';
+import 'package:flutter_application_1/src/welcome.dart';
 
 import '../../utilities/dimention.dart';
 import 'pollution/Pollution.dart';
