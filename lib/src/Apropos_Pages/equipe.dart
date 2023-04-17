@@ -13,18 +13,26 @@ class Equipe extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           alignment: Alignment.center,
           color: Theme.of(context).primaryColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(alignment: Alignment.topRight,child: InkWell(onTap: (){Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (_) => Strategie(),
-                        ));}
-                ,child: Text("skip",style: TextStyle(color: Colors.white),))),
+              Container(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => const Strategie(),
+                            ));
+                      },
+                      child: const Text(
+                        "skip",
+                        style: TextStyle(color: Colors.white),
+                      ))),
               Image.asset('images/logo.png'),
               Image.asset('images/equipe.png'),
               Text(
@@ -42,7 +50,7 @@ class Equipe extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Image.asset('images/next.png',height: Dimenssio.height20dp*2)
+              Image.asset('images/next.png', height: Dimenssio.height20dp * 2)
             ],
           ),
         ),

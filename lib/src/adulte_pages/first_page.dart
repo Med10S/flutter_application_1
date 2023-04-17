@@ -19,28 +19,31 @@ class firstPage extends StatelessWidget {
         padding: EdgeInsets.only(
             right: Dimenssio.width80dp / 2,
             left: Dimenssio.width80dp / 3,
-            top: Dimenssio.height40dp
-            ),
-        color:Theme.of(context).primaryColor,
+            top: Dimenssio.height40dp),
+        color: Theme.of(context).primaryColor,
         alignment: Alignment.topCenter,
         child: Column(
           children: [
             Container(
-                alignment:Alignment.topLeft,
+                alignment: Alignment.topLeft,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(
-                                builder: (_) => Welcome(),
-                              ));
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (_) => Welcome(),
+                        ));
                   },
-                  child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),)
+                  child: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.white,
                   ),
+                )),
             Image.asset('images/logo.png'),
-            
             Container(
               height: Dimenssio.height250dp,
               alignment: Alignment.center,
-             // margin: EdgeInsets.symmetric(vertical: Dimenssio.height20dp *5),
+              // margin: EdgeInsets.symmetric(vertical: Dimenssio.height20dp *5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -56,8 +59,7 @@ class firstPage extends StatelessWidget {
                               ));
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                            Mcolors.couleurSecondaire,
+                            backgroundColor: Mcolors.couleurSecondaire,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Text(
@@ -80,8 +82,7 @@ class firstPage extends StatelessWidget {
                             ));*/
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Mcolors.couleurSecondaire,
+                            backgroundColor: Mcolors.couleurSecondaire,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Text(
@@ -89,16 +90,12 @@ class firstPage extends StatelessWidget {
                           style: TextStyle(fontSize: Dimenssio.width20dp),
                         ),
                       )),
-                     
                 ],
               ),
             ),
           ],
-          
         ),
       ),
-      
-    )
-    );
+    ));
   }
 }

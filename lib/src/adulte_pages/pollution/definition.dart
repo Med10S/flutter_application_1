@@ -17,7 +17,6 @@ class definition extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Container(
-          
         alignment: Alignment.center,
         color: Theme.of(context).primaryColor,
         child: Column(
@@ -26,7 +25,7 @@ class definition extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                  height: Dimenssio.FirstPagesImageHeight/2.5,
+                    height: Dimenssio.FirstPagesImageHeight / 2.5,
                     alignment: Alignment.topRight,
                     child: Image.asset('images/terre.png')),
                 Image.asset('images/logo.png')
@@ -38,7 +37,9 @@ class definition extends StatelessWidget {
                   color: Mcolors.couleurSecondaire,
                 )),
             Container(
-              margin: EdgeInsets.symmetric(vertical: Dimenssio.height40dp, horizontal: Dimenssio.width24dp),
+              margin: EdgeInsets.symmetric(
+                  vertical: Dimenssio.height40dp,
+                  horizontal: Dimenssio.width24dp),
               child: Text(
                 strings.pollutionDefinition,
                 style: TextStyle(
