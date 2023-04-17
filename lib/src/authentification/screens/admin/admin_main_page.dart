@@ -9,18 +9,16 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:flutter/material.dart';
 
-import '../repository/authentification_repository/authentification_repository.dart';
-import '../welcome.dart';
-import 'main_page.dart';
 
-class QRScan extends StatefulWidget {
-  const QRScan({Key? key}) : super(key: key);
+
+class QRScan2 extends StatefulWidget {
+  const QRScan2({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRScanState();
 }
 
-class _QRScanState extends State<QRScan> {
+class _QRScanState extends State<QRScan2> {
   Barcode? result;
   String? wifiSSID;
   String? wifiPassword;
@@ -63,82 +61,6 @@ class _QRScanState extends State<QRScan> {
                     ));
               },
             )),
-        bottomNavigationBar: BottomAppBar(
-          notchMargin: 5,
-          shape: const CircularNotchedRectangle(),
-          color: Theme.of(context).primaryColor,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => User_Main_Page(),
-                              ));
-                        },
-                        child: Image.asset("images/home.png")),
-                    const Text(
-                      "home",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset("images/chart.png"),
-                    const Text(
-                      "Statistique",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset("images/info_client.png"),
-                    const Text(
-                      "Compte",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          AuthentificationRepository.instance.logout();
-
-                        },
-                        child: Image.asset("images/EXIT.png")),
-                    const Text(
-                      "Sortir",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
         backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           children: <Widget>[

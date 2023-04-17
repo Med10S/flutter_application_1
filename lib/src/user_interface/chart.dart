@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../repository/authentification_repository/authentification_repository.dart';
 import '../welcome.dart';
 import 'code_scanner.dart';
 import 'main_page.dart';
@@ -136,11 +137,8 @@ class _statistiqueState extends State<statistique> {
                     children: [
                       InkWell(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (_) => Welcome(),
-                                ));
+                            AuthentificationRepository.instance.logout();
+
                           },
                           child: Image.asset("images/EXIT.png")),
                       const Text(

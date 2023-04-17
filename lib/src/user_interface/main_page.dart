@@ -2,10 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
+import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../repository/authentification_repository/authentification_repository.dart';
 import '../welcome.dart';
 import 'code_scanner.dart';
 import 'compte.dart';
@@ -21,9 +26,9 @@ class _User_Main_PageState extends State<User_Main_Page> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     User_Main_Page(),
-    const compte(),
+    compte(),
     const Welcome(),
-    QRScan()
+    const QRScan()
   ];
 
   void _onItemTapped(int index) {
@@ -45,7 +50,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
 //openssl
   @override
   Widget build(BuildContext context) {
-
+    final controller = Get.put(ProfileController());
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
@@ -61,33 +66,54 @@ class _User_Main_PageState extends State<User_Main_Page> {
             ),
             height: Dimenssio.FirstPagesImageHeight / 2,
             width: Dimenssio.screenWidth,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "50,25",
-                  style: TextStyle(
-                      fontSize: Dimenssio.width20dp * 4,
-                      color: const Color.fromRGBO(230, 198, 84, 1)),
-                ),
-                Text(
-                  "Points",
-                  style: TextStyle(
-                      fontSize: Dimenssio.width20dp * 2,
-                      color: const Color.fromRGBO(230, 198, 84, 1)),
-                )
-              ],
+            child: FutureBuilder(
+              future: controller.getUserData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    UserModel userData = snapshot.data as UserModel;
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          userData.points.toString(),
+                          style: TextStyle(
+                              fontSize: Dimenssio.width20dp * 4,
+                              color: const Color.fromRGBO(230, 198, 84, 1)),
+                        ),
+                        Text(
+                          "Points",
+                          style: TextStyle(
+                              fontSize: Dimenssio.width20dp * 2,
+                              color: const Color.fromRGBO(230, 198, 84, 1)),
+                        )
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("Somthing went wrong"),
+                    );
+                  }
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 5),
+            padding: const EdgeInsets.only(top: 5),
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.all(
-                  Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: SizedBox(
-              height: Dimenssio.height250dp/1,
+              height: Dimenssio.height250dp / 1.08,
               child: ListTileTheme(
                 tileColor: Theme.of(context).cardColor,
                 shape: RoundedRectangleBorder(
@@ -123,7 +149,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
           Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (_) => QRScan(),
+                builder: (_) => const QRScan(),
               ));
         },
         backgroundColor: Theme.of(context).primaryColor,
@@ -185,14 +211,14 @@ class _User_Main_PageState extends State<User_Main_Page> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
+                      onTap: () {
+                        Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => compte(),
+                              builder: (_) =>  compte(),
                             ));
-                    },
-                    child: Image.asset("images/info_client.png")),
+                      },
+                      child: Image.asset("images/info_client.png")),
                   const Text(
                     "Compte",
                     style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
@@ -207,11 +233,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
                 children: [
                   InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => Welcome(),
-                            ));
+                        AuthentificationRepository.instance.logout();
                       },
                       child: Image.asset("images/EXIT.png")),
                   const Text(
@@ -228,7 +250,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   itemBuilder(BuildContext context, int index) {
-    
     return ListTile(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -236,14 +257,20 @@ class _User_Main_PageState extends State<User_Main_Page> {
           Text(
             time[index],
             style: TextStyle(
-                fontSize: Dimenssio.width24dp / 1.2,
-                color: Theme.of(context).brightness == Brightness.dark ?  Colors.white : Color.fromRGBO(14, 77, 89, 1),),
+              fontSize: Dimenssio.width24dp / 1.2,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : const Color.fromRGBO(14, 77, 89, 1),
+            ),
           ),
           Text(
             quantite[index].toString() + " Point(s)",
             style: TextStyle(
-                fontSize: Dimenssio.width24dp / 1.3,
-                color: Theme.of(context).brightness == Brightness.dark ?  Colors.white : Color.fromRGBO(14, 77, 89, 1),),
+              fontSize: Dimenssio.width24dp / 1.3,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : const Color.fromRGBO(14, 77, 89, 1),
+            ),
           ),
         ],
       ),

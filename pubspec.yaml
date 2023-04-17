@@ -45,6 +45,9 @@ dependencies:
   provider: 
   shared_preferences:
   firebase_auth: ^4.4.0
+  fluttertoast:
+  cloud_firestore:
+
 
 
   #flutter_launcher_name: ^0.0.1

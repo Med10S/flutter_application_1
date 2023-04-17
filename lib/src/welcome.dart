@@ -8,7 +8,8 @@ import 'package:flutter_application_1/src/fist_pages/page1.dart';
 
 import 'Apropos_Pages/equipe.dart';
 import 'Apropos_Pages/pageDePassage.dart';
-import 'authentification/screens/login/Login_screen.dart';
+import 'authentification/screens/admin_or_user.dart';
+import 'authentification/screens/users/login_user/Login_screen.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -105,7 +106,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => LoginScreen(),
+                                builder: (_) => choice_page_admin_user(),//LoginScreen(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(

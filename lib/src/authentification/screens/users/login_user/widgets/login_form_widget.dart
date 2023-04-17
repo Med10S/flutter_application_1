@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/authentification/controllers/loging_controller.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
-import '../../../../user_interface/main_page.dart';
+import '../../../../../user_interface/main_page.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -12,6 +15,8 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+    final _forKey = GlobalKey<FormState>();
     return Form(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 30 - 10),
@@ -19,6 +24,8 @@ class LoginForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              controller: controller.email,
+
               decoration:  InputDecoration(
                   prefixIcon: Icon(Icons.person_outline_outlined,color: Mcolors.couleurPrincipal,),
                   labelText: "Email",
@@ -27,6 +34,8 @@ class LoginForm extends StatelessWidget {
             ),
             const SizedBox(height: 30 - 20),
             TextFormField(
+              controller: controller.password,
+
               decoration:  InputDecoration(
                 prefixIcon: Icon(Icons.fingerprint,color: Mcolors.couleurPrincipal),
                 labelText: "Password",
@@ -50,7 +59,9 @@ class LoginForm extends StatelessWidget {
               child: ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor), // Définir la couleur de fond du bouton
  ),
-                onPressed: () {},
+                onPressed: () {                
+                  LoginController.instance.loginUser(controller.email.text.trim(),controller.password.text.trim());
+},
                 child: Text("Login".toUpperCase()),
               ),
             ),
