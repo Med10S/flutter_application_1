@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
+import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
@@ -51,6 +53,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
+    //final user_repo = Get.put(UserRepository());
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
@@ -210,19 +213,70 @@ class _User_Main_PageState extends State<User_Main_Page> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) =>  compte(),
-                            ));
-                      },
-                      child: Image.asset("images/info_client.png")),
-                  const Text(
-                    "Compte",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                  FutureBuilder(
+                    future: controller.getUserData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData) {
+                          UserModel userData = snapshot.data as UserModel;
+                          if (userData.role == "admin") {
+                            return InkWell(
+                              onTap: () {
+                                Get.snackbar("utlisateur info",
+                                    "acces authoriser");
+                                    
+                              },
+                              child: Column(
+                                children: [
+                                  //Image.asset("images/info_client.png"),
+                                  Stack(children: const[
+                                    Icon(
+                                      Icons.admin_panel_settings,
+                                      color: Color.fromRGBO(255, 182, 76, 1),
+                                      size: 45,
+                                    ),
+                                    Icon(
+                                      Icons.admin_panel_settings_outlined,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      size: 45,
+                                    )
+                                  ]),
+                                  const Text(
+                                    "Administrateur",
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(230, 198, 84, 1)),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            return InkWell(
+                              onTap: () {
+                                Get.snackbar("next page",
+                                    "utlisateur info");
+                              },
+                              child: Column(
+                                children: [
+                                  Image.asset("images/info_client.png"),
+                                   
+                                  const Text(
+                                    "Compte",
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(230, 198, 84, 1)),
+                                  ),
+                                ],
+                              ),
+                            );;
+                          }
+                        } else {
+                          // Add any other widget or error handling logic here
+                          return Container();
+                        }
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  ),
                 ],
               ),
             ),

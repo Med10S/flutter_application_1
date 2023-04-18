@@ -15,8 +15,7 @@ class ProfileController extends GetxController{
       return _userRepo.getUserDetails(email);
     }else{
       Get.snackbar("Error", "Login to continue");
-    }
-   
-    
+    } 
   }
+  
 }
