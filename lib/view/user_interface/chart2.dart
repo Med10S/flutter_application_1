@@ -54,7 +54,7 @@ class _chartDaysState extends State<chartDays> {
           children: [
             Container(
                 padding: EdgeInsets.only(
-                    left: Dimenssio.width24dp, right: Dimenssio.width24dp),
+                    left: Dimenssion.width24dp, right: Dimenssion.width24dp),
                 alignment: Alignment.topLeft,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,14 +65,18 @@ class _chartDaysState extends State<chartDays> {
                       textAlign: TextAlign.start,
                     ),
                     InkWell(
-                        onTap: () {Navigator.push(context, CupertinoPageRoute(
-                              builder: (_) => statistique(),
-                            ));},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) => statistique(),
+                              ));
+                        },
                         child: const Icon(Icons.calendar_month_outlined))
                   ],
                 )),
             SfCircularChart(
-              margin: EdgeInsets.all(-Dimenssio.height20dp/4),
+              margin: EdgeInsets.all(-Dimenssion.height20dp / 4),
               backgroundColor: Colors.transparent,
               legend: Legend(
                   isVisible: true,

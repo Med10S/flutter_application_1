@@ -45,7 +45,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
 //openssl
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
@@ -58,21 +57,21 @@ class _User_Main_PageState extends State<User_Main_Page> {
               borderRadius: BorderRadius.circular(20),
               color: Theme.of(context).cardColor,
             ),
-            height: Dimenssio.FirstPagesImageHeight / 2,
-            width: Dimenssio.screenWidth,
+            height: Dimenssion.FirstPagesImageHeight / 2,
+            width: Dimenssion.screenWidth,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "50,25",
                   style: TextStyle(
-                      fontSize: Dimenssio.width20dp * 4,
+                      fontSize: Dimenssion.width20dp * 4,
                       color: const Color.fromRGBO(230, 198, 84, 1)),
                 ),
                 Text(
                   "Points",
                   style: TextStyle(
-                      fontSize: Dimenssio.width20dp * 2,
+                      fontSize: Dimenssion.width20dp * 2,
                       color: const Color.fromRGBO(230, 198, 84, 1)),
                 )
               ],
@@ -89,7 +88,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
               children: [
                 Image.asset('images/line.png'),
                 Container(
-                  height: Dimenssio.height250dp,
+                  height: Dimenssion.height250dp,
                   child: ListTileTheme(
                     tileColor: Theme.of(context).cardColor,
                     shape: RoundedRectangleBorder(
@@ -100,7 +99,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
                       // Appliquer un BorderRadius de 20 à tous les éléments de la liste
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          padding: EdgeInsets.only(top: Dimenssio.width16dp),
+                          padding: EdgeInsets.only(top: Dimenssion.width16dp),
                           child: Material(
                             color: Theme.of(context).primaryColorDark,
                             borderRadius: BorderRadius.circular(20),
@@ -224,7 +223,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   itemBuilder(BuildContext context, int index) {
-    
     return ListTile(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -232,14 +230,20 @@ class _User_Main_PageState extends State<User_Main_Page> {
           Text(
             time[index],
             style: TextStyle(
-                fontSize: Dimenssio.width24dp / 1.2,
-                color: Theme.of(context).brightness == Brightness.dark ?  Colors.white : Color.fromRGBO(14, 77, 89, 1),),
+              fontSize: Dimenssion.width24dp / 1.2,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Color.fromRGBO(14, 77, 89, 1),
+            ),
           ),
           Text(
             quantite[index].toString() + " Point(s)",
             style: TextStyle(
-                fontSize: Dimenssio.width24dp / 1.3,
-                color: Theme.of(context).brightness == Brightness.dark ?  Colors.white : Color.fromRGBO(14, 77, 89, 1),),
+              fontSize: Dimenssion.width24dp / 1.3,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Color.fromRGBO(14, 77, 89, 1),
+            ),
           ),
         ],
       ),

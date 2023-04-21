@@ -27,9 +27,9 @@ class _AuthPageState extends State<AuthPage> {
       body: Container(
         color: Theme.of(context).primaryColor,
         padding: EdgeInsets.only(
-            right: Dimenssio.width32dp,
-            left: Dimenssio.width32dp,
-            top: Dimenssio.height32dp),
+            right: Dimenssion.width32dp,
+            left: Dimenssion.width32dp,
+            top: Dimenssion.height32dp),
         child: Form(
           key: _formKey,
           child: ListView(
@@ -43,11 +43,11 @@ class _AuthPageState extends State<AuthPage> {
                   style: TextStyle(
                       color: Color.fromRGBO(247, 191, 95, 1),
                       fontWeight: FontWeight.bold,
-                      fontSize: Dimenssio.width30dp),
+                      fontSize: Dimenssion.width30dp),
                 ),
               ),
               SizedBox(
-                height: Dimenssio.height20dp,
+                height: Dimenssion.height20dp,
               ),
               TextFormField(
                 controller: _emailController,
@@ -61,7 +61,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
               ),
               SizedBox(
-                height: Dimenssio.height20dp * 1.5,
+                height: Dimenssion.height20dp * 1.5,
               ),
               TextFormField(
                 controller: _passwordController,
@@ -76,7 +76,7 @@ class _AuthPageState extends State<AuthPage> {
                 ),
               ),
               SizedBox(
-                height: Dimenssio.height32dp / 2,
+                height: Dimenssion.height32dp / 2,
               ),
               if (_autoformType == AuthFormType.login)
                 Align(
@@ -86,26 +86,28 @@ class _AuthPageState extends State<AuthPage> {
                       "Forgot your password ?",
                       style: TextStyle(
                           color: Color.fromRGBO(247, 191, 95, 1),
-                          fontSize: Dimenssio.width16dp / 1.2),
+                          fontSize: Dimenssion.width16dp / 1.2),
                     ),
                     onTap: () {},
                   ),
                 ),
               SizedBox(
-                height: Dimenssio.height32dp,
+                height: Dimenssion.height32dp,
               ),
               MainButton(
                 text: _autoformType == AuthFormType.login
                     ? "Se connecter"
                     : "Créer un compte",
-                onTap: () {Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => User_Main_Page(),
-                              ));},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (_) => User_Main_Page(),
+                      ));
+                },
               ),
               SizedBox(
-                height: Dimenssio.height20dp,
+                height: Dimenssion.height20dp,
               ),
               Align(
                 alignment: Alignment.center,
@@ -116,7 +118,7 @@ class _AuthPageState extends State<AuthPage> {
                         : "vouz avez déja un compte?",
                     style: TextStyle(
                         color: Color.fromRGBO(247, 191, 95, 1),
-                        fontSize: Dimenssio.width16dp / 1.2),
+                        fontSize: Dimenssion.width16dp / 1.2),
                   ),
                   onTap: () {
                     setState(() {
@@ -130,20 +132,20 @@ class _AuthPageState extends State<AuthPage> {
                 ),
               ),
               SizedBox(
-                height: Dimenssio.height20dp,
+                height: Dimenssion.height20dp,
               ),
               CustomText(
                 text: "-OR-",
                 alignment: Alignment.center,
               ),
               SizedBox(
-                height: Dimenssio.height20dp / 2,
+                height: Dimenssion.height20dp / 2,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    height: Dimenssio.height32dp * 1.5,
+                    height: Dimenssion.height32dp * 1.5,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
@@ -154,17 +156,17 @@ class _AuthPageState extends State<AuthPage> {
                         Image.asset("images/google.png"),
                         Text(
                           'continué avec Google',
-                          style: TextStyle(fontSize: Dimenssio.width16dp),
+                          style: TextStyle(fontSize: Dimenssion.width16dp),
                         )
                       ],
                     ),
                   ),
                   SizedBox(
-                    width: Dimenssio.width20dp / 2,
-                    height: Dimenssio.height32dp,
+                    width: Dimenssion.width20dp / 2,
+                    height: Dimenssion.height32dp,
                   ),
                   Container(
-                    height: Dimenssio.height32dp * 1.5,
+                    height: Dimenssion.height32dp * 1.5,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
@@ -175,7 +177,7 @@ class _AuthPageState extends State<AuthPage> {
                         Image.asset("images/facebook.png"),
                         Text(
                           'continué avec facebook',
-                          style: TextStyle(fontSize: Dimenssio.width16dp),
+                          style: TextStyle(fontSize: Dimenssion.width16dp),
                         )
                       ],
                     ),

@@ -19,7 +19,6 @@ class _Page1State extends State<Page1> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -33,11 +32,11 @@ class _Page1State extends State<Page1> {
                   children: [
                     Image.asset(
                       'images/back.png',
-                      width: Dimenssio.screenWidth,
+                      width: Dimenssion.screenWidth,
                       fit: BoxFit.fitWidth,
                     ),
                     Container(
-                      height: Dimenssio.FirstPagesImageHeight,
+                      height: Dimenssion.FirstPagesImageHeight,
                       child: Image.asset(
                         'images/groupe1.png',
                       ),
@@ -49,38 +48,40 @@ class _Page1State extends State<Page1> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                        left: Dimenssio.width55dp,
-                        right: Dimenssio.width55dp,
-                        top: Dimenssio.height5dp ),
+                        left: Dimenssion.width55dp,
+                        right: Dimenssion.width55dp,
+                        top: Dimenssion.height5dp),
                     alignment: Alignment.center,
-                    child:  Text(
+                    child: Text(
                       "RECYCLE",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: Dimenssio.width30dp,
+                          fontSize: Dimenssion.width30dp,
                           fontFamily: 'Roboto'),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.only(
-                        left: Dimenssio.width46dp,
-                        right: Dimenssio.width46dp,
-                        top: Dimenssio.height5dp),
-                    child:  Text(
+                        left: Dimenssion.width46dp,
+                        right: Dimenssion.width46dp,
+                        top: Dimenssion.height5dp),
+                    child: Text(
                       "Recycle,Earn Point and Get Rewards",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: const Color.fromRGBO(247, 191, 95, 1),
-                          fontSize: Dimenssio.width30dp,
+                          fontSize: Dimenssion.width30dp,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Roboto'),
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(
-                          top: Dimenssio.height5dp * 5),
+                      margin: EdgeInsets.only(top: Dimenssion.height5dp * 5),
                       alignment: Alignment.center,
-                      child: Image.asset('images/next.png',height: Dimenssio.height20dp*2,))
+                      child: Image.asset(
+                        'images/next.png',
+                        height: Dimenssion.height20dp * 2,
+                      ))
                 ],
               ),
             ],

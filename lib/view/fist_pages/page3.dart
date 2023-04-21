@@ -25,12 +25,12 @@ class Page3 extends StatelessWidget {
                 children: [
                   Image.asset(
                     'images/back.png',
-                    width: Dimenssio.screenWidth,
+                    width: Dimenssion.screenWidth,
                     fit: BoxFit.fitWidth,
                   ),
                   Image.asset(
                     'images/Group3.png',
-                    height: Dimenssio.FirstPagesImageHeight,
+                    height: Dimenssion.FirstPagesImageHeight,
                     fit: BoxFit.scaleDown,
                   ),
                 ],
@@ -39,26 +39,26 @@ class Page3 extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                        left: Dimenssio.width55dp,
-                        right: Dimenssio.width55dp,
-                        top: Dimenssio.height5dp),
+                        left: Dimenssion.width55dp,
+                        right: Dimenssion.width55dp,
+                        top: Dimenssion.height5dp),
                     alignment: Alignment.center,
                     child: Text(
                       "ZERO PLASTIC",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: Dimenssio.width30dp,
+                          fontSize: Dimenssion.width30dp,
                           fontFamily: 'Roboto'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: Dimenssio.height5dp),
+                    padding: EdgeInsets.only(top: Dimenssion.height5dp),
                     child: Text(
                       "Pour un avenir sans plastique, agissons dès aujourd'hui.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: const Color.fromRGBO(247, 191, 95, 1),
-                          fontSize: Dimenssio.width30dp,
+                          fontSize: Dimenssion.width30dp,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Roboto'),
                     ),
@@ -80,7 +80,7 @@ class Page3 extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20))),
                         child: Text(
                           'Terminer',
-                          style: TextStyle(fontSize: Dimenssio.width20dp),
+                          style: TextStyle(fontSize: Dimenssion.width20dp),
                         ),
                       ))
                 ],

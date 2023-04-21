@@ -21,13 +21,12 @@ class Page2 extends StatelessWidget {
                 children: [
                   Image.asset(
                     'images/back2.png',
-                    width: Dimenssio.screenWidth,
+                    width: Dimenssion.screenWidth,
                     fit: BoxFit.fitWidth,
                   ),
                   Image.asset(
-                                        fit: BoxFit.scaleDown,
-
-                    height: Dimenssio.FirstPagesImageHeight,
+                    fit: BoxFit.scaleDown,
+                    height: Dimenssion.FirstPagesImageHeight,
                     'images/Group2.png',
                   ),
                 ],
@@ -36,35 +35,37 @@ class Page2 extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                        left: Dimenssio.width55dp,
-                        right: Dimenssio.width55dp,
-                        top: Dimenssio.height5dp),
+                        left: Dimenssion.width55dp,
+                        right: Dimenssion.width55dp,
+                        top: Dimenssion.height5dp),
                     alignment: Alignment.center,
                     child: Text(
                       "CLEAN EARTH",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: Dimenssio.width30dp,
+                          fontSize: Dimenssion.width30dp,
                           fontFamily: 'Roboto'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: Dimenssio.height5dp),
+                    padding: EdgeInsets.only(top: Dimenssion.height5dp),
                     child: Text(
                       "Une planète propre pour un avenir durable",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: const Color.fromRGBO(247, 191, 95, 1),
-                          fontSize: Dimenssio.width30dp,
+                          fontSize: Dimenssion.width30dp,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Roboto'),
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(                          
-                          top: Dimenssio.height5dp),
+                      margin: EdgeInsets.only(top: Dimenssion.height5dp),
                       alignment: Alignment.center,
-                      child: Image.asset('images/next.png',height: Dimenssio.height20dp*2,))
+                      child: Image.asset(
+                        'images/next.png',
+                        height: Dimenssion.height20dp * 2,
+                      ))
                 ],
               ),
             ],

@@ -25,17 +25,17 @@ class Objective extends StatelessWidget {
               style: TextStyle(
                   color: Color.fromRGBO(247, 191, 95, 1),
                   fontWeight: FontWeight.bold,
-                  fontSize: Dimenssio.width20dp),
+                  fontSize: Dimenssion.width20dp),
             ),
             Text(
               'Nous avons créé cette application pour sensibiliser les gens à l\'importance du tri des déchets et pour encourager l\'utilisation de poubelles intelligentes. Notre objectif est de contribuer à rendre notre planète plus propre et plus saine pour les générations futures',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: Dimenssio.width16dp,
+                fontSize: Dimenssion.width16dp,
               ),
               textAlign: TextAlign.center,
             ),
-            Image.asset('images/next.png',height: Dimenssio.height20dp*2)
+            Image.asset('images/next.png', height: Dimenssion.height20dp * 2)
           ],
         ),
       ),

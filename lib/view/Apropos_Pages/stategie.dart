@@ -27,19 +27,19 @@ class Strategie extends StatelessWidget {
               style: TextStyle(
                   color: Color.fromRGBO(247, 191, 95, 1),
                   fontWeight: FontWeight.bold,
-                  fontSize: Dimenssio.width20dp),
+                  fontSize: Dimenssion.width20dp),
             ),
             Text(
               'L’application permet aux utilisateurs de se connecter et de visualiser une carte qui affiche les emplacements de nos poubelles intelligentes. Les utilisateurs pourront également consulter leur compte de points d\'achats accumulés grâce au tri de leurs déchets dans nos poubelles intelligentes.',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: Dimenssio.width16dp,
+                fontSize: Dimenssion.width16dp,
               ),
               textAlign: TextAlign.center,
             ),
             SizedBox(
-                width: Dimenssio.width200dp,
-                height: Dimenssio.height45dp,
+                width: Dimenssion.width200dp,
+                height: Dimenssion.height45dp,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(

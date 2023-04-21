@@ -1,4 +1,3 @@
-
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
@@ -29,26 +28,29 @@ class _statistiqueState extends State<statistique> {
 
   @override
   Widget build(BuildContext context) {
-     var list =[1.2,2.2,3.1];
-     list.add(10.2);
-     List<ChartData> chartData = <ChartData>[
-      ChartData('2/04', list[list.length-1], 9, 5, 4, 0),
+    var list = [1.2, 2.2, 3.1];
+    list.add(10.2);
+    List<ChartData> chartData = <ChartData>[
+      ChartData('2/04', list[list.length - 1], 9, 5, 4, 0),
       ChartData('3/04', 3, 0, 5, 0, 2),
       ChartData('4/04', 5, 4, 0, 1, 1),
       ChartData('5/04', 6, 2, 2, 0, 2),
-      ChartData('6/04', 1, 8, 5, 4, 0),//teste
+      ChartData('6/04', 1, 8, 5, 4, 0), //teste
     ];
-    //cette boocle est une demonstration comment tu peut ajouter les donnes depuis firebase 
+    //cette boocle est une demonstration comment tu peut ajouter les donnes depuis firebase
     //tu les engresitre dans une list apres tu extracte les elements de la list
 
-    for(int i=7;i<11;i++){
-      chartData.add(ChartData('$i/04', 1, 8, 5, 4, 0),);
-
+    for (int i = 7; i < 11; i++) {
+      chartData.add(
+        ChartData('$i/04', 1, 8, 5, 4, 0),
+      );
     }
-    chartData.add(ChartData('11/04', 1, 8, 5, 1, 0),);
+    chartData.add(
+      ChartData('11/04', 1, 8, 5, 1, 0),
+    );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).cardColor,
+          backgroundColor: Theme.of(context).cardColor,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
@@ -158,19 +160,20 @@ class _statistiqueState extends State<statistique> {
               child: Column(
             children: [
               Container(
-                  width: Dimenssio.screenWidth,
+                  width: Dimenssion.screenWidth,
                   color: Theme.of(context).primaryColor,
                   child: Image.asset('images/logo.png')),
               SizedBox(
-                height: Dimenssio.height20dp * 3,
+                height: Dimenssion.height20dp * 3,
               ),
               SizedBox(
-                  height: Dimenssio.FirstPagesImageHeight,
+                  height: Dimenssion.FirstPagesImageHeight,
                   child: SfCartesianChart(
-                    backgroundColor: Theme.of(context).cardColor,
-                    zoomPanBehavior: ZoomPanBehavior(enablePanning: true,enablePinching: true),
+                      backgroundColor: Theme.of(context).cardColor,
+                      zoomPanBehavior: ZoomPanBehavior(
+                          enablePanning: true, enablePinching: true),
                       legend: Legend(
-                        backgroundColor: Theme.of(context).cardColor,
+                          backgroundColor: Theme.of(context).cardColor,
                           overflowMode: LegendItemOverflowMode.wrap,
                           isVisible: true,
                           position: LegendPosition.bottom,
