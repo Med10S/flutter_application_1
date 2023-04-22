@@ -23,7 +23,7 @@ class defRecyclage extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                  height: Dimenssio.FirstPagesImageHeight/2.5,
+                  height: Dimenssion.FirstPagesImageHeight/2.5,
                     alignment: Alignment.topRight,
                     child: Image.asset('images/terre.png')),
                 Image.asset('images/logo.png')
@@ -31,15 +31,15 @@ class defRecyclage extends StatelessWidget {
             ),
             Text('Definition',
                 style: TextStyle(
-                  fontSize: Dimenssio.width24dp,
+                  fontSize: Dimenssion.width24dp,
                   color: Mcolors.couleurSecondaire,
                 )),
             Container(
-              margin: EdgeInsets.symmetric(vertical: Dimenssio.height40dp, horizontal: Dimenssio.width24dp),
+              margin: EdgeInsets.symmetric(vertical: Dimenssion.height40dp, horizontal: Dimenssion.width24dp),
               child: Text(
                 Strings.recyclageDefinition,
                 style: TextStyle(
-                    fontSize: Dimenssio.width16dp, color: Colors.white),
+                    fontSize: Dimenssion.width16dp, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -55,7 +55,7 @@ class defRecyclage extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
-                      size: Dimenssio.height40dp,
+                      size: Dimenssion.height40dp,
                     )),
                 InkWell(
                     onTap: () {
@@ -68,7 +68,7 @@ class defRecyclage extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
-                      size: Dimenssio.height40dp,
+                      size: Dimenssion.height40dp,
                     )),
               ],
             )

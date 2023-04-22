@@ -35,7 +35,7 @@ class _R_3State extends State<R_3> {
               alignment: Alignment.center,
               children: [
                 Container(
-                    height: Dimenssio.FirstPagesImageHeight / 2.5,
+                    height: Dimenssion.FirstPagesImageHeight / 2.5,
                     alignment: Alignment.topRight,
                     child: Image.asset('images/terre.png')),
                 Image.asset('images/logo.png')
@@ -43,24 +43,24 @@ class _R_3State extends State<R_3> {
             ),
             Text('La méthode de « 3R »',
                 style: TextStyle(
-                  fontSize: Dimenssio.width24dp,
+                  fontSize: Dimenssion.width24dp,
                   color: Mcolors.couleurSecondaire,
                 )),
             Container(
               margin: EdgeInsets.symmetric(
-                  vertical: Dimenssio.height40dp / 4,
-                  horizontal: Dimenssio.width24dp),
+                  vertical: Dimenssion.height40dp / 4,
+                  horizontal: Dimenssion.width24dp),
               child: Text(
                 Strings.r_3_1,
                 style: TextStyle(
-                    fontSize: Dimenssio.width16dp, color: Colors.white),
+                    fontSize: Dimenssion.width16dp, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                  vertical: Dimenssio.height40dp / 4,
-                  horizontal: Dimenssio.width55dp),
+                  vertical: Dimenssion.height40dp / 4,
+                  horizontal: Dimenssion.width55dp),
               child: Column(
                 children: [
                   ElevatedButton(
@@ -86,7 +86,7 @@ class _R_3State extends State<R_3> {
                       children: [
                         Image.asset('images/decrease.png', height: 30),
                         SizedBox(
-                          width: Dimenssio.width20dp,
+                          width: Dimenssion.width20dp,
                         ),
                         Text(
                           'Réduire',
@@ -131,7 +131,7 @@ class _R_3State extends State<R_3> {
                       children: [
                         Image.asset('images/reuse.png', height: 30),
                         SizedBox(
-                          width: Dimenssio.width20dp,
+                          width: Dimenssion.width20dp,
                         ),
                         Text('Réutiliser'),
                       ],
@@ -176,7 +176,7 @@ class _R_3State extends State<R_3> {
                           height: 30,
                         ),
                         SizedBox(
-                          width: Dimenssio.width20dp,
+                          width: Dimenssion.width20dp,
                         ),
                         Text('Recycler'),
                       ],
@@ -213,7 +213,7 @@ class _R_3State extends State<R_3> {
                     child: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
-                      size: Dimenssio.height40dp,
+                      size: Dimenssion.height40dp,
                     )),
                 InkWell(
                     onTap: () {
@@ -226,7 +226,7 @@ class _R_3State extends State<R_3> {
                     child: Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white,
-                      size: Dimenssio.height40dp,
+                      size: Dimenssion.height40dp,
                     )),
               ],
             )

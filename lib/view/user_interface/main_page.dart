@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/src/user_interface/chart2.dart';
+import 'package:flutter_application_1/src/user_interface/code_scanner.dart';
+import 'package:flutter_application_1/src/user_interface/compte.dart';
+import 'package:flutter_application_1/src/welcome.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/view/user_interface/chart.dart';
-import 'package:flutter_application_1/view/user_interface/chart2.dart';
 
-import '../welcome.dart';
-import 'code_scanner.dart';
-import 'info.dart';
 
 class User_Main_Page extends StatefulWidget {
   User_Main_Page({super.key});
@@ -21,7 +20,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     User_Main_Page(),
-    const info_client(),
+    compte(),
     const Welcome(),
     QRScan()
   ];

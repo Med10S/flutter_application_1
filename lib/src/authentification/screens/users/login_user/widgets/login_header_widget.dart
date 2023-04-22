@@ -19,8 +19,8 @@ class LoginHeaderWidget extends StatelessWidget {
              image: const AssetImage("images/Group2.png"),
             height: size.height * 0.3),
         ),
-        Text("Welcome Back", style: TextStyle(fontWeight: FontWeight.bold,fontSize: Dimenssio.width24dp)),
-        Text("Make it work, make it right, make it fast.", style: TextStyle(fontSize: Dimenssio.width16dp) ),
+        Text("Welcome Back", style: TextStyle(fontWeight: FontWeight.bold,fontSize: Dimenssion.width24dp)),
+        Text("Make it work, make it right, make it fast.", style: TextStyle(fontSize: Dimenssion.width16dp) ),
       ],
     );
   }

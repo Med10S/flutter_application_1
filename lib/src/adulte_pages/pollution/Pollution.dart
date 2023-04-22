@@ -155,11 +155,7 @@ class Pollution extends StatelessWidget {
                             ],
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                      ),
+                       ),
                     ),
                     SizedBox(
                       height: Dimenssion.height55dp,
@@ -171,6 +167,10 @@ class Pollution extends StatelessWidget {
                                 builder: (_) => TypesPollution(),
                               ));
                         },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Mcolors.Cbackground,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimenssion.width30dp / 2),
@@ -188,10 +188,6 @@ class Pollution extends StatelessWidget {
                             ],
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
                       ),
                     ),
                   ],

@@ -29,8 +29,8 @@ class FormHeaderWidget extends StatelessWidget {
       children: [
         Image(image: AssetImage(image), color: imageColor, height: size.height * 0.3),
         SizedBox(height: heightBetween),
-        Text(title, style:TextStyle(fontWeight: FontWeight.bold,fontSize: Dimenssio.width24dp)),
-        Text(subTitle, textAlign: textAlign,style: TextStyle(fontSize: Dimenssio.width16dp)),
+        Text(title, style:TextStyle(fontWeight: FontWeight.bold,fontSize: Dimenssion.width24dp)),
+        Text(subTitle, textAlign: textAlign,style: TextStyle(fontSize: Dimenssion.width16dp)),
       ],
     );
   }

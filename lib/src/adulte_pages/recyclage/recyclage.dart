@@ -18,9 +18,9 @@ class Recyclage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(
-            right: Dimenssio.width20dp / 2,
-            left: Dimenssio.width20dp / 2,
-            top: Dimenssio.height20dp * 1.5,
+            right: Dimenssion.width20dp / 2,
+            left: Dimenssion.width20dp / 2,
+            top: Dimenssion.height20dp * 1.5,
           ),
           //alignment: Alignment.center,
           color: Theme.of(context).primaryColor,
@@ -40,25 +40,25 @@ class Recyclage extends StatelessWidget {
                 children: [
                   Image.asset('images/logo.png'),
                   SizedBox(
-                    height: Dimenssio.height20dp * 1.5,
+                    height: Dimenssion.height20dp * 1.5,
                   ),
                   Text('Recyclage',
                       style: TextStyle(
-                        fontSize: Dimenssio.width24dp,
+                        fontSize: Dimenssion.width24dp,
                         color: const Color.fromRGBO(247, 191, 95, 1),
                       )),
                 ],
               ),
               SizedBox(
-                height: Dimenssio.height20dp * 4,
+                height: Dimenssion.height20dp * 4,
               ),
               SizedBox(
-                height: Dimenssio.height250dp,
+                height: Dimenssion.height250dp,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -74,7 +74,7 @@ class Recyclage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -82,7 +82,7 @@ class Recyclage extends StatelessWidget {
                                 "Definition",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
                              const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
@@ -92,7 +92,7 @@ class Recyclage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
                         onPressed: () {Navigator.push(
                               context,
@@ -106,7 +106,7 @@ class Recyclage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -114,7 +114,7 @@ class Recyclage extends StatelessWidget {
                                 Strings.nature_Pollution,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
                              const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
@@ -124,7 +124,7 @@ class Recyclage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
@@ -134,7 +134,7 @@ class Recyclage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -142,7 +142,7 @@ class Recyclage extends StatelessWidget {
                                 "Source de pollution",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
                               const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
@@ -152,7 +152,7 @@ class Recyclage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
@@ -162,7 +162,7 @@ class Recyclage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -170,7 +170,7 @@ class Recyclage extends StatelessWidget {
                                 "type de pollution",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
                               const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),

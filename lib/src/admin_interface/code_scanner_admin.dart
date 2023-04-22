@@ -156,8 +156,8 @@ class _QRScanState extends State<qRScan_admin> {
                   else
                     const Text('Scan a code'),
                   Container(
-                    padding: EdgeInsets.all(Dimenssio.height20dp),
-                    width: Dimenssio.screenWidth,
+                    padding: EdgeInsets.all(Dimenssion.height20dp),
+                    width: Dimenssion.screenWidth,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       //crossAxisAlignment: CrossAxisAlignment.center,
@@ -166,13 +166,13 @@ class _QRScanState extends State<qRScan_admin> {
                           onTap: () async {
                             await controller?.pauseCamera();
                           },
-                          child:  Image.asset('images/pause.png',height: Dimenssio.height5dp*5),
+                          child:  Image.asset('images/pause.png',height: Dimenssion.height5dp*5),
                         ),
                         InkWell(
                           onTap: () async {
                             await controller?.resumeCamera();
                           },
-                          child: Image.asset('images/resume.png',height: Dimenssio.height5dp*5,),
+                          child: Image.asset('images/resume.png',height: Dimenssion.height5dp*5,),
                         )
                       ],
                     ),
@@ -187,7 +187,7 @@ class _QRScanState extends State<qRScan_admin> {
   }
 
   Widget _buildQrView(BuildContext context) {
-    var scanArea = Dimenssio.FirstPagesImageHeight;
+    var scanArea = Dimenssion.FirstPagesImageHeight;
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,

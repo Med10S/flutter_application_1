@@ -68,8 +68,8 @@ class _User_Main_PageState extends State<User_Main_Page> {
               borderRadius: BorderRadius.circular(20),
               color: Theme.of(context).cardColor,
             ),
-            height: Dimenssio.FirstPagesImageHeight / 2,
-            width: Dimenssio.screenWidth,
+            height: Dimenssion.FirstPagesImageHeight / 2,
+            width: Dimenssion.screenWidth,
             child: FutureBuilder(
               future: controller.getUserData(),
               builder: (context, snapshot) {
@@ -82,13 +82,13 @@ class _User_Main_PageState extends State<User_Main_Page> {
                         Text(
                           userData.points.toString(),
                           style: TextStyle(
-                              fontSize: Dimenssio.width20dp * 4,
+                              fontSize: Dimenssion.width20dp * 4,
                               color: const Color.fromRGBO(230, 198, 84, 1)),
                         ),
                         Text(
                           "Points",
                           style: TextStyle(
-                              fontSize: Dimenssio.width20dp * 2,
+                              fontSize: Dimenssion.width20dp * 2,
                               color: const Color.fromRGBO(230, 198, 84, 1)),
                         )
                       ],
@@ -117,7 +117,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: SizedBox(
-              height: Dimenssio.height250dp / 1.08,
+              height: Dimenssion.height250dp / 1.08,
               child: ListTileTheme(
                 tileColor: Theme.of(context).cardColor,
                 shape: RoundedRectangleBorder(
@@ -128,7 +128,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
                   // Appliquer un BorderRadius de 20 à tous les éléments de la liste
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      padding: EdgeInsets.only(top: Dimenssio.width16dp),
+                      padding: EdgeInsets.only(top: Dimenssion.width16dp),
                       child: Material(
                         color: Theme.of(context).primaryColorDark,
                         borderRadius: BorderRadius.circular(20),
@@ -317,7 +317,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
           Text(
             time[index],
             style: TextStyle(
-              fontSize: Dimenssio.width24dp / 1.2,
+              fontSize: Dimenssion.width24dp / 1.2,
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.white
                   : const Color.fromRGBO(14, 77, 89, 1),
@@ -326,7 +326,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
           Text(
             quantite[index].toString() + " Point(s)",
             style: TextStyle(
-              fontSize: Dimenssio.width24dp / 1.3,
+              fontSize: Dimenssion.width24dp / 1.3,
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.white
                   : const Color.fromRGBO(14, 77, 89, 1),
