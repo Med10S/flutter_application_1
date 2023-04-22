@@ -37,7 +37,7 @@ class PollutionAir extends StatelessWidget {
                   'types de pollution',
                   style: TextStyle(
                     fontSize: Dimenssion.height20dp,
-                    color: Color.fromARGB(255, 242, 187, 93),
+                    color: const Color.fromARGB(255, 242, 187, 93),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -154,15 +154,29 @@ class PollutionAir extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          "La pollution atmosphérique se produit lorsque l'air que nous respirons est endommagé par des produits chimiques nocifs qui se trouvent dans l'air. Les pics de pollution atmosphérique sont plus fréquents en été. ",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "La pollution atmosphérique se produit lorsque l'air que nous respirons est endommagé par des produits chimiques nocifs qui se trouvent dans l'air. Les pics de pollution atmosphérique sont plus fréquents en été. ",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: Dimenssion.height20dp),
+                            const Text(
+                              "click to flip back",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.italic),
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -179,15 +193,29 @@ class PollutionAir extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          "Les principales sources de pollution atmosphérique comprennent les particules fines, le dioxyde de soufre, l'ozone, les oxydes d'azote, les composés organiques volatils, etc.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Les principales sources de pollution atmosphérique comprennent les particules fines, le dioxyde de soufre, l'ozone, les oxydes d'azote, les composés organiques volatils, etc.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: Dimenssion.height20dp),
+                            const Text(
+                              "click to flip front",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.italic),
+                            )
+                          ],
                         ),
                       ),
                     ),
