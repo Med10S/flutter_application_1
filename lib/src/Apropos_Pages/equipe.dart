@@ -19,12 +19,20 @@ class Equipe extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(alignment: Alignment.topRight,child: InkWell(onTap: (){Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (_) => Strategie(),
-                        ));}
-                ,child: Text("skip",style: TextStyle(color: Colors.white),))),
+              Container(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => Strategie(),
+                            ));
+                      },
+                      child: Text(
+                        "skip",
+                        style: TextStyle(color: Colors.white),
+                      ))),
               Image.asset('images/logo.png'),
               Image.asset('images/equipe.png'),
               Text(
@@ -32,17 +40,17 @@ class Equipe extends StatelessWidget {
                 style: TextStyle(
                     color: Color.fromRGBO(247, 191, 95, 1),
                     fontWeight: FontWeight.bold,
-                    fontSize: Dimenssio.width20dp),
+                    fontSize: Dimenssion.width20dp),
               ),
               Text(
                 'Nous sommes un groupe de 13 étudiants de l\' École nationale des sciences appliquées de fes passionnés par l\'environnement et désireux de contribuer à la réduction de la pollution.',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: Dimenssio.width16dp,
+                  fontSize: Dimenssion.width16dp,
                 ),
                 textAlign: TextAlign.center,
               ),
-              Image.asset('images/next.png',height: Dimenssio.height20dp*2)
+              Image.asset('images/next.png', height: Dimenssion.height20dp * 2)
             ],
           ),
         ),

@@ -84,23 +84,76 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
             children: [
               Container(
                 padding: EdgeInsets.only(
-                    right: Dimenssio.width80dp / 4,
-                    left: Dimenssio.width80dp / 4,
-                    bottom: Dimenssio.height20dp * 4,
-                    top: Dimenssio.height20dp*2),
+                    right: Dimenssion.width80dp / 4,
+                    left: Dimenssion.width80dp / 4,
+                    bottom: Dimenssion.height20dp * 4,
+                    top: Dimenssion.height20dp * 2),
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                margin: EdgeInsets.only(bottom: Dimenssio.height20dp),
-                alignment: Alignment.center,
-                child: Image.asset('images/logo.png'),),
-                SizedBox(height: Dimenssio.height20dp*3,),
-                   Container( 
-                    
-                    width: Dimenssio.width250dp/1.2,
+                      margin: EdgeInsets.only(bottom: Dimenssion.height20dp),
                       alignment: Alignment.center,
+<<<<<<< HEAD:lib/view/welcome.dart
+                      child: Image.asset('images/logo.png'),
+                    ),
+                    SizedBox(
+                      height: Dimenssion.height20dp * 3,
+                    ),
+                    Container(
+                        width: Dimenssion.width250dp / 1.2,
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (_) => AuthPage(),
+                                ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromRGBO(247, 191, 95, 1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Image.asset(
+                                'images/identifer.png',
+                                height: Dimenssion.height40dp,
+                              ),
+                              Text(
+                                'Votre espace',
+                                style:
+                                    TextStyle(fontSize: Dimenssion.width20dp),
+                              ),
+                            ],
+                          ),
+                        )),
+                    SizedBox(height: Dimenssion.height20dp),
+                    Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (_) => firstPage(),
+                                ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromRGBO(247, 191, 95, 1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                          child: Text(
+                            'Environnement',
+                            style: TextStyle(fontSize: Dimenssion.width20dp),
+                          ),
+                        )),
+=======
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -148,12 +201,13 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                           style: TextStyle(fontSize: Dimenssio.width20dp),
                         ), 
                       )),
+>>>>>>> 9103f81044f3bfccd29a458af4c15e4750d75b40:lib/src/welcome.dart
                   ],
                 ),
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.only(top: Dimenssio.height55dp),
+                  margin: EdgeInsets.only(top: Dimenssion.height55dp),
                   child: Stack(
                     children: [
                       Image.asset(
@@ -167,12 +221,12 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                         children: [
                           Container(
                             padding:
-                                EdgeInsets.only(right: Dimenssio.width80dp),
+                                EdgeInsets.only(right: Dimenssion.width80dp),
                             alignment: Alignment.topRight,
                             child: InkWell(
                               child: Image.asset(
                                 'images/NEXTTOP.png',
-                                height: Dimenssio.height20dp*3,
+                                height: Dimenssion.height20dp * 3,
                                 color: Theme.of(context).primaryColor,
                               ),
                             ),
@@ -184,7 +238,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
-                                    fontSize: Dimenssio.width80dp / 2,
+                                    fontSize: Dimenssion.width80dp / 2,
                                     fontWeight: FontWeight.bold),
                               ))
                         ],
@@ -195,10 +249,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
               )
             ],
           ),
-        )
-        
-        
-        ),
+        )),
       ),
       // Your initial widget here
     );

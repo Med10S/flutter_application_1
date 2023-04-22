@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 //height of my phone is 640
 ///width of my phone is 360
 
-class Dimenssio {
+class Dimenssion {
   static double screenHeight = Get.context!.height;
   static double screenWidth = Get.context!.width;
 //640/

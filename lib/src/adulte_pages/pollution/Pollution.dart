@@ -8,6 +8,7 @@ import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
 import '../../../colors/colors.dart';
 import '../first_page.dart';
 import 'definition.dart';
+import 'types.dart';
 
 class Pollution extends StatelessWidget {
   const Pollution({super.key});
@@ -18,47 +19,52 @@ class Pollution extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(
-            right: Dimenssio.width20dp / 2,
-            left: Dimenssio.width20dp / 2,
-            top: Dimenssio.height20dp * 1.5,
+            right: Dimenssion.width20dp / 2,
+            left: Dimenssion.width20dp / 2,
+            top: Dimenssion.height20dp * 1.5,
           ),
           //alignment: Alignment.center,
           color: Theme.of(context).primaryColor,
           child: Column(
             children: [
               Container(
-                alignment:Alignment.topLeft,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(context, CupertinoPageRoute(
-                                builder: (_) => const firstPage(),
-                              ));
-                  },
-                  child: const Icon(Icons.arrow_back_ios_new,color: Colors.white,),)
-                  ),
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (_) => const firstPage(),
+                          ));
+                    },
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                    ),
+                  )),
               Column(
                 children: [
                   Image.asset('images/logo.png'),
                   SizedBox(
-                    height: Dimenssio.height20dp * 1.5,
+                    height: Dimenssion.height20dp * 1.5,
                   ),
                   Text('Pollution',
                       style: TextStyle(
-                        fontSize: Dimenssio.width24dp,
+                        fontSize: Dimenssion.width24dp,
                         color: const Color.fromRGBO(247, 191, 95, 1),
                       )),
                 ],
               ),
               SizedBox(
-                height: Dimenssio.height20dp * 4,
+                height: Dimenssion.height20dp * 4,
               ),
               SizedBox(
-                height: Dimenssio.height250dp,
+                height: Dimenssion.height250dp,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -68,13 +74,12 @@ class Pollution extends StatelessWidget {
                               ));
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                               Mcolors.Cbackground,
+                            backgroundColor: Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -82,9 +87,9 @@ class Pollution extends StatelessWidget {
                                 "Definition",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
-                             const Icon(Icons.arrow_forward_ios,
+                              const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
                             ],
                           ),
@@ -92,21 +97,22 @@ class Pollution extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
-                        onPressed: () {Navigator.push(
+                        onPressed: () {
+                          Navigator.push(
                               context,
                               CupertinoPageRoute(
                                 builder: (_) => const naturePollution(),
-                              ));},
+                              ));
+                        },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Mcolors.Cbackground,
+                            backgroundColor: Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -114,9 +120,9 @@ class Pollution extends StatelessWidget {
                                 Strings.nature_Pollution,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
-                             const Icon(Icons.arrow_forward_ios,
+                              const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
                             ],
                           ),
@@ -124,7 +130,7 @@ class Pollution extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
@@ -134,7 +140,7 @@ class Pollution extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -142,27 +148,32 @@ class Pollution extends StatelessWidget {
                                 "Source de pollution",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
                               const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
                             ],
                           ),
                         ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Mcolors.Cbackground,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
                       ),
                     ),
                     SizedBox(
-                      height: Dimenssio.height55dp,
+                      height: Dimenssion.height55dp,
                       child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) => TypesPollution(),
+                              ));
+                        },
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssio.width30dp / 2),
+                              horizontal: Dimenssion.width30dp / 2),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -170,13 +181,17 @@ class Pollution extends StatelessWidget {
                                 "type de pollution",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Dimenssio.width16dp),
+                                    fontSize: Dimenssion.width16dp),
                               ),
                               const Icon(Icons.arrow_forward_ios,
                                   color: Colors.black),
                             ],
                           ),
                         ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Mcolors.Cbackground,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
                       ),
                     ),
                   ],
