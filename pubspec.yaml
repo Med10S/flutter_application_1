@@ -47,9 +47,9 @@ dependencies:
   firebase_auth: ^4.4.0
   fluttertoast:
   cloud_firestore:
-
-
-
+ # wifi:
+  http: ^0.13.5
+  flutter_dialogs:
   #flutter_launcher_name: ^0.0.1
 
 

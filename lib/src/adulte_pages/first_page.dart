@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/recyclage.dart';
 import 'package:flutter_application_1/src/welcome.dart';
 
 import '../../utilities/dimention.dart';
 import 'pollution/Pollution.dart';
 
+// ignore: camel_case_types
 class firstPage extends StatelessWidget {
   const firstPage({super.key});
 
@@ -30,10 +30,10 @@ class firstPage extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     Navigator.push(context, CupertinoPageRoute(
-                                builder: (_) => Welcome(),
+                                builder: (_) =>const Welcome(),
                               ));
                   },
-                  child: Icon(Icons.arrow_back_ios_new,color: Colors.white,),)
+                  child:const Icon(Icons.arrow_back_ios_new,color: Colors.white,),)
                   ),
             Image.asset('images/logo.png'),
             
@@ -52,7 +52,7 @@ class firstPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => Pollution(),
+                                builder: (_) => const Pollution(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(
@@ -73,11 +73,11 @@ class firstPage extends StatelessWidget {
                       height: Dimenssio.height20dp * 2,
                       child: ElevatedButton(
                         onPressed: () {
-                          /*Navigator.push(
+                          Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => Welcome(),
-                            ));*/
+                              builder: (_) => const Recyclage(),
+                            ));
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:

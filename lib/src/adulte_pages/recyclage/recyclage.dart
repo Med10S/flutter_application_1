@@ -9,8 +9,8 @@ import '../../../colors/colors.dart';
 import '../first_page.dart';
 import 'definition.dart';
 
-class Pollution extends StatelessWidget {
-  const Pollution({super.key});
+class Recyclage extends StatelessWidget {
+  const Recyclage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class Pollution extends StatelessWidget {
                   SizedBox(
                     height: Dimenssio.height20dp * 1.5,
                   ),
-                  Text('Pollution',
+                  Text('Recyclage',
                       style: TextStyle(
                         fontSize: Dimenssio.width24dp,
                         color: const Color.fromRGBO(247, 191, 95, 1),
@@ -64,7 +64,7 @@ class Pollution extends StatelessWidget {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => const definition(),
+                                builder: (_) => const defRecyclage(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(

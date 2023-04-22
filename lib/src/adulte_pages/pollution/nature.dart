@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/definition.dart';
 
 import '../../../utilities/dimention.dart';
-import 'Pollution.dart';//init
 
+// ignore: camel_case_types
 class naturePollution extends StatelessWidget {
   const naturePollution({super.key});
 
@@ -48,7 +46,7 @@ class naturePollution extends StatelessWidget {
             InkWell(
               onTap: (){},
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Mcolors.couleurPrincipal2,
@@ -67,7 +65,7 @@ class naturePollution extends StatelessWidget {
               ),
             ),
             Container(
-               margin: EdgeInsets.symmetric(horizontal: 10),
+               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Mcolors.couleurPrincipal2,
@@ -85,7 +83,7 @@ class naturePollution extends StatelessWidget {
               ),
             ),
             Container(
-               margin: EdgeInsets.symmetric(horizontal: 10),
+               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Mcolors.couleurPrincipal2,
@@ -108,7 +106,7 @@ class naturePollution extends StatelessWidget {
                 InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) => definition()));
+                          CupertinoPageRoute(builder: (_) => const definition()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
@@ -117,10 +115,9 @@ class naturePollution extends StatelessWidget {
                       size: Dimenssio.height40dp,
                     )),
                 InkWell(
-                    onTap: () {/*
-                       Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) => CalendarWithGraphs(data: [],)));*/
-                      // Fonction appelée lors du clic sur le bouton
+                    onTap: () {
+                      /*Navigator.push(context,
+                          CupertinoPageRoute(builder: (_) => Scene()));*/
                     },
                     child: Icon(
                       Icons.arrow_forward_ios,

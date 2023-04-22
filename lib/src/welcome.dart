@@ -149,11 +149,8 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                         ), 
                       )),
                   ],
-                  
                 ),
               ),
-              
-              
               Expanded(
                 child: Container(
                   margin: EdgeInsets.only(top: Dimenssio.height55dp),

@@ -2,7 +2,7 @@
 
 import 'dart:developer';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -10,17 +10,17 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 
 import '../repository/authentification_repository/authentification_repository.dart';
-import '../welcome.dart';
-import 'main_page.dart';
+import '../user_interface/main_page.dart';
 
-class QRScan extends StatefulWidget {
-  const QRScan({Key? key}) : super(key: key);
+// ignore: camel_case_types
+class qRScan_admin extends StatefulWidget {
+  const qRScan_admin({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRScanState();
 }
 
-class _QRScanState extends State<QRScan> {
+class _QRScanState extends State<qRScan_admin> {
   Barcode? result;
   String? wifiSSID;
   String? wifiPassword;
@@ -218,15 +218,13 @@ class _QRScanState extends State<QRScan> {
    * et la bibliothèque http pour envoyer les données à l'ESP. 
    * Vous devrez remplacer "ESP-WIFI-SSID", 
    * "ESP-WIFI-PASSWORD" et "IP_ADDRESS" avec vos propres valeurs. */
-
-   /*void _onQRViewCreated(QRViewController controller) async {
+/**
+   import 'package:wifi/wifi.dart';
+   void _onQRViewCreated(QRViewController controller) async {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
-      String ESP_WIFI_SSID =scanData.code!.split(';')[0].substring(5);
-      String ESPWIFIPASSWORD = scanData.code!.split(';')[1].substring(4);
-      String USER_ID= "Admin";
-      await Wifi.connection(ESP_WIFI_SSID, ESPWIFIPASSWORD);
-      await sendUserIdToESP(USER_ID);
+      await Wifi.connection('ESP-WIFI-SSID', 'ESP-WIFI-PASSWORD');
+      await sendUserIdToESP('USER_ID');
       controller.pauseCamera();
     });
   }
@@ -240,11 +238,10 @@ class _QRScanState extends State<QRScan> {
       print('Données envoyées avec succès à l\'ESP');
     } else {
       // La connexion à l'ESP a échoué
-      print('Impossible de se connecter à l\'ESP');
-      //throw Exception('Impossible de se connecter à l\'ESP');
+      throw Exception('Impossible de se connecter à l\'ESP');
     }
-  } */
-  
+  } 
+  */
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
