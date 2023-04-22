@@ -10,6 +10,7 @@ import 'package:flutter_application_1/view/adulte_pages/pollution/nature.dart';
 import '../../../colors/colors.dart';
 import '../first_page.dart';
 import 'definition.dart';
+import 'types.dart';
 
 class Pollution extends StatelessWidget {
   const Pollution({super.key});
@@ -160,7 +161,13 @@ class Pollution extends StatelessWidget {
                     SizedBox(
                       height: Dimenssion.height55dp,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) => TypesPollution(),
+                              ));
+                        },
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimenssion.width30dp / 2),
