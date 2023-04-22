@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
-import 'package:flutter_application_1/src/authentification/screens/admin/admin_main_page.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart.dart';
@@ -223,19 +222,13 @@ class _User_Main_PageState extends State<User_Main_Page> {
                           if (userData.role == "admin") {
                             return InkWell(
                               onTap: () {
-                                Get.snackbar("utlisateur info",
-                                    "acces authoriser");
-                                    Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => const QRScan2(),
-                              ));
-                                    
+                                Get.snackbar(
+                                    "utlisateur info", "acces authoriser");
                               },
                               child: Column(
                                 children: [
                                   //Image.asset("images/info_client.png"),
-                                  Stack(children: const[
+                                  Stack(children: const [
                                     Icon(
                                       Icons.admin_panel_settings,
                                       color: Color.fromRGBO(255, 182, 76, 1),
@@ -258,13 +251,11 @@ class _User_Main_PageState extends State<User_Main_Page> {
                           } else {
                             return InkWell(
                               onTap: () {
-                                Get.snackbar("next page",
-                                    "utlisateur info");
+                                Get.snackbar("next page", "utlisateur info");
                               },
                               child: Column(
                                 children: [
                                   Image.asset("images/info_client.png"),
-                                   
                                   const Text(
                                     "Compte",
                                     style: TextStyle(
@@ -272,7 +263,8 @@ class _User_Main_PageState extends State<User_Main_Page> {
                                   ),
                                 ],
                               ),
-                            );;
+                            );
+                            ;
                           }
                         } else {
                           // Add any other widget or error handling logic here

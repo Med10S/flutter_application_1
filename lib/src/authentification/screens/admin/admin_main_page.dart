@@ -9,8 +9,6 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:flutter/material.dart';
 
-
-
 class QRScan2 extends StatefulWidget {
   const QRScan2({Key? key}) : super(key: key);
 
@@ -40,8 +38,7 @@ class _QRScanState extends State<QRScan2> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
             onPressed: () async {
               await controller?.toggleFlash();
@@ -53,12 +50,12 @@ class _QRScanState extends State<QRScan2> {
               builder: (context, snapshot) {
                 return InkWell(
                     child: Image.asset(
-                      snapshot.data == true
-                          ? "images/flash_on.png"
-                          : "images/no-flash.png",
-                      height: 40,
-                      color: const Color.fromRGBO(230, 198, 84, 1),
-                    ));
+                  snapshot.data == true
+                      ? "images/flash_on.png"
+                      : "images/no-flash.png",
+                  height: 40,
+                  color: const Color.fromRGBO(230, 198, 84, 1),
+                ));
               },
             )),
         backgroundColor: Theme.of(context).primaryColor,
@@ -72,7 +69,8 @@ class _QRScanState extends State<QRScan2> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   if (result != null)
-                    Text(textAlign:TextAlign.center,
+                    Text(
+                      textAlign: TextAlign.center,
                       'wifiSSID ${result!.code!.split(';')[0].substring(5)},\npassword ${result!.code!.split(';')[1].substring(4)}\npoubelle ${result!.code!.split(';')[2].substring(9)}',
                     )
                   else
@@ -88,13 +86,17 @@ class _QRScanState extends State<QRScan2> {
                           onTap: () async {
                             await controller?.pauseCamera();
                           },
-                          child:  Image.asset('images/pause.png',height: Dimenssion.height5dp*5),
+                          child: Image.asset('images/pause.png',
+                              height: Dimenssion.height5dp * 5),
                         ),
                         InkWell(
                           onTap: () async {
                             await controller?.resumeCamera();
                           },
-                          child: Image.asset('images/resume.png',height: Dimenssion.height5dp*5,),
+                          child: Image.asset(
+                            'images/resume.png',
+                            height: Dimenssion.height5dp * 5,
+                          ),
                         )
                       ],
                     ),
