@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         primaryColor:const Color.fromRGBO(26, 98, 114, 1) ,
         cardColor:const Color.fromRGBO(14, 77, 89, 1) ),
         //themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.system,
         theme: ThemeData(
           brightness: Brightness.light,
           canvasColor: Color.fromARGB(255, 236, 236, 236),

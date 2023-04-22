@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 
 import 'Pollution.dart';
@@ -92,10 +93,8 @@ class TypesPollution extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => WaterPollution(
-                      title: 'Pollution de l\'eau',
-                      image: Image.asset('images/water-pollution.png'),
-                    ),
+                    builder: (context) => MyGridView(
+                  )
                   ));
                 },
                 child: Container(

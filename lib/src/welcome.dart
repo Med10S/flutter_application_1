@@ -82,6 +82,9 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(padding: EdgeInsets.only(top: Dimenssion.height20dp*4),
+                
+                child: Image.asset('images/logo.png'),),
               Container(
                 padding: EdgeInsets.only(
                     right: Dimenssion.width80dp / 4,
