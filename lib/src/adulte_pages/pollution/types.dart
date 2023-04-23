@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/AirPollution.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/Pollution.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'SoilPollution.dart';
@@ -19,14 +20,32 @@ class TypesPollution extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           child: ListView(
             children: [
-              Stack(
-                alignment: Alignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      height: Dimenssion.FirstPagesImageHeight / 2.5,
-                      alignment: Alignment.centerRight,
-                      child: Image.asset('images/mother-earth.png')),
-                  Image.asset('images/logo.png')
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Pollution(),
+                        ));
+                        // ignore: prefer_const_constructors
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: Dimenssion.height40dp,
+                      )),
+                  const SizedBox(width: 40),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                          height: Dimenssion.FirstPagesImageHeight / 2.5,
+                          alignment: Alignment.centerRight,
+                          child: Image.asset('images/mother-earth.png')),
+                      Image.asset('images/logo.png')
+                    ],
+                  ),
                 ],
               ),
               Text(
