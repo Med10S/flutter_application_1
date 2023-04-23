@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/AirPollution.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/Pollution.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-
-import 'Pollution.dart';
-import 'PollutionAir.dart';
 import 'SoilPollution.dart';
 import 'WaterPollution.dart';
 
@@ -21,21 +20,39 @@ class TypesPollution extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           child: ListView(
             children: [
-              Stack(
-                alignment: Alignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      height: Dimenssion.FirstPagesImageHeight / 2.5,
-                      alignment: Alignment.centerRight,
-                      child: Image.asset('images/mother-earth.png')),
-                  Image.asset('images/logo.png')
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Pollution(),
+                        ));
+                        // ignore: prefer_const_constructors
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: Dimenssion.height40dp,
+                      )),
+                  const SizedBox(width: 40),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                          height: Dimenssion.FirstPagesImageHeight / 2.5,
+                          alignment: Alignment.centerRight,
+                          child: Image.asset('images/mother-earth.png')),
+                      Image.asset('images/logo.png')
+                    ],
+                  ),
                 ],
               ),
               Text(
                 'types de pollution',
                 style: TextStyle(
                   fontSize: Dimenssion.height20dp,
-                  color: Color.fromARGB(255, 242, 187, 93),
+                  color: const Color.fromARGB(255, 242, 187, 93),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -51,10 +68,7 @@ class TypesPollution extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PollutionAir(
-                      title: 'Pollution de l\'air',
-                      image: Image.asset('images/air-pollution.png'),
-                    ),
+                    builder: (context) => const PollutionAir(),
                   ));
                 },
                 child: Container(
@@ -93,9 +107,7 @@ class TypesPollution extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => MyGridView(
-                  )
-                  ));
+                      builder: (context) => const WaterPollution()));
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: Dimenssion.height20dp),
@@ -133,10 +145,7 @@ class TypesPollution extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => SoilPollution(
-                      title: 'Pollution du sol',
-                      image: Image.asset('images/soil-pollution.png'),
-                    ),
+                    builder: (context) => const SoilPollution(),
                   ));
                 },
                 child: Container(

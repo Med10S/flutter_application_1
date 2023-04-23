@@ -31,6 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flip_card: ^0.7.0
   get: ^4.1.4
   qr_code_scanner: ^1.0.1
   cupertino_icons: ^1.0.2
