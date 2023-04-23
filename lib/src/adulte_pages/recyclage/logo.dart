@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/3R.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/poubelle.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 
 import '../../../colors/colors.dart';
@@ -110,9 +113,9 @@ class LogoRecyclage extends StatelessWidget {
                     color: Mcolors.couleurSecondaire,
                   )),
               Text("❌ Les faux-amis des symboles de recyclage*",style: TextStyle(color: Colors.red),),
-
+          
               SizedBox(
-                height: Dimenssion.height45dp * 10,
+                height: Dimenssion.height40dp * 10,
                 child: GridView.builder(
                   padding: EdgeInsets.all(Dimenssion.height20dp),
                   itemCount: buttonTitles.length,
@@ -144,6 +147,41 @@ class LogoRecyclage extends StatelessWidget {
                   },
                 ),
               ),
+              Positioned(
+                bottom: 10,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) => const R_3()));
+                          // Fonction appelée lors du clic sur le bouton
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                          size: Dimenssion.height40dp,
+                        )),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) =>Poubelle()));
+                          // Fonction appelée lors du clic sur le bouton
+                        },
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: Dimenssion.height40dp,
+                        )),
+                  ],
+                ),
+              )
+            
             ],
           ),
         ),

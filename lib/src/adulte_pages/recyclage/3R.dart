@@ -10,6 +10,8 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import '../../../colors/colors.dart';
 import '../pollution/Pollution.dart';
 import '../pollution/nature.dart';
+import 'definition.dart';
+import 'logo.dart';
 
 class R_3 extends StatefulWidget {
   const R_3({super.key});
@@ -212,7 +214,7 @@ class _R_3State extends State<R_3> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (_) => const Recyclage()));
+                                  builder: (_) => const DefRecyclage()));
                           // Fonction appelée lors du clic sur le bouton
                         },
                         child: Icon(
@@ -225,7 +227,7 @@ class _R_3State extends State<R_3> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (_) => const naturePollution()));
+                                  builder: (_) =>LogoRecyclage()));
                           // Fonction appelée lors du clic sur le bouton
                         },
                         child: Icon(

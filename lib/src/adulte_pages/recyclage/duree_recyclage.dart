@@ -9,7 +9,7 @@ class DureeRecyclage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(backgroundColor: Theme.of(context).primaryColor,
-      body: Container(),));
+      body: Center(child:Text("DureeRecyclage")),));
   }
 }
 
