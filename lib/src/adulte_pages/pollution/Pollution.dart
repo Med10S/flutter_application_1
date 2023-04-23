@@ -6,6 +6,7 @@ import 'package:flutter_application_1/utilities/string.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
 
 import '../../../colors/colors.dart';
+import '../../../utilities/botton.dart';
 import '../first_page.dart';
 import 'definition.dart';
 import 'types.dart';
@@ -58,139 +59,17 @@ class Pollution extends StatelessWidget {
               SizedBox(
                 height: Dimenssion.height20dp * 4,
               ),
+
               SizedBox(
                 height: Dimenssion.height250dp,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: Dimenssion.height55dp,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => const definition(),
-                              ));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssion.width30dp / 2),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Definition",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Dimenssion.width16dp),
-                              ),
-                              const Icon(Icons.arrow_forward_ios,
-                                  color: Colors.black),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Dimenssion.height55dp,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => const naturePollution(),
-                              ));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssion.width30dp / 2),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                Strings.nature_Pollution,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Dimenssion.width16dp),
-                              ),
-                              const Icon(Icons.arrow_forward_ios,
-                                  color: Colors.black),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Dimenssion.height55dp,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssion.width30dp / 2),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Source de pollution",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Dimenssion.width16dp),
-                              ),
-                              const Icon(Icons.arrow_forward_ios,
-                                  color: Colors.black),
-                            ],
-                          ),
-                        ),
-                       ),
-                    ),
-                    SizedBox(
-                      height: Dimenssion.height55dp,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => TypesPollution(),
-                              ));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Mcolors.Cbackground,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimenssion.width30dp / 2),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "type de pollution",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Dimenssion.width16dp),
-                              ),
-                              const Icon(Icons.arrow_forward_ios,
-                                  color: Colors.black),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  children: const [
+                    CustomButton(text: "Définiton",root: "/Pdeffintion",),
+                    CustomButton(text: "Nature de pollution" ,root: "/NaturePollution",),
+                    CustomButton(text: "Source de pollution" ,root: "/Psourse",),
+                    CustomButton(text: "type de pollution" ,root: "/Ptype",),
+                   ],
                 ),
               ),
             ],

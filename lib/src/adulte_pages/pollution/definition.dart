@@ -8,8 +8,8 @@ import '../../../utilities/dimention.dart';
 import 'Pollution.dart';
 
 // ignore: camel_case_types
-class definition extends StatelessWidget {
-  const definition({super.key});
+class definitionPolution extends StatelessWidget {
+  const definitionPolution({super.key});
 
   @override
   Widget build(BuildContext context) {

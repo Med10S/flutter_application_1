@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/AirPollution.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/Pollution.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'SoilPollution.dart';
 import 'WaterPollution.dart';

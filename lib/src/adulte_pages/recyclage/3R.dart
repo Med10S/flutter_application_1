@@ -26,213 +26,220 @@ class _R_3State extends State<R_3> {
     bool isDark = brightnessValue == Brightness.dark;
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        alignment: Alignment.centerLeft,
-        color: Theme.of(context).primaryColor,
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                    height: Dimenssion.FirstPagesImageHeight / 2.5,
-                    alignment: Alignment.topRight,
-                    child: Image.asset('images/terre.png')),
-                Image.asset('images/logo.png')
-              ],
-            ),
-            Text('La méthode de « 3R »',
-                style: TextStyle(
-                  fontSize: Dimenssion.width24dp,
-                  color: Mcolors.couleurSecondaire,
-                )),
-            Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: Dimenssion.height40dp / 4,
-                  horizontal: Dimenssion.width24dp),
-              child: Text(
-                Strings.r_3_1,
-                style: TextStyle(
-                    fontSize: Dimenssion.width16dp, color: Colors.white),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: Dimenssion.height40dp / 4,
-                  horizontal: Dimenssion.width55dp),
-              child: Column(
+          child: SingleChildScrollView(
+            child: Container(
+              height: Dimenssion.screenHeight,
+                  alignment: Alignment.centerLeft,
+                  color: Theme.of(context).primaryColor,
+                  child: Column(
+            children: [
+              Stack(
+                alignment: Alignment.center,
                 children: [
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).canvasColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.disabled)) {
-                            return Colors.grey;
-                          }
-                          return Theme.of(context).colorScheme.onSurface;
-                        },
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('images/decrease.png', height: 30),
-                        SizedBox(
-                          width: Dimenssion.width20dp,
-                        ),
-                        Text(
-                          'Réduire',
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CustomDialog(
-                            title: 'Réduire',
-                            description: Strings.reduire,
-                            buttonText: 'Close',
-                            image: Image.asset('images/decrease.png'),
-                            isDark: isDark,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).canvasColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.disabled)) {
-                            return Colors.grey;
-                          }
-                          return Theme.of(context).colorScheme.onSurface;
-                        },
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('images/reuse.png', height: 30),
-                        SizedBox(
-                          width: Dimenssion.width20dp,
-                        ),
-                        Text('Réutiliser'),
-                      ],
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CustomDialog(
-                              title: 'Réutiliser',
-                              description: Strings.reutiliser,
-                              buttonText: 'Close',
-                              image: Image.asset('images/reuse.png'),
-                              isDark: isDark);
-                        },
-                      );
-                    },
-                  ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).canvasColor),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.disabled)) {
-                            return Colors.grey;
-                          }
-                          return Theme.of(context).colorScheme.onSurface;
-                        },
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'images/recycle.png',
-                          height: 30,
-                        ),
-                        SizedBox(
-                          width: Dimenssion.width20dp,
-                        ),
-                        Text('Recycler'),
-                      ],
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CustomDialog(
-                            title: 'Recycler',
-                            description: Strings.recycle,
-                            buttonText: 'Close',
-                            image: Image.asset('images/recycle.png'),
-                            isDark: isDark,
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  Container(
+                      height: Dimenssion.FirstPagesImageHeight / 2.5,
+                      alignment: Alignment.topRight,
+                      child: Image.asset('images/terre.png')),
+                  Image.asset('images/logo.png')
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (_) => const Recyclage()));
-                      // Fonction appelée lors du clic sur le bouton
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: Dimenssion.height40dp,
-                    )),
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (_) => const naturePollution()));
-                      // Fonction appelée lors du clic sur le bouton
-                    },
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: Dimenssion.height40dp,
-                    )),
-              ],
-            )
-          ],
-        ),
-      )),
+              Text('La méthode de « 3R »',
+                  style: TextStyle(
+                    fontSize: Dimenssion.width24dp,
+                    color: Mcolors.couleurSecondaire,
+                  )),
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: Dimenssion.height40dp / 4,
+                    horizontal: Dimenssion.width24dp),
+                child: Text(
+                  Strings.r_3_1,
+                  style: TextStyle(
+                      fontSize: Dimenssion.width16dp, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: Dimenssion.height40dp / 4,
+                    horizontal: Dimenssion.width55dp),
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).canvasColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors.grey;
+                            }
+                            return Theme.of(context).colorScheme.onSurface;
+                          },
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('images/decrease.png', height: 30),
+                          SizedBox(
+                            width: Dimenssion.width20dp,
+                          ),
+                          Text(
+                            'Réduire',
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CustomDialog(
+                              title: 'Réduire',
+                              description: Strings.reduire,
+                              buttonText: 'Close',
+                              image: Image.asset('images/decrease.png'),
+                              isDark: isDark,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).canvasColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors.grey;
+                            }
+                            return Theme.of(context).colorScheme.onSurface;
+                          },
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('images/reuse.png', height: 30),
+                          SizedBox(
+                            width: Dimenssion.width20dp,
+                          ),
+                          Text('Réutiliser'),
+                        ],
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CustomDialog(
+                                title: 'Réutiliser',
+                                description: Strings.reutiliser,
+                                buttonText: 'Close',
+                                image: Image.asset('images/reuse.png'),
+                                isDark: isDark);
+                          },
+                        );
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).canvasColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors.grey;
+                            }
+                            return Theme.of(context).colorScheme.onSurface;
+                          },
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/recycle.png',
+                            height: 30,
+                          ),
+                          SizedBox(
+                            width: Dimenssion.width20dp,
+                          ),
+                          Text('Recycler'),
+                        ],
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CustomDialog(
+                              title: 'Recycler',
+                              description: Strings.recycle,
+                              buttonText: 'Close',
+                              image: Image.asset('images/recycle.png'),
+                              isDark: isDark,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                child: Row(
+                  
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) => const Recyclage()));
+                          // Fonction appelée lors du clic sur le bouton
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                          size: Dimenssion.height40dp,
+                        )),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) => const naturePollution()));
+                          // Fonction appelée lors du clic sur le bouton
+                        },
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: Dimenssion.height40dp,
+                        )),
+                  ],
+                ),
+              )
+            ],
+                  ),
+                ),
+          )),
     );
   }
 

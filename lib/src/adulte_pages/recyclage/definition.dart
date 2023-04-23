@@ -7,8 +7,8 @@ import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 import '../../../colors/colors.dart';
 
-class defRecyclage extends StatelessWidget {
-  const defRecyclage({super.key});
+class DefRecyclage extends StatelessWidget {
+  const DefRecyclage({super.key});
 
   @override
   Widget build(BuildContext context) {

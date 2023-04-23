@@ -107,7 +107,7 @@ class naturePollution extends StatelessWidget {
                 InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) => const definition()));
+                          CupertinoPageRoute(builder: (_) => const definitionPolution()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
