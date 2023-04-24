@@ -54,20 +54,20 @@ class agriculture extends StatelessWidget {
                         color: Mcolors.couleurSecondaire,
                       )),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
+                    padding:  EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2,vertical: Dimenssion.height20dp/2), //ajouter un padding de 16.0 pixels
+                    child: const Image(
                       image: AssetImage('images/Pol_agriculture1.jpg'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
+                    padding:  EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2,vertical: Dimenssion.height20dp/2), //ajouter un padding de 16.0 pixels
+                    child: const Image(
                       image: AssetImage('images/Pol_agriculture2.jpg'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
+                    padding:  EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2,vertical: Dimenssion.height20dp/2), //ajouter un padding de 16.0 pixels
+                    child: const Image(
                       image: AssetImage('images/Pol_agriculture3.jpg'),
                     ),
                   ),
