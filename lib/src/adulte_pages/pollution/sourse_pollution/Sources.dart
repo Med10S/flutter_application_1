@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/agriculture.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/definition.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/transport.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/sourse_pollution/agriculture.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/definition/definition.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/sourse_pollution/transport.dart';
 
-import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
+import '../../../../utilities/dimention.dart';
+import '../Pollution.dart';
 import 'dechets.dart';
 import 'domestique.dart';
 import 'industriel.dart'; //init
@@ -58,11 +58,11 @@ class sources extends StatelessWidget {
                         CupertinoPageRoute(
                           builder: (_) =>
 
-                              industriel(),
+                              const industriel(),
                         ));
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Mcolors.couleurPrincipal2,
@@ -86,11 +86,11 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              transport(),
+                              const transport(),
                         ));
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Mcolors.couleurPrincipal2,
@@ -104,8 +104,8 @@ class sources extends StatelessWidget {
                               color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(45, 0, 0,0), //ajouter un padding de 16.0 pixels
-                          child: Image(
+                          padding: const EdgeInsets.fromLTRB(45, 0, 0,0), //ajouter un padding de 16.0 pixels
+                          child: const Image(
                             image: AssetImage('images/transport.png'),
                           ),
                         )
@@ -119,11 +119,11 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              agriculture(),
+                              const agriculture(),
                         ));
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Mcolors.couleurPrincipal2,
@@ -137,8 +137,8 @@ class sources extends StatelessWidget {
                               color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(100, 0, 0,0), //ajouter un padding de 16.0 pixels
-                          child: Image(
+                          padding: const EdgeInsets.fromLTRB(100, 0, 0,0), //ajouter un padding de 16.0 pixels
+                          child: const Image(
                             image: AssetImage('images/agriculture.png'),
                           ),
                         )
@@ -152,11 +152,11 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              dechets(),
+                              const dechets(),
                         ));
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Mcolors.couleurPrincipal2,
@@ -170,8 +170,8 @@ class sources extends StatelessWidget {
                               color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(100, 0, 0,0), //ajouter un padding de 16.0 pixels
-                          child: Image(
+                          padding: const EdgeInsets.fromLTRB(100, 0, 0,0), //ajouter un padding de 16.0 pixels
+                          child: const Image(
                             image: AssetImage('images/dechets.png'),
                           ),
                         )
@@ -185,12 +185,12 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              domestique(),
+                              const domestique(),
                         ));
                   },
 
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Mcolors.couleurPrincipal2,
@@ -205,7 +205,7 @@ class sources extends StatelessWidget {
                         ),
                         Container(
                           //padding: EdgeInsets.fromLTRB(40, 0, 0,0), //ajouter un padding de 16.0 pixels
-                          child: Image(
+                          child: const Image(
                             image: AssetImage('images/domestiques.png'),
                           ),
                         )
@@ -219,7 +219,7 @@ class sources extends StatelessWidget {
                     InkWell(
                         onTap: () {
                           Navigator.push(context,
-                              CupertinoPageRoute(builder: (_) => naturePollution()));
+                              CupertinoPageRoute(builder: (_) => const naturePollution()));
                           // Fonction appelée lors du clic sur le bouton
                         },
                         child: Icon(

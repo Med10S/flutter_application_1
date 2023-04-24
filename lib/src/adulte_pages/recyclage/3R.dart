@@ -9,7 +9,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 import '../../../colors/colors.dart';
 import '../pollution/Pollution.dart';
-import '../pollution/nature.dart';
+import '../pollution/nature_pollution/nature.dart';
 import 'definition.dart';
 import 'logo.dart';
 

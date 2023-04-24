@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/duree_recyclage.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/poubelle.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/whyRecycle.dart';
 import 'package:flutter_application_1/utilities/routes_router/routes.dart';
 
 import '../../src/adulte_pages/first_page.dart';
-import '../../src/adulte_pages/pollution/Sources.dart';
-import '../../src/adulte_pages/pollution/definition.dart';
-import '../../src/adulte_pages/pollution/types.dart';
+import '../../src/adulte_pages/pollution/sourse_pollution/Sources.dart';
+import '../../src/adulte_pages/pollution/definition/definition.dart';
+import '../../src/adulte_pages/pollution/type_pollution/types.dart';
 import '../../src/adulte_pages/recyclage/3R.dart';
 import '../../src/adulte_pages/recyclage/definition.dart';
 import '../../src/adulte_pages/recyclage/logo.dart';

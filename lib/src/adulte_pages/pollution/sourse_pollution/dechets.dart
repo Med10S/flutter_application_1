@@ -4,12 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 
-import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
-class domestique extends StatelessWidget {
-  const domestique({super.key});
+import '../../../../utilities/dimention.dart';
+import '../Pollution.dart';
+class dechets extends StatelessWidget {
+  const dechets({super.key});
 
 
   @override
@@ -42,7 +42,7 @@ class domestique extends StatelessWidget {
                         vertical: Dimenssion.height40dp,
                         horizontal: Dimenssion.width24dp),
                     child: Text(
-                      Strings.domestiqueDefinition,
+                      Strings.dechetsDefinition,
                       style: TextStyle(
                           fontSize: Dimenssion.width16dp, color: Colors.white),
                       textAlign: TextAlign.center,
@@ -56,19 +56,19 @@ class domestique extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
                     child: Image(
-                      image: AssetImage('images/Pol_domestique1.jpg'),
+                      image: AssetImage('images/Pol_dechets1.jpg'),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
                     child: Image(
-                      image: AssetImage('images/Pol_domestique2.jpg'),
+                      image: AssetImage('images/Pol_dechets2.jpg'),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
                     child: Image(
-                      image: AssetImage('images/Pol_domestique3.png'),
+                      image: AssetImage('images/Pol_dechets3.jpg'),
                     ),
                   ),
 

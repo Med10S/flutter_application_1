@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 
-import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
+import '../../../../utilities/dimention.dart';
+import '../Pollution.dart';
 
 // ignore: camel_case_types
 class definitionPolution extends StatelessWidget {

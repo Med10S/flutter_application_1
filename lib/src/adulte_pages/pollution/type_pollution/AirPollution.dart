@@ -2,13 +2,15 @@ import 'dart:ui';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/WaterPollution.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/types.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/types.dart';
 
-import '../../../utilities/dimention.dart';
+import '../../../../utilities/dimention.dart';
+import 'WaterPollution.dart'; //init
 
-class SoilPollution extends StatelessWidget {
-  const SoilPollution({super.key});
+class PollutionAir extends StatelessWidget {
+  const PollutionAir({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class SoilPollution extends StatelessWidget {
                   'types de pollution',
                   style: TextStyle(
                     fontSize: Dimenssion.height20dp,
-                    color: Color.fromARGB(255, 242, 187, 93),
+                    color: const Color.fromARGB(255, 242, 187, 93),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -152,15 +154,29 @@ class SoilPollution extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          "La pollution du sol est le terme utilisé pour décrire toutes les formes de pollution affectant les différents types de sols (agricoles, forestiers, urbains, etc.). Lorsqu'un sol est pollué, il peut devenir une source de pollution pour l'environnement, car les polluants peuvent se propager dans l'eau, l'air ou par l'intermédiaire des organismes vivants (bactéries, champignons, plantes, animaux). Cette pollution peut également se produire par l'intermédiaire d'envols de poussières ou de vapeurs gazeuses.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "La pollution atmosphérique se produit lorsque l'air que nous respirons est endommagé par des produits chimiques nocifs qui se trouvent dans l'air. Les pics de pollution atmosphérique sont plus fréquents en été. ",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: Dimenssion.height20dp),
+                            const Text(
+                              "click to flip back",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.italic),
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -177,15 +193,29 @@ class SoilPollution extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          "C\'est tout! Merci pour votre attention.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Les principales sources de pollution atmosphérique comprennent les particules fines, le dioxyde de soufre, l'ozone, les oxydes d'azote, les composés organiques volatils, etc.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: Dimenssion.height20dp),
+                            const Text(
+                              "click to flip front",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.italic),
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -197,7 +227,7 @@ class SoilPollution extends StatelessWidget {
                     OutlinedButton.icon(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const WaterPollution(),
+                            builder: (context) => const TypesPollution(),
                           ));
                         },
                         icon: const Icon(
@@ -211,7 +241,7 @@ class SoilPollution extends StatelessWidget {
                     OutlinedButton.icon(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const TypesPollution(),
+                            builder: (context) => const WaterPollution(),
                           ));
                         },
                         icon: const Icon(

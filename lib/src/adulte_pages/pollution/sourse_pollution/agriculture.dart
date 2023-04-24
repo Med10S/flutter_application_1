@@ -4,12 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 
-import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
-class industriel extends StatelessWidget {
-  const industriel({super.key});
+import '../../../../utilities/dimention.dart';
+import '../Pollution.dart';
+class agriculture extends StatelessWidget {
+  const agriculture({super.key});
 
 
   @override
@@ -42,7 +42,7 @@ class industriel extends StatelessWidget {
                         vertical: Dimenssion.height40dp,
                         horizontal: Dimenssion.width24dp),
                     child: Text(
-                      Strings.industrielDefinition,
+                      Strings.agricultureDefinition,
                       style: TextStyle(
                           fontSize: Dimenssion.width16dp, color: Colors.white),
                       textAlign: TextAlign.center,
@@ -54,21 +54,21 @@ class industriel extends StatelessWidget {
                         color: Mcolors.couleurSecondaire,
                       )),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
-                      image: AssetImage('images/Pol_indus1.jpg'),
+                    padding:  EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2,vertical: Dimenssion.height20dp/2), //ajouter un padding de 16.0 pixels
+                    child: const Image(
+                      image: AssetImage('images/Pol_agriculture1.jpg'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
-                      image: AssetImage('images/Pol_indus2.jpg'),
+                    padding:  EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2,vertical: Dimenssion.height20dp/2), //ajouter un padding de 16.0 pixels
+                    child: const Image(
+                      image: AssetImage('images/Pol_agriculture2.jpg'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
-                      image: AssetImage('images/Pol_indus3.jpg'),
+                    padding:  EdgeInsets.symmetric(horizontal: Dimenssion.width20dp/2,vertical: Dimenssion.height20dp/2), //ajouter un padding de 16.0 pixels
+                    child: const Image(
+                      image: AssetImage('images/Pol_agriculture3.jpg'),
                     ),
                   ),
 
