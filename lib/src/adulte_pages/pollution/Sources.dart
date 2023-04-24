@@ -31,7 +31,7 @@ class sources extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Container(
-                        height: Dimenssio.FirstPagesImageHeight / 2.5,
+                        height: Dimenssion.FirstPagesImageHeight / 2.5,
                         alignment: Alignment.topRight,
                         child: Image.asset('images/terre.png')),
                     Image.asset('images/logo.png')
@@ -39,15 +39,15 @@ class sources extends StatelessWidget {
                 ),
                 Text('Sources de pollution',
                     style: TextStyle(
-                      fontSize: Dimenssio.width24dp,
+                      fontSize: Dimenssion.width24dp,
                       color: const Color.fromRGBO(247, 191, 95, 1),
                     )),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: Dimenssio.height20dp),
+                  margin: EdgeInsets.symmetric(vertical: Dimenssion.height20dp),
                   child: Text(
                     'Il existe plusieurs sources de pollution, voici les principales :',
                     style: TextStyle(
-                        color: Colors.white, fontSize: Dimenssio.width16dp),
+                        color: Colors.white, fontSize: Dimenssion.width16dp),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -73,7 +73,7 @@ class sources extends StatelessWidget {
                         Text(
                           'Les émissions industrielles ',
                           style: TextStyle(
-                              color: Colors.white, fontSize: Dimenssio.width16dp),
+                              color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Image.asset('images/industrie.png')
                       ],
@@ -101,7 +101,7 @@ class sources extends StatelessWidget {
                         Text(
                           'Les transports',
                           style: TextStyle(
-                              color: Colors.white, fontSize: Dimenssio.width16dp),
+                              color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(45, 0, 0,0), //ajouter un padding de 16.0 pixels
@@ -134,7 +134,7 @@ class sources extends StatelessWidget {
                         Text(
                           "L'agriculture",
                           style: TextStyle(
-                              color: Colors.white, fontSize: Dimenssio.width16dp),
+                              color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(100, 0, 0,0), //ajouter un padding de 16.0 pixels
@@ -167,7 +167,7 @@ class sources extends StatelessWidget {
                         Text(
                           "Les déchets",
                           style: TextStyle(
-                              color: Colors.white, fontSize: Dimenssio.width16dp),
+                              color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(100, 0, 0,0), //ajouter un padding de 16.0 pixels
@@ -201,7 +201,7 @@ class sources extends StatelessWidget {
                         Text(
                           "Les activités domestiques",
                           style: TextStyle(
-                              color: Colors.white, fontSize: Dimenssio.width16dp),
+                              color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
                         Container(
                           //padding: EdgeInsets.fromLTRB(40, 0, 0,0), //ajouter un padding de 16.0 pixels
@@ -225,7 +225,7 @@ class sources extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_back_ios,
                           color: Colors.white,
-                          size: Dimenssio.height40dp,
+                          size: Dimenssion.height40dp,
                         )),
                     InkWell(
                         onTap: () {
@@ -238,7 +238,7 @@ class sources extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.white,
-                          size: Dimenssio.height40dp,
+                          size: Dimenssion.height40dp,
                         )),
                   ],
                 )

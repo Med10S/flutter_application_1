@@ -6,6 +6,7 @@ import 'package:flutter_application_1/src/adulte_pages/recyclage/whyRecycle.dart
 import 'package:flutter_application_1/utilities/routes_router/routes.dart';
 
 import '../../src/adulte_pages/first_page.dart';
+import '../../src/adulte_pages/pollution/Sources.dart';
 import '../../src/adulte_pages/pollution/definition.dart';
 import '../../src/adulte_pages/pollution/types.dart';
 import '../../src/adulte_pages/recyclage/3R.dart';
@@ -20,7 +21,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.naturePollution:
       return CupertinoPageRoute(builder: (_) => const naturePollution());
     case AppRoutes.sourcePolution:
-      return CupertinoPageRoute(builder: (_) => const R_3());
+      return CupertinoPageRoute(builder: (_) => const sources());
     case AppRoutes.typePolution:
       return CupertinoPageRoute(builder: (_) => const TypesPollution());
   //------------------recyclage-----------------------

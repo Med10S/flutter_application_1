@@ -26,7 +26,7 @@ class dechets extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                          height: Dimenssio.FirstPagesImageHeight / 2.5,
+                          height: Dimenssion.FirstPagesImageHeight / 2.5,
                           alignment: Alignment.topRight,
                           child: Image.asset('images/terre.png')),
                       Image.asset('images/logo.png')
@@ -34,23 +34,23 @@ class dechets extends StatelessWidget {
                   ),
                   Text('Definition',
                       style: TextStyle(
-                        fontSize: Dimenssio.width24dp,
+                        fontSize: Dimenssion.width24dp,
                         color: Mcolors.couleurSecondaire,
                       )),
                   Container(
                     margin: EdgeInsets.symmetric(
-                        vertical: Dimenssio.height40dp,
-                        horizontal: Dimenssio.width24dp),
+                        vertical: Dimenssion.height40dp,
+                        horizontal: Dimenssion.width24dp),
                     child: Text(
-                      strings.dechetsDefinition,
+                      Strings.dechetsDefinition,
                       style: TextStyle(
-                          fontSize: Dimenssio.width16dp, color: Colors.white),
+                          fontSize: Dimenssion.width16dp, color: Colors.white),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   Text('Exemples',
                       style: TextStyle(
-                        fontSize: Dimenssio.width24dp,
+                        fontSize: Dimenssion.width24dp,
                         color: Mcolors.couleurSecondaire,
                       )),
                   Container(
