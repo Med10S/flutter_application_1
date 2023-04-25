@@ -5,7 +5,7 @@ import 'package:flutter_application_1/src/adulte_pages/recyclage/3R.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/recyclage.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import '../../../colors/colors.dart';
+import '../../../../colors/colors.dart';
 
 class DefRecyclage extends StatelessWidget {
   const DefRecyclage({super.key});

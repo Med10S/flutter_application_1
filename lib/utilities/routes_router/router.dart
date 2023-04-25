@@ -10,7 +10,7 @@ import '../../src/adulte_pages/pollution/sourse_pollution/Sources.dart';
 import '../../src/adulte_pages/pollution/definition/definition.dart';
 import '../../src/adulte_pages/pollution/type_pollution/types.dart';
 import '../../src/adulte_pages/recyclage/3R.dart';
-import '../../src/adulte_pages/recyclage/definition.dart';
+import '../../src/adulte_pages/recyclage/definiton_R/definition.dart';
 import '../../src/adulte_pages/recyclage/logo.dart';
 
 Route<dynamic> onGenerate(RouteSettings settings) {

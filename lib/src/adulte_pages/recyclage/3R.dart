@@ -10,7 +10,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import '../../../colors/colors.dart';
 import '../pollution/Pollution.dart';
 import '../pollution/nature_pollution/nature.dart';
-import 'definition.dart';
+import 'definiton_R/definition.dart';
 import 'logo.dart';
 
 class R_3 extends StatefulWidget {

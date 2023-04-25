@@ -8,7 +8,7 @@ import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollutio
 
 import '../../../colors/colors.dart';
 import '../first_page.dart';
-import 'definition.dart';
+import 'definiton_R/definition.dart';
 
 class Recyclage extends StatelessWidget {
   const Recyclage({super.key});

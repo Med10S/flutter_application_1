@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/3R.dart';
-import 'package:flutter_application_1/src/adulte_pages/recyclage/definition.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/definiton_R/definition.dart';
 import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/src/repository/authentification_repository/authentification_repository.dart';
 import 'package:flutter_application_1/utilities/routes_router/router.dart';
