@@ -27,6 +27,11 @@ class SignUpFormWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 30 - 20),
             TextFormField(
+              validator:(value) {
+                if(value==''){
+                  return 'le champ est vide';
+                }
+              },
               controller: controller.fullName,
               decoration: const InputDecoration(
                   label: Text("Full Name"),

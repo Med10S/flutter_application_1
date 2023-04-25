@@ -21,7 +21,6 @@ class SignUpFormWidget extends StatelessWidget {
     final _forKey = GlobalKey<FormState>();
     TextEditingController _textController1 = TextEditingController();
 
-    String key = 'azerty@1234@';
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 30 - 10),
       child: Form(
