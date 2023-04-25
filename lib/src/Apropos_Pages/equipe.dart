@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/Apropos_Pages/stategie.dart';
 
@@ -13,7 +11,7 @@ class Equipe extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           alignment: Alignment.center,
           color: Theme.of(context).primaryColor,
           child: Column(
@@ -26,10 +24,10 @@ class Equipe extends StatelessWidget {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => Strategie(),
+                              builder: (_) => const Strategie(),
                             ));
                       },
-                      child: Text(
+                      child: const Text(
                         "skip",
                         style: TextStyle(color: Colors.white),
                       ))),
@@ -38,7 +36,7 @@ class Equipe extends StatelessWidget {
               Text(
                 'Notre Équipe',
                 style: TextStyle(
-                    color: Color.fromRGBO(247, 191, 95, 1),
+                    color: const Color.fromRGBO(247, 191, 95, 1),
                     fontWeight: FontWeight.bold,
                     fontSize: Dimenssion.width20dp),
               ),

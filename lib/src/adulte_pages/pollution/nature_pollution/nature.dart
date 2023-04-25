@@ -4,7 +4,6 @@ import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/definition/definition.dart';
 
 import '../../../../utilities/dimention.dart';
-import '../Pollution.dart';//init
 
 // ignore: camel_case_types
 class naturePollution extends StatelessWidget {
@@ -66,7 +65,7 @@ class naturePollution extends StatelessWidget {
               ),
             ),
             Container(
-               margin: EdgeInsets.symmetric(horizontal: 10),
+               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Mcolors.couleurPrincipal2,
@@ -84,7 +83,7 @@ class naturePollution extends StatelessWidget {
               ),
             ),
             Container(
-               margin: EdgeInsets.symmetric(horizontal: 10),
+               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Mcolors.couleurPrincipal2,

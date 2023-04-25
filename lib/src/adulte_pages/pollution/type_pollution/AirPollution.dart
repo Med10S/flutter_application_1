@@ -2,8 +2,6 @@ import 'dart:ui';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/types.dart';
 
 import '../../../../utilities/dimention.dart';

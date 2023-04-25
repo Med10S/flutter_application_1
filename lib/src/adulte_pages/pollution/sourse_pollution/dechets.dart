@@ -1,15 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 
 import '../../../../utilities/dimention.dart';
-import '../Pollution.dart';
-class dechets extends StatelessWidget {
-  const dechets({super.key});
+class Dechets extends StatelessWidget {
+  const Dechets({super.key});
 
 
   @override
@@ -54,20 +49,20 @@ class dechets extends StatelessWidget {
                         color: Mcolors.couleurSecondaire,
                       )),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
+                    padding: const EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
+                    child: const Image(
                       image: AssetImage('images/Pol_dechets1.jpg'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
+                    padding: const EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
+                    child: const Image(
                       image: AssetImage('images/Pol_dechets2.jpg'),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
-                    child: Image(
+                    padding: const EdgeInsets.fromLTRB(10,10,10,10), //ajouter un padding de 16.0 pixels
+                    child: const Image(
                       image: AssetImage('images/Pol_dechets3.jpg'),
                     ),
                   ),

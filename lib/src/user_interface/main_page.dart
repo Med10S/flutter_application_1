@@ -227,7 +227,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
                               },
                               child: Column(
                                 children: [
-                                  //Image.asset("images/info_client.png"),
                                   Stack(children: const [
                                     Icon(
                                       Icons.admin_panel_settings,

@@ -62,7 +62,7 @@ class DefRecyclage extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (_) => R_3()));
+                              builder: (_) => const R_3()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(

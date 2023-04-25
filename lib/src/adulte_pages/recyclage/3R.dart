@@ -1,15 +1,14 @@
 // ignore: camel_case_types
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/adulte_pages/recyclage/recyclage.dart';
 import 'package:flutter_application_1/utilities/custum_dialog.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 
 import '../../../colors/colors.dart';
-import '../pollution/Pollution.dart';
-import '../pollution/nature_pollution/nature.dart';
 import 'definiton_R/definition.dart';
 import 'logo.dart';
 
@@ -92,7 +91,7 @@ class _R_3State extends State<R_3> {
                           SizedBox(
                             width: Dimenssion.width20dp,
                           ),
-                          Text(
+                          const Text(
                             'Réduire',
                           ),
                         ],
@@ -137,7 +136,7 @@ class _R_3State extends State<R_3> {
                           SizedBox(
                             width: Dimenssion.width20dp,
                           ),
-                          Text('Réutiliser'),
+                          const Text('Réutiliser'),
                         ],
                       ),
                       onPressed: () {
@@ -182,7 +181,7 @@ class _R_3State extends State<R_3> {
                           SizedBox(
                             width: Dimenssion.width20dp,
                           ),
-                          Text('Recycler'),
+                          const Text('Recycler'),
                         ],
                       ),
                       onPressed: () {
@@ -253,7 +252,7 @@ class _R_3State extends State<R_3> {
         content: Text(contenue),
         actions: <Widget>[
           BasicDialogAction(
-            title: Text("Terminer"),
+            title: const Text("Terminer"),
             onPressed: () {
               Navigator.pop(context);
             },

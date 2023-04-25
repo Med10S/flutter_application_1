@@ -21,7 +21,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.naturePollution:
       return CupertinoPageRoute(builder: (_) => const naturePollution());
     case AppRoutes.sourcePolution:
-      return CupertinoPageRoute(builder: (_) => const sources());
+      return CupertinoPageRoute(builder: (_) => const Sources());
     case AppRoutes.typePolution:
       return CupertinoPageRoute(builder: (_) => const TypesPollution());
   //------------------recyclage-----------------------

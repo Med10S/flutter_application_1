@@ -1,22 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/sourse_pollution/agriculture.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/definition/definition.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/sourse_pollution/transport.dart';
 
 import '../../../../utilities/dimention.dart';
-import '../Pollution.dart';
 import '../type_pollution/types.dart';
 import 'dechets.dart';
 import 'domestique.dart';
 import 'industriel.dart'; //init
 
-class sources extends StatelessWidget {
-  const sources({super.key});
+class Sources extends StatelessWidget {
+  const Sources({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +55,7 @@ class sources extends StatelessWidget {
                         CupertinoPageRoute(
                           builder: (_) =>
 
-                              const industriel(),
+                              const Industriel(),
                         ));
                   },
                   child: Container(
@@ -87,7 +83,7 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              const transport(),
+                              const Transport(),
                         ));
                   },
                   child: Container(
@@ -120,7 +116,7 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              const agriculture(),
+                              const Agriculture(),
                         ));
                   },
                   child: Container(
@@ -153,7 +149,7 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              const dechets(),
+                              const Dechets(),
                         ));
                   },
                   child: Container(
@@ -186,7 +182,7 @@ class sources extends StatelessWidget {
                         context,
                         CupertinoPageRoute(
                           builder: (_) =>
-                              const domestique(),
+                              const Domestique(),
                         ));
                   },
 
@@ -204,11 +200,8 @@ class sources extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white, fontSize: Dimenssion.width16dp),
                         ),
-                        Container(
-                          //padding: EdgeInsets.fromLTRB(40, 0, 0,0), //ajouter un padding de 16.0 pixels
-                          child: const Image(
-                            image: AssetImage('images/domestiques.png'),
-                          ),
+                        const Image(
+                          image: AssetImage('images/domestiques.png'),
                         )
                       ],
                     ),
@@ -233,7 +226,7 @@ class sources extends StatelessWidget {
 
                           
                        Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) =>TypesPollution()));
+                          CupertinoPageRoute(builder: (_) =>const TypesPollution()));
                           // Fonction appelée lors du clic sur le bouton
                         },
                         child: Icon(

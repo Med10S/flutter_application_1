@@ -38,7 +38,7 @@ class CustomButton2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           if(icon==true)
-            Container(alignment: Alignment.topRight,child: Text("❌"),),
+            Container(alignment: Alignment.topRight,child: const Text("❌"),),
           if (image != null) // Vérifie si l'image a été fournie
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
@@ -112,7 +112,7 @@ class LogoRecyclage extends StatelessWidget {
                     fontSize: Dimenssion.width24dp,
                     color: Mcolors.couleurSecondaire,
                   )),
-              Text("❌ Les faux-amis des symboles de recyclage*",style: TextStyle(color: Colors.red),),
+              const Text("❌ Les faux-amis des symboles de recyclage*",style: TextStyle(color: Colors.red),),
           
               SizedBox(
                 height: Dimenssion.height40dp * 10,
@@ -170,7 +170,7 @@ class LogoRecyclage extends StatelessWidget {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (_) =>Poubelle()));
+                                  builder: (_) =>const Poubelle()));
                           // Fonction appelée lors du clic sur le bouton
                         },
                         child: Icon(

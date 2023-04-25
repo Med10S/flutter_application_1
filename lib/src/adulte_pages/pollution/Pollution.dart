@@ -2,14 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 
-import '../../../colors/colors.dart';
 import '../../../utilities/botton.dart';
 import '../first_page.dart';
-import 'definition/definition.dart';
-import 'type_pollution/types.dart';
 
 class Pollution extends StatelessWidget {
   const Pollution({super.key});

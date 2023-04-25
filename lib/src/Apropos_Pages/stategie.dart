@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../utilities/dimention.dart';
 import '../welcome.dart';
@@ -14,7 +12,7 @@ class Strategie extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         alignment: Alignment.center,
         color: Theme.of(context).primaryColor,
         child: Column(
@@ -25,7 +23,7 @@ class Strategie extends StatelessWidget {
             Text(
               'Notre Stratégie',
               style: TextStyle(
-                  color: Color.fromRGBO(247, 191, 95, 1),
+                  color: const Color.fromRGBO(247, 191, 95, 1),
                   fontWeight: FontWeight.bold,
                   fontSize: Dimenssion.width20dp),
             ),
@@ -45,12 +43,12 @@ class Strategie extends StatelessWidget {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (_) => Welcome(),
+                          builder: (_) => const Welcome(),
                         ));
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(247, 191, 95, 1),
-                      maximumSize: Size(200, 46),
+                      maximumSize: const Size(200, 46),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
                   child: const Text(

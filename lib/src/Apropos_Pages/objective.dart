@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../utilities/dimention.dart';
 
@@ -12,7 +10,7 @@ class Objective extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         alignment: Alignment.center,
         color: Theme.of(context).primaryColor,
         child: Column(
@@ -23,7 +21,7 @@ class Objective extends StatelessWidget {
             Text(
               'Notre Objective',
               style: TextStyle(
-                  color: Color.fromRGBO(247, 191, 95, 1),
+                  color: const Color.fromRGBO(247, 191, 95, 1),
                   fontWeight: FontWeight.bold,
                   fontSize: Dimenssion.width20dp),
             ),

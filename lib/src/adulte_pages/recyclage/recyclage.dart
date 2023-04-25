@@ -3,12 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/botton.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 
-import '../../../colors/colors.dart';
 import '../first_page.dart';
-import 'definiton_R/definition.dart';
 
 class Recyclage extends StatelessWidget {
   const Recyclage({super.key});

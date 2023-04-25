@@ -2,11 +2,8 @@ import 'dart:ui';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/AirPollution.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/SoilPollution.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/types.dart';
 
 import '../../../../utilities/dimention.dart';
 
@@ -38,7 +35,7 @@ class WaterPollution extends StatelessWidget {
                   'types de pollution',
                   style: TextStyle(
                     fontSize: Dimenssion.height20dp,
-                    color: Color.fromARGB(255, 242, 187, 93),
+                    color: const Color.fromARGB(255, 242, 187, 93),
                   ),
                   textAlign: TextAlign.center,
                 ),
