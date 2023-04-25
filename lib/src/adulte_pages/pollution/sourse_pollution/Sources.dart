@@ -10,6 +10,7 @@ import 'package:flutter_application_1/src/adulte_pages/pollution/sourse_pollutio
 
 import '../../../../utilities/dimention.dart';
 import '../Pollution.dart';
+import '../type_pollution/types.dart';
 import 'dechets.dart';
 import 'domestique.dart';
 import 'industriel.dart'; //init
@@ -230,9 +231,9 @@ class sources extends StatelessWidget {
                     InkWell(
                         onTap: () {
 
-                          /*
+                          
                        Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) => CalendarWithGraphs(data: [],)));*/
+                          CupertinoPageRoute(builder: (_) =>TypesPollution()));
                           // Fonction appelée lors du clic sur le bouton
                         },
                         child: Icon(
