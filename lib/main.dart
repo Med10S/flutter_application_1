@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/src/repository/authentification_repository/authentification_repository.dart';
+import 'package:flutter_application_1/utilities/routes_router/router.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+     onGenerateRoute: onGenerate,
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
           canvasColor: const Color.fromRGBO(14, 77, 89, 1),
@@ -41,10 +42,10 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: ThemeData(
         brightness: Brightness.light,
-        canvasColor: Color.fromARGB(255, 236, 236, 236),
+        canvasColor: const Color.fromARGB(255, 236, 236, 236),
         scaffoldBackgroundColor: const Color(0xFFE5E5E5),
         primaryColor: const Color.fromRGBO(47, 103, 23, 1),
-        primaryColorDark: const Color.fromARGB(255, 245, 245, 245),
+        primaryColorDark: Color.fromARGB(255, 216, 216, 216),
         inputDecorationTheme: InputDecorationTheme(
             labelStyle: Theme.of(context).textTheme.labelLarge,
             focusedBorder: OutlineInputBorder(

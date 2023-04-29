@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/AirPollution.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/AirPollution.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/Pollution.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'SoilPollution.dart';
 import 'WaterPollution.dart';
@@ -181,6 +179,27 @@ class TypesPollution extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                width: Dimenssion.width200dp,
+                height: Dimenssion.height45dp,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (_) => Pollution(),
+                        ));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(247, 191, 95, 1),
+                      maximumSize: Size(200, 46),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                  child: const Text(
+                    'Sortir',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ))
             ],
           ),
         ),

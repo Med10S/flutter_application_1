@@ -5,10 +5,10 @@ class CustomDialog extends StatelessWidget {
   final String title;
   final String description;
   final String buttonText;
-  final Image image;
+  final Image ?image;
   final bool isDark;
 
-  CustomDialog({required this.title,required this.description,required this.buttonText,required this.image, required this.isDark});
+  CustomDialog({required this.title,required this.description,required this.buttonText,this.image, required this.isDark,});
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +101,7 @@ class CustomDialog extends StatelessWidget {
               borderRadius: const BorderRadius.all(
                 Radius.circular(60),
               ),
-              child: image,
+              child: image 
             ),
           ),
         ),],

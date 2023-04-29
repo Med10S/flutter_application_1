@@ -1,15 +1,11 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/Apropos_Pages/equipe.dart';
 import 'package:flutter_application_1/src/Apropos_Pages/objective.dart';
 import 'package:flutter_application_1/src/Apropos_Pages/stategie.dart';
-import 'package:flutter_application_1/src/fist_pages/page1.dart';
-import 'package:flutter_application_1/src/fist_pages/page2.dart';
-import 'package:flutter_application_1/src/fist_pages/page3.dart';
 
 // Définissez une liste de widgets pour chaque page
-final List<Widget> pages = [Equipe(), Objective(), Strategie()];
+final List<Widget> pages = [const Equipe(), const Objective(), const Strategie()];
 
 // Dans le widget de votre écran, ajoutez un PageView et un DotsIndicator
 class MyScreen2 extends StatefulWidget {

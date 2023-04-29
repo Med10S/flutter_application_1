@@ -2,15 +2,13 @@ import 'dart:ui';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/types.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/AirPollution.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/SoilPollution.dart';
 
-import '../../../utilities/dimention.dart';
-import 'WaterPollution.dart'; //init
+import '../../../../utilities/dimention.dart';
 
-class PollutionAir extends StatelessWidget {
-  const PollutionAir({Key? key});
+class WaterPollution extends StatelessWidget {
+  const WaterPollution({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -154,29 +152,15 @@ class PollutionAir extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "La pollution atmosphérique se produit lorsque l'air que nous respirons est endommagé par des produits chimiques nocifs qui se trouvent dans l'air. Les pics de pollution atmosphérique sont plus fréquents en été. ",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: Dimenssion.height20dp),
-                            const Text(
-                              "click to flip back",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white,
-                                  fontStyle: FontStyle.italic),
-                            )
-                          ],
+                      child: const Center(
+                        child: Text(
+                          "L'eau peut être contaminée par des déchets, des produits chimiques ou des micro-organismes, ce qu'on appelle la pollution de l'eau. Les principales causes de cette pollution sont l'agriculture, en raison de l'utilisation de pesticides et d'engrais, et les rejets domestiques, qui contiennent des médicaments et des produits chimiques que les stations d'épuration ne peuvent pas traiter.  ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -193,29 +177,15 @@ class PollutionAir extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Les principales sources de pollution atmosphérique comprennent les particules fines, le dioxyde de soufre, l'ozone, les oxydes d'azote, les composés organiques volatils, etc.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: Dimenssion.height20dp),
-                            const Text(
-                              "click to flip front",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.white,
-                                  fontStyle: FontStyle.italic),
-                            )
-                          ],
+                      child: const Center(
+                        child: Text(
+                          "phosphates, présents dans certains produits ménagers, peuvent provoquer l'eutrophisation des cours d'eau, c'est-à-dire une prolifération d'algues qui asphyxie le cours d'eau. Enfin, les rejets d'hydrocarbures des bateaux peuvent également polluer l'eau.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -227,7 +197,7 @@ class PollutionAir extends StatelessWidget {
                     OutlinedButton.icon(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const TypesPollution(),
+                            builder: (context) => const PollutionAir(),
                           ));
                         },
                         icon: const Icon(
@@ -241,7 +211,7 @@ class PollutionAir extends StatelessWidget {
                     OutlinedButton.icon(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const WaterPollution(),
+                            builder: (context) => const SoilPollution(),
                           ));
                         },
                         icon: const Icon(

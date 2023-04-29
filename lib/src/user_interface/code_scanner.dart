@@ -246,8 +246,8 @@ class _QRScanState extends State<QRScan> {
       print('Impossible de se connecter à l\'ESP');
       //throw Exception('Impossible de se connecter à l\'ESP');
     }
-  } */
-  
+  } 
+  */
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {

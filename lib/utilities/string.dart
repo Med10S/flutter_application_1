@@ -10,14 +10,6 @@ class Strings {
       'la meilleure façon de recycler un déchet est de ne pas le produire en premier lieu.';
   static String reutiliser =
       'donner une seconde vie aux objets plutôt que de les jeter permet de prolonger leur durée de vie et de réduire la quantité de déchets produits.';
-  static String st1 =
-      'il exsite plusieurs types de pollution, cliquer pour obtenir une definition et des exemples';
   static String recycle =
       'si les deux premières options ne sont pas possibles, il est important de recycler correctement les déchets en respectant les consignes de tri pour qu\'ils puissent être transformés en matières premières réutilisables.';
-  static String pollutionbio =
-      'Un grand nombre de micro-organismes peuvent se multiplier dans les milieux (sol, air et eau) qui sont leur habitat naturel ou leur simple moyen de transport. Les principaux organismes pathogènes qui se reproduisent dans l\'eau sont : les bactéries, les virus, les parasites et les champignons, on parle alors de pollution bactérienne, virale ou parasitaire.';
-  static String pollutionchimique =
-      'La pollution chimique est causée par la libération dans l\'environnement de certains minéraux toxiques tels que les nitrates, les phosphates, l\'ammoniac et d\'autres sels, ainsi que les ions métalliques. Ces substances ont un effet toxique sur les matières organiques, les rendant encore plus dangereuses.';
-  static String pollutionphysique =
-      'Lorsque la structure physique de l\'environnement pollué change en raison de divers facteurs, nous appelons ce type de pollution. Elle comprend la pollution mécanique, qui est causée par la présence de particules de tailles et de matériaux très différents dans l\'environnement (sol, air et eau).';
 }

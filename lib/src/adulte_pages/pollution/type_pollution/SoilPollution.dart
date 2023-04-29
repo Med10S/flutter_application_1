@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/WaterPollution.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/types.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/WaterPollution.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/types.dart';
 
-import '../../../utilities/dimention.dart';
+import '../../../../utilities/dimention.dart';
 
 class SoilPollution extends StatelessWidget {
   const SoilPollution({super.key});

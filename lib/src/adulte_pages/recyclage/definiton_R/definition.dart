@@ -1,15 +1,14 @@
+// ignore: camel_case_types
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/3R.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/recyclage.dart';
+import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/utilities/string.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/nature.dart';
+import '../../../../colors/colors.dart';
 
-import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
-
-// ignore: camel_case_types
-class definition extends StatelessWidget {
-  const definition({super.key});
+class DefRecyclage extends StatelessWidget {
+  const DefRecyclage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class definition extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 Container(
-                    height: Dimenssion.FirstPagesImageHeight / 2.5,
+                  height: Dimenssion.FirstPagesImageHeight/2.5,
                     alignment: Alignment.topRight,
                     child: Image.asset('images/terre.png')),
                 Image.asset('images/logo.png')
@@ -36,11 +35,9 @@ class definition extends StatelessWidget {
                   color: Mcolors.couleurSecondaire,
                 )),
             Container(
-              margin: EdgeInsets.symmetric(
-                  vertical: Dimenssion.height40dp,
-                  horizontal: Dimenssion.width24dp),
+              margin: EdgeInsets.symmetric(vertical: Dimenssion.height40dp, horizontal: Dimenssion.width24dp),
               child: Text(
-                Strings.pollutionDefinition,
+                Strings.recyclageDefinition,
                 style: TextStyle(
                     fontSize: Dimenssion.width16dp, color: Colors.white),
                 textAlign: TextAlign.center,
@@ -52,7 +49,7 @@ class definition extends StatelessWidget {
                 InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          CupertinoPageRoute(builder: (_) => const Pollution()));
+                          CupertinoPageRoute(builder: (_) => const Recyclage()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
@@ -65,7 +62,7 @@ class definition extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (_) => const naturePollution()));
+                              builder: (_) => const R_3()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
@@ -81,3 +78,4 @@ class definition extends StatelessWidget {
     );
   }
 }
+
