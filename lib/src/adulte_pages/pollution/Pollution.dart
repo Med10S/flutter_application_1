@@ -134,8 +134,7 @@ class Pollution extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Mcolors.Cbackground,
+                            backgroundColor: Mcolors.Cbackground,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))),
                         child: Container(
@@ -155,7 +154,7 @@ class Pollution extends StatelessWidget {
                             ],
                           ),
                         ),
-                       ),
+                      ),
                     ),
                     SizedBox(
                       height: Dimenssion.height55dp,
