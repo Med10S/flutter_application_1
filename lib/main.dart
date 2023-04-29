@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         canvasColor: const Color.fromARGB(255, 236, 236, 236),
         scaffoldBackgroundColor: const Color(0xFFE5E5E5),
         primaryColor: const Color.fromRGBO(47, 103, 23, 1),
-        primaryColorDark: Color.fromARGB(255, 216, 216, 216),
+        primaryColorDark: const Color.fromARGB(255, 216, 216, 216),
         inputDecorationTheme: InputDecorationTheme(
             labelStyle: Theme.of(context).textTheme.labelLarge,
             focusedBorder: OutlineInputBorder(

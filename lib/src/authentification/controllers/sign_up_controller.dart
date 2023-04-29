@@ -4,8 +4,8 @@ import 'package:flutter_application_1/src/authentification/models/user_model.dar
 import 'package:flutter_application_1/src/repository/authentification_repository/authentification_repository.dart';
 import 'package:get/get.dart';
 
+import '../../../view/user_interface/main_page.dart';
 import '../../repository/user_repository/user_repository.dart';
-import '../../user_interface/main_page.dart';
 import '../screens/admin/admin_main_page.dart';
 
 class SignUpController extends GetxController{

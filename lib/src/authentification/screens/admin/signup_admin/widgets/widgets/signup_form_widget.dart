@@ -57,7 +57,7 @@ class SignUpFormWidget extends StatelessWidget {
               controller: controller.fullName,
               decoration: const InputDecoration(
                   label: Text("Full Name"),
-                  prefixIcon: Icon(Icons.person_2_outlined,
+                  prefixIcon: Icon(Icons.person_outlined,
                       color: Mcolors.couleurPrincipal),
                   border: OutlineInputBorder()),
             ),

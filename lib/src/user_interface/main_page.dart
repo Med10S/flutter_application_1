@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_1/blue/MainPage.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
+import 'package:flutter_application_1/src/user_interface/test/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
@@ -224,6 +226,11 @@ class _User_Main_PageState extends State<User_Main_Page> {
                               onTap: () {
                                 Get.snackbar(
                                     "utlisateur info", "acces authoriser");
+                                    Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => MainPage(),
+                            ));
                               },
                               child: Column(
                                 children: [

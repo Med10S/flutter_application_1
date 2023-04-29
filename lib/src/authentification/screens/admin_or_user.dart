@@ -39,7 +39,7 @@ class choice_page_admin_user extends StatelessWidget {
                                 builder: (_) => LoginScreen(),
                               ));
                   },
-                  icon: const Icon(Icons.person_2),
+                  icon: const Icon(Icons.person),
                   label: const Text('ESPACE UTLISATEUR'),
                 ),
                 const SizedBox(height: 16.0), // Espacement entre les boutons
