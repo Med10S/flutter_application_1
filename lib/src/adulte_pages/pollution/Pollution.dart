@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 
+import '../../../colors/colors.dart';
 import '../../../utilities/botton.dart';
+import '../../../utilities/string.dart';
 import '../first_page.dart';
+import 'definition/definition.dart';
+import 'nature_pollution/nature.dart';
+import 'type_pollution/types.dart';
 
 class Pollution extends StatelessWidget {
   const Pollution({super.key});
@@ -65,7 +70,7 @@ class Pollution extends StatelessWidget {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => const definition(),
+                                builder: (_) => const definitionPolution(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(
@@ -112,7 +117,7 @@ class Pollution extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                Strings.nature_Pollution,
+                                Strings.naturePollution,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: Dimenssion.width16dp),

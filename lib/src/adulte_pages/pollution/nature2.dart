@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/src/adulte_pages/pollution/definition.dart';
 
 import '../../../utilities/dimention.dart';
-import 'Pollution.dart'; //init
+import 'Pollution.dart';
+import 'definition/definition.dart'; //init
 
 // ignore: camel_case_types
 class naturePollution extends StatelessWidget {
@@ -109,7 +109,7 @@ class naturePollution extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (_) => const definition()));
+                              builder: (_) => const definitionPolution()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
