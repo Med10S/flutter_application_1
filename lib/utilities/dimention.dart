@@ -29,4 +29,6 @@ class Dimenssion {
   static double width250dp = screenWidth / 1.44;
 
   static double width24dp = screenWidth / 15;
+
+  static double heightCdp = screenHeight / 320;
 }
