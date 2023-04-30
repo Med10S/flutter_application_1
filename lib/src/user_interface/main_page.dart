@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/blue/MainPage.dart';
 import 'package:flutter_application_1/colors/colors.dart';
+import 'package:flutter_application_1/src/Bluetooth_page.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
@@ -40,6 +41,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
       _selectedIndex = index;
     });
   }
+  
 
   List<String> time = [
     "09/03/2023",
@@ -55,7 +57,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
-    //final user_repo = Get.put(UserRepository());
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
@@ -226,10 +227,10 @@ class _User_Main_PageState extends State<User_Main_Page> {
                               onTap: () {
                                 Get.snackbar(
                                     "utlisateur info", "acces authoriser");
-                                    Navigator.push(
+                                   Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => MainPage(),
+                              builder: (_) => const BluetoothPage(desiredAddress:"78:21:84:A0:19:CE"),//MainPage(),// BluetoothPage(desiredAddress:"60:A4:D0:E0:AF:FC"),
                             ));
                               },
                               child: Column(

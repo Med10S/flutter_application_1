@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:get/get.dart';
 
 import './BluetoothDeviceListEntry.dart';
 
@@ -30,7 +29,7 @@ class _DiscoveryPage extends State<DiscoveryPage> {
 
     isDiscovering = widget.start;
     if (isDiscovering) {
-      _startDiscovery("78:21:84:A0:19:CE");
+      _startDiscovery();
     }
   }
 
@@ -40,22 +39,19 @@ class _DiscoveryPage extends State<DiscoveryPage> {
       isDiscovering = true;
     });
 
-    _startDiscovery("78:21:84:A0:19:CE");
+    _startDiscovery();
   }
 
-  void _startDiscovery(String address) {
+  void _startDiscovery() {
     _streamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
       setState(() {
-        if (r.device.address == address) {
+        final existingIndex = results.indexWhere(
+            (element) => element.device.address == r.device.address);
+        if (existingIndex >= 0)
+          results[existingIndex] = r;
+        else
           results.add(r);
-          if (results.isNotEmpty) {
-            _connectAuto();
-          }
-        } else {
-          Get.snackbar("connection",
-              "vous ete tres loi de la poubelle si le probleme percicte contact l'admin");
-        }
       });
     });
 
@@ -64,61 +60,6 @@ class _DiscoveryPage extends State<DiscoveryPage> {
         isDiscovering = false;
       });
     });
-  }
-
-  Future<void> _connectAuto() async {
-    BluetoothDiscoveryResult result = results[0];
-    final device = result.device;
-    final address = device.address;
-    try {
-      bool bonded = false;
-      if (device.isBonded) {
-        print('Unbonding from ${device.address}...');
-        await FlutterBluetoothSerial.instance
-            .removeDeviceBondWithAddress(address);
-        print('Unbonding from ${device.address} has succed');
-      } else {
-        print('Bonding with ${device.address}...');
-        bonded = (await FlutterBluetoothSerial.instance
-            .bondDeviceAtAddress(address))!;
-        print(
-            'Bonding with ${device.address} has ${bonded ? 'succed' : 'failed'}.');
-        bonded
-            ? Get.snackbar("conection reusite",
-                "bien connecter a ${results[0].device.name}")
-            : Get.snackbar("erreur de connection",
-                "vous ete tres loi de la poubelle si le probleme percicte contact l'admin");
-      }
-      setState(() {
-        results[results.indexOf(result)] = BluetoothDiscoveryResult(
-            device: BluetoothDevice(
-              name: device.name ?? '',
-              address: address,
-              type: device.type,
-              bondState:
-                  bonded ? BluetoothBondState.bonded : BluetoothBondState.none,
-            ),
-            rssi: result.rssi);
-      });
-    } catch (ex) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Error occured while bonding'),
-            content: Text("${ex.toString()}"),
-            actions: <Widget>[
-              new TextButton(
-                child: new Text("Close"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
   }
 
   // @TODO . One day there should be `_pairDevice` on long tap on something... ;)
@@ -134,27 +75,27 @@ class _DiscoveryPage extends State<DiscoveryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: isDiscovering
-              ? const Text('Discovering device')
-              : const Text('Discovered device'),
-          actions: <Widget>[
-            isDiscovering
-                ? FittedBox(
-                    child: Container(
-                      margin: const EdgeInsets.all(16.0),
-                      child: const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
+      appBar: AppBar(
+        title: isDiscovering
+            ? Text('Discovering devices')
+            : Text('Discovered devices'),
+        actions: <Widget>[
+          isDiscovering
+              ? FittedBox(
+                  child: Container(
+                    margin: new EdgeInsets.all(16.0),
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
-                  )
-                : IconButton(
-                    icon: const Icon(Icons.replay),
-                    onPressed: _restartDiscovery,
-                  )
-          ],
-        ),
-        body: ListView.builder(
+                  ),
+                )
+              : IconButton(
+                  icon: Icon(Icons.replay),
+                  onPressed: _restartDiscovery,
+                )
+        ],
+      ),
+      body: ListView.builder(
         itemCount: results.length,
         itemBuilder: (BuildContext context, index) {
           BluetoothDiscoveryResult result = results[index];
@@ -215,6 +156,7 @@ class _DiscoveryPage extends State<DiscoveryPage> {
             },
           );
         },
-      ),);
+      ),
+    );
   }
 }
