@@ -5,7 +5,7 @@ class UserModel {
   final String fullName;
   final String email;
   final String password;
-  final int? points;
+  final int points;
   final String role;
 
 
@@ -14,7 +14,7 @@ class UserModel {
     required this.email,
     required this.password,
     required this.fullName,
-    this.points,
+    required this.points,
     required this.role,
   });
     

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,23 +16,30 @@ import 'package:flutter_application_1/src/user_interface/chart.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utilities/changeNotifier.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
 import '../welcome.dart';
 import 'code_scanner.dart';
 import 'compte.dart';
 
 class User_Main_Page extends StatefulWidget {
-  User_Main_Page({super.key});
+  
+  const User_Main_Page({super.key});
 
   @override
   State<User_Main_Page> createState() => _User_Main_PageState();
 }
 
 class _User_Main_PageState extends State<User_Main_Page> {
+
+  
+
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    User_Main_Page(),
+    const User_Main_Page(),
     compte(),
     const Welcome(),
     const QRScan()
@@ -41,7 +50,19 @@ class _User_Main_PageState extends State<User_Main_Page> {
       _selectedIndex = index;
     });
   }
-  
+  int val=0;
+  @override
+  void initState()  {
+    super.initState();
+    _fetchData();
+    Timer.periodic(const Duration(seconds: 24), (timer) {
+    initaliserPoint();
+  });
+
+  }
+  Future<void> _fetchData() async {
+    val = await getMyIntValue();
+  }
 
   List<String> time = [
     "09/03/2023",
@@ -52,6 +73,17 @@ class _User_Main_PageState extends State<User_Main_Page> {
   ];
 
   List<double> quantite = [3, 10, 6, 10, 20];
+  int? points;
+
+ Future<int> getMyIntValue() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  int myIntValue = prefs.getInt('points_loacal') ?? 0; // 0 est une valeur par défaut si la clé n'existe pas
+  return myIntValue;
+}
+initaliserPoint() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setInt('points_loacal', 0);
+}
 
 //openssl
   @override
@@ -74,16 +106,17 @@ class _User_Main_PageState extends State<User_Main_Page> {
             width: Dimenssion.screenWidth,
             child: FutureBuilder(
               future: controller.getUserData(),
-              builder: (context, snapshot) {
+              builder: (context, snapshot) {              
                 if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
-                    UserModel userData = snapshot.data as UserModel;
-                    return Column(
+                  if (snapshot.hasData ) {  
+                  UserModel userData = snapshot.data as UserModel;
+                  int sum = val+userData.points;
+                return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          userData.points.toString(),
-                          style: TextStyle(
+                    sum.toString(),              
+                    style: TextStyle(
                               fontSize: Dimenssion.width20dp * 4,
                               color: const Color.fromRGBO(230, 198, 84, 1)),
                         ),
@@ -105,9 +138,11 @@ class _User_Main_PageState extends State<User_Main_Page> {
                     );
                   }
                 } else {
+                  
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+
                 }
               },
             ),
@@ -227,11 +262,11 @@ class _User_Main_PageState extends State<User_Main_Page> {
                               onTap: () {
                                 Get.snackbar(
                                     "utlisateur info", "acces authoriser");
-                                   Navigator.push(
+                                /*Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => const BluetoothPage(desiredAddress:"78:21:84:A0:19:CE"),//MainPage(),// BluetoothPage(desiredAddress:"60:A4:D0:E0:AF:FC"),
-                            ));
+                              builder: (_) => const BluetoothPage(desiredAddress:"78:21:84:A0:19:CE",Scandata: "1",),//MainPage(),// BluetoothPage(desiredAddress:"60:A4:D0:E0:AF:FC"),
+                            ));*/
                               },
                               child: Column(
                                 children: [

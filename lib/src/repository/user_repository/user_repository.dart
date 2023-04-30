@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
   final _db = FirebaseFirestore.instance;
-  //final _userdata= Get.put(ProfileController());
   createUser(UserModel user) async{
    await  _db.collection("Users").add(user.toJson()).whenComplete(() => Get.snackbar(
         "Success", "Your account has been created",

@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/authentification_repository/authentification_repository.dart';
+import 'package:flutter_application_1/src/user_interface/main_page.dart';
 import 'package:get/get.dart';
 
-import '../../../view/user_interface/main_page.dart';
 import '../../repository/user_repository/user_repository.dart';
 import '../screens/admin/admin_main_page.dart';
 
