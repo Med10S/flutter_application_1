@@ -1,31 +1,25 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/src/repository/authentification_repository/authentification_repository.dart';
-import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
 import 'package:flutter_application_1/src/user_interface/main_page.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utilities/changeNotifier.dart';
 import 'authentification/controllers/profil_controller.dart';
 import 'authentification/models/user_model.dart';
 
 class BluetoothPage extends StatefulWidget {
   final String desiredAddress;
-  final String Scandata;
+  final String scandata;
   final String userid;
 
   const BluetoothPage(
       {super.key,
       required this.desiredAddress,
-      required this.Scandata,
+      required this.scandata,
       required this.userid});
   @override
   _BluetoothPageState createState() => _BluetoothPageState();
@@ -40,9 +34,16 @@ class _BluetoothPageState extends State<BluetoothPage> {
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _taskCompleted = false;
-  String _messageBuffer = '';
   late String message;
   late String _buffer = '';
+  List<String> lines = [];
+
+  Future<String> getRoleUser() async {
+    Future<dynamic> clientinfo = ProfileController().getUserData();
+    UserModel user2 = await clientinfo;
+    String role = user2.role;
+    return role;
+  }
 
   @override
   void initState() {
@@ -166,15 +167,31 @@ class _BluetoothPageState extends State<BluetoothPage> {
           //String?  user_id_utlisable = await userId2;
           _sendMessage();
         });
-
-        connection!.input!.listen(_onDataReceived).onDone(() {
-          if (!connected) {
-            print('Disconnecting locally!');
-          } else {
-            print('Disconnected remotely!');
-          }
-          if (mounted) {
-            setState(() {});
+        Future<String> role = getRoleUser();
+        role.then((value) {
+          String rolVal = value; // valeur résolue de l'ID utilisateur
+          if (rolVal == "user") {
+            connection!.input!.listen(_onDataReceivedUser).onDone(() {
+              if (!connected) {
+                print('Disconnecting locally!');
+              } else {
+                print('Disconnected remotely!');
+              }
+              if (mounted) {
+                setState(() {});
+              }
+            });
+          }else if(rolVal=="admin"){
+            connection!.input!.listen(_onDataReceivedAdmin).onDone(() {
+              if (!connected) {
+                print('Disconnecting locally!');
+              } else {
+                print('Disconnected remotely!');
+              }
+              if (mounted) {
+                setState(() {});
+              }
+            });
           }
         });
       }
@@ -184,10 +201,8 @@ class _BluetoothPageState extends State<BluetoothPage> {
         content: Text('Erreur de connexion Bluetooth: $ex'),
       ));*/
       connectToDevice();
-
     }
   }
-
   void _sendMessage() async {
     Future<dynamic>? clientinfo = ProfileController().getUserData();
     if (clientinfo != null) {
@@ -200,7 +215,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
         try {
           if (widget.userid != null) {
             String message =
-                "$fullName;$role;${widget.Scandata};${widget.userid}";
+                "$fullName;$role;${widget.scandata};${widget.userid}";
             connection!.output
                 .add(Uint8List.fromList(utf8.encode("$message\r\n")));
             await connection!.output.allSent;
@@ -218,7 +233,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
     }
   }
 
-  Future<void> _onDataReceived(Uint8List data) async {
+  Future<void> _onDataReceivedUser(Uint8List data) async {
     String dataString = String.fromCharCodes(data);
     _buffer += dataString;
     if (_buffer.contains('\n')) {
@@ -227,25 +242,23 @@ class _BluetoothPageState extends State<BluetoothPage> {
       Get.snackbar("Message", message,
           borderRadius: 20,
           snackPosition: SnackPosition.TOP,
-          backgroundColor: Color.fromARGB(255, 151, 255, 154),
+          backgroundColor: const Color.fromARGB(255, 151, 255, 154),
           colorText: Colors.black);
       try {
-        
-          int points = int.parse(message.split(";")[1]);
-          // Passer la valeur résolue à la classe BluetoothPage
-          // Modifiez la valeur
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          int myIntValue = prefs.getInt('points_loacal') ?? 0; // 0 est une valeur par défaut si la clé n'existe pas
-          int new_result = myIntValue+points;
-          await prefs.setInt('points_loacal', new_result);
-          Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => const User_Main_Page(),
-                            ));
-          print("points 1:$points");
-         
-        
+        int points = int.parse(message.split(";")[1]);
+        // Passer la valeur résolue à la classe BluetoothPage
+        // Modifiez la valeur
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        int myIntValue = prefs.getInt('points_loacal') ??
+            0; // 0 est une valeur par défaut si la clé n'existe pas
+        int new_result = myIntValue + points;
+        await prefs.setInt('points_loacal', new_result);
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (_) => const User_Main_Page(),
+            ));
+        print("points 1:$points");
       } catch (e) {
         print("convetisement impossible");
       }
@@ -253,6 +266,21 @@ class _BluetoothPageState extends State<BluetoothPage> {
       print("points2 :$points");
     }
   }
+
+
+void _onDataReceivedAdmin(Uint8List data) {
+  String received = String.fromCharCodes(data); // Convertir les données en String
+  List<String> chunks = received.split("&"); // Séparer les lignes
+  for (var chunk in chunks) {
+    if (chunk.isNotEmpty) { // Vérifier que la ligne n'est pas vide
+      lines.add(chunk); // Ajouter la ligne à la liste
+    }
+  }
+  print("recieve${lines.last}");
+}
+
+
+ 
 
   late void Function(int) onPointsUpdated;
 
@@ -309,5 +337,4 @@ class _BluetoothPageState extends State<BluetoothPage> {
         ));
   }
 }
-
-class ESP32 {}
+  

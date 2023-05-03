@@ -2,20 +2,16 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/Bluetooth_page.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
-import '../../utilities/changeNotifier.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/user_model.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
 import 'main_page.dart';
 import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 class QRScan extends StatefulWidget {
   const QRScan({Key? key}) : super(key: key);
@@ -242,7 +238,7 @@ class _QRScanState extends State<QRScan> {
               CupertinoPageRoute(
                 builder: (_) => BluetoothPage(
                   desiredAddress: desiredAddress,
-                  Scandata: poubelle,
+                  scandata: poubelle,
                   userid: userIdFinal,
                 ),
               ));

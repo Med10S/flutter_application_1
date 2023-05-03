@@ -19,7 +19,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../utilities/changeNotifier.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
 import '../welcome.dart';
 import 'code_scanner.dart';
@@ -55,7 +54,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   void initState()  {
     super.initState();
     _fetchData();
-    Timer.periodic(const Duration(seconds: 24), (timer) {
+    Timer.periodic(const Duration(hours: 24), (timer) {
     initaliserPoint();
   });
 

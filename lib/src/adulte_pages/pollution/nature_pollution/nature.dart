@@ -92,7 +92,7 @@ class naturePollution extends StatelessWidget {
                   builder: (BuildContext context) {
                     return CustomDialog(
                         title: 'pollution physique',
-                        description: Strings.pollutionphysique,
+                        description:"",//, Strings.pollutionphysique,
                         buttonText: 'Close',
                         image: Image.asset('images/physique.png'),
                         isDark: isDark);
@@ -138,7 +138,7 @@ class naturePollution extends StatelessWidget {
                   builder: (BuildContext context) {
                     return CustomDialog(
                         title: 'pollution chimique',
-                        description: Strings.pollutionchimique,
+                        description:"",// Strings.pollutionchimique,
                         buttonText: 'Close',
                         image: Image.asset('images/chimique.png'),
                         isDark: isDark);
@@ -184,7 +184,7 @@ class naturePollution extends StatelessWidget {
                   builder: (BuildContext context) {
                     return CustomDialog(
                         title: 'pollution biologique',
-                        description: Strings.pollutionbio,
+                        description:"",// Strings.pollutionbio,
                         buttonText: 'Close',
                         image: Image.asset('images/biologique.png'),
                         isDark: isDark);
