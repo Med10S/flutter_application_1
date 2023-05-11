@@ -8,6 +8,7 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'admin_interface/updateData.dart';
 import 'authentification/controllers/profil_controller.dart';
 import 'authentification/models/user_model.dart';
 
@@ -15,17 +16,20 @@ class BluetoothPage extends StatefulWidget {
   final String desiredAddress;
   final String scandata;
   final String userid;
+  final bool extraction;
 
   const BluetoothPage(
       {super.key,
       required this.desiredAddress,
       required this.scandata,
-      required this.userid});
+      required this.userid,
+      required this.extraction});
   @override
   _BluetoothPageState createState() => _BluetoothPageState();
 }
 
 class _BluetoothPageState extends State<BluetoothPage> {
+  
   // Adresse MAC de l'appareil recherché
   BluetoothConnection? connection;
   bool connected = false;
@@ -37,6 +41,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
   late String message;
   late String _buffer = '';
   List<String> lines = [];
+  final _Update = Get.put(Updatedata());
 
   Future<String> getRoleUser() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
@@ -166,10 +171,14 @@ class _BluetoothPageState extends State<BluetoothPage> {
           // Future<String?> userId2 = getdata_from_here();
           //String?  user_id_utlisable = await userId2;
           _sendMessage();
+          
         });
         Future<String> role = getRoleUser();
+        print("role ::$role");
         role.then((value) {
-          String rolVal = value; // valeur résolue de l'ID utilisateur
+          String rolVal = value;
+          print("role ::$role");
+          // valeur résolue de l'ID utilisateur
           if (rolVal == "user") {
             connection!.input!.listen(_onDataReceivedUser).onDone(() {
               if (!connected) {
@@ -181,7 +190,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
                 setState(() {});
               }
             });
-          }else if(rolVal=="admin"){
+          } else if (rolVal == "admin") {
             connection!.input!.listen(_onDataReceivedAdmin).onDone(() {
               if (!connected) {
                 print('Disconnecting locally!');
@@ -203,6 +212,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
       connectToDevice();
     }
   }
+
   void _sendMessage() async {
     Future<dynamic>? clientinfo = ProfileController().getUserData();
     if (clientinfo != null) {
@@ -215,9 +225,9 @@ class _BluetoothPageState extends State<BluetoothPage> {
         try {
           if (widget.userid != null) {
             String message =
-                "$fullName;$role;${widget.scandata};${widget.userid}";
+                "$fullName;$role;${widget.scandata.trim()};${widget.userid};${widget.extraction}";
             connection!.output
-                .add(Uint8List.fromList(utf8.encode("$message\r\n")));
+                .add(Uint8List.fromList(utf8.encode("$message\n")));
             await connection!.output.allSent;
           }
         } catch (e) {
@@ -251,8 +261,10 @@ class _BluetoothPageState extends State<BluetoothPage> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         int myIntValue = prefs.getInt('points_loacal') ??
             0; // 0 est une valeur par défaut si la clé n'existe pas
-        int new_result = myIntValue + points;
-        await prefs.setInt('points_loacal', new_result);
+        int newResult = myIntValue + points;
+        await prefs.setInt('points_loacal', newResult);
+         await FlutterBluetoothSerial.instance
+                      .removeDeviceBondWithAddress(widget.desiredAddress);
         Navigator.push(
             context,
             CupertinoPageRoute(
@@ -267,20 +279,70 @@ class _BluetoothPageState extends State<BluetoothPage> {
     }
   }
 
+  Future<void> _onDataReceivedAdmin(Uint8List data) async {
+    String dataString = String.fromCharCodes(data);
+    _buffer += dataString;
+    if (_buffer.contains('\n')) {
+      final message = _buffer.replaceAll('\r', '').replaceAll('\n', '');
+      _buffer = '';
+      if (widget.extraction == true) {
+        Get.snackbar("Message", "extraction en cours ....",
+            borderRadius: 20,
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Color.fromARGB(255, 109, 118, 247),
+            colorText: Colors.black);
+        List<String> chunks = message.split("&"); // Séparer les lignes
+        for (var chunk in chunks) {
+          if (chunk.isNotEmpty) {
+            // Vérifier que la ligne n'est pas vide
+            lines.add(chunk); // Ajouter la ligne à la liste
+          }
+        }
+        if(lines[0]!=""){
+       await _Update.updateDataProgress(context,lines);
 
-void _onDataReceivedAdmin(Uint8List data) {
-  String received = String.fromCharCodes(data); // Convertir les données en String
-  List<String> chunks = received.split("&"); // Séparer les lignes
-  for (var chunk in chunks) {
-    if (chunk.isNotEmpty) { // Vérifier que la ligne n'est pas vide
-      lines.add(chunk); // Ajouter la ligne à la liste
+        }else{
+          Get.snackbar("info", "aucun client pour aujourd'hui");
+        }
+        await FlutterBluetoothSerial.instance
+                      .removeDeviceBondWithAddress(widget.desiredAddress);
+        
+        for (int i = 0; i < lines.length; i++) {
+          print("recieve${lines[i]}");
+          
+      } else if(widget.extraction == false) {
+        Get.snackbar("Message", message,
+            borderRadius: 20,
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: const Color.fromARGB(255, 151, 255, 154),
+            colorText: Colors.black);
+        try {
+          int points = int.parse(message.split(";")[1]);
+          // Passer la valeur résolue à la classe BluetoothPage
+          // Modifiez la valeur
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          int myIntValue = prefs.getInt('points_loacal') ?? 0; // 0 est une valeur par défaut si la clé n'existe pas
+          int new_result = myIntValue + points;
+          await prefs.setInt('points_loacal', new_result);
+          await FlutterBluetoothSerial.instance
+                      .removeDeviceBondWithAddress(widget.desiredAddress);
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (_) => const User_Main_Page(),
+              ));
+          print("points 1:$points");
+        } catch (e) {
+          print("convetisement impossible");
+        }
+        int points = int.parse(message.split(";")[1]);
+        print("points2 :$points");
+      }
+    else{
+      print("errreeeuuuurrrr");
+    }
     }
   }
-  print("recieve${lines.last}");
-}
-
-
- 
 
   late void Function(int) onPointsUpdated;
 
@@ -337,4 +399,3 @@ void _onDataReceivedAdmin(Uint8List data) {
         ));
   }
 }
-  
