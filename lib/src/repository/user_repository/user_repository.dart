@@ -24,6 +24,9 @@ class UserRepository extends GetxController {
         })
         ;
   }
+  createDataStatDay()async{
+
+  }
 
   Future <UserModel> getUserDetails(String email) async{
     final snapshot = await _db.collection("Users").where("Email",isEqualTo: email).get();

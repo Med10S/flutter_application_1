@@ -263,7 +263,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
             0; // 0 est une valeur par défaut si la clé n'existe pas
         int newResult = myIntValue + points;
         await prefs.setInt('points_loacal', newResult);
-         await FlutterBluetoothSerial.instance
+        await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
         Navigator.push(
             context,
@@ -308,7 +308,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
                       .removeDeviceBondWithAddress(widget.desiredAddress);
         
         for (int i = 0; i < lines.length; i++) {
-          print("recieve${lines[i]}");
+          print("recieve${lines[i]}");}
           
       } else if(widget.extraction == false) {
         Get.snackbar("Message", message,

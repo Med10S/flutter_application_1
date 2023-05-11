@@ -1,16 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/blue/MainPage.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/Bluetooth_page.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
-import 'package:flutter_application_1/src/user_interface/test/test.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
@@ -31,19 +28,12 @@ class User_Main_Page extends StatefulWidget {
   @override
   State<User_Main_Page> createState() => _User_Main_PageState();
 }
-
 class _User_Main_PageState extends State<User_Main_Page> {
 
   
 
   int _selectedIndex = 0;
-  static final List<Widget> _widgetOptions = <Widget>[
-    const User_Main_Page(),
-    compte(),
-    const Welcome(),
-    const QRScan()
-  ];
-
+  
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -54,7 +44,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   void initState()  {
     super.initState();
     _fetchData();
-    Timer.periodic(const Duration(hours: 24), (timer) {
+    Timer.periodic(const Duration(seconds: 24), (timer) {
     initaliserPoint();
   });
 
@@ -78,12 +68,14 @@ class _User_Main_PageState extends State<User_Main_Page> {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   int myIntValue = prefs.getInt('points_loacal') ?? 0; // 0 est une valeur par défaut si la clé n'existe pas
   return myIntValue;
-}
+  }
 initaliserPoint() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setInt('points_loacal', 0);
 }
-
+  setstatDay()async{
+    
+  }
 //openssl
   @override
   Widget build(BuildContext context) {
@@ -189,7 +181,7 @@ initaliserPoint() async {
           Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (_) => const QRScan(),
+                builder: (_) => const QRScan(extraction: false,),
               ));
         },
         backgroundColor: Theme.of(context).primaryColor,
@@ -261,11 +253,10 @@ initaliserPoint() async {
                               onTap: () {
                                 Get.snackbar(
                                     "utlisateur info", "acces authoriser");
-                                /*Navigator.push(
+                                Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => const BluetoothPage(desiredAddress:"78:21:84:A0:19:CE",Scandata: "1",),//MainPage(),// BluetoothPage(desiredAddress:"60:A4:D0:E0:AF:FC"),
-                            ));*/
+                              builder: (_) => const QRScan(extraction: true,)));
                               },
                               child: Column(
                                 children: [

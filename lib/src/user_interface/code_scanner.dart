@@ -14,7 +14,8 @@ import 'main_page.dart';
 import 'dart:async';
 
 class QRScan extends StatefulWidget {
-  const QRScan({Key? key}) : super(key: key);
+  final bool extraction;
+  const QRScan({Key? key,required this.extraction}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRScanState();
@@ -239,7 +240,7 @@ class _QRScanState extends State<QRScan> {
                 builder: (_) => BluetoothPage(
                   desiredAddress: desiredAddress,
                   scandata: poubelle,
-                  userid: userIdFinal,
+                  userid: userIdFinal, extraction: widget.extraction,
                 ),
               ));
         });

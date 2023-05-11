@@ -59,7 +59,7 @@ class _statistiqueState extends State<statistique> {
               Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (_) => QRScan(),
+                    builder: (_) => QRScan(extraction:false),
                   ));
             },
             backgroundColor: Theme.of(context).primaryColor,

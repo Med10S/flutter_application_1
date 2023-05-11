@@ -60,6 +60,7 @@ dependencies:
   flutter_bluetooth_serial: ^0.4.0
   scoped_model: ^2.0.0
   flutter_blue:
+  sn_progress_dialog: ^1.1.3
    
 
 
