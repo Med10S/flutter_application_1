@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -20,37 +21,105 @@ import '../repository/authentification_repository/authentification_repository.da
 import '../welcome.dart';
 import 'code_scanner.dart';
 import 'compte.dart';
+import 'package:intl/intl.dart';
 
 class User_Main_Page extends StatefulWidget {
-  
   const User_Main_Page({super.key});
 
   @override
   State<User_Main_Page> createState() => _User_Main_PageState();
 }
-class _User_Main_PageState extends State<User_Main_Page> {
 
-  
+class _User_Main_PageState extends State<User_Main_Page> {
+  final _db = FirebaseFirestore.instance;
+  final userRepo = Get.put(UserRepository());
 
   int _selectedIndex = 0;
-  
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-  int val=0;
+
+  int val = 0;
   @override
-  void initState()  {
+  void initState() {
     super.initState();
+    _initializeStats();
     _fetchData();
     Timer.periodic(const Duration(seconds: 24), (timer) {
-    initaliserPoint();
-  });
-
+      initaliserPoint();
+    });
   }
+
   Future<void> _fetchData() async {
     val = await getMyIntValue();
+  }
+
+  void _initializeStats() async {
+    Future<String> usedId = getdata_from_here();
+    usedId.then((value) async {
+      String userIdFinal = value;
+      debugPrint('user id : $userIdFinal');
+// valeur résolue de l'ID utilisateur
+      await initializeStatsCollection(userIdFinal);
+    });
+  }
+
+  Future<void> initializeStatsCollection(String userId) async {
+    DateTime maintenant = DateTime.now();
+    final userRef = _db.collection('Users').doc(userId);
+    final statsRef =
+        userRef.collection('Stats').doc(maintenant.year.toString());
+    final day = DateFormat('yyyy-MM-dd').format(maintenant);
+
+    // get the current data in the stats document
+    final data = await statsRef.get().then((snapshot) => snapshot.data());
+
+    // define the keys for each data index
+    final keys = ['plastique', 'verre', 'carton', 'metale', 'organique'];
+
+    // if the stats document doesn't exist, create it with all keys initialized to 0
+    if (data == null) {
+      final initialData = {for (var key in keys) key: 0};
+      await statsRef.set({day: initialData});
+    } else if (!data.containsKey(day)) {
+      // if the day doesn't exist, initialize all keys to 0
+      final initialData = {for (var key in keys) key: 0};
+      await statsRef.update({day: initialData});
+    }
+  }
+
+//--------------------------------------------------------------------------------------
+/*cette fonction doit ce deplacer vers la class de bluetooth */
+  void _updatedata() async {
+    Future<String> usedId = getdata_from_here();
+    usedId.then((value) async {
+      String userIdFinal = value;
+      debugPrint('user id : $userIdFinal');
+// valeur résolue de l'ID utilisateur
+      await userRepo.createStatsCollection(userIdFinal, 50, 4);
+    });
+  }
+//--------------------------------------------------------------------------------------
+
+  Future<String> getdata_from_here() async {
+    Future<dynamic> clientinfo = ProfileController().getUserData();
+    UserModel user2 = await clientinfo;
+    String mail = user2.email;
+    String userId = await getUserId(mail);
+    return userId;
+  }
+
+  Future<String> getUserId(String mail) async {
+    final snapshot =
+        await _db.collection("Users").where("Email", isEqualTo: mail).get();
+    if (snapshot.docs.isNotEmpty) {
+      return snapshot.docs[0].id;
+    } else {
+      return "erreur1";
+    }
   }
 
   List<String> time = [
@@ -64,18 +133,18 @@ class _User_Main_PageState extends State<User_Main_Page> {
   List<double> quantite = [3, 10, 6, 10, 20];
   int? points;
 
- Future<int> getMyIntValue() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  int myIntValue = prefs.getInt('points_loacal') ?? 0; // 0 est une valeur par défaut si la clé n'existe pas
-  return myIntValue;
+  Future<int> getMyIntValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int myIntValue = prefs.getInt('points_loacal') ??
+        0; // 0 est une valeur par défaut si la clé n'existe pas
+    return myIntValue;
   }
-initaliserPoint() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setInt('points_loacal', 0);
-}
-  setstatDay()async{
-    
+
+  initaliserPoint() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('points_loacal', 0);
   }
+
 //openssl
   @override
   Widget build(BuildContext context) {
@@ -97,17 +166,17 @@ initaliserPoint() async {
             width: Dimenssion.screenWidth,
             child: FutureBuilder(
               future: controller.getUserData(),
-              builder: (context, snapshot) {              
+              builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData ) {  
-                  UserModel userData = snapshot.data as UserModel;
-                  int sum = val+userData.points;
-                return Column(
+                  if (snapshot.hasData) {
+                    UserModel userData = snapshot.data as UserModel;
+                    int sum = val + userData.points;
+                    return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                    sum.toString(),              
-                    style: TextStyle(
+                          sum.toString(),
+                          style: TextStyle(
                               fontSize: Dimenssion.width20dp * 4,
                               color: const Color.fromRGBO(230, 198, 84, 1)),
                         ),
@@ -129,11 +198,9 @@ initaliserPoint() async {
                     );
                   }
                 } else {
-                  
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-
                 }
               },
             ),
@@ -181,7 +248,9 @@ initaliserPoint() async {
           Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (_) => const QRScan(extraction: false,),
+                builder: (_) => const QRScan(
+                  extraction: false,
+                ),
               ));
         },
         backgroundColor: Theme.of(context).primaryColor,
@@ -223,13 +292,39 @@ initaliserPoint() async {
                 children: [
                   InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => chartDays(),
-                            ));
+                        Future<String> usedId = getdata_from_here();
+                        usedId.then((value) async {
+                          String userIdFinal = value;
+                          debugPrint('user id : $userIdFinal');
+// valeur résolue de l'ID utilisateur
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) =>
+                                    ChartDays(userIdFinal: userIdFinal),
+                              ));
+                        });
                       },
                       child: Image.asset("images/chart.png")),
+                  const Text(
+                    "Statistique",
+                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      _updatedata();
+                    },
+                    child:
+                        Image.asset("images/next.png", height: 40, width: 40),
+                  ),
                   const Text(
                     "Statistique",
                     style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
@@ -254,9 +349,11 @@ initaliserPoint() async {
                                 Get.snackbar(
                                     "utlisateur info", "acces authoriser");
                                 Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => const QRScan(extraction: true,)));
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (_) => const QRScan(
+                                              extraction: true,
+                                            )));
                               },
                               child: Column(
                                 children: [

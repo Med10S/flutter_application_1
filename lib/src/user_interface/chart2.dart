@@ -1,35 +1,53 @@
 import 'dart:math';
 
 import 'package:calendar_appbar/calendar_appbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intl/intl.dart';
 
+import '../authentification/controllers/profil_controller.dart';
+import '../authentification/models/dechet_model.dart';
+import '../authentification/models/user_model.dart';
 import 'chart.dart';
 
-class chartDays extends StatefulWidget {
+class ChartDays extends StatefulWidget {
+  final String userIdFinal;
+  const ChartDays({Key? key,required this.userIdFinal}) : super(key: key);
+ 
+
   @override
-  _chartDaysState createState() => _chartDaysState();
+    State<StatefulWidget> createState() => ChartDaysState();
+
+  //_chartDaysState createState() => _chartDaysState();
 }
 
-class _chartDaysState extends State<chartDays> {
+class ChartDaysState extends State<ChartDays> {
   late List<quatitedechet> _chartData;
+  late List<quatitedechet> chartData;
+    late Future<List<quatitedechet>> _chartDataFuture;
+  final _db = FirebaseFirestore.instance;
+  
+
   @override
   void initState() {
-    _chartData = getchardata();
-    setState(() {
-      selectedDate = DateTime.now();
-    });
+      _initData();
     super.initState();
   }
+  Future<void> _initData() async {
+    
+  setState(() {
+    selectedDate = DateTime.now();
+    day = DateFormat('yyyy-MM-dd').format(selectedDate!);
+    _chartDataFuture = getchardata(day);
+  });
+}
 
   DateTime? selectedDate;
   Random random = Random();
-
+  String day = DateFormat('yyyy-MM-dd').format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +56,16 @@ class _chartDaysState extends State<chartDays> {
         backButton: true,
         locale: 'fr',
         fullCalendar: true,
-        onDateChanged: (value) => setState(() => selectedDate = value),
+        onDateChanged: (value) => setState(() {
+          selectedDate = value;
+          day = DateFormat('yyyy-MM-dd').format(selectedDate!);
+          _chartDataFuture = getchardata(day);
+
+        }),
         lastDate: DateTime.now(),
         accent: const Color.fromRGBO(47, 103, 23, 1),
       ),
+
       body: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -59,8 +83,8 @@ class _chartDaysState extends State<chartDays> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Auj",
+                     Text(
+                      day==DateFormat('yyyy-MM-dd').format(DateTime.now())?"Auj":day,
                       style: TextStyle(fontSize: 20, color: Colors.black),
                       textAlign: TextAlign.start,
                     ),
@@ -75,7 +99,18 @@ class _chartDaysState extends State<chartDays> {
                         child: const Icon(Icons.calendar_month_outlined))
                   ],
                 )),
-            SfCircularChart(
+FutureBuilder<List<quatitedechet>>(
+          future: _chartDataFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              final _chartData = snapshot.data!;
+
+              return SfCircularChart(
+
               margin: EdgeInsets.all(-Dimenssion.height20dp / 4),
               backgroundColor: Colors.transparent,
               legend: Legend(
@@ -93,23 +128,48 @@ class _chartDaysState extends State<chartDays> {
                   dataLabelSettings: DataLabelSettings(isVisible: true),
                 )
               ],
-            )
+              );
+            }
+          },
+        ),           
           ],
         ),
       ),
     );
   }
+ 
+  Future<DechetModel> getusesstat(String day) async {
+  Future<dynamic> userStat =  ProfileController().getUserStat(day,widget.userIdFinal);
+  DechetModel data = await userStat;
+  debugPrint("metale1${data.metale}");
 
-  List<quatitedechet> getchardata() {
-    final List<quatitedechet> chartData = [
-      quatitedechet("platique", 12),
-      quatitedechet("verre", 2),
-      quatitedechet("metalle", 6),
-      quatitedechet("organique", 4),
-      quatitedechet("carton", 5),
-    ];
-    return chartData;
-  }
+  return data;
+}
+
+  Future<List<quatitedechet>> getchardata(String day) async {
+  DechetModel stas = await getusesstat(day);
+  debugPrint("metale${stas.metale}");
+
+  /*stas.then((value) {
+          DechetModel data = value; // valeur résolue de l'ID utilisateur
+          debugPrint("metale${data.metale}");
+          
+        });*/
+  
+  
+  final chartData = [
+    quatitedechet("platique", stas.plastique),
+    quatitedechet("verre", stas.verre),
+    quatitedechet("metalle", stas.metale),
+    quatitedechet("organique", stas.organique),
+    quatitedechet("carton", stas.carton),
+  ];
+  
+  return chartData;
+}
+ 
+
+ 
 }
 
 class quatitedechet {
@@ -117,3 +177,5 @@ class quatitedechet {
   final String produit;
   final int quantite;
 }
+
+
