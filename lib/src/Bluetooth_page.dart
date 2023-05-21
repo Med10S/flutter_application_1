@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/src/user_interface/main_page.dart';
+import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 import 'admin_interface/updateData.dart';
 import 'authentification/controllers/profil_controller.dart';
@@ -31,8 +35,10 @@ class BluetoothPage extends StatefulWidget {
   _BluetoothPageState createState() => _BluetoothPageState();
 }
 
-class _BluetoothPageState extends State<BluetoothPage> {
+class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProviderStateMixin {
   
+ late AnimationController _animationController;
+  late Animation<double> _animation;
   // Adresse MAC de l'appareil recherché
   BluetoothConnection? connection;
   bool connected = false;
@@ -77,6 +83,12 @@ class _BluetoothPageState extends State<BluetoothPage> {
     _requestBluetooth();
 
     connectToDevice();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    )..repeat(reverse: true);
+    _animation = Tween(begin: 0.0, end: 2.0 * pi).animate(_animationController);
+  
   }
 
   Future<void> _requestBluetooth() async {
@@ -145,11 +157,11 @@ class _BluetoothPageState extends State<BluetoothPage> {
     });
     try {
       // Recherche des appareils Bluetooth disponibles
-      List<BluetoothDevice> devices = [];
+     late BluetoothDevice devices ;
       _discoveryStreamSubscription =
           FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
         if (r.device.address == widget.desiredAddress) {
-          devices.add(r.device);
+          devices=(r.device);
         }
       });
 
@@ -159,7 +171,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
       // Arrêt de la recherche d'appareils
       _discoveryStreamSubscription?.cancel();
 
-      if (devices.isEmpty) {
+      if (devices==null) {
         // Aucun appareil trouvé, afficher une snackbar avec un message d'erreur
         ScaffoldMessenger.of(_scaffoldKey.currentContext!)
             .showSnackBar(SnackBar(
@@ -173,8 +185,6 @@ class _BluetoothPageState extends State<BluetoothPage> {
           searching = false;
           connected = true;
           _taskCompleted = true;
-          // Future<String?> userId2 = getdata_from_here();
-          //String?  user_id_utlisable = await userId2;
           _sendMessage();
           
         });
@@ -210,10 +220,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
         });
       }
     } catch (ex) {
-      // Erreur lors de la connexion, afficher une snackbar avec un message d'erreur
-      /*ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(SnackBar(
-        content: Text('Erreur de connexion Bluetooth: $ex'),
-      ));*/
+      
       connectToDevice();
     }
   }
@@ -449,17 +456,140 @@ class _BluetoothPageState extends State<BluetoothPage> {
           return _taskCompleted;
         },
         child: Scaffold(
+          
           key: _scaffoldKey,
           appBar: AppBar(title: const Text('Bluetooth')),
           body: Center(
-            child: searching
-                ? const CircularProgressIndicator()
-                : connected
-                    ? Text(
-                        'Connecté à l\'appareil Bluetooth avec l\'adresse ${widget.desiredAddress}')
-                    : Text(
-                        'Recherche de l\'appareil Bluetooth avec l\'adresse ${widget.desiredAddress}'),
+  child: searching
+      ? Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+      Text("searching...".toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: AnimatedBuilder(
+                      animation: _animation,
+                      builder: (context, child) {
+                        return CustomPaint(
+                          painter: ColorCirclePainter(
+                            animationValue: _animation.value,
+                            startColor: Colors.green,
+                            endColor: Color.fromARGB(255, 39, 180, 223),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Image.asset('images/bluetooth(1).png',scale: 4,),
+                ],
+              ),
+            ],
           ),
+        )
+      : connected
+          ? Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+      child: contentBox(context),
+    )
+          : Text(
+              'Recherche de l\'appareil Bluetooth avec l\'adresse ${widget.desiredAddress}'),
+),
+
         ));
+  }
+}
+contentBox(context) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding:const  EdgeInsets.only(
+            top: 16,
+            bottom: 16,
+            left: 16,
+            right: 16,
+          ),
+          margin: const EdgeInsets.only(top: 50),
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10.0,
+                offset: Offset(0.0, 10.0),
+              ),
+            ],
+          ),
+          child:const Text("connection avec succé",textAlign:TextAlign.center,)
+           ), Positioned(
+      top: -Dimenssion.height32dp,
+      left: 16,
+      right: 16,
+      child: const CircleAvatar(
+        backgroundColor: Colors.transparent,
+        radius: 60,
+        child: ClipRRect(
+         
+          child: Icon(Icons.check_circle,color: Colors.blue,),
+        ),
+      ),
+    ),
+
+      ],
+      
+    );
+  }
+
+
+
+class ColorCirclePainter extends CustomPainter {
+  final double animationValue;
+  final Color startColor;
+  final Color endColor;
+
+  ColorCirclePainter({
+    required this.animationValue,
+    required this.startColor,
+    required this.endColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final centerX = size.width / 2 ;
+    final centerY = size.height / 2;
+    final radius = min(centerX,centerY)*1.5;
+
+    final startColorOpacity = (1 - animationValue / (2 * pi)).clamp(0.0, 1.0);
+    final endColorOpacity = (0.5 - animationValue / (2 * pi)).clamp(0.0, 1.0);
+
+    final startColorWithOpacity = startColor.withOpacity(startColorOpacity);
+    final endColorWithOpacity = endColor.withOpacity(endColorOpacity);
+
+    final gradient = RadialGradient(
+      colors: [startColorWithOpacity, endColorWithOpacity],
+    );
+
+    final rect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius);
+
+    final paint = Paint()
+      ..shader = gradient.createShader(rect)
+      ..style = PaintingStyle.fill;
+
+    canvas.drawCircle(Offset(centerX, centerY), radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }
