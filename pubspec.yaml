@@ -61,6 +61,8 @@ dependencies:
   scoped_model: ^2.0.0
   flutter_blue:
   sn_progress_dialog: ^1.1.3
+  flutter_calendar_carousel: ^2.4.1
+
    
 
 

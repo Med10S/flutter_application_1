@@ -3,7 +3,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/utilities/custum_dialog.dart';
+import 'package:flutter_application_1/widgets/custum_dialog.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';

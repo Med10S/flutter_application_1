@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 class DechetModel {
-  final int carton;
-  final int metale;
-  final int organique;
-  final int plastique;
-  final int verre;
+  final double carton;
+  final double metale;
+  final double organique;
+  final double plastique;
+  final double verre;
 
 
   const DechetModel({

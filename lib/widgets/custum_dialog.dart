@@ -40,8 +40,8 @@ class CustomDialog extends StatelessWidget {
             shape: BoxShape.rectangle,
             color: isDark ? const Color.fromARGB(255, 0, 0, 0) : Colors.white,
             borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              const BoxShadow(
+            boxShadow: const[
+               BoxShadow(
                 color: Colors.black26,
                 blurRadius: 10.0,
                 offset: Offset(0.0, 10.0),
@@ -104,7 +104,8 @@ class CustomDialog extends StatelessWidget {
               child: image 
             ),
           ),
-        ),],
+        ),
+        ],
     );
   }
 }

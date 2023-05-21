@@ -1,26 +1,18 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/colors/colors.dart';
-import 'package:flutter_application_1/src/Bluetooth_page.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/src/user_interface/chart.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../repository/authentification_repository/authentification_repository.dart';
-import '../welcome.dart';
 import 'code_scanner.dart';
-import 'compte.dart';
 import 'package:intl/intl.dart';
 
 class User_Main_Page extends StatefulWidget {
@@ -33,7 +25,7 @@ class User_Main_Page extends StatefulWidget {
 class _User_Main_PageState extends State<User_Main_Page> {
   final _db = FirebaseFirestore.instance;
   final userRepo = Get.put(UserRepository());
-
+  List<Map<String, dynamic>> pointsList = [];
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -43,14 +35,22 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   int val = 0;
+  List<Map<String, dynamic>>? val2=List.empty();
   @override
   void initState() {
     super.initState();
     _initializeStats();
     _fetchData();
-    Timer.periodic(const Duration(seconds: 24), (timer) {
+    _fetchDataHistoryque();
+    getValueListFromSharedPreferences();
+
+    Timer.periodic(const Duration(hours: 24), (timer) {
       initaliserPoint();
     });
+  }
+
+Future<void> _fetchDataHistoryque() async {
+    pointsList = await  getValueListFromSharedPreferences();
   }
 
   Future<void> _fetchData() async {
@@ -68,6 +68,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   Future<void> initializeStatsCollection(String userId) async {
+    /**pour initialiser les quantite de chaque jours si elle n'existe pas a chaque connection a zero  */
     DateTime maintenant = DateTime.now();
     final userRef = _db.collection('Users').doc(userId);
     final statsRef =
@@ -82,27 +83,15 @@ class _User_Main_PageState extends State<User_Main_Page> {
 
     // if the stats document doesn't exist, create it with all keys initialized to 0
     if (data == null) {
-      final initialData = {for (var key in keys) key: 0};
+      final initialData = {for (var key in keys) key: 0.0};
       await statsRef.set({day: initialData});
     } else if (!data.containsKey(day)) {
       // if the day doesn't exist, initialize all keys to 0
-      final initialData = {for (var key in keys) key: 0};
+      final initialData = {for (var key in keys) key: 0.0};
       await statsRef.update({day: initialData});
     }
   }
 
-//--------------------------------------------------------------------------------------
-/*cette fonction doit ce deplacer vers la class de bluetooth */
-  void _updatedata() async {
-    Future<String> usedId = getdata_from_here();
-    usedId.then((value) async {
-      String userIdFinal = value;
-      debugPrint('user id : $userIdFinal');
-// valeur résolue de l'ID utilisateur
-      await userRepo.createStatsCollection(userIdFinal, 50, 4);
-    });
-  }
-//--------------------------------------------------------------------------------------
 
   Future<String> getdata_from_here() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
@@ -122,16 +111,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
     }
   }
 
-  List<String> time = [
-    "09/03/2023",
-    "10/03/2023",
-    "15/03/2023",
-    "15/03/2023",
-    "15/03/2023"
-  ];
-
-  List<double> quantite = [3, 10, 6, 10, 20];
-  int? points;
 
   Future<int> getMyIntValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -141,6 +120,8 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   initaliserPoint() async {
+    ///pour renitialiser la donne enregister depuis le bluetooth a zero 
+    ///cette fonction est appller dans intistate chaque 24h
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('points_loacal', 0);
   }
@@ -211,37 +192,58 @@ class _User_Main_PageState extends State<User_Main_Page> {
               color: Theme.of(context).cardColor,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
+
+///j'utlise toujourd des FutureBuilder pour constuire le widget apres que les donnes arrivent
+            
             child: SizedBox(
-              height: Dimenssion.height250dp / 1.08,
-              child: ListTileTheme(
-                tileColor: Theme.of(context).cardColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+  height: Dimenssion.height250dp / 1.08,
+  child: FutureBuilder<List<Map<String, dynamic>>>(
+    future: getValueListFromSharedPreferences(),
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.hasData) {
+          List<Map<String, dynamic>> valueList = snapshot.data!;
+
+          return ListView.builder(
+            itemCount: valueList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                padding: EdgeInsets.only(top: Dimenssion.width16dp),
+                child: Material(
+                  color: Theme.of(context).primaryColorDark,
+                  borderRadius: BorderRadius.circular(20),
+                  child: ListTileTheme(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: itemBuilder(context, index),
+                  ),
                 ),
-                child: ListView.builder(
-                  itemCount: time.length,
-                  // Appliquer un BorderRadius de 20 à tous les éléments de la liste
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: EdgeInsets.only(top: Dimenssion.width16dp),
-                      child: Material(
-                        color: Theme.of(context).primaryColorDark,
-                        borderRadius: BorderRadius.circular(20),
-                        child: ListTileTheme(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: itemBuilder(context, index),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+              );
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
+        } else {
+          return const Center(
+            child: Text("Something went wrong"),
+          );
+        }
+      } else {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+    },
+  ),
+),
+
           ),
         ],
       ),
+      
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -306,25 +308,6 @@ class _User_Main_PageState extends State<User_Main_Page> {
                         });
                       },
                       child: Image.asset("images/chart.png")),
-                  const Text(
-                    "Statistique",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      _updatedata();
-                    },
-                    child:
-                        Image.asset("images/next.png", height: 40, width: 40),
-                  ),
                   const Text(
                     "Statistique",
                     style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
@@ -430,13 +413,19 @@ class _User_Main_PageState extends State<User_Main_Page> {
     ));
   }
 
-  itemBuilder(BuildContext context, int index) {
+  Widget itemBuilder(BuildContext context, int index) {
     return ListTile(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            time[index],
+
+///pointsList est une list avec les donne de la date
+/// et les points elle se comporte comme un tableau 
+///donc je peux l'acceder avec [index] j'utliser ['date'] car les donnes sont 
+///enregistrer en format JONSON 
+
+            "${pointsList[index]['date']}",
             style: TextStyle(
               fontSize: Dimenssion.width24dp / 1.2,
               color: Theme.of(context).brightness == Brightness.dark
@@ -445,7 +434,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
             ),
           ),
           Text(
-            quantite[index].toString() + " Point(s)",
+            "${pointsList[index]['value']} Point(s)",
             style: TextStyle(
               fontSize: Dimenssion.width24dp / 1.3,
               color: Theme.of(context).brightness == Brightness.dark
@@ -461,4 +450,29 @@ class _User_Main_PageState extends State<User_Main_Page> {
       },
     );
   }
+/// cette fonction a pour but d'extraire les donne enregister depuis la class bluetooth car precedament
+/// j'ai enregister les points avec le timstamp dans une list de type Map<String, dynamic>>
+ 
+  Future<List<Map<String, dynamic>>> getValueListFromSharedPreferences() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  // Obtenir la liste de valeurs à partir des préférences partagées
+  List<String>? valueListJson = prefs.getStringList('value_list');
+
+  if (valueListJson != null) {
+    // Convertir la liste JSON en une liste de Maps
+    List<Map<String, dynamic>> valueList = valueListJson
+        .map((json) => Map<String, dynamic>.from(jsonDecode(json)))
+        .toList();
+
+    return valueList;
+  }
+
+  return [];
 }
+
+}
+
+
+
+

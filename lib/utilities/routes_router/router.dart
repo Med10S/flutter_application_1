@@ -3,6 +3,7 @@ import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollutio
 import 'package:flutter_application_1/src/adulte_pages/recyclage/duree_recyclage.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/poubelle.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/whyRecycle.dart';
+import 'package:flutter_application_1/src/user_interface/main_page.dart';
 import 'package:flutter_application_1/utilities/routes_router/routes.dart';
 
 import '../../src/adulte_pages/first_page.dart';
@@ -12,6 +13,7 @@ import '../../src/adulte_pages/pollution/type_pollution/types.dart';
 import '../../src/adulte_pages/recyclage/3R.dart';
 import '../../src/adulte_pages/recyclage/definiton_R/definition.dart';
 import '../../src/adulte_pages/recyclage/logo.dart';
+import '../../src/user_interface/code_scanner.dart';
 
 Route<dynamic> onGenerate(RouteSettings settings) {
   switch (settings.name) {
@@ -37,7 +39,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const DureeRecyclage());
     case AppRoutes.whyRecyclage:
       return CupertinoPageRoute(builder: (_) => const WhyRecyclage());
-
+    
     default:
       return CupertinoPageRoute(
         builder: (_) => const firstPage(),

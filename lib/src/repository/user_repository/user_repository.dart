@@ -28,7 +28,7 @@ class UserRepository extends GetxController {
         ;
   }
 
- Future<void> createStatsCollection(String userId, int value, int dataIndex) async {
+ Future<void> createStatsCollection(String userId, double value, int dataIndex) async {
   DateTime maintenant = DateTime.now();
   final userRef = _db.collection('Users').doc(userId);
   final statsRef = userRef.collection('Stats').doc(maintenant.year.toString());

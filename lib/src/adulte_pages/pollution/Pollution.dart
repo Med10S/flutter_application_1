@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 
 import '../../../colors/colors.dart';
-import '../../../utilities/botton.dart';
+import '../../../widgets/botton.dart';
 import '../../../utilities/string.dart';
 import '../first_page.dart';
 import 'definition/definition.dart';

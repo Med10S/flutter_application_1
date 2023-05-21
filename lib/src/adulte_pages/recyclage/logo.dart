@@ -5,7 +5,7 @@ import 'package:flutter_application_1/src/adulte_pages/recyclage/poubelle.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 
 import '../../../colors/colors.dart';
-import '../../../utilities/custum_dialog.dart';
+import '../../../widgets/custum_dialog.dart';
 import '../../../utilities/dimention.dart';
 
 class CustomButton2 extends StatelessWidget {

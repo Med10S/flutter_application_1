@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,10 +8,12 @@ import 'package:flutter_application_1/src/user_interface/main_page.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 import 'admin_interface/updateData.dart';
 import 'authentification/controllers/profil_controller.dart';
 import 'authentification/models/user_model.dart';
+import 'repository/user_repository/user_repository.dart';
 
 class BluetoothPage extends StatefulWidget {
   final String desiredAddress;
@@ -42,6 +45,8 @@ class _BluetoothPageState extends State<BluetoothPage> {
   late String _buffer = '';
   List<String> lines = [];
   final _Update = Get.put(Updatedata());
+  final userRepo = Get.put(UserRepository());
+  final _db = FirebaseFirestore.instance;
 
   Future<String> getRoleUser() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
@@ -263,6 +268,7 @@ class _BluetoothPageState extends State<BluetoothPage> {
             0; // 0 est une valeur par défaut si la clé n'existe pas
         int newResult = myIntValue + points;
         await prefs.setInt('points_loacal', newResult);
+        await storeValueWithDate(points);
         await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
         Navigator.push(
@@ -278,6 +284,28 @@ class _BluetoothPageState extends State<BluetoothPage> {
       print("points2 :$points");
     }
   }
+  Future<void> storeValueWithDate(int points) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  // Obtenir la date actuelle
+  DateTime currentDate = DateTime.now();
+  // Obtenir la liste de valeurs à partir des préférences partagées
+  List<Map<String, dynamic>> valueList =
+      (prefs.getStringList('value_list') ?? []).map((json) => Map<String, dynamic>.from(jsonDecode(json))).toList();
+  // Créer un nouveau Map avec la date et la valeur
+  Map<String, dynamic> newValueMap = {
+    'date': DateFormat('yyyy-MM-dd').format(currentDate),
+    'value': points,
+  };
+
+  // Ajouter le nouveau Map à la liste
+  valueList.add(newValueMap);
+
+  // Convertir la liste en JSON
+  List<String> valueListJson = valueList.map((map) => jsonEncode(map)).toList();
+
+  // Enregistrer la liste mise à jour dans les préférences partagées
+  await prefs.setStringList('value_list', valueListJson);
+}
 
   Future<void> _onDataReceivedAdmin(Uint8List data) async {
     String dataString = String.fromCharCodes(data);
@@ -298,6 +326,10 @@ class _BluetoothPageState extends State<BluetoothPage> {
             lines.add(chunk); // Ajouter la ligne à la liste
           }
         }
+
+/**apres que je recuper les ligne de donne depuis l'esp32
+*je donne cette liste de donne a la class updateDataProgress  */
+
         if(lines[0]!=""){
        await _Update.updateDataProgress(context,lines);
 
@@ -318,12 +350,20 @@ class _BluetoothPageState extends State<BluetoothPage> {
             colorText: Colors.black);
         try {
           int points = int.parse(message.split(";")[1]);
+          await storeValueWithDate(points);
+
           // Passer la valeur résolue à la classe BluetoothPage
           // Modifiez la valeur
+          double quantite = double.parse(message.split(";")[3]);
+//Bonjour mohammed vous avez recu ;12;points quatite :;2.2;poubelle:;3
+          int position = int.parse(message.split(";")[5]);
+          debugPrint("position $position quatite $quantite");
+          _updatedata(quantite,position);
           SharedPreferences prefs = await SharedPreferences.getInstance();
           int myIntValue = prefs.getInt('points_loacal') ?? 0; // 0 est une valeur par défaut si la clé n'existe pas
-          int new_result = myIntValue + points;
-          await prefs.setInt('points_loacal', new_result);
+          int newResult = myIntValue + points;
+          
+          await prefs.setInt('points_loacal', newResult);
           await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
           Navigator.push(
@@ -343,10 +383,34 @@ class _BluetoothPageState extends State<BluetoothPage> {
     }
     }
   }
+//-------------update des statistique --------------------
 
-  late void Function(int) onPointsUpdated;
-
-  // Cette fonction doit être appelée lorsque la valeur des points est mise à jour
+  void _updatedata(double quatite,int poubelle)async {
+    Future<String> usedId = getdata_from_here();
+    usedId.then((value) async {
+      String userIdFinal = value;
+      debugPrint('user id : $userIdFinal');
+// valeur résolue de l'ID utilisateur
+      await userRepo.createStatsCollection(userIdFinal, quatite, poubelle);
+    });
+  }
+  Future<String> getdata_from_here() async {
+    Future<dynamic> clientinfo = ProfileController().getUserData();
+    UserModel user2 = await clientinfo;
+    String mail = user2.email;
+    String userId = await getUserId(mail);
+    return userId;
+  }
+   Future<String> getUserId(String mail) async {
+    final snapshot =
+        await _db.collection("Users").where("Email", isEqualTo: mail).get();
+    if (snapshot.docs.isNotEmpty) {
+      return snapshot.docs[0].id;
+    } else {
+      return "erreur1";
+    }
+  }
+//--------------------------------------------------------------------------------------
 
   @override
   void dispose() {

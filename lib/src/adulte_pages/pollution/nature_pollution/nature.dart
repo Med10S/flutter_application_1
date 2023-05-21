@@ -5,7 +5,7 @@ import 'package:flutter_application_1/src/adulte_pages/pollution/definition/defi
 import 'package:flutter_application_1/src/adulte_pages/recyclage/recyclage.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 
-import '../../../../utilities/custum_dialog.dart';
+import '../../../../widgets/custum_dialog.dart';
 import '../../../../utilities/dimention.dart';
 
 // ignore: camel_case_types
