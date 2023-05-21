@@ -19,7 +19,10 @@ void main() {
   // WidgetsFlutterBinding.ensureInitialized();
 
   //debugPaintSizeEnabled = true;
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const MyApp());
+  });
 }
 
 //tesr245

@@ -10,7 +10,6 @@ import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../repository/authentification_repository/authentification_repository.dart';
 import 'code_scanner.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +34,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
   }
 
   int val = 0;
-  List<Map<String, dynamic>>? val2=List.empty();
+  List<Map<String, dynamic>>? val2 = List.empty();
   @override
   void initState() {
     super.initState();
@@ -49,8 +48,8 @@ class _User_Main_PageState extends State<User_Main_Page> {
     });
   }
 
-Future<void> _fetchDataHistoryque() async {
-    pointsList = await  getValueListFromSharedPreferences();
+  Future<void> _fetchDataHistoryque() async {
+    pointsList = await getValueListFromSharedPreferences();
   }
 
   Future<void> _fetchData() async {
@@ -92,7 +91,6 @@ Future<void> _fetchDataHistoryque() async {
     }
   }
 
-
   Future<String> getdata_from_here() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
@@ -111,7 +109,6 @@ Future<void> _fetchDataHistoryque() async {
     }
   }
 
-
   Future<int> getMyIntValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int myIntValue = prefs.getInt('points_loacal') ??
@@ -120,7 +117,7 @@ Future<void> _fetchDataHistoryque() async {
   }
 
   initaliserPoint() async {
-    ///pour renitialiser la donne enregister depuis le bluetooth a zero 
+    ///pour renitialiser la donne enregister depuis le bluetooth a zero
     ///cette fonction est appller dans intistate chaque 24h
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('points_loacal', 0);
@@ -193,57 +190,55 @@ Future<void> _fetchDataHistoryque() async {
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
 
-///j'utlise toujourd des FutureBuilder pour constuire le widget apres que les donnes arrivent
-            
+            ///j'utlise toujourd des FutureBuilder pour constuire le widget apres que les donnes arrivent
+
             child: SizedBox(
-  height: Dimenssion.height250dp / 1.08,
-  child: FutureBuilder<List<Map<String, dynamic>>>(
-    future: getValueListFromSharedPreferences(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.done) {
-        if (snapshot.hasData) {
-          List<Map<String, dynamic>> valueList = snapshot.data!;
+              height: Dimenssion.height250dp / 1.08,
+              child: FutureBuilder<List<Map<String, dynamic>>>(
+                future: getValueListFromSharedPreferences(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      List<Map<String, dynamic>> valueList = snapshot.data!;
 
-          return ListView.builder(
-            itemCount: valueList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                padding: EdgeInsets.only(top: Dimenssion.width16dp),
-                child: Material(
-                  color: Theme.of(context).primaryColorDark,
-                  borderRadius: BorderRadius.circular(20),
-                  child: ListTileTheme(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: itemBuilder(context, index),
-                  ),
-                ),
-              );
-            },
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text(snapshot.error.toString()),
-          );
-        } else {
-          return const Center(
-            child: Text("Something went wrong"),
-          );
-        }
-      } else {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    },
-  ),
-),
-
+                      return ListView.builder(
+                        itemCount: valueList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding: EdgeInsets.only(top: Dimenssion.width16dp),
+                            child: Material(
+                              color: Theme.of(context).primaryColorDark,
+                              borderRadius: BorderRadius.circular(20),
+                              child: ListTileTheme(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: itemBuilder(context, index),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error.toString()),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text("Something went wrong"),
+                      );
+                    }
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            ),
           ),
         ],
       ),
-      
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -419,11 +414,10 @@ Future<void> _fetchDataHistoryque() async {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-
-///pointsList est une list avec les donne de la date
-/// et les points elle se comporte comme un tableau 
-///donc je peux l'acceder avec [index] j'utliser ['date'] car les donnes sont 
-///enregistrer en format JONSON 
+            ///pointsList est une list avec les donne de la date
+            /// et les points elle se comporte comme un tableau
+            ///donc je peux l'acceder avec [index] j'utliser ['date'] car les donnes sont
+            ///enregistrer en format JONSON
 
             "${pointsList[index]['date']}",
             style: TextStyle(
@@ -450,29 +444,25 @@ Future<void> _fetchDataHistoryque() async {
       },
     );
   }
-/// cette fonction a pour but d'extraire les donne enregister depuis la class bluetooth car precedament
-/// j'ai enregister les points avec le timstamp dans une list de type Map<String, dynamic>>
- 
+
+  /// cette fonction a pour but d'extraire les donne enregister depuis la class bluetooth car precedament
+  /// j'ai enregister les points avec le timstamp dans une list de type Map<String, dynamic>>
+
   Future<List<Map<String, dynamic>>> getValueListFromSharedPreferences() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  // Obtenir la liste de valeurs à partir des préférences partagées
-  List<String>? valueListJson = prefs.getStringList('value_list');
+    // Obtenir la liste de valeurs à partir des préférences partagées
+    List<String>? valueListJson = prefs.getStringList('value_list');
 
-  if (valueListJson != null) {
-    // Convertir la liste JSON en une liste de Maps
-    List<Map<String, dynamic>> valueList = valueListJson
-        .map((json) => Map<String, dynamic>.from(jsonDecode(json)))
-        .toList();
+    if (valueListJson != null) {
+      // Convertir la liste JSON en une liste de Maps
+      List<Map<String, dynamic>> valueList = valueListJson
+          .map((json) => Map<String, dynamic>.from(jsonDecode(json)))
+          .toList();
 
-    return valueList;
+      return valueList;
+    }
+
+    return [];
   }
-
-  return [];
 }
-
-}
-
-
-
-
