@@ -6,7 +6,7 @@ import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/
 import 'package:flutter_application_1/src/adulte_pages/pollution/type_pollution/types.dart';
 
 import '../../../../utilities/dimention.dart';
-
+//done
 class SoilPollution extends StatelessWidget {
   const SoilPollution({super.key});
 
