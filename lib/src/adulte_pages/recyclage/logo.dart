@@ -147,39 +147,36 @@ class LogoRecyclage extends StatelessWidget {
                   },
                 ),
               ),
-              Positioned(
-                bottom: 10,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (_) => const R_3()));
-                          // Fonction appelée lors du clic sur le bouton
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                          size: Dimenssion.height40dp,
-                        )),
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (_) =>const Poubelle()));
-                          // Fonction appelée lors du clic sur le bouton
-                        },
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                          size: Dimenssion.height40dp,
-                        )),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (_) => const R_3()));
+                        // Fonction appelée lors du clic sur le bouton
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: Dimenssion.height40dp,
+                      )),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (_) =>const PoubelleRecyclage()));
+                        // Fonction appelée lors du clic sur le bouton
+                      },
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: Dimenssion.height40dp,
+                      )),
+                ],
               )
             
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/definition/definition.dart';
+import 'package:flutter_application_1/src/adulte_pages/pollution/sourse_pollution/Sources.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/recyclage.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 
@@ -92,7 +93,7 @@ class naturePollution extends StatelessWidget {
                   builder: (BuildContext context) {
                     return CustomDialog(
                         title: 'pollution physique',
-                        description:"",//, Strings.pollutionphysique,
+                        description:Strings.pollutionphysique,
                         buttonText: 'Close',
                         image: Image.asset('images/physique.png'),
                         isDark: isDark);
@@ -129,7 +130,7 @@ class naturePollution extends StatelessWidget {
                   SizedBox(
                     width: Dimenssion.width20dp,
                   ),
-                  const Text('pollution chimique2'),
+                  const Text('pollution chimique'),
                 ],
               ),
               onPressed: () {
@@ -138,7 +139,7 @@ class naturePollution extends StatelessWidget {
                   builder: (BuildContext context) {
                     return CustomDialog(
                         title: 'pollution chimique',
-                        description:"",// Strings.pollutionchimique,
+                        description:Strings.pollutionchimique,
                         buttonText: 'Close',
                         image: Image.asset('images/chimique.png'),
                         isDark: isDark);
@@ -184,7 +185,7 @@ class naturePollution extends StatelessWidget {
                   builder: (BuildContext context) {
                     return CustomDialog(
                         title: 'pollution biologique',
-                        description:"",// Strings.pollutionbio,
+                        description:Strings.pollutionbiologique,
                         buttonText: 'Close',
                         image: Image.asset('images/biologique.png'),
                         isDark: isDark);
@@ -200,7 +201,7 @@ class naturePollution extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (_) => const Recyclage()));
+                              builder: (_) => const definitionPolution()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(
@@ -213,7 +214,7 @@ class naturePollution extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (_) => const naturePollution()));
+                              builder: (_) => const Sources()));
                       // Fonction appelée lors du clic sur le bouton
                     },
                     child: Icon(

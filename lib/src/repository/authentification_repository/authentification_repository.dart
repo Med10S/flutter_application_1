@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/src/repository/authentification_repository/expections/signup_email_password_failure.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,7 +28,7 @@ class AuthentificationRepository extends GetxController {
 
   _setinitialScren(User? user) { 
      user == null
-        ? Get.offAll(() => const Welcome())
+        ? Get.offAll(() =>  MyScreen())
         : Get.offAll(() => User_Main_Page());
   }
 
@@ -35,7 +36,7 @@ class AuthentificationRepository extends GetxController {
     try {
     await _auth.createUserWithEmailAndPassword(email: email, password: password);
       firebaseUser.value != null
-          ? Get.offAll(() => User_Main_Page())
+          ? Get.offAll(() =>const User_Main_Page())
           : Get.offAll(() => const Welcome()
           );
           return true;   

@@ -202,40 +202,37 @@ class _R_3State extends State<R_3> {
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 10,
-                child: Row(
-                  
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (_) => const DefRecyclage()));
-                          // Fonction appelée lors du clic sur le bouton
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                          size: Dimenssion.height40dp,
-                        )),
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (_) =>LogoRecyclage()));
-                          // Fonction appelée lors du clic sur le bouton
-                        },
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                          size: Dimenssion.height40dp,
-                        )),
-                  ],
-                ),
+              Row(
+                
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (_) => const DefRecyclage()));
+                        // Fonction appelée lors du clic sur le bouton
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: Dimenssion.height40dp,
+                      )),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (_) =>LogoRecyclage()));
+                        // Fonction appelée lors du clic sur le bouton
+                      },
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: Dimenssion.height40dp,
+                      )),
+                ],
               )
             ],
                   ),

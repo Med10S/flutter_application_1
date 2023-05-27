@@ -162,14 +162,13 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
         if (r.device.address == widget.desiredAddress) {
           devices=(r.device);
+          _discoveryStreamSubscription?.cancel();    
+           // Arrêt de la recherche d'appareils
         }
       });
 
       // Attente de 10 secondes pour permettre la détection de l'appareil
-      await Future.delayed(const Duration(seconds: 10));
-
-      // Arrêt de la recherche d'appareils
-      _discoveryStreamSubscription?.cancel();
+      //await Future.delayed(const Duration(seconds: 10));
 
       if (devices==null) {
         // Aucun appareil trouvé, afficher une snackbar avec un message d'erreur
@@ -184,7 +183,6 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         setState(() {
           searching = false;
           connected = true;
-          _taskCompleted = true;
           _sendMessage();
           
         });
@@ -241,6 +239,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
             connection!.output
                 .add(Uint8List.fromList(utf8.encode("$message\n")));
             await connection!.output.allSent;
+            _taskCompleted = true;
+
           }
         } catch (e) {
           // Ignore error, but notify state
@@ -258,7 +258,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
   Future<void> _onDataReceivedUser(Uint8List data) async {
     String dataString = String.fromCharCodes(data);
     _buffer += dataString;
-    if (_buffer.contains('\n')) {
+    if (_buffer.contains('\n')) {//remplace \n avec & 
       final message = _buffer.replaceAll('\r', '').replaceAll('\n', '');
       _buffer = '';
       Get.snackbar("Message", message,

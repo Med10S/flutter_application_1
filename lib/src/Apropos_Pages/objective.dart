@@ -26,7 +26,7 @@ class Objective extends StatelessWidget {
                   fontSize: Dimenssion.width20dp),
             ),
             Text(
-              'Nous avons créé cette application pour sensibiliser les gens à l\'importance du tri des déchets et pour encourager l\'utilisation de poubelles intelligentes. Notre objectif est de contribuer à rendre notre planète plus propre et plus saine pour les générations futures',
+              'Nous avons créé cette application pour sensibiliser les gens à l\'importance du tri des déchets et pour encourager l\'utilisation de poubelles de trie. Notre objectif est de contribuer à rendre notre planète plus propre et plus saine pour les générations futures',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: Dimenssion.width16dp,

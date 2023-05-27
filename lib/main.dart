@@ -7,7 +7,7 @@ import 'package:flutter_application_1/src/repository/authentification_repository
 import 'package:flutter_application_1/utilities/routes_router/router.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main()  {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthentificationRepository()));
@@ -16,9 +16,7 @@ void main() {
       statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
       statusBarBrightness: Brightness.light,
       statusBarColor: Color.fromRGBO(47, 103, 23, 1)));
-  // WidgetsFlutterBinding.ensureInitialized();
-
-  //debugPaintSizeEnabled = true;
+   
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
@@ -62,7 +60,8 @@ class MyApp extends StatelessWidget {
             disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
                 borderSide:
-                    const BorderSide(color: Color.fromRGBO(47, 103, 23, 1)))),
+                    const BorderSide(color: Color.fromRGBO(47, 103, 23, 1)))
+        ),
       ),
       home: MyScreen(),
     );

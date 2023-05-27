@@ -28,7 +28,7 @@ class Strategie extends StatelessWidget {
                   fontSize: Dimenssion.width20dp),
             ),
             Text(
-              'L’application permet aux utilisateurs de se connecter et de visualiser une carte qui affiche les emplacements de nos poubelles intelligentes. Les utilisateurs pourront également consulter leur compte de points d\'achats accumulés grâce au tri de leurs déchets dans nos poubelles intelligentes.',
+              'L’application permet aux utilisateurs de se connecter où utilisateurs pourront consulter leur compte de points d\'achats accumulés grâce au tri de leurs déchets dans nos poubelles avec des statistiques de consomation des dechets pris en compte dans notre système .',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: Dimenssion.width16dp,

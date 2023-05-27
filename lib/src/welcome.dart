@@ -46,28 +46,34 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
      * clé unique utilisée pour identifier de manière unique un widget dans l'ensemble de
      *l'arborescence des widgets de l'application Flutter. 
       */
-    return GestureDetector(
-      key: UniqueKey(),
-      onVerticalDragUpdate: (details) {
-        // Get the vertical drag distance and direction
-        double distance = details.delta.dy;
-
-        SwipeDirection direction =
-            distance < 0 ? SwipeDirection.up : SwipeDirection.down;
-        const double SWIPE_THRESHOLD = 10.0;
-
-        // If the distance is greater than a certain threshold and the direction is up, trigger the swipe action
-        if (distance.abs() > SWIPE_THRESHOLD &&
-            direction == SwipeDirection.up) {
-          _animationController.forward(from: 0.0);
-          setState(() {
-            _swipedUp = true;
-            // Trigger the appropriate action, such as navigating to a different screen
-            // For example:
-          });
-        }
-      },
-      child: _swipedUp ? _buildSwipedUpWidget() : _buildInitialWidget(),
+    return WillPopScope(
+      onWillPop: () async {
+    // Empêcher le retour en arrière en renvoyant "false"
+    return false;
+  },
+      child: GestureDetector(
+        key: UniqueKey(),
+        onVerticalDragUpdate: (details) {
+          // Get the vertical drag distance and direction
+          double distance = details.delta.dy;
+    
+          SwipeDirection direction =
+              distance < 0 ? SwipeDirection.up : SwipeDirection.down;
+          const double SWIPE_THRESHOLD = 10.0;
+    
+          // If the distance is greater than a certain threshold and the direction is up, trigger the swipe action
+          if (distance.abs() > SWIPE_THRESHOLD &&
+              direction == SwipeDirection.up) {
+            _animationController.forward(from: 0.0);
+            setState(() {
+              _swipedUp = true;
+              // Trigger the appropriate action, such as navigating to a different screen
+              // For example:
+            });
+          }
+        },
+        child: _swipedUp ? _buildSwipedUpWidget() : _buildInitialWidget(),
+      ),
     );
   }
 
