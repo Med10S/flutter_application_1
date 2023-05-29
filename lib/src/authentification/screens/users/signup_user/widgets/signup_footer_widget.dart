@@ -10,35 +10,21 @@ class SignUpFooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text("OR"),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton.icon(
-            onPressed: () {},
-            icon: const Image(
-              image: AssetImage("images/google.png"),
-              width: 20.0,
-            ),
-            label: Text("SignIn With Google".toUpperCase()),
+    return Center(
+      child: TextButton(
+        onPressed: () {Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => const LoginScreen(),
+                            ));},
+        child: Text.rich(TextSpan(children: [
+          TextSpan(
+            text: "Already Have An Account ",
+            style: Theme.of(context).textTheme.bodySmall,
           ),
-        ),
-        TextButton(
-          onPressed: () {Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => LoginScreen(),
-                              ));},
-          child: Text.rich(TextSpan(children: [
-            TextSpan(
-              text: "Already Have An Account ",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            TextSpan(text: "Login".toUpperCase())
-          ])),
-        )
-      ],
+          TextSpan(text: "Login".toUpperCase())
+        ])),
+      ),
     );
   }
 }

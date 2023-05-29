@@ -11,6 +11,8 @@ class AppRoutes {
   static const String poubelle = "/Poubelle";
   static const String dureeRecyclage = "/DureeRecyclage";
   static const String whyRecyclage = "/whyRecyclage";
-
+  static const String mainuserpage="/mainuserpage";
+  static const String apropos="/Apropos";
+  static const String education="/Education";
 
 }

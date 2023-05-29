@@ -40,11 +40,7 @@ class Strategie extends StatelessWidget {
                 height: Dimenssion.height45dp,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (_) => const Welcome(),
-                        ));
+                    Navigator.of(context).pop(true);
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(247, 191, 95, 1),

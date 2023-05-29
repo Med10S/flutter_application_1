@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/src/user_interface/main_page.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
@@ -85,7 +86,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
     connectToDevice();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
     _animation = Tween(begin: 0.0, end: 2.0 * pi).animate(_animationController);
   
@@ -97,7 +98,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
     }
     await _requestPermission();
   }
-
+//requestPermission to enabele bluetooth
   Future<bool> _requestPermission() async {
     final isGranted = await FlutterBluetoothSerial.instance.requestEnable();
 
@@ -149,6 +150,9 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
     }
   }
 
+
+
+
   void connectToDevice() async {
     if (!mounted) return;
 
@@ -157,20 +161,21 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
     });
     try {
       // Recherche des appareils Bluetooth disponibles
-     late BluetoothDevice devices ;
+     List <BluetoothDevice> devices=[] ;
       _discoveryStreamSubscription =
           FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
+            debugPrint("devise adress is :${r.device.address}");
         if (r.device.address == widget.desiredAddress) {
-          devices=(r.device);
-          _discoveryStreamSubscription?.cancel();    
+          devices.add(r.device);
            // Arrêt de la recherche d'appareils
+        _discoveryStreamSubscription?.cancel();    
+
         }
       });
 
-      // Attente de 10 secondes pour permettre la détection de l'appareil
-      //await Future.delayed(const Duration(seconds: 10));
+      await Future.delayed(const Duration(seconds: 10));
 
-      if (devices==null) {
+      if (devices.isEmpty) {
         // Aucun appareil trouvé, afficher une snackbar avec un message d'erreur
         ScaffoldMessenger.of(_scaffoldKey.currentContext!)
             .showSnackBar(SnackBar(
@@ -218,7 +223,14 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         });
       }
     } catch (ex) {
-      
+      Fluttertoast.showToast(
+        msg: ex.toString(),
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
       connectToDevice();
     }
   }
@@ -239,7 +251,6 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
             connection!.output
                 .add(Uint8List.fromList(utf8.encode("$message\n")));
             await connection!.output.allSent;
-            _taskCompleted = true;
 
           }
         } catch (e) {
@@ -258,7 +269,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
   Future<void> _onDataReceivedUser(Uint8List data) async {
     String dataString = String.fromCharCodes(data);
     _buffer += dataString;
-    if (_buffer.contains('\n')) {//remplace \n avec & 
+    if (_buffer.contains('&')) { 
       final message = _buffer.replaceAll('\r', '').replaceAll('\n', '');
       _buffer = '';
       Get.snackbar("Message", message,
@@ -278,6 +289,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         await storeValueWithDate(points);
         await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
+        _taskCompleted = true;
+
         Navigator.push(
             context,
             CupertinoPageRoute(
@@ -317,14 +330,14 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
   Future<void> _onDataReceivedAdmin(Uint8List data) async {
     String dataString = String.fromCharCodes(data);
     _buffer += dataString;
-    if (_buffer.contains('\n')) {
+    if (_buffer.contains('&')) {
       final message = _buffer.replaceAll('\r', '').replaceAll('\n', '');
       _buffer = '';
       if (widget.extraction == true) {
         Get.snackbar("Message", "extraction en cours ....",
             borderRadius: 20,
             snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Color.fromARGB(255, 109, 118, 247),
+            backgroundColor: const Color.fromARGB(255, 109, 118, 247),
             colorText: Colors.black);
         List<String> chunks = message.split("&"); // Séparer les lignes
         for (var chunk in chunks) {
@@ -345,7 +358,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         }
         await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
-        
+        _taskCompleted = true;
+
         for (int i = 0; i < lines.length; i++) {
           print("recieve${lines[i]}");}
           
@@ -355,6 +369,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
             snackPosition: SnackPosition.TOP,
             backgroundColor: const Color.fromARGB(255, 151, 255, 154),
             colorText: Colors.black);
+
         try {
           int points = int.parse(message.split(";")[1]);
           await storeValueWithDate(points);
@@ -371,8 +386,11 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           int newResult = myIntValue + points;
           
           await prefs.setInt('points_loacal', newResult);
+           _taskCompleted = true;
+
           await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
+
           Navigator.push(
               context,
               CupertinoPageRoute(
@@ -438,12 +456,12 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text('Tâche en cours'),
+                  title: const Text('Tâche en cours'),
                   content:
-                      Text('Veuillez attendre que la tâche soit terminée.'),
+                      const Text('Veuillez attendre que la tâche soit terminée.'),
                   actions: [
                     ElevatedButton(
-                      child: Text('OK'),
+                      child: const Text('OK'),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ],
@@ -465,7 +483,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-      Text("searching...".toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold),),
+      Text("searching...".toUpperCase(),style: const TextStyle(fontWeight: FontWeight.bold),),
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -479,7 +497,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
                           painter: ColorCirclePainter(
                             animationValue: _animation.value,
                             startColor: Colors.green,
-                            endColor: Color.fromARGB(255, 39, 180, 223),
+                            endColor: const Color.fromARGB(255, 39, 180, 223),
                           ),
                         );
                       },

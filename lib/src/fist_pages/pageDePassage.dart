@@ -25,34 +25,23 @@ class _MyScreenState extends State<MyScreen> {
     super.initState();
     checkFirstRun();
   }
-  Future<bool>? checkFirstRun() async {
+  void checkFirstRun() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     isFirstRun = prefs.getBool('isFirstRun') ?? true;
-return isFirstRun;
+    redirectToHomePage();
    
   }
   void redirectToHomePage() {
+    if(!isFirstRun){
+  
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Welcome()));
-
+    }
    
   }
     @override
-
- Widget build(BuildContext context) {
+Widget build(BuildContext context) {
   return Scaffold(
-    body: FutureBuilder<bool>(
-      future: checkFirstRun(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text('Error: ${snapshot.error}'),
-          );
-        } else if (snapshot.data == true) {
-          return Column(
+    body: Column(
             children: [
               Expanded(
                 child: PageView(
@@ -79,20 +68,11 @@ return isFirstRun;
                 ),
               ),
             ],
-          );
-        } else {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Welcome()),
-            );
-          });
-          return Container(); // Placeholder widget
-        }
-      },
-    ),
+          )
+        
   );
 }
+
 
 
 }

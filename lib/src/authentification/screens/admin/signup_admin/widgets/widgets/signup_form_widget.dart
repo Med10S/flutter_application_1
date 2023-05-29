@@ -10,10 +10,17 @@ import 'package:get/get_core/src/get_main.dart';
 
 import 'package:flutter_application_1/utilities/dimention.dart';
 
-class SignUpFormWidget extends StatelessWidget {
+class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<SignUpFormWidget> createState() => _SignUpFormWidgetState();
+}
+
+class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+    bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +45,8 @@ class SignUpFormWidget extends StatelessWidget {
                 // Retourne null si la validation est réussie
                 return null;
               },
+              obscureText:false,
+
               controller: _textController1,
               decoration: const InputDecoration(
                   label: Text("clé"),
@@ -91,11 +100,20 @@ class SignUpFormWidget extends StatelessWidget {
                 return null;
               },
               controller: controller.password,
-              decoration: const InputDecoration(
-                  label: Text("Password"),
-                  prefixIcon:
-                      Icon(Icons.fingerprint, color: Mcolors.couleurPrincipal),
-                  border: OutlineInputBorder()),
+              decoration:  InputDecoration(
+                prefixIcon: Icon(Icons.fingerprint,color: Mcolors.couleurPrincipal),
+                labelText: "Password",
+                hintText: "Password",
+                border:const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+        ),
+              ),
             ),
             const SizedBox(height: 30 - 10),
             SizedBox(
@@ -118,6 +136,7 @@ class SignUpFormWidget extends StatelessWidget {
                           password: controller.password.text.trim(),
                           fullName: controller.fullName.text.trim(),
                           points: 0,
+                          niveau: "admin",
                           role: 'admin');
                       SignUpController.instance.createUser(admin);
                     } else {

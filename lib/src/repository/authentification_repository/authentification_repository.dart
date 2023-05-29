@@ -7,8 +7,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../authentification/screens/admin/admin_main_page.dart';
+import '../../authentification/screens/email_verfication.dart';
 import '../../user_interface/main_page.dart';
 import '../../welcome.dart';
+import 'expections/EmailVArficationExrption.dart';
 import 'expections/loging_email_password_failure.dart';
 
 class AuthentificationRepository extends GetxController {
@@ -19,17 +21,45 @@ class AuthentificationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
 
+  
+
   @override
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setinitialScren);
+    setinitialScren(firebaseUser.value);
+    //ever(firebaseUser, _setinitialScren);
   }
 
-  _setinitialScren(User? user) { 
+  setinitialScren(User? user) { 
      user == null
         ? Get.offAll(() =>  MyScreen())
-        : Get.offAll(() => User_Main_Page());
+        :user.emailVerified ? Get.offAll(() => User_Main_Page()): Get.offAll(() => MailVerification());
+  }
+
+  Future<void> sendEmailVerfication()async{
+    try{_auth.currentUser?.sendEmailVerification();
+    }on FirebaseAuthException catch(e){
+      final ex = EmailVerificationException.fromCode(e.code);
+      Fluttertoast.showToast(
+        msg: ex.message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }catch(_){
+      const ex = EmailVerificationException();
+      Fluttertoast.showToast(
+        msg: ex.message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
   }
 
   Future<bool> createUserWithEmailAndPassword(String email, String password) async {

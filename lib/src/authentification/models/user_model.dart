@@ -7,6 +7,7 @@ class UserModel {
   final String password;
   final int points;
   final String role;
+  final String niveau;
 
 
   const UserModel({
@@ -16,6 +17,7 @@ class UserModel {
     required this.fullName,
     required this.points,
     required this.role,
+    required this.niveau,
   });
     
     
@@ -26,6 +28,7 @@ class UserModel {
       "Password": password,
       "points": points,
       "role": role,
+      "niveau": niveau,
     };
   }
   factory UserModel.fromSnapshot(
@@ -37,6 +40,7 @@ class UserModel {
         password: data["Password"],
         role: data["role"],
         fullName: data["FullName"],
-        points: data["points"]);
+        points: data["points"],
+        niveau:data["niveau"]);
   }
 }

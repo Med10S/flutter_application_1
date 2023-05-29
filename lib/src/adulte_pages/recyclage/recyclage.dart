@@ -30,7 +30,7 @@ class Recyclage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Navigator.push(context, CupertinoPageRoute(
-                                  builder: (_) => const firstPage(),
+                                  builder: (_) => const Education(),
                                 ));
                     },
                     child: const Icon(Icons.arrow_back_ios_new,color: Colors.white,),)

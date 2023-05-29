@@ -34,7 +34,7 @@ class Pollution extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (_) => const firstPage(),
+                            builder: (_) => const Education(),
                           ));
                     },
                     child: const Icon(

@@ -138,7 +138,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => firstPage(),
+                                builder: (_) => Education(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(
@@ -207,7 +207,7 @@ class _WelcomeState extends State<Welcome> with SingleTickerProviderStateMixin {
   Widget _buildSwipedUpWidget() {
     return FadeTransition(
       opacity: _animation,
-      child: MyScreen2(), // Your swiped-up widget here
+      child: Apropos(), // Your swiped-up widget here
     );
   }
 }

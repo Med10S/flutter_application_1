@@ -1,110 +1,287 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class compte extends StatefulWidget {
+import '../../colors/colors.dart';
+import '../../widgets/botton.dart';
+import '../authentification/controllers/profil_controller.dart';
+import '../authentification/models/user_model.dart';
+import '../repository/authentification_repository/authentification_repository.dart';
+import 'chart2.dart';
+import 'code_scanner.dart';
+import 'main_page.dart';
+
+class AccountScreen extends StatefulWidget {
+  const AccountScreen({Key? key}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _AccountScreenState createState() => _AccountScreenState();
 }
 
-class _MyHomePageState extends State<compte> {
-    final _formKey = GlobalKey<FormState>();
+class _AccountScreenState extends State<AccountScreen> {
+  UserModel? _userModel;
+  final _db = FirebaseFirestore.instance;
 
-  final TextEditingController _textController1 = TextEditingController();
-  final TextEditingController _textController2 = TextEditingController();
-  final TextEditingController _textController3 = TextEditingController();
-  final TextEditingController _textController4 = TextEditingController();
-  final TextEditingController _textController5 = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    userInformation();
+  }
+
+  Future<void> userInformation() async {
+    final userModel = await ProfileController().getUserData();
+    setState(() {
+      _userModel = userModel;
+    });
+  }
+  Future<String> getdata_from_here() async {
+    Future<dynamic> clientinfo = ProfileController().getUserData();
+    UserModel user2 = await clientinfo;
+    String mail = user2.email;
+    String userId = await getUserId(mail);
+    return userId;
+  }
+
+  Future<String> getUserId(String mail) async {
+    final snapshot =
+        await _db.collection("Users").where("Email", isEqualTo: mail).get();
+    if (snapshot.docs.isNotEmpty) {
+      return snapshot.docs[0].id;
+    } else {
+      return "erreur1";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Champs de saisie d\'entiers'),
-      ),
-      body: Form(
-        key: _formKey,
+        final controller = Get.put(ProfileController());
 
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _textController1,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Champ 1'),
-                validator: (value) {
-                  if (value!.isEmpty) return 'Veuillez entrer une valeur';
-                  int? parsedValue = int.tryParse(value);
-                  if (parsedValue == null) return 'Veuillez entrer un nombre entier';
-                  return null;
-                },
+    return SafeArea(
+      child: Scaffold(
+      
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 5,
+        shape: const CircularNotchedRectangle(),
+        color: Theme.of(context).primaryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => User_Main_Page(),
+                            ));
+                      },
+                      child: Image.asset("images/home.png")),
+                  const Text(
+                    "home",
+                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                  )
+                ],
               ),
-              TextFormField(
-                controller: _textController2,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Champ 2'),
-                validator: (value) {
-                  // Validation personnalisée pour le champ 2
-                  // Retourne une chaîne de caractères d'erreur si la validation échoue, sinon retourne null
-                  // Vous pouvez personnaliser cette validation pour chaque champ de saisie
-                  // en modifiant cette fonction de rappel (validator)
-                  return null;
-                },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Future<String> usedId = getdata_from_here();
+                        usedId.then((value) async {
+                          String userIdFinal = value;
+                          debugPrint('user id : $userIdFinal');
+// valeur résolue de l'ID utilisateur
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) =>
+                                    ChartDays(userIdFinal: userIdFinal),
+                              ));
+                        });
+                      },
+                      child: Image.asset("images/chart.png")),
+                  const Text(
+                    "Statistique",
+                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                  )
+                ],
               ),
-              TextFormField(
-                controller: _textController3,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Champ 3'),
-                validator: (value) {
-                  // Validation personnalisée pour le champ 3
-                  return null;
-                },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                      onTap: () {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (_) => const QRScan(
+                  extraction: false,
+                ),
+              ));
+        },
+                      child: Image.asset('images/QR.png')),
+                  const Text(
+                    "QR Scaner",
+                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                  )
+                ],
               ),
-              TextFormField(
-                controller: _textController4,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Champ 4'),
-                validator: (value) {
-                  // Validation personnalisée pour le champ 4
-                  return null;
-                },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        AuthentificationRepository.instance.logout();
+                      },
+                      child: Image.asset("images/EXIT.png")),
+                  const Text(
+                    "Sortir",
+                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                  )
+                ],
               ),
-              TextFormField(
-                controller: _textController5,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Champ 5'),
-                validator: (value) {
-                  // Validation personnalisée pour le champ 5
-                  return null;
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Valider les champs de texte
-                  if (_formKey.currentState!.validate()) {
-                    // Utiliser les valeurs saisies dans les champs de texte
-                     int champ1 = int.parse(_textController1.text);
-                    int champ2 = int.parse(_textController2.text);
-                    int champ3 = int.parse(_textController3.text);
-                    int champ4 = int.parse(_textController4.text);
-                    int champ5 = int.parse(_textController5.text);
-        
-                    // Utiliser les valeurs saisies dans les champs de texte
-                    // Faites ce que vous voulez avec les valeurs entières ici
-                    // Vous pouvez les utiliser pour effectuer des calculs, les afficher, etc.
-        
-                    // Exemple d'utilisation :
-                    print('Champ 1 : $champ1');
-                    print('Champ 2 : $champ2');
-                    print('Champ 3 : $champ3');
-                    print('Champ 4 : $champ4');
-                    print('Champ 5 : $champ5');
-                  }
-                },
-                child: Text('Valider'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
+    
+              backgroundColor: Theme.of(context).primaryColor,
+    
+        
+        body: _userModel != null ? buildUserInfo() : buildLoading(),
+      ),
+    );
+  }
+
+ Widget buildUserInfo() {
+  return Column(
+    children: [
+      Container(
+            padding: EdgeInsets.only(top:Dimenssion.height20dp/2),
+
+        height: Dimenssion.height55dp*2,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20.0),
+            bottomRight: Radius.circular(20.0),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Profile Detail",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Dimenssion.width16dp * 1.5,
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Container(
+                  padding: EdgeInsets.symmetric( horizontal:Dimenssion.height20dp/1.2 ),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Hello"),
+                      Text(_userModel!.fullName,style: TextStyle(fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  InkWell(
+                    onTap: () {Fluttertoast.showToast(
+        msg: "pas encore!!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );},
+                    child: CircleAvatar(
+                      child: Icon(Icons.edit),
+                      backgroundColor: Theme.of(context).focusColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+                  SizedBox(height: 20.0),
+
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: CustomButton(text: "Acceuil",root: "/mainuserpage",),
+        ),
+      Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: CustomButton(text: "A propos de nous",root: "/Apropos",),
+        ),Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: CustomButton(text: "Education",root: "/Education",),
+        ),
+       Padding(
+         padding: const EdgeInsets.all(4.0),
+         child: SizedBox(
+            height: Dimenssion.height55dp,
+            child: ElevatedButton(
+              onPressed:(){
+                AuthentificationRepository.instance.logout();
+                },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Mcolors.Cbackground,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20))),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: Dimenssion.width30dp / 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Se déconecter",
+                      style: TextStyle(
+                          color: Colors.red, fontSize: Dimenssion.width16dp),
+                    ),
+                    const Icon(Icons.arrow_forward_ios, color: Colors.black),
+                  ],
+                ),
+              ),
+            ),
+          ),
+       ),
+       
+    ],
+  );
+}
+
+
+
+  Widget buildLoading() {
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

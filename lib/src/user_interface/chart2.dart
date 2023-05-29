@@ -209,7 +209,7 @@ class ChartDaysState extends State<ChartDays> {
               future: _chartDataFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else {
@@ -224,7 +224,7 @@ class ChartDaysState extends State<ChartDays> {
                         position: LegendPosition.bottom),
                     series: <CircularSeries>[
                       RadialBarSeries<quatitedechet, String>(
-                        maximumValue: 10,
+                        maximumValue: 300,
                         dataSource: _chartData,
                         legendIconType: LegendIconType.seriesType,
                         cornerStyle: CornerStyle.bothCurve,

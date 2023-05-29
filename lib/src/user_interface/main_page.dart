@@ -14,6 +14,8 @@ import '../repository/authentification_repository/authentification_repository.da
 import 'code_scanner.dart';
 import 'package:intl/intl.dart';
 
+import 'compte.dart';
+
 class User_Main_Page extends StatefulWidget {
   const User_Main_Page({super.key});
 
@@ -358,6 +360,11 @@ class _User_Main_PageState extends State<User_Main_Page> {
                           } else {
                             return InkWell(
                               onTap: () {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (_) => const AccountScreen()
+));
                                 Get.snackbar("next page", "utlisateur info");
                               },
                               child: Column(

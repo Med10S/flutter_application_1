@@ -8,8 +8,8 @@ import '../../utilities/dimention.dart';
 import 'pollution/Pollution.dart';
 //done
 // ignore: camel_case_types
-class firstPage extends StatelessWidget {
-  const firstPage({super.key});
+class Education extends StatelessWidget {
+  const Education({super.key});
 
   @override
   Widget build(BuildContext context) {

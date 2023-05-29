@@ -9,11 +9,56 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../login_user/Login_screen.dart';
 import '../../../../../user_interface/main_page.dart';
 
-class SignUpFormWidget extends StatelessWidget {
+class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<SignUpFormWidget> createState() => _SignUpFormWidgetState();
+}
+
+class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+    bool _obscureText = true;
+    String selectedText="cp1";
+     late TextEditingController _textEditingController;
+  late ValueNotifier<String> _selectedTextNotifier;
+
+
+  List<String> texts = [
+    "cp1",
+    "cp2",
+    "INFO1",
+    "INFO2",
+    "INDUS1",
+    "INDUS2",
+    "GMSA1",
+    "GMSA2",  
+    "GESI1",
+    "GESI2",
+    "GTR1",
+    "GTR2",
+    "SEII1",
+    "SEII2"
+  ];
+@override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController();
+    _selectedTextNotifier = ValueNotifier<String>(texts[0]);
+
+    _textEditingController.text = texts[0]; // Initialiser le contrôleur avec la première valeur
+
+    _selectedTextNotifier.addListener(() {
+      _textEditingController.text = _selectedTextNotifier.value;
+    });
+  }
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    _selectedTextNotifier.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
@@ -41,6 +86,11 @@ class SignUpFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: 30 - 20),
             TextFormField(
+               validator:(value) {
+                if(value==''){
+                  return 'le champ est vide';
+                }
+              },
               controller: controller.email,
               decoration: const InputDecoration(
                   label: Text("Email"),
@@ -51,14 +101,59 @@ class SignUpFormWidget extends StatelessWidget {
             const SizedBox(height: 30 - 20),
             TextFormField(
               controller: controller.password,
-              decoration:const  InputDecoration(
-                  label: Text("Password"),
-                  prefixIcon:
-                      Icon(Icons.fingerprint, color: Mcolors.couleurPrincipal),
-                  border: OutlineInputBorder()),
+              obscureText:_obscureText,
+              validator: (value) {
+                // Validation de la valeur du champ de texte
+                if (value == '') {
+                  return 'Le champ est vide'; // Message d'erreur en cas de champ vide
+                } else if (value!.length < 6) {
+                  return 'il doit contenir au moin 6 caracter';
+                }
+                // Retourne null si la validation est réussie
+                return null;
+              },
+              decoration:  InputDecoration(
+                prefixIcon: Icon(Icons.fingerprint,color: Mcolors.couleurPrincipal),
+                labelText: "Password",
+                hintText: "Password",
+                border:const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+        ),
+              ),
             ),
+            const SizedBox(height: 30 - 20),
+
+            DropdownButtonFormField<String>(
+              
+          value: _selectedTextNotifier.value,
+          decoration:  const InputDecoration(
+                prefixIcon: Icon(Icons.school,color: Mcolors.couleurPrincipal),
+                
+                border: OutlineInputBorder(),
+               
+              ),
+          hint: const Text('Sélectionnez un texte'),
+          onChanged: (String? newValue) {
+            setState(() {
+              _selectedTextNotifier.value = newValue!;
+              
+            });
+          },
+          items: texts.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList()),
             const SizedBox(height: 30 - 10),
             SizedBox(
+
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
@@ -72,6 +167,7 @@ class SignUpFormWidget extends StatelessWidget {
                         password: controller.password.text.trim(),
                         fullName: controller.fullName.text.trim(),
                         role: 'user',
+                        niveau: _textEditingController.text.trim(),
                         points: 0);
                         SignUpController.instance.createUser(user);
                         }else{ _forKey.currentState!.validate()==false;}

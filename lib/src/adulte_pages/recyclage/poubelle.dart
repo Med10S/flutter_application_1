@@ -63,7 +63,7 @@ class PoubelleRecyclage extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).canvasColor),
+                            Colors.red),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -93,7 +93,7 @@ class PoubelleRecyclage extends StatelessWidget {
                               title: 'Les metaux',
                               description: Strings.poubelleRouge,
                               buttonText: 'Close',
-                              image: Image.asset('images/metal.png'),
+                              image: Image.asset('images/metals.png'),
                               isDark: isDark,
                             );
                           },
@@ -103,7 +103,7 @@ class PoubelleRecyclage extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).canvasColor),
+                            Colors.green),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -140,7 +140,7 @@ class PoubelleRecyclage extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).canvasColor),
+                            Color.fromARGB(255, 13, 110, 189)),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -178,7 +178,7 @@ class PoubelleRecyclage extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).canvasColor),
+                            Colors.yellow),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -206,7 +206,7 @@ class PoubelleRecyclage extends StatelessWidget {
                               title: 'Le plastique',
                               description: Strings.poubelleJaune,
                               buttonText: 'Close',
-                              image: Image.asset('images/plastic.png'),
+                              image: Image.asset('images/plastic1.png'),
                               isDark: isDark,
                             );
                           },
@@ -216,7 +216,7 @@ class PoubelleRecyclage extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).canvasColor),
+                            Colors.grey),
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -244,7 +244,7 @@ class PoubelleRecyclage extends StatelessWidget {
                               title: 'Autre',
                               description: Strings.poubelleGrise,
                               buttonText: 'Close',
-                              image: Image.asset('images/organic.png'),
+                              image: Image.asset('images/compost.png'),
                               isDark: isDark,
                             );
                           },

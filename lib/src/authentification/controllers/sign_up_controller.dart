@@ -21,9 +21,10 @@ class SignUpController extends GetxController{
   Future<bool> registerUser(String email,String password){
    return AuthentificationRepository.instance.createUserWithEmailAndPassword(email, password);
   }
-  
+  final auth = AuthentificationRepository.instance;
   Future<void> createUser(UserModel user) async {
     await userRepo.createUser(user);
+    auth.setinitialScren(auth.firebaseUser.value );
     //registerUser(user.email, user.password);
     Get.to(()=> User_Main_Page());
   }

@@ -72,7 +72,7 @@ Future<DechetModel> getStatsForDay(String userId, String day) async {
   if (!statsDoc.exists) {
     return const DechetModel(
     carton: 0,
-    metale: 20,
+    metale: 0,
     organique: 0,
     plastique: 0,
     verre: 0,

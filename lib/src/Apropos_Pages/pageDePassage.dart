@@ -8,12 +8,12 @@ import 'package:flutter_application_1/src/Apropos_Pages/stategie.dart';
 final List<Widget> pages = [const Equipe(), const Objective(), const Strategie()];
 
 // Dans le widget de votre écran, ajoutez un PageView et un DotsIndicator
-class MyScreen2 extends StatefulWidget {
+class Apropos extends StatefulWidget {
   @override
   _MyScreenState createState() => _MyScreenState();
 }
 
-class _MyScreenState extends State<MyScreen2> {
+class _MyScreenState extends State<Apropos> {
   int _currentPageIndex = 0;
 
   @override

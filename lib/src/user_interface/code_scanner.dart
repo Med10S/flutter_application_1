@@ -5,11 +5,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/Bluetooth_page.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/user_model.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
+import 'compte.dart';
 import 'main_page.dart';
 import 'dart:async';
 
@@ -109,7 +111,14 @@ class _QRScanState extends State<QRScan> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset("images/info_client.png"),
+                    InkWell(onTap: () {
+                       Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (_) => const AccountScreen()
+));
+                    },
+                      child: Image.asset("images/info_client.png")),
                     const Text(
                       "Compte",
                       style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
@@ -227,10 +236,12 @@ class _QRScanState extends State<QRScan> {
       setState(() {
         result = scanData;
         controller.pauseCamera();
+        
         String desiredAddress = result!.code!.split(";")[0];
         String poubelle = result!.code!.split(";")[1];
         print(desiredAddress + "poubelle :" + poubelle);
         Future<String> used_id = getdata_from_here();
+       
         used_id.then((value) {
           String userIdFinal = value; // valeur résolue de l'ID utilisateur
           
@@ -240,10 +251,14 @@ class _QRScanState extends State<QRScan> {
                 builder: (_) => BluetoothPage(
                   desiredAddress: desiredAddress,
                   scandata: poubelle,
-                  userid: userIdFinal, extraction: widget.extraction,
+                  userid: userIdFinal, 
+                  extraction: widget.extraction,
                 ),
               ));
-        });
+        }
+        );
+        
+        
       });
     });
   }

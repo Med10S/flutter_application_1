@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,10 @@ class LoginController extends GetxController{
 
   
   Future<void> loginUser(String email,String password) async{
-    String? error = await AuthentificationRepository.instance.loginWithEmailAndPassword(email, password);
+    final auth = AuthentificationRepository.instance;
+    String? error = await auth.loginWithEmailAndPassword(email, password);
+    auth.setinitialScren(auth.firebaseUser.value);
+
      if(error != null) {
       Get.showSnackbar(GetSnackBar(message: error.toString(),));
     }
