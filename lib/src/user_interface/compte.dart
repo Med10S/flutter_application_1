@@ -1,10 +1,16 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/welcome.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:flutter_application_1/utilities/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../colors/colors.dart';
 import '../../widgets/botton.dart';
@@ -38,6 +44,7 @@ class _AccountScreenState extends State<AccountScreen> {
       _userModel = userModel;
     });
   }
+
   Future<String> getdata_from_here() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
@@ -58,208 +65,349 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-        final controller = Get.put(ProfileController());
+    final controller = Get.put(ProfileController());
 
     return SafeArea(
       child: Scaffold(
-      
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 5,
-        shape: const CircularNotchedRectangle(),
-        color: Theme.of(context).primaryColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => User_Main_Page(),
-                            ));
-                      },
-                      child: Image.asset("images/home.png")),
-                  const Text(
-                    "home",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
-                ],
+        bottomNavigationBar: BottomAppBar(
+          notchMargin: 5,
+          shape: const CircularNotchedRectangle(),
+          color: Theme.of(context).primaryColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) => const User_Main_Page(),
+                              ));
+                        },
+                        child: Image.asset("images/home.png")),
+                    const Text(
+                      "home",
+                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        Future<String> usedId = getdata_from_here();
-                        usedId.then((value) async {
-                          String userIdFinal = value;
-                          debugPrint('user id : $userIdFinal');
+              Padding(
+                padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Future<String> usedId = getdata_from_here();
+                          usedId.then((value) async {
+                            String userIdFinal = value;
+                            debugPrint('user id : $userIdFinal');
 // valeur résolue de l'ID utilisateur
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (_) =>
+                                      ChartDays(userIdFinal: userIdFinal),
+                                ));
+                          });
+                        },
+                        child: Image.asset("images/chart.png")),
+                    const Text(
+                      "Statistique",
+                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) => const QRScan(
+                                  extraction: false,
+                                ),
+                              ));
+                        },
+                        child: Image.asset('images/QR.png')),
+                    const Text(
+                      "QR Scaner",
+                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          AuthentificationRepository.instance.logout();
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
                                 builder: (_) =>
-                                    ChartDays(userIdFinal: userIdFinal),
+                                    PrivacyPolicyPage(), //LoginScreen(),
                               ));
-                        });
-                      },
-                      child: Image.asset("images/chart.png")),
-                  const Text(
-                    "Statistique",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                      onTap: () {
-          Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (_) => const QRScan(
-                  extraction: false,
+                        },
+                        child: Image.asset("images/EXIT.png")),
+                    const Text(
+                      "Sortir",
+                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                    )
+                  ],
                 ),
-              ));
-        },
-                      child: Image.asset('images/QR.png')),
-                  const Text(
-                    "QR Scaner",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
-                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        AuthentificationRepository.instance.logout();
-                      },
-                      child: Image.asset("images/EXIT.png")),
-                  const Text(
-                    "Sortir",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    
-              backgroundColor: Theme.of(context).primaryColor,
-    
-        
+        backgroundColor: Theme.of(context).primaryColor,
         body: _userModel != null ? buildUserInfo() : buildLoading(),
       ),
     );
   }
 
- Widget buildUserInfo() {
-  return Column(
-    children: [
-      Container(
-            padding: EdgeInsets.only(top:Dimenssion.height20dp/2),
-
-        height: Dimenssion.height55dp*2,
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20.0),
-            bottomRight: Radius.circular(20.0),
+  Widget buildUserInfo() {
+return 
+     Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: Dimenssion.height20dp / 2),
+          height: Dimenssion.height55dp * 2,
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20.0),
+              bottomRight: Radius.circular(20.0),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Profile Detail",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: Dimenssion.width16dp * 1.5,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimenssion.height20dp / 1.2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Hello"),
+                        Text(
+                          _userModel!.fullName,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Fluttertoast.showToast(
+                          msg: "pas encore!!",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      },
+                      child: CircleAvatar(
+                        child: const Icon(Icons.edit),
+                        backgroundColor: Theme.of(context).focusColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "Profile Detail",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: Dimenssion.width16dp * 1.5,
-              ),
-            ),
-            SizedBox(height: 20.0),
-            Container(
-                  padding: EdgeInsets.symmetric( horizontal:Dimenssion.height20dp/1.2 ),
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Hello"),
-                      Text(_userModel!.fullName,style: TextStyle(fontWeight: FontWeight.bold),),
-                    ],
-                  ),
-                  InkWell(
-                    onTap: () {Fluttertoast.showToast(
-        msg: "pas encore!!",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );},
-                    child: CircleAvatar(
-                      child: Icon(Icons.edit),
-                      backgroundColor: Theme.of(context).focusColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        const SizedBox(height: 20.0),
+        const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: CustomButton(
+            text: "Acceuil",
+            root: "/mainuserpage",
+            icon: FontAwesomeIcons.house,
+          ),
         ),
-      ),
-                  SizedBox(height: 20.0),
-
+        const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: CustomButton(
+            text: "A propos de nous",
+            root: "/Apropos",
+            icon: FontAwesomeIcons.info,
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4),
+          child: CustomButton(
+              text: "Education",
+              root: "/Education",
+              icon: FontAwesomeIcons.graduationCap),
+        ),
+        Divider(
+          thickness: 2,
+          color: Colors.blueAccent,
+          endIndent: Dimenssion.width20dp * 5,
+          indent: Dimenssion.width20dp * 5,
+        ),
         Padding(
           padding: const EdgeInsets.all(4.0),
-          child: CustomButton(text: "Acceuil",root: "/mainuserpage",),
-        ),
-      Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: CustomButton(text: "A propos de nous",root: "/Apropos",),
-        ),Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: CustomButton(text: "Education",root: "/Education",),
-        ),
-       Padding(
-         padding: const EdgeInsets.all(4.0),
-         child: SizedBox(
+          child: SizedBox(
             height: Dimenssion.height55dp,
             child: ElevatedButton(
-              onPressed:(){
-                AuthentificationRepository.instance.logout();
-                },
+              onPressed: () async {
+                String email = 'garb.eco13@gmail.com';
+                String url = 'mailto:<$email>';
+                Uri uri = Uri.parse(url);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Erreur'),
+                      content: const Text(
+                          'Impossible d\'ouvrir l\'application de messagerie gmail.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Mcolors.Cbackground,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20))),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: Dimenssion.width30dp / 2),
+                padding:
+                    EdgeInsets.symmetric(horizontal: Dimenssion.width30dp / 2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const Icon(FontAwesomeIcons.envelopeOpenText,
+                        color: Colors.black),
+                    Text(
+                      "Nous contacter",
+                      style: TextStyle(
+                          color: Colors.black, fontSize: Dimenssion.width16dp),
+                    ),
+                    const Icon(Icons.arrow_forward_ios, color: Colors.black),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: SizedBox(
+            height: Dimenssion.height55dp,
+            child: ElevatedButton(
+              onPressed: () async {
+                  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Stack(
+        children:[
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+AlertDialog(
+  scrollable:true,
+  backgroundColor:Colors.transparent,
+          title: Text('politique De Confidentialite',textAlign: TextAlign.center,),
+          content:  Text(Strings.politiqueDeConfidentialite,textAlign: TextAlign.center,),
+          actions: [
+            TextButton(
+              child: Text('Fermer'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+        ] 
+      );});
+                
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Mcolors.Cbackground,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20))),
+              child: Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: Dimenssion.width30dp / 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(FontAwesomeIcons.shield, color: Colors.black),
+                    Text(
+                      "Politique de confidentialité",
+                      style: TextStyle(
+                          color: Colors.black, fontSize: Dimenssion.width16dp),
+                    ),
+                    const Icon(Icons.arrow_forward_ios, color: Colors.black),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SizedBox(
+            height: Dimenssion.height55dp,
+            child: ElevatedButton(
+              onPressed: () {
+                AuthentificationRepository.instance.logout();
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (_) => PrivacyPolicyPage(), //LoginScreen(),
+                    ));
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Mcolors.Cbackground,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20))),
+              child: Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: Dimenssion.width30dp / 2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(Icons.logout_rounded, color: Colors.red),
                     Text(
                       "Se déconecter",
                       style: TextStyle(
@@ -271,16 +419,12 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
             ),
           ),
-       ),
-       
-    ],
-  );
-}
-
-
+        ),
+      ],
+    );}
 
   Widget buildLoading() {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   }

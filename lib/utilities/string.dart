@@ -26,4 +26,36 @@ class Strings{
    static String agricultureDefinition=" Les pesticides et les engrais chimiques utilisés dans l'agriculture peuvent contaminer l'eau et les sols. Les excréments d'animaux provenant des exploitations agricoles peuvent également contaminer les cours d'eau.";
    static String dechetsDefinition="Les déchets peuvent polluer l'environnement lorsqu'ils sont jetés de manière inappropriée. Les décharges peuvent libérer des produits chimiques toxiques dans le sol et les eaux souterraines. Les déchets alimentaires non compostés peuvent également produire du méthane, un gaz à effet de serre qui contribue au changement climatique.";
    static String domestiqueDefinition="Les produits chimiques utilisés dans les produits de nettoyage, les peintures et les solvants peuvent produire des émissions toxiques. Les déchets domestiques, tels que les piles, les appareils électroniques et les médicaments périmés, peuvent également contaminer l'environnement lorsqu'ils sont jetés de manière inappropriée";
+   static String politiqueDeConfidentialite = """
+
+Nous, GARBECO, nous engageons à respecter et à protéger votre vie privée. Cette politique de confidentialité explique comment nous recueillons, utilisons et divulguons vos informations lorsque vous utilisez notre application GARBECO.
+
+Collecte d'informations
+
+Lorsque vous utilisez notre application, nous pouvons collecter certaines informations personnelles vous concernant, telles que votre nom, votre adresse e-mail, votre identifiant dans la base de donné etc. Nous recueillons ces informations uniquement lorsque vous les fournissez volontairement, par exemple lorsque vous vous inscrivez à un compte ou lorsque vous nous contactez directement.
+
+Utilisation des informations
+
+Nous utilisons les informations que nous collectons pour fournir, maintenir et améliorer notre application, ainsi que pour vous contacter concernant les mises à jour, les nouvelles fonctionnalités, les offres spéciales, etc. Nous pouvons également utiliser ces informations pour résoudre les problèmes techniques, analyser les tendances d'utilisation et personnaliser votre expérience.
+
+Divulgation des informations
+
+Nous ne vendons ni ne louons vos informations personnelles à des tiers. Cependant, nous pouvons partager vos informations avec des fournisseurs de services tiers qui travaillent avec nous pour vous fournir nos services. Ces tiers ont l'obligation de protéger vos informations et de les utiliser uniquement dans le cadre de la prestation des services pour lesquels ils ont été engagés.
+
+Sécurité des informations
+
+Nous prenons des mesures de sécurité appropriées pour protéger vos informations personnelles contre tout accès non autorisé, utilisation abusive ou divulgation. Cependant, veuillez noter qu'aucune méthode de transmission sur Internet ou de stockage électronique n'est totalement sécurisée. Nous ne pouvons donc garantir une sécurité absolue.
+
+Liens vers des sites tiers
+
+Notre application peut contenir des liens vers des sites tiers. Veuillez noter que nous ne sommes pas responsables des pratiques de confidentialité de ces sites. Nous vous encourageons à lire les politiques de confidentialité de ces sites tiers lorsque vous les visitez.
+
+Modifications de la politique de confidentialité
+
+Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Toute modification entrera en vigueur immédiatement après sa publication dans l'application. Nous vous recommandons de consulter régulièrement cette politique de confidentialité pour rester informé des mises à jour.
+
+Contactez-nous
+
+Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter à garb.eco13@gmail.com""";
+
 }

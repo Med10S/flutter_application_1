@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/duree_recyclage.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/poubelle.dart';
-import 'package:flutter_application_1/src/adulte_pages/recyclage/whyRecycle.dart';
+import 'package:flutter_application_1/src/adulte_pages/recyclage/whyRecycle/whyRecycle.dart';
 import 'package:flutter_application_1/src/user_interface/main_page.dart';
 import 'package:flutter_application_1/utilities/routes_router/routes.dart';
 
@@ -39,7 +39,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.dureeRecyclage:
       return CupertinoPageRoute(builder: (_) => const DureeRecyclage());
     case AppRoutes.whyRecyclage:
-      return CupertinoPageRoute(builder: (_) => const WhyRecyclage());
+      return CupertinoPageRoute(builder: (_) =>  WhyRecyclage());
     case AppRoutes.mainuserpage:
       return CupertinoPageRoute(builder: (_) => const User_Main_Page());
     case AppRoutes.apropos:

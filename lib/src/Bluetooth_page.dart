@@ -168,12 +168,12 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         if (r.device.address == widget.desiredAddress) {
           devices.add(r.device);
            // Arrêt de la recherche d'appareils
-        _discoveryStreamSubscription?.cancel();    
+      _discoveryStreamSubscription?.cancel();    
 
         }
       });
 
-      await Future.delayed(const Duration(seconds: 10));
+       await Future.delayed(const Duration(seconds: 10));
 
       if (devices.isEmpty) {
         // Aucun appareil trouvé, afficher une snackbar avec un message d'erreur
@@ -189,7 +189,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           searching = false;
           connected = true;
           _sendMessage();
-          
+          _taskCompleted = true;
+
         });
         Future<String> role = getRoleUser();
         print("role ::$role");
@@ -289,7 +290,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         await storeValueWithDate(points);
         await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
-        _taskCompleted = true;
+        //_taskCompleted = true;
 
         Navigator.push(
             context,
@@ -304,6 +305,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
       print("points2 :$points");
     }
   }
+  
+  
   Future<void> storeValueWithDate(int points) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   // Obtenir la date actuelle
@@ -330,8 +333,20 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
   Future<void> _onDataReceivedAdmin(Uint8List data) async {
     String dataString = String.fromCharCodes(data);
     _buffer += dataString;
-    if (_buffer.contains('&')) {
+    print("donne dans 1:$_buffer");
+    if(_buffer.contains("vide")){
+      Get.snackbar("info", "aucun client pour aujourd'hui");
+       await FlutterBluetoothSerial.instance
+                      .removeDeviceBondWithAddress(widget.desiredAddress);
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (_) => const User_Main_Page(),
+              ));
+    }
+    if (_buffer.contains('\n')) {
       final message = _buffer.replaceAll('\r', '').replaceAll('\n', '');
+      print(message);
       _buffer = '';
       if (widget.extraction == true) {
         Get.snackbar("Message", "extraction en cours ....",
@@ -350,18 +365,24 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
 /**apres que je recuper les ligne de donne depuis l'esp32
 *je donne cette liste de donne a la class updateDataProgress  */
 
-        if(lines[0]!=""){
+        if(lines[0]!="vide"){
        await _Update.updateDataProgress(context,lines);
-
+       await FlutterBluetoothSerial.instance
+                      .removeDeviceBondWithAddress(widget.desiredAddress);
         }else{
           Get.snackbar("info", "aucun client pour aujourd'hui");
         }
-        await FlutterBluetoothSerial.instance
-                      .removeDeviceBondWithAddress(widget.desiredAddress);
-        _taskCompleted = true;
+        
+        //_taskCompleted = true;
 
         for (int i = 0; i < lines.length; i++) {
-          print("recieve${lines[i]}");}
+          print("recieve${lines[i]}");
+          }
+          /*Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (_) => const User_Main_Page(),
+              ));*/
           
       } else if(widget.extraction == false) {
         Get.snackbar("Message", message,
@@ -371,12 +392,16 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
             colorText: Colors.black);
 
         try {
+          debugPrint("points 9bele : ${message.split(";")[1]}");
+
           int points = int.parse(message.split(";")[1]);
           await storeValueWithDate(points);
 
           // Passer la valeur résolue à la classe BluetoothPage
           // Modifiez la valeur
           double quantite = double.parse(message.split(";")[3]);
+          debugPrint(": ${message.split(";")[5]}");
+
 //Bonjour mohammed vous avez recu ;12;points quatite :;2.2;poubelle:;3
           int position = int.parse(message.split(";")[5]);
           debugPrint("position $position quatite $quantite");
@@ -386,7 +411,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           int newResult = myIntValue + points;
           
           await prefs.setInt('points_loacal', newResult);
-           _taskCompleted = true;
+           //_taskCompleted = true;
 
           await FlutterBluetoothSerial.instance
                       .removeDeviceBondWithAddress(widget.desiredAddress);
@@ -438,11 +463,12 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
 //--------------------------------------------------------------------------------------
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     connection?.dispose();
     _discoveryStreamSubscription
         ?.cancel(); // Annuler la recherche des appareils Bluetooth
-
+    _animationController.dispose(); // Disposer du AnimationController ici.
+       
     super.dispose();
   }
 

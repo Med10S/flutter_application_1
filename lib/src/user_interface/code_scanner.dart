@@ -17,7 +17,7 @@ import 'dart:async';
 
 class QRScan extends StatefulWidget {
   final bool extraction;
-  const QRScan({Key? key,required this.extraction}) : super(key: key);
+  const QRScan({Key? key, required this.extraction}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QRScanState();
@@ -111,14 +111,14 @@ class _QRScanState extends State<QRScan> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    InkWell(onTap: () {
-                       Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (_) => const AccountScreen()
-));
-                    },
-                      child: Image.asset("images/info_client.png")),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) => const AccountScreen()));
+                        },
+                        child: Image.asset("images/info_client.png")),
                     const Text(
                       "Compte",
                       style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
@@ -236,29 +236,39 @@ class _QRScanState extends State<QRScan> {
       setState(() {
         result = scanData;
         controller.pauseCamera();
-        
-        String desiredAddress = result!.code!.split(";")[0];
-        String poubelle = result!.code!.split(";")[1];
-        print(desiredAddress + "poubelle :" + poubelle);
-        Future<String> used_id = getdata_from_here();
-       
-        used_id.then((value) {
-          String userIdFinal = value; // valeur résolue de l'ID utilisateur
-          
-          Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (_) => BluetoothPage(
-                  desiredAddress: desiredAddress,
-                  scandata: poubelle,
-                  userid: userIdFinal, 
-                  extraction: widget.extraction,
-                ),
-              ));
+        String desiredAddress = "";
+        String poubelle = "";
+        try {
+          desiredAddress = result!.code!.split(";")[0];
+          poubelle = result!.code!.split(";")[1];
+
+          debugPrint(desiredAddress + "poubelle :" + poubelle);
+          Future<String> usedId = getdata_from_here();
+
+          usedId.then((value) {
+            String userIdFinal = value; // valeur résolue de l'ID utilisateur
+
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => BluetoothPage(
+                    desiredAddress: desiredAddress,
+                    scandata: poubelle,
+                    userid: userIdFinal,
+                    extraction: widget.extraction,
+                  ),
+                ));
+          });
+        } catch (e) {
+          Fluttertoast.showToast(
+            msg: "Erreur de lecture du code QR",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
         }
-        );
-        
-        
       });
     });
   }
@@ -275,6 +285,8 @@ class _QRScanState extends State<QRScan> {
   @override
   void dispose() {
     controller?.dispose();
+    controller?.pauseCamera();
+
 
     super.dispose();
   }

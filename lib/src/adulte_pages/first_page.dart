@@ -31,7 +31,7 @@ class Education extends StatelessWidget {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (_) =>const Welcome(),
+                          builder: (_) => PrivacyPolicyPage(),
                         ));
                   },
                   child:const Icon(

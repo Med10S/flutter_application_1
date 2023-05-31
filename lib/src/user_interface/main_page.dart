@@ -393,22 +393,25 @@ class _User_Main_PageState extends State<User_Main_Page> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        AuthentificationRepository.instance.logout();
-                      },
-                      child: Image.asset("images/EXIT.png")),
-                  const Text(
-                    "Sortir",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
-                ],
+                padding: const EdgeInsets.only( top: 10, bottom: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) => const AccountScreen()));
+                        },
+                        child: Image.asset("images/info_client.png")),
+                    const Text(
+                      "Compte",
+                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
+                    )
+                  ],
+                ),
               ),
-            ),
           ],
         ),
       ),

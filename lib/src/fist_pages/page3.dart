@@ -73,7 +73,7 @@ class Page3 extends StatelessWidget {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => Welcome(),
+                                builder: (_) => PrivacyPolicyPage(),
                               ));
                         },
                         style: ElevatedButton.styleFrom(

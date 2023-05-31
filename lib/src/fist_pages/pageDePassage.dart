@@ -34,7 +34,7 @@ class _MyScreenState extends State<MyScreen> {
   void redirectToHomePage() {
     if(!isFirstRun){
   
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Welcome()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  PrivacyPolicyPage()));
     }
    
   }

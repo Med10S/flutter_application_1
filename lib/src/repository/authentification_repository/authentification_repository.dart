@@ -67,7 +67,7 @@ class AuthentificationRepository extends GetxController {
     await _auth.createUserWithEmailAndPassword(email: email, password: password);
       firebaseUser.value != null
           ? Get.offAll(() =>const User_Main_Page())
-          : Get.offAll(() => const Welcome()
+          : Get.offAll(() =>  PrivacyPolicyPage()
           );
           return true;   
     } on FirebaseAuthException catch (e) {
