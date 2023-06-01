@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
@@ -6,7 +8,6 @@ import 'package:flutter_application_1/utilities/string.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-import '../../authentification/screens/admin/admin_main_page.dart';
 import '../../authentification/screens/email_verfication.dart';
 import '../../user_interface/main_page.dart';
 import '../../welcome.dart';
@@ -34,7 +35,7 @@ class AuthentificationRepository extends GetxController {
   setinitialScren(User? user) { 
      user == null
         ? Get.offAll(() =>  MyScreen())
-        :user.emailVerified ? Get.offAll(() => User_Main_Page()): Get.offAll(() => MailVerification());
+        :user.emailVerified ? Get.offAll(() => const User_Main_Page()): Get.offAll(() => const MailVerification());
   }
 
   Future<void> sendEmailVerfication()async{
@@ -72,7 +73,7 @@ class AuthentificationRepository extends GetxController {
           return true;   
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      Get.snackbar(icon:Icon(Icons.warning,color: Colors.red,),'FIREBASE AUTH EXEPTION',ex.message,snackPosition: SnackPosition.BOTTOM,colorText: Colors.red,backgroundColor: Colors.redAccent.withOpacity(0.1));
+      Get.snackbar(icon:const Icon(Icons.warning,color: Colors.red,),'FIREBASE AUTH EXEPTION',ex.message,snackPosition: SnackPosition.BOTTOM,colorText: Colors.red,backgroundColor: Colors.redAccent.withOpacity(0.1));
       print('FIREBASE AUTH EXEPTION - ${ex.message}');
       //throw ex;
       return false;

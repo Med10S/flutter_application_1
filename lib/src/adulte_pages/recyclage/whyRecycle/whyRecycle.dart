@@ -186,12 +186,16 @@ class WhyRecyclage extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              color: Colors.black
             ),
           ),
           subtitle: Text(
             description,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Colors.grey
+            ),
           ),
           trailing: Icon(Icons.arrow_forward_ios),
         ),
@@ -216,7 +220,7 @@ class APEMDetailsPage extends StatelessWidget {
           Container(
             height: 200, // Hauteur raisonnable pour la photo
             child: Image.asset(
-              'assets/apem_photo.jpg',
+              'images/apem_photo.png',
               fit: BoxFit.cover,
             ),
           ),

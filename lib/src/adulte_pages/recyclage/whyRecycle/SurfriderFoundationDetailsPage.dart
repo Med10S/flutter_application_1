@@ -10,7 +10,7 @@ class SurfriderFoundationDetailsPage extends StatelessWidget {
           Container(
             height: 200, // Hauteur raisonnable pour la photo
             child: Image.asset(
-              'assets/surfrider_photo.jpg',
+              'images/surfrider_photo.png',
               fit: BoxFit.cover,
             ),
           ),

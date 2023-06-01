@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
@@ -55,12 +56,11 @@ class UserRepository extends GetxController {
 
   // update the stats document with the new data
   await statsRef.update({
-    '${day}.${keys[dataIndex - 1]}': updatedData[keys[dataIndex - 1]],
+    '$day.${keys[dataIndex - 1]}': updatedData[keys[dataIndex - 1]],
   });
 }
 
 Future<DechetModel> getStatsForDay(String userId, String day) async {
-    DateTime maintenant = DateTime.now();
 
   final userRef = _db.collection('Users').doc(userId);  
   final day3 = day.split('-')[0];

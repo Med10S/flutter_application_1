@@ -3,14 +3,16 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../repository/authentification_repository/authentification_repository.dart';
+import '../../colors/colors.dart';
 import 'code_scanner.dart';
 import 'package:intl/intl.dart';
 
@@ -24,6 +26,7 @@ class User_Main_Page extends StatefulWidget {
 }
 
 class _User_Main_PageState extends State<User_Main_Page> {
+  Brightness platformBrightness = Brightness.light;
   final _db = FirebaseFirestore.instance;
   final userRepo = Get.put(UserRepository());
   List<Map<String, dynamic>> pointsList = [];
@@ -40,14 +43,44 @@ class _User_Main_PageState extends State<User_Main_Page> {
   @override
   void initState() {
     super.initState();
+    getPlatformBrightness().then((brightness) {
+      setState(() {
+        platformBrightness = brightness;
+        setStatusBarColor();
+      });
+    });
     _initializeStats();
     _fetchData();
     _fetchDataHistoryque();
     getValueListFromSharedPreferences();
 
-    Timer.periodic(const Duration(hours: 24), (timer) {
+    Timer.periodic(const Duration(hours: 12), (timer) {
       initaliserPoint();
     });
+  }
+
+  Future<Brightness> getPlatformBrightness() async {
+    Brightness brightness;
+    try {
+      brightness = WidgetsBinding.instance.window.platformBrightness;
+    } on PlatformException {
+      brightness = Brightness.light;
+    }
+    return brightness;
+  }
+
+  void setStatusBarColor() {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: platformBrightness,
+        statusBarColor: platformBrightness == Brightness.dark
+            ? const Color.fromRGBO(
+                26, 98, 114, 1) // Couleur de la barre d'état en mode nuit
+            : Mcolors
+                .couleurPrincipal, // Couleur de la barre d'état en mode jour
+      ),
+    );
   }
 
   Future<void> _fetchDataHistoryque() async {
@@ -273,14 +306,11 @@ class _User_Main_PageState extends State<User_Main_Page> {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (_) => User_Main_Page(),
+                              builder: (_) => const User_Main_Page(),
                             ));
                       },
                       child: Image.asset("images/home.png")),
-                  const Text(
-                    "home",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                  
                 ],
               ),
             ),
@@ -305,10 +335,7 @@ class _User_Main_PageState extends State<User_Main_Page> {
                         });
                       },
                       child: Image.asset("images/chart.png")),
-                  const Text(
-                    "Statistique",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                  
                 ],
               ),
             ),
@@ -349,32 +376,22 @@ class _User_Main_PageState extends State<User_Main_Page> {
                                       size: 45,
                                     )
                                   ]),
-                                  const Text(
-                                    "Administrateur",
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(230, 198, 84, 1)),
-                                  ),
+                                  
                                 ],
                               ),
                             );
                           } else {
                             return InkWell(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (_) => const AccountScreen()
-));
                                 Get.snackbar("next page", "utlisateur info");
                               },
                               child: Column(
-                                children: [
-                                  Image.asset("images/info_client.png"),
-                                  const Text(
-                                    "Compte",
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(230, 198, 84, 1)),
-                                  ),
+                                children:  [
+                                  Stack(children: const [
+                                    
+                                  Icon(Icons.store,size: 40,color: Mcolors.couleurSecondaire,),
+                                  ],),
+                                 
                                 ],
                               ),
                             );
@@ -393,25 +410,22 @@ class _User_Main_PageState extends State<User_Main_Page> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only( top: 10, bottom: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (_) => const AccountScreen()));
-                        },
-                        child: Image.asset("images/info_client.png")),
-                    const Text(
-                      "Compte",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (_) => const AccountScreen()));
+                      },
+                      child: Image.asset("images/info_client.png")),
+                  
+                ],
               ),
+            ),
           ],
         ),
       ),

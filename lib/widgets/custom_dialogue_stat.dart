@@ -83,7 +83,7 @@ class CustomDialogStat extends StatelessWidget {
                           position: LegendPosition.bottom),
                       series: <CircularSeries>[
                         RadialBarSeries<quatitedechet, String>(
-                          maximumValue: 10,
+                          maximumValue: 300,
                           dataSource: chartData,
                           legendIconType: LegendIconType.seriesType,
                           cornerStyle: CornerStyle.bothCurve,
@@ -122,7 +122,6 @@ class CustomDialogStat extends StatelessWidget {
 
   Future<List<quatitedechet>> getchardata(String day) async {
     DechetModel stas = await getusesstat(day);
-    debugPrint("metale${stas.metale}");
 
     final chartData = [
       quatitedechet("platique", stas.plastique),
@@ -139,7 +138,6 @@ class CustomDialogStat extends StatelessWidget {
     Future<dynamic> userStat =
         ProfileController().getUserStat(day, userIdFinal);
     DechetModel data = await userStat;
-    debugPrint("metale1${data.metale}");
     return data;
   }
 }

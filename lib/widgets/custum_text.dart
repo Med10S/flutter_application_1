@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -8,8 +6,8 @@ class CustomText extends StatelessWidget {
   final Color color;
   final Alignment alignment;
 
-  CustomText(
-      {this.text = "",
+  const CustomText(
+      {super.key, this.text = "",
       this.fontSize = 16,
       this.color = Colors.white,
       this.alignment = Alignment.topLeft});

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
@@ -8,7 +7,7 @@ class CustomDialog extends StatelessWidget {
   final Image ?image;
   final bool isDark;
 
-  CustomDialog({required this.title,required this.description,required this.buttonText,this.image, required this.isDark,});
+  const CustomDialog({super.key, required this.title,required this.description,required this.buttonText,this.image, required this.isDark,});
 
   @override
   Widget build(BuildContext context) {

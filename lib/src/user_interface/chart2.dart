@@ -1,18 +1,20 @@
 import 'dart:math';
 
 import 'package:calendar_appbar/calendar_appbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/dechet_model.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
+import '../welcome.dart';
 import 'chart3.dart';
 import 'code_scanner.dart';
+import 'compte.dart';
 import 'main_page.dart';
 
 class ChartDays extends StatefulWidget {
@@ -26,10 +28,8 @@ class ChartDays extends StatefulWidget {
 }
 
 class ChartDaysState extends State<ChartDays> {
-  late List<quatitedechet> _chartData;
   late List<quatitedechet> chartData;
   late Future<List<quatitedechet>> _chartDataFuture;
-  final _db = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -86,10 +86,7 @@ class ChartDaysState extends State<ChartDays> {
                             ));
                       },
                       child: Image.asset("images/home.png")),
-                  const Text(
-                    "home",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                  
                 ],
               ),
             ),
@@ -116,10 +113,7 @@ class ChartDaysState extends State<ChartDays> {
                         Icon(Icons.calendar_today,
                             color: Colors.black, size: 40)
                       ])),
-                  const Text(
-                    "Statistique",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                  
                 ],
               ),
             ),
@@ -128,11 +122,14 @@ class ChartDaysState extends State<ChartDays> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset("images/info_client.png"),
-                  const Text(
-                    "Compte",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                  InkWell(onTap: () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (_) => const AccountScreen()));
+                      },
+                    child: Image.asset("images/info_client.png")),
+                  
                 ],
               ),
             ),
@@ -144,12 +141,15 @@ class ChartDaysState extends State<ChartDays> {
                   InkWell(
                       onTap: () {
                         AuthentificationRepository.instance.logout();
+                        Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (_) => PrivacyPolicyPage(), //LoginScreen(),
+                    ));
                       },
-                      child: Image.asset("images/EXIT.png")),
-                  const Text(
-                    "Sortir",
-                    style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                  )
+                      child: Icon(Icons.logout,color: Colors.red )
+                      ),
+                  
                 ],
               ),
             ),
@@ -247,13 +247,11 @@ class ChartDaysState extends State<ChartDays> {
     Future<dynamic> userStat =
         ProfileController().getUserStat(day, widget.userIdFinal);
     DechetModel data = await userStat;
-    debugPrint("metale1${data.metale}");
     return data;
   }
 
   Future<List<quatitedechet>> getchardata(String day) async {
     DechetModel stas = await getusesstat(day);
-    debugPrint("metale${stas.metale}");
 
     final chartData = [
       quatitedechet("platique", stas.plastique),

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/firebase_options.dart';
 import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/src/repository/authentification_repository/authentification_repository.dart';
@@ -8,21 +9,15 @@ import 'package:flutter_application_1/utilities/routes_router/router.dart';
 import 'package:get/get.dart';
 
 void main()  {
+
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthentificationRepository()));
-  //pour changer la couleur le la bar de notification de la même couleur de notre théme
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-      statusBarBrightness: Brightness.light,
-      statusBarColor: Color.fromRGBO(47, 103, 23, 1)));
-   
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
   });
 }
-
 //tesr245
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -39,7 +34,6 @@ class MyApp extends StatelessWidget {
           primaryColorDark: const Color.fromARGB(255, 194, 194, 194),
           primaryColor: const Color.fromRGBO(26, 98, 114, 1),
           cardColor: const Color.fromRGBO(14, 77, 89, 1)),
-      //themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
       themeMode: ThemeMode.system,
       theme: ThemeData(
         brightness: Brightness.light,

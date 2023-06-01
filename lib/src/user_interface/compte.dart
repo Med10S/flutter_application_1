@@ -65,7 +65,6 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileController());
 
     return SafeArea(
       child: Scaffold(
@@ -91,10 +90,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               ));
                         },
                         child: Image.asset("images/home.png")),
-                    const Text(
-                      "home",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
+                    
                   ],
                 ),
               ),
@@ -119,10 +115,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           });
                         },
                         child: Image.asset("images/chart.png")),
-                    const Text(
-                      "Statistique",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
+                    
                   ],
                 ),
               ),
@@ -142,10 +135,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               ));
                         },
                         child: Image.asset('images/QR.png')),
-                    const Text(
-                      "QR Scaner",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
+                    
                   ],
                 ),
               ),
@@ -165,10 +155,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               ));
                         },
                         child: Image.asset("images/EXIT.png")),
-                    const Text(
-                      "Sortir",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
+                    
                   ],
                 ),
               ),
@@ -344,12 +331,28 @@ return
             ),
           ),
 AlertDialog(
+  icon: Icon(FontAwesomeIcons.shield),
   scrollable:true,
   backgroundColor:Colors.transparent,
-          title: Text('politique De Confidentialite',textAlign: TextAlign.center,),
-          content:  Text(Strings.politiqueDeConfidentialite,textAlign: TextAlign.center,),
+          title: Text('politique De Confidentialite',textAlign: TextAlign.center,style:TextStyle(color:Colors.white)),
+          content:  Text(Strings.politiqueDeConfidentialite,textAlign: TextAlign.center,style:TextStyle(color:Colors.white)),
           actions: [
             TextButton(
+              style:ButtonStyle(backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors.grey;
+                            }
+                            return Theme.of(context).colorScheme.onSurface;
+                          },
+                        ),),
               child: Text('Fermer'),
               onPressed: () {
                 Navigator.of(context).pop();

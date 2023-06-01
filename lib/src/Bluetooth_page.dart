@@ -176,6 +176,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
        await Future.delayed(const Duration(seconds: 10));
 
       if (devices.isEmpty) {
+        _taskCompleted = true;
+
         // Aucun appareil trouvé, afficher une snackbar avec un message d'erreur
         ScaffoldMessenger.of(_scaffoldKey.currentContext!)
             .showSnackBar(SnackBar(
@@ -257,6 +259,8 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         } catch (e) {
           // Ignore error, but notify state
           Get.snackbar("erreur", "connection interempue");
+          _taskCompleted = true;
+
           //setState(() {});
         }
       } else {
