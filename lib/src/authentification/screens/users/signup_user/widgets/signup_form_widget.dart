@@ -4,10 +4,12 @@ import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/authentification/controllers/sign_up_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
+
+import 'package:get/get_core/src/get_main.dart';
 import '../../login_user/Login_screen.dart';
 import '../../../../../user_interface/main_page.dart';
+
 
 class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
@@ -21,7 +23,7 @@ class SignUpFormWidget extends StatefulWidget {
 class _SignUpFormWidgetState extends State<SignUpFormWidget> {
     bool _obscureText = true;
     String selectedText="cp1";
-     late TextEditingController _textEditingController;
+  late TextEditingController _textEditingController;
   late ValueNotifier<String> _selectedTextNotifier;
 
 

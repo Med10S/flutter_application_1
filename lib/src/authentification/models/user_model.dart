@@ -5,19 +5,19 @@ class UserModel {
   final String fullName;
   final String email;
   final String password;
-  final int points;
-  final String role;
-  final String niveau;
+  final int? points;
+  final String? role;
+  final String? niveau;
 
 
-  const UserModel({
+  const UserModel( {
     this.id,
     required this.email,
     required this.password,
     required this.fullName,
-    required this.points,
-    required this.role,
-    required this.niveau,
+     this.points,
+     this.role,
+     this.niveau,
   });
     
     

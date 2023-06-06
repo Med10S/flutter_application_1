@@ -6,6 +6,7 @@ import 'package:flutter_application_1/src/repository/authentification_repository
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:get/get.dart';
 
+import '../../welcome.dart';
 import '../controllers/mail_Verfication_Controller.dart';
 
 class MailVerification extends StatelessWidget {
@@ -14,6 +15,7 @@ class MailVerification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(MailVerificationController());
+    final controller2 = Get.put(AuthentificationRepository());
     return SafeArea(
       
         child: Scaffold(
@@ -58,7 +60,53 @@ class MailVerification extends StatelessWidget {
                 height: Dimenssion.height40dp ,
                 child: OutlinedButton(child: const Text("Continuer",),onPressed: (){controller.manuallyCheckEmailVerficationStatus();},),
               ),
-              TextButton(onPressed: (){controller.sendVerficationEmail();}, child: Text("Renvoyer le lien mail"))
+              TextButton(
+              style:ButtonStyle(backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors.grey;
+                            }
+                            return Theme.of(context).colorScheme.onSurface;
+                          },
+                        ),),
+              child: Text('Renvoyer le lien email'),
+              onPressed: () {
+                controller.sendVerficationEmail();
+              },
+            ),
+            TextButton(
+              style:ButtonStyle(backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors.grey;
+                            }
+                            return Theme.of(context).colorScheme.onSurface;
+                          },
+                        ),),
+              child: Text('Modifier l\'adress mail'),
+              onPressed: () {
+                controller2.logout();
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (_) => PrivacyPolicyPage(), //LoginScreen(),
+                    ));
+              },
+            ),
             ],
           ),
         ),

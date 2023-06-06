@@ -29,6 +29,18 @@ class UserRepository extends GetxController {
         ;
   }
 
+  Future<void> updateUserpassworddata(String password,String userId) async{
+    await _db.collection("Users").doc(userId).update({'Password':password});
+  }
+
+  Future<void> updateUserEmaildata(String newEmail,String userId) async{
+    await _db.collection("Users").doc(userId).update({'Email':newEmail});
+  }
+  Future<void>updateUserdata(UserModel user,String userId) async{
+    //print("user id is :$userId");
+    await _db.collection("Users").doc(userId).update(user.toJson());
+  }
+
  Future<void> createStatsCollection(String userId, double value, int dataIndex) async {
   DateTime maintenant = DateTime.now();
   final userRef = _db.collection('Users').doc(userId);
@@ -63,9 +75,9 @@ class UserRepository extends GetxController {
 Future<DechetModel> getStatsForDay(String userId, String day) async {
 
   final userRef = _db.collection('Users').doc(userId);  
-  final day3 = day.split('-')[0];
+  final year = day.split('-')[0];//day = yyyy-MM-dd
 
-  final statsRef = userRef.collection('Stats').doc(day3.toString());
+  final statsRef = userRef.collection('Stats').doc(year.toString());
 
   // vérifier si le document stats existe pour l'année donnée
   final statsDoc = await statsRef.get();
@@ -115,6 +127,38 @@ Future<DechetModel> getStatsForDay(String userId, String day) async {
    }
   }
 
+Future<void> initializeStatsCollection(String userId) async {
+    /**pour initialiser les quantite de chaque jours si elle n'existe pas a chaque connection a zero  */
+    DateTime maintenant = DateTime.now();
+    final userRef = _db.collection('Users').doc(userId);
+    final statsRef =
+        userRef.collection('Stats').doc(maintenant.year.toString());
+    final day = DateFormat('yyyy-MM-dd').format(maintenant);
+
+    // get the current data in the stats document
+    final data = await statsRef.get().then((snapshot) => snapshot.data());
+
+    // define the keys for each data index
+    final keys = ['plastique', 'verre', 'carton', 'metale', 'organique'];
+
+    // if the stats document doesn't exist, create it with all keys initialized to 0
+    if (data == null) {
+      final initialData = {for (var key in keys) key: 0.0};
+      await statsRef.set({day: initialData});
+    } else if (!data.containsKey(day)) {
+      // if the day doesn't exist, initialize all keys to 0
+      final initialData = {for (var key in keys) key: 0.0};
+      await statsRef.update({day: initialData});
+    }
+  }
+
+Future<String> getUserId() async {
+    Future<dynamic> clientinfo = ProfileController().getUserData();
+    UserModel user2 = await clientinfo;
+    String id = user2.id!;
+    //print("user id is :$id");
+    return id;
+  }
  
 
 }

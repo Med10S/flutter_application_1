@@ -17,12 +17,9 @@ import 'expections/loging_email_password_failure.dart';
 class AuthentificationRepository extends GetxController {
   static AuthentificationRepository get instance => Get.find();
 
-
   //Variables
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
-
-  
 
   @override
   void onReady() {
@@ -32,15 +29,58 @@ class AuthentificationRepository extends GetxController {
     //ever(firebaseUser, _setinitialScren);
   }
 
-  setinitialScren(User? user) { 
-     user == null
-        ? Get.offAll(() =>  MyScreen())
-        :user.emailVerified ? Get.offAll(() => const User_Main_Page()): Get.offAll(() => const MailVerification());
+  setinitialScren(User? user) {
+    user == null
+        ? Get.offAll(() => MyScreen())
+        : user.emailVerified
+            ? Get.offAll(() => const UserMainPage())
+            : Get.offAll(() => const MailVerification());
   }
 
-  Future<void> sendEmailVerfication()async{
-    try{_auth.currentUser?.sendEmailVerification();
-    }on FirebaseAuthException catch(e){
+  Future<bool> updateEmail(
+      String newEmail, String email, String oldPassword) async {
+    try {
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: oldPassword);
+      await _auth.currentUser?.reauthenticateWithCredential(credential);
+      _auth.currentUser?.updateEmail(newEmail);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      Get.snackbar(
+          icon: const Icon(
+            Icons.warning,
+            color: Colors.red,
+          ),
+          'FIREBASE AUTH EXEPTION',
+          ex.message,
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.red,
+          backgroundColor: Colors.redAccent.withOpacity(0.1));
+
+      return false;
+    } catch (_) {
+      const ex = SignUpWithEmailAndPasswordFailure();
+      Fluttertoast.showToast(
+        msg: ex.message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      return false;
+    }
+  }
+
+  Future<void> updatepassowrd(
+      String password, String email, String oldPassword) async {
+    try {
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: oldPassword);
+      await _auth.currentUser?.reauthenticateWithCredential(credential);
+      _auth.currentUser?.updatePassword(password);
+    } on FirebaseAuthException catch (e) {
       final ex = EmailVerificationException.fromCode(e.code);
       Fluttertoast.showToast(
         msg: ex.message,
@@ -50,7 +90,7 @@ class AuthentificationRepository extends GetxController {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-    }catch(_){
+    } catch (_) {
       const ex = EmailVerificationException();
       Fluttertoast.showToast(
         msg: ex.message,
@@ -63,30 +103,63 @@ class AuthentificationRepository extends GetxController {
     }
   }
 
-  Future<bool> createUserWithEmailAndPassword(String email, String password) async {
+  Future<void> sendEmailVerfication() async {
     try {
-    await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      final ex = EmailVerificationException.fromCode(e.code);
+      Fluttertoast.showToast(
+        msg: ex.message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } catch (_) {
+      const ex = EmailVerificationException();
+      Fluttertoast.showToast(
+        msg: ex.message,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
+  }
+
+  Future<bool> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       firebaseUser.value != null
-          ? Get.offAll(() =>const User_Main_Page())
-          : Get.offAll(() =>  PrivacyPolicyPage()
-          );
-          return true;   
+          ? Get.offAll(() => const UserMainPage())
+          : Get.offAll(() => PrivacyPolicyPage());
+      return true;
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      Get.snackbar(icon:const Icon(Icons.warning,color: Colors.red,),'FIREBASE AUTH EXEPTION',ex.message,snackPosition: SnackPosition.BOTTOM,colorText: Colors.red,backgroundColor: Colors.redAccent.withOpacity(0.1));
+      Get.snackbar(
+          icon: const Icon(
+            Icons.warning,
+            color: Colors.red,
+          ),
+          'FIREBASE AUTH EXEPTION',
+          ex.message,
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.red,
+          backgroundColor: Colors.redAccent.withOpacity(0.1));
       print('FIREBASE AUTH EXEPTION - ${ex.message}');
       //throw ex;
       return false;
-
     } catch (_) {
       const ex = SignUpWithEmailAndPasswordFailure();
       print('EXEPTION - ${ex.message}');
       return false;
       //throw ex;
-      
     }
   }
-  
 
   Future<String?> loginWithEmailAndPassword(
       String email, String password) async {
@@ -111,5 +184,4 @@ class AuthentificationRepository extends GetxController {
   }
 
   Future<void> logout() async => await _auth.signOut();
-
 }

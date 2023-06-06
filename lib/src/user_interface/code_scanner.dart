@@ -8,6 +8,7 @@ import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/models_ui/1_item_nav_bar.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/user_model.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
@@ -44,13 +45,27 @@ class _QRScanState extends State<QRScan> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-            onPressed: () async {
+        
+        bottomNavigationBar: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          color: Theme.of(context).primaryColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              OneItemNavBar(
+                push: false,
+                          imagepath: "images/home.png",
+                          page: const UserMainPage(),
+                          left: 5,
+                          right: 0,
+                          top: 0,
+                          bottom: 5,
+                        ),InkWell(
+            onTap: () async {
               await controller?.toggleFlash();
               setState(() {});
             },
-            backgroundColor: Theme.of(context).primaryColor,
             child: FutureBuilder(
               future: controller?.getFlashStatus(),
               builder: (context, snapshot) {
@@ -63,86 +78,8 @@ class _QRScanState extends State<QRScan> {
                   color: const Color.fromRGBO(230, 198, 84, 1),
                 ));
               },
-            )),
-        bottomNavigationBar: BottomAppBar(
-          notchMargin: 5,
-          shape: const CircularNotchedRectangle(),
-          color: Theme.of(context).primaryColor,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (_) => User_Main_Page(),
-                              ));
-                        },
-                        child: Image.asset("images/home.png")),
-                    const Text(
-                      "home",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset("images/chart.png"),
-                    const Text(
-                      "Statistique",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (_) => const AccountScreen()));
-                        },
-                        child: Image.asset("images/info_client.png")),
-                    const Text(
-                      "Compte",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          AuthentificationRepository.instance.logout();
-                        },
-                        child: Image.asset("images/EXIT.png")),
-                    const Text(
-                      "Sortir",
-                      style: TextStyle(color: Color.fromRGBO(230, 198, 84, 1)),
-                    )
-                  ],
-                ),
-              ),
+            ))
+ 
             ],
           ),
         ),
@@ -210,22 +147,12 @@ class _QRScanState extends State<QRScan> {
     );
   }
 
-  Future<String> getdata_from_here() async {
+ Future<String> getdata_from_here() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
-    String mail = user2.email;
-    String userId = await getUserId(mail);
-    return userId;
-  }
-
-  Future<String> getUserId(String mail) async {
-    final snapshot =
-        await _db.collection("Users").where("Email", isEqualTo: mail).get();
-    if (snapshot.docs.isNotEmpty) {
-      return snapshot.docs[0].id;
-    } else {
-      return "erreur1";
-    }
+    String id = user2.id!;
+    //print("user id is :$id");
+    return id;
   }
 
   void _onQRViewCreated(QRViewController controller) {
@@ -284,10 +211,8 @@ class _QRScanState extends State<QRScan> {
 
   @override
   void dispose() {
-    controller?.dispose();
-    controller?.pauseCamera();
-
-
     super.dispose();
+
+    controller?.dispose();
   }
 }

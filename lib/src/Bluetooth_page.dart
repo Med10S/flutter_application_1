@@ -58,7 +58,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
   Future<String> getRoleUser() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
-    String role = user2.role;
+    String role = user2.role!;
     return role;
   }
 
@@ -243,7 +243,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
     if (clientinfo != null) {
       UserModel user2 = await clientinfo;
       if (user2 != null) {
-        String role = user2.role;
+        String role = user2.role!;
         String fullName = user2.fullName;
         print("client_info$role");
         print("user_id $widget.userid");
@@ -299,7 +299,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
         Navigator.push(
             context,
             CupertinoPageRoute(
-              builder: (_) => const User_Main_Page(),
+              builder: (_) => const UserMainPage(),
             ));
         print("points 1:$points");
       } catch (e) {
@@ -345,7 +345,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (_) => const User_Main_Page(),
+                builder: (_) => const UserMainPage(),
               ));
     }
     if (_buffer.contains('\n')) {
@@ -423,7 +423,7 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
           Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (_) => const User_Main_Page(),
+                builder: (_) => const UserMainPage(),
               ));
           print("points 1:$points");
         } catch (e) {
@@ -443,26 +443,17 @@ class _BluetoothPageState extends State<BluetoothPage>  with SingleTickerProvide
     Future<String> usedId = getdata_from_here();
     usedId.then((value) async {
       String userIdFinal = value;
-      debugPrint('user id : $userIdFinal');
+      //debugPrint('user id : $userIdFinal');
 // valeur résolue de l'ID utilisateur
       await userRepo.createStatsCollection(userIdFinal, quatite, poubelle);
     });
   }
-  Future<String> getdata_from_here() async {
+ Future<String> getdata_from_here() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
-    String mail = user2.email;
-    String userId = await getUserId(mail);
-    return userId;
-  }
-   Future<String> getUserId(String mail) async {
-    final snapshot =
-        await _db.collection("Users").where("Email", isEqualTo: mail).get();
-    if (snapshot.docs.isNotEmpty) {
-      return snapshot.docs[0].id;
-    } else {
-      return "erreur1";
-    }
+    String id = user2.id!;
+   // print("user id is :$id");
+    return id;
   }
 //--------------------------------------------------------------------------------------
 

@@ -24,6 +24,6 @@ class SignUpController extends GetxController{
     await userRepo.createUser(user);
     auth.setinitialScren(auth.firebaseUser.value );
     //registerUser(user.email, user.password);
-    Get.to(()=> User_Main_Page());
+    Get.to(()=> UserMainPage());
   }
 }

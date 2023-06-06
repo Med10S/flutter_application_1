@@ -14,5 +14,7 @@ class AppRoutes {
   static const String mainuserpage="/mainuserpage";
   static const String apropos="/Apropos";
   static const String education="/Education";
+  static const String allDataLevel="/AllDataLevel";
+
 
 }

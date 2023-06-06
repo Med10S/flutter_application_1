@@ -70,7 +70,7 @@ class _ChartCalendareState extends State<ChartCalendare> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => const User_Main_Page(),
+                                builder: (_) => const UserMainPage(),
                               ));
                         },
                         child: Image.asset("images/home.png")),

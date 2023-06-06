@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
+import '../../widgets/models_ui/1_item_nav_bar.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/dechet_model.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
@@ -18,8 +19,8 @@ import 'compte.dart';
 import 'main_page.dart';
 
 class ChartDays extends StatefulWidget {
-  final String userIdFinal;
-  const ChartDays({Key? key, required this.userIdFinal}) : super(key: key);
+  final String? userIdFinal;
+  const ChartDays({Key? key, this.userIdFinal}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ChartDaysState();
@@ -72,66 +73,46 @@ class ChartDaysState extends State<ChartDays> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => User_Main_Page(),
-                            ));
-                      },
-                      child: Image.asset("images/home.png")),
-                  
-                ],
-              ),
+            OneItemNavBar(
+                                        push: true,
+
+              imagepath: "images/home.png",
+              page: const UserMainPage(),
+              left: 5,
+              bottom: 0,
+              top: 0,
+              right: 0,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20, top: 10, bottom: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+            OneItemNavBar(
+                                        push: true,
+
+              widget: Column(
                 children: [
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => ChartCalendare(
-                                  userIdFinal: widget.userIdFinal),
-                            ));
-                      },
-                      child: Stack(children: const [
-                        Icon(
-                          Icons.calendar_month_outlined,
-                          size: 40,
-                          color: Color.fromRGBO(230, 192, 58, 1),
-                        ),
-                        Icon(Icons.calendar_today,
-                            color: Colors.black, size: 40)
-                      ])),
-                  
+                  Stack(children: const [
+                    Icon(
+                      Icons.calendar_month_outlined,
+                      size: 40,
+                      color: Color.fromRGBO(230, 192, 58, 1),
+                    ),
+                    Icon(Icons.calendar_today, color: Colors.black, size: 40)
+                  ])
                 ],
               ),
+              page:ChartCalendare(userIdFinal: widget.userIdFinal!),              
+              left: 0,
+              right: 20,
+              top: 10,
+              bottom: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (_) => const AccountScreen()));
-                      },
-                    child: Image.asset("images/info_client.png")),
-                  
-                ],
-              ),
+            OneItemNavBar(
+                                        push: true,
+
+              imagepath: "images/info_client.png",
+              page: const AccountScreen(),
+              left: 5,
+              bottom: 0,
+              top: 0,
+              right: 0,
             ),
             Padding(
               padding: const EdgeInsets.only(right: 5),
@@ -142,14 +123,13 @@ class ChartDaysState extends State<ChartDays> {
                       onTap: () {
                         AuthentificationRepository.instance.logout();
                         Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (_) => PrivacyPolicyPage(), //LoginScreen(),
-                    ));
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) =>
+                                  PrivacyPolicyPage(), //LoginScreen(),
+                            ));
                       },
-                      child: Icon(Icons.logout,color: Colors.red )
-                      ),
-                  
+                      child: const Icon(Icons.logout, color: Colors.red)),
                 ],
               ),
             ),
@@ -199,7 +179,7 @@ class ChartDaysState extends State<ChartDays> {
                               context,
                               CupertinoPageRoute(
                                 builder: (_) => ChartCalendare(
-                                  userIdFinal: widget.userIdFinal),
+                                    userIdFinal: widget.userIdFinal!),
                               ));
                         },
                         child: const Icon(Icons.calendar_month_outlined))
@@ -245,7 +225,8 @@ class ChartDaysState extends State<ChartDays> {
 
   Future<DechetModel> getusesstat(String day) async {
     Future<dynamic> userStat =
-        ProfileController().getUserStat(day, widget.userIdFinal);
+        ProfileController().getUserStat(day, widget.userIdFinal!);
+
     DechetModel data = await userStat;
     return data;
   }
