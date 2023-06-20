@@ -8,8 +8,7 @@ import 'package:flutter_application_1/src/repository/authentification_repository
 import 'package:flutter_application_1/utilities/routes_router/router.dart';
 import 'package:get/get.dart';
 
-void main()  {
-
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthentificationRepository()));
@@ -18,7 +17,7 @@ void main()  {
     runApp(const MyApp());
   });
 }
-//tesr245
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-     onGenerateRoute: onGenerate,
+      onGenerateRoute: onGenerate,
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(
           canvasColor: const Color.fromRGBO(14, 77, 89, 1),
@@ -54,8 +53,7 @@ class MyApp extends StatelessWidget {
             disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
                 borderSide:
-                    const BorderSide(color: Color.fromRGBO(47, 103, 23, 1)))
-        ),
+                    const BorderSide(color: Color.fromRGBO(47, 103, 23, 1)))),
       ),
       home: MyScreen(),
     );

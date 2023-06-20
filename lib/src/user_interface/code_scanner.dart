@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application_1/src/Bluetooth_page.dart';
+import 'package:flutter_application_1/src/bluetooth/Bluetooth_page.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -45,7 +45,6 @@ class _QRScanState extends State<QRScan> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        
         bottomNavigationBar: BottomAppBar(
           shape: const CircularNotchedRectangle(),
           color: Theme.of(context).primaryColor,
@@ -55,31 +54,31 @@ class _QRScanState extends State<QRScan> {
             children: [
               OneItemNavBar(
                 push: false,
-                          imagepath: "images/home.png",
-                          page: const UserMainPage(),
-                          left: 5,
-                          right: 0,
-                          top: 0,
-                          bottom: 5,
-                        ),InkWell(
-            onTap: () async {
-              await controller?.toggleFlash();
-              setState(() {});
-            },
-            child: FutureBuilder(
-              future: controller?.getFlashStatus(),
-              builder: (context, snapshot) {
-                return InkWell(
-                    child: Image.asset(
-                  snapshot.data == true
-                      ? "images/flash_on.png"
-                      : "images/no-flash.png",
-                  height: 40,
-                  color: const Color.fromRGBO(230, 198, 84, 1),
-                ));
-              },
-            ))
- 
+                imagepath: "images/home.png",
+                page: const UserMainPage(),
+                left: 5,
+                right: 0,
+                top: 0,
+                bottom: 5,
+              ),
+              InkWell(
+                  onTap: () async {
+                    await controller?.toggleFlash();
+                    setState(() {});
+                  },
+                  child: FutureBuilder(
+                    future: controller?.getFlashStatus(),
+                    builder: (context, snapshot) {
+                      return InkWell(
+                          child: Image.asset(
+                        snapshot.data == true
+                            ? "images/flash_on.png"
+                            : "images/no-flash.png",
+                        height: 40,
+                        color: const Color.fromRGBO(230, 198, 84, 1),
+                      ));
+                    },
+                  ))
             ],
           ),
         ),
@@ -147,7 +146,7 @@ class _QRScanState extends State<QRScan> {
     );
   }
 
- Future<String> getdata_from_here() async {
+  Future<String> getdata_from_here() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
     String id = user2.id!;
@@ -180,7 +179,7 @@ class _QRScanState extends State<QRScan> {
                 CupertinoPageRoute(
                   builder: (_) => BluetoothPage(
                     desiredAddress: desiredAddress,
-                    scandata: poubelle,
+                    poubelleNum: poubelle,
                     userid: userIdFinal,
                     extraction: widget.extraction,
                   ),

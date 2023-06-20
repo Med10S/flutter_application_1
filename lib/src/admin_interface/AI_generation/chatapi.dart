@@ -19,7 +19,7 @@ class ChatApi {
     'messages': [
       {
         'role': 'user',
-        'content': 'comment tu t\'applle',
+        'content': message,
       }
     ]
   });

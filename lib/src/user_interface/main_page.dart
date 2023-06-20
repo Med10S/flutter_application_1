@@ -20,6 +20,7 @@ import 'code_scanner.dart';
 import 'package:intl/intl.dart';
 
 import 'compte.dart';
+import 'e-commerce/main/main_page.dart';
 
 class UserMainPage extends StatefulWidget {
   const UserMainPage({super.key});
@@ -225,8 +226,7 @@ class _UserMainPageState extends State<UserMainPage> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         OneItemNavBar(
-                                                    push: true,
-
+                          push: true,
                           imagepath: "images/home.png",
                           page: const UserMainPage(),
                           left: 5,
@@ -237,7 +237,7 @@ class _UserMainPageState extends State<UserMainPage> {
                         OneItemNavBar(
                           push: true,
                           imagepath: "images/chart.png",
-                          page: ChartDays(userIdFinal: userData.id!),
+                          page:MainPage(), //ChartDays(userIdFinal: userData.id!),
                           left: 5,
                           right: 20,
                           top: 10,
@@ -245,8 +245,7 @@ class _UserMainPageState extends State<UserMainPage> {
                         ),
                         userData.role == "admin"
                             ? OneItemNavBar(
-                                                        push: true,
-
+                                push: true,
                                 widget: Column(
                                   children: [
                                     Stack(children: const [
@@ -263,12 +262,16 @@ class _UserMainPageState extends State<UserMainPage> {
                                     ]),
                                   ],
                                 ),
-                                page: const QRScan( extraction: true,),
-                                left: 20,top: 10,bottom: 10,right: 0,
+                                page: const QRScan(
+                                  extraction: true,
+                                ),
+                                left: 20,
+                                top: 10,
+                                bottom: 10,
+                                right: 0,
                               )
                             : OneItemNavBar(
-                                                        push: true,
-
+                                push: true,
                                 widget: Column(
                                   children: [
                                     Stack(
@@ -289,11 +292,13 @@ class _UserMainPageState extends State<UserMainPage> {
                                 right: 0,
                               ),
                         OneItemNavBar(
-                                                    push: true,
-
+                          push: true,
                           imagepath: "images/info_client.png",
                           page: const AccountScreen(),
-                          left: 5,right: 20,top: 10,bottom: 10,
+                          left: 5,
+                          right: 20,
+                          top: 10,
+                          bottom: 10,
                         ),
                       ],
                     ),
