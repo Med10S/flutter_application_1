@@ -34,9 +34,8 @@ class _AccountScreenState extends State<AccountScreen> {
   final controller = Get.put(AuthentificationRepository());
   final profcontoller = Get.put(ProfileController());
   UserModel? _userModel;
-    Brightness platformBrightness = Brightness.light;
+  Brightness platformBrightness = Brightness.light;
 
-  final _db = FirebaseFirestore.instance;
   String userInput = ''; // Variable to store user input
   @override
   void initState() {
@@ -46,11 +45,13 @@ class _AccountScreenState extends State<AccountScreen> {
       setState(() {
         platformBrightness = brightness;
         statusController.setStatusBarColor(
-          platformBrightness,const Color.fromARGB(255, 236, 236, 236),
-          const Color.fromRGBO(14, 77, 89, 1));
+            platformBrightness,
+            const Color.fromARGB(255, 236, 236, 236),
+            const Color.fromRGBO(14, 77, 89, 1));
       });
     });
   }
+
   Future<void> userInformation() async {
     final userModel = await ProfileController().getUserData();
     setState(() {
@@ -65,8 +66,6 @@ class _AccountScreenState extends State<AccountScreen> {
     //print("user id is :$id");
     return id;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +172,6 @@ class _AccountScreenState extends State<AccountScreen> {
     final password = TextEditingController();
     final oldpassword = TextEditingController();
 
-
     return SingleChildScrollView(
       child: Form(
         key: _forKey,
@@ -199,7 +197,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       fontSize: Dimenssion.width16dp * 1.5,
                     ),
                   ),
-                   SizedBox(height: Dimenssion.height20dp),
+                  SizedBox(height: Dimenssion.height20dp),
                   Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimenssion.height20dp / 1.2),
@@ -218,13 +216,13 @@ class _AccountScreenState extends State<AccountScreen> {
                           ],
                         ),
                         InkWell(
-                        onTap: () {
-                        Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (_) => UpdateDataAll(userModel:_userModel!), 
-                        ));
-                            
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (_) =>
+                                      UpdateDataAll(userModel: _userModel!),
+                                ));
                           },
                           child: CircleAvatar(
                             backgroundColor: Theme.of(context).focusColor,
@@ -238,17 +236,16 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
             ),
             const SizedBox(height: 20.0),
-            _userModel!.role == 'admin' ? const Padding(
-              padding: EdgeInsets.all(4.0),
-              child: CustomButton(
-                text: "Tout les statistique",
-                root: "/AllDataLevel",
-                icon: FontAwesomeIcons.database,
-              ),
-            ): const Padding(
-              padding: EdgeInsets.all(4.0),
-              child: null
-            ),
+            _userModel!.role == 'admin'
+                ? const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: CustomButton(
+                      text: "Tout les statistique",
+                      root: "/AllDataLevel",
+                      icon: FontAwesomeIcons.database,
+                    ),
+                  )
+                : const Padding(padding: EdgeInsets.all(4.0), child: null),
             const Padding(
               padding: EdgeInsets.all(4.0),
               child: CustomButton(
@@ -284,50 +281,51 @@ class _AccountScreenState extends State<AccountScreen> {
                         return AlertDialog(
                           title: const Text('modifier votre clé '),
                           content: Column(
-                            mainAxisSize:MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               TextFormField(
-                    controller: oldpassword,
-                    validator: (value) {
-                      // Validation de la valeur du champ de texte
-                      if (value == '') {
-                        return 'Le champ est vide'; // Message d'erreur en cas de champ vide
-                      } else if (value!.length < 6) {
-                        return 'il doit contenir au moin 6 caracter';
-                      }
-                      // Retourne null si la validation est réussie
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.fingerprint,
-                              color: Mcolors.couleurPrincipal),
-                      labelText: "Old Password ",
-                      hintText: "Old Password",
-                      border: OutlineInputBorder(),
-                      
-                    ),
-                  ),SizedBox(height: Dimenssion.height20dp/2,),
+                                controller: oldpassword,
+                                validator: (value) {
+                                  // Validation de la valeur du champ de texte
+                                  if (value == '') {
+                                    return 'Le champ est vide'; // Message d'erreur en cas de champ vide
+                                  } else if (value!.length < 6) {
+                                    return 'il doit contenir au moin 6 caracter';
+                                  }
+                                  // Retourne null si la validation est réussie
+                                  return null;
+                                },
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.fingerprint,
+                                      color: Mcolors.couleurPrincipal),
+                                  labelText: "Old Password ",
+                                  hintText: "Old Password",
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              SizedBox(
+                                height: Dimenssion.height20dp / 2,
+                              ),
                               TextFormField(
-                    controller: password,
-                    validator: (value) {
-                      // Validation de la valeur du champ de texte
-                      if (value == '') {
-                        return 'Le champ est vide'; // Message d'erreur en cas de champ vide
-                      } else if (value!.length < 6) {
-                        return 'il doit contenir au moin 6 caracter';
-                      }
-                      // Retourne null si la validation est réussie
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.fingerprint,
-                              color: Mcolors.couleurPrincipal),
-                      labelText: "Password",
-                      hintText: "Password",
-                      border: OutlineInputBorder(),
-                      
-                    ),
-                  ),
+                                controller: password,
+                                validator: (value) {
+                                  // Validation de la valeur du champ de texte
+                                  if (value == '') {
+                                    return 'Le champ est vide'; // Message d'erreur en cas de champ vide
+                                  } else if (value!.length < 6) {
+                                    return 'il doit contenir au moin 6 caracter';
+                                  }
+                                  // Retourne null si la validation est réussie
+                                  return null;
+                                },
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.fingerprint,
+                                      color: Mcolors.couleurPrincipal),
+                                  labelText: "Password",
+                                  hintText: "Password",
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
                             ],
                           ),
                           actions: <Widget>[
@@ -335,9 +333,12 @@ class _AccountScreenState extends State<AccountScreen> {
                               child: const Text('OK'),
                               onPressed: () {
                                 if (!(password.text.trim().length < 6)) {
-                                  print("old:${oldpassword.text} new${password.text}");
-                                  controller.updatepassowrd(password.text.trim(),
-                                      _userModel!.email, oldpassword.text.trim());
+                                  print(
+                                      "old:${oldpassword.text} new${password.text}");
+                                  controller.updatepassowrd(
+                                      password.text.trim(),
+                                      _userModel!.email,
+                                      oldpassword.text.trim());
                                   profcontoller.updatedatapassword(
                                       password.text.trim(), _userModel!.id!);
                                   Navigator.of(context).pop();

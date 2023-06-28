@@ -4,7 +4,6 @@ import 'package:calendar_appbar/calendar_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
@@ -74,8 +73,7 @@ class ChartDaysState extends State<ChartDays> {
           mainAxisSize: MainAxisSize.max,
           children: [
             OneItemNavBar(
-                                        push: true,
-
+              push: true,
               imagepath: "images/home.png",
               page: const UserMainPage(),
               left: 5,
@@ -84,8 +82,7 @@ class ChartDaysState extends State<ChartDays> {
               right: 0,
             ),
             OneItemNavBar(
-                                        push: true,
-
+              push: true,
               widget: Column(
                 children: [
                   Stack(children: const [
@@ -98,15 +95,14 @@ class ChartDaysState extends State<ChartDays> {
                   ])
                 ],
               ),
-              page:ChartCalendare(userIdFinal: widget.userIdFinal!),              
+              page: ChartCalendare(userIdFinal: widget.userIdFinal!),
               left: 0,
               right: 20,
               top: 10,
               bottom: 10,
             ),
             OneItemNavBar(
-                                        push: true,
-
+              push: true,
               imagepath: "images/info_client.png",
               page: const AccountScreen(),
               left: 5,

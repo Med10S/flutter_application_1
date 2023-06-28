@@ -6,7 +6,6 @@ import '../../../../utilities/models/product.dart';
 import '../../e-admin/productentry.dart';
 import '../category/category_list_page.dart';
 import '../screens/notifications_page.dart';
-import '../screens/profile_page.dart';
 import '../screens/search_page.dart';
 import '../shop/check_out_page.dart';
 import 'components/custom_bottom_bar.dart';

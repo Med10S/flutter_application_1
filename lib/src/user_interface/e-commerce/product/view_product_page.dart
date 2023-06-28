@@ -4,10 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../utilities/app_properties.dart';
 import '../../../../utilities/models/product.dart';
 import '../screens/search_page.dart';
-import 'components/color_list.dart';
 import 'components/more_products.dart';
 import 'components/product_options.dart';
-import 'components/rating_bottomSheet.dart';
 
 class ViewProductPage extends StatefulWidget {
   final Product product;
