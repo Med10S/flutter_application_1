@@ -3,6 +3,7 @@ import '../../../../../utilities/models/category.dart';
 import 'category_card.dart';
 import 'recommended_list.dart';
 
+// ignore: must_be_immutable
 class TabView extends StatelessWidget {
   List<Category> categories = [
     Category(

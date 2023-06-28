@@ -15,11 +15,10 @@ import '../../src/adulte_pages/pollution/type_pollution/types.dart';
 import '../../src/adulte_pages/recyclage/3R.dart';
 import '../../src/adulte_pages/recyclage/definiton_R/definition.dart';
 import '../../src/adulte_pages/recyclage/logo.dart';
-import '../../src/user_interface/code_scanner.dart';
 
 Route<dynamic> onGenerate(RouteSettings settings) {
   switch (settings.name) {
-  //------------------pollution-----------------------
+    //------------------pollution-----------------------
     case AppRoutes.defintionPollution:
       return CupertinoPageRoute(builder: (_) => const definitionPolution());
     case AppRoutes.naturePollution:
@@ -28,7 +27,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const Sources());
     case AppRoutes.typePolution:
       return CupertinoPageRoute(builder: (_) => const TypesPollution());
-  //------------------recyclage-----------------------
+    //------------------recyclage-----------------------
     case AppRoutes.defintionREcyclage:
       return CupertinoPageRoute(builder: (_) => const DefRecyclage());
     case AppRoutes.recyclage_3R:
@@ -38,18 +37,18 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.poubelle:
       return CupertinoPageRoute(builder: (_) => const PoubelleRecyclage());
     case AppRoutes.dureeRecyclage:
-      return CupertinoPageRoute(builder: (_) =>  DureeRecyclage());
+      return CupertinoPageRoute(builder: (_) => DureeRecyclage());
     case AppRoutes.whyRecyclage:
-      return CupertinoPageRoute(builder: (_) =>  WhyRecyclage());
+      return CupertinoPageRoute(builder: (_) => WhyRecyclage());
     case AppRoutes.mainuserpage:
       return CupertinoPageRoute(builder: (_) => const UserMainPage());
     case AppRoutes.apropos:
-      return CupertinoPageRoute(builder: (_) =>  Apropos());
+      return CupertinoPageRoute(builder: (_) => Apropos());
     case AppRoutes.education:
       return CupertinoPageRoute(builder: (_) => const Education());
     case AppRoutes.allDataLevel:
       return CupertinoPageRoute(builder: (_) => const AllDataLevel());
-            
+
     default:
       return CupertinoPageRoute(
         builder: (_) => const Education(),

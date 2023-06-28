@@ -5,6 +5,7 @@ import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/product.dart';
 import '../../product/product_page.dart';
 
+// ignore: must_be_immutable
 class RecommendedList extends StatelessWidget {
   List<Product> products = [
     Product('assets/bag_1.png', 'Bag', 'Beautiful bag', 2.33),
@@ -18,6 +19,8 @@ class RecommendedList extends StatelessWidget {
     Product('assets/shoeman_7.png', 'Shoes', 'Description', 62.33),
     Product('assets/headphone_9.png', 'Headphones', 'Description', 72.33),
   ];
+
+  RecommendedList({super.key});
 
   @override
   Widget build(BuildContext context) {

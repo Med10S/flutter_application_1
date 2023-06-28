@@ -1,18 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/adulte_pages/first_page.dart';
-import 'package:flutter_application_1/src/fist_pages/page1.dart';
 import 'package:flutter_application_1/utilities/string.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'Apropos_Pages/equipe.dart';
 import 'Apropos_Pages/pageDePassage.dart';
 import 'authentification/screens/admin_or_user.dart';
-import 'authentification/screens/users/login_user/Login_screen.dart';
 
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrivacyPolicyPage extends StatefulWidget {
@@ -49,12 +43,13 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
-        appBar: _policyAccepted ? null: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          title: const Text('Politique de confidentialité'),
-          centerTitle: true,
-        ),
+        appBar: _policyAccepted
+            ? null
+            : AppBar(
+                backgroundColor: Theme.of(context).primaryColor,
+                title: const Text('Politique de confidentialité'),
+                centerTitle: true,
+              ),
         body: _policyAccepted ? const Welcome() : _buildPolicyContent(),
       ),
     );
@@ -68,12 +63,10 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
           children: [
             Text(
               Strings.politiqueDeConfidentialite,
-              style:const  TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             ),
-                        SizedBox(height: Dimenssion.height20dp/2),
-
+            SizedBox(height: Dimenssion.height20dp / 2),
             ElevatedButton(
-
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -104,13 +97,16 @@ class _PrivacyPolicyPageState extends State<PrivacyPolicyPage> {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children:const  [
-                  Icon(Icons.email,color:Colors.black),
-                  Text('Contactez-nous par e-mail',style: TextStyle(color:Colors.black),),
+                children: const [
+                  Icon(Icons.email, color: Colors.black),
+                  Text(
+                    'Contactez-nous par e-mail',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: Dimenssion.height20dp/2),
+            SizedBox(height: Dimenssion.height20dp / 2),
             ElevatedButton(
               onPressed: _acceptPolicy,
               style: ElevatedButton.styleFrom(

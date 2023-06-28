@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:dart_openai/openai.dart';
 
 import 'chatapi.dart';
 
 class Chatgpt extends StatelessWidget {
   final ChatApi chatApi = ChatApi();
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +34,6 @@ class _ChatScreenState extends State<ChatScreen> {
     String message = _messageController.text;
 
     if (message.isNotEmpty) {
-      
-
       String response = await widget.chatApi.completeChat(message);
 
       setState(() {
@@ -95,4 +91,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-

@@ -1,23 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_application_1/src/admin_interface/allstat.dart';
 import 'package:flutter_application_1/src/authentification/controllers/profil_controller.dart';
 import 'package:flutter_application_1/src/authentification/models/user_model.dart';
 import 'package:flutter_application_1/src/repository/user_repository/user_repository.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/src/user_interface/chart2.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../colors/colors.dart';
 import '../../utilities/status_bar_controller.dart';
 import '../../widgets/models_ui/1_item_nav_bar.dart';
 import 'code_scanner.dart';
-import 'package:intl/intl.dart';
 
 import 'compte.dart';
 import 'e-commerce/main/main_page.dart';
@@ -237,7 +232,8 @@ class _UserMainPageState extends State<UserMainPage> {
                         OneItemNavBar(
                           push: true,
                           imagepath: "images/chart.png",
-                          page:MainPage(), //ChartDays(userIdFinal: userData.id!),
+                          page:
+                              MainPage(), //ChartDays(userIdFinal: userData.id!),
                           left: 5,
                           right: 20,
                           top: 10,

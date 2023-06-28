@@ -5,6 +5,7 @@ import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/product.dart';
 import '../../product/product_page.dart';
 
+// ignore: must_be_immutable
 class ProductList extends StatelessWidget {
   List<Product> products;
 
