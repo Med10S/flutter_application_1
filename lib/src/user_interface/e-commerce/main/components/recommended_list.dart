@@ -38,7 +38,7 @@ class RecommendedList extends StatelessWidget {
                   color: mediumYellow,
                 ),
               ),
-              Center(
+              const Center(
                   child: Text(
                 'Recommended',
                 style: TextStyle(
@@ -51,14 +51,14 @@ class RecommendedList extends StatelessWidget {
         ),
         Flexible(
           child: Container(
-            padding: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
+            padding: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
             child: StaggeredGridView.countBuilder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               crossAxisCount: 4,
               itemCount: products.length,
               itemBuilder: (BuildContext context, int index) => new ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(5.0)),
                 child: InkWell(
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => ProductPage(product: products[index]))),
@@ -69,9 +69,9 @@ class RecommendedList extends StatelessWidget {
                               Colors.grey.withOpacity(0.3),
                               Colors.grey.withOpacity(0.7),
                             ],
-                            center: Alignment(0, 0),
+                            center: const Alignment(0, 0),
                             radius: 0.6,
-                            focal: Alignment(0, 0),
+                            focal: const Alignment(0, 0),
                             focalRadius: 0.1),
                       ),
                       child: Hero(

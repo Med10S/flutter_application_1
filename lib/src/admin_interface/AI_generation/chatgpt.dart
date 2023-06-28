@@ -5,6 +5,8 @@ import 'chatapi.dart';
 class Chatgpt extends StatelessWidget {
   final ChatApi chatApi = ChatApi();
 
+  Chatgpt({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +22,7 @@ class Chatgpt extends StatelessWidget {
 class ChatScreen extends StatefulWidget {
   final ChatApi chatApi;
 
-  ChatScreen({required this.chatApi});
+  const ChatScreen({super.key, required this.chatApi});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -48,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ChatGPT Demo'),
+        title: const Text('ChatGPT Demo'),
       ),
       body: Column(
         children: [
@@ -57,10 +59,10 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
                       _response,
-                      style: TextStyle(fontSize: 16.0),
+                      style: const TextStyle(fontSize: 16.0),
                     ),
                   ),
                 ],
@@ -68,19 +70,19 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _messageController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Enter your message...',
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: _sendMessage,
                 ),
               ],

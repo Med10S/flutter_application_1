@@ -39,7 +39,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.dureeRecyclage:
       return CupertinoPageRoute(builder: (_) => DureeRecyclage());
     case AppRoutes.whyRecyclage:
-      return CupertinoPageRoute(builder: (_) => WhyRecyclage());
+      return CupertinoPageRoute(builder: (_) => const WhyRecyclage());
     case AppRoutes.mainuserpage:
       return CupertinoPageRoute(builder: (_) => const UserMainPage());
     case AppRoutes.apropos:

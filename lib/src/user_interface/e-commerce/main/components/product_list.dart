@@ -44,7 +44,7 @@ class ProductList extends StatelessWidget {
 
             if (config.indicatorLayout != PageIndicatorLayout.NONE &&
                 config.layout == SwiperLayout.DEFAULT) {
-              return new PageIndicator(
+              return PageIndicator(
                 count: config.itemCount,
                 controller: config.pageController!,
                 layout: config.indicatorLayout,
@@ -117,7 +117,7 @@ class ProductCard extends StatelessWidget {
             margin: const EdgeInsets.only(left: 30),
             height: height,
             width: width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(24)),
               color: mediumYellow,
             ),
@@ -126,7 +126,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.favorite_border),
+                  icon: const Icon(Icons.favorite_border),
                   onPressed: () {},
                   color: Colors.white,
                 ),
@@ -138,8 +138,8 @@ class ProductCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             product.name,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16.0),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16.0),
                           ),
                         )),
                     Align(
@@ -147,7 +147,7 @@ class ProductCard extends StatelessWidget {
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 12.0),
                         padding: const EdgeInsets.fromLTRB(8.0, 4.0, 12.0, 4.0),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10)),
@@ -155,7 +155,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         child: Text(
                           '\$${product.price}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold),

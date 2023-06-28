@@ -7,7 +7,7 @@ import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/models_ui/1_item_nav_bar.dart';
+import '../../widgets/models_ui/1ItemNavBar.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/user_model.dart';
 import 'main_page.dart';

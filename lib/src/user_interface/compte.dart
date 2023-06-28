@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -57,7 +59,7 @@ class _AccountScreenState extends State<AccountScreen> {
     });
   }
 
-  Future<String> getdata_from_here() async {
+  Future<String> GetdataFRomHere() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
     String id = user2.id!;
@@ -101,7 +103,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   children: [
                     InkWell(
                         onTap: () {
-                          Future<String> usedId = getdata_from_here();
+                          Future<String> usedId = GetdataFRomHere();
                           usedId.then((value) async {
                             String userIdFinal = value;
                             //debugPrint('user id : $userIdFinal');

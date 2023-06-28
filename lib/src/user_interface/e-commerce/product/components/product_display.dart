@@ -7,6 +7,7 @@ class ProductDisplay extends StatelessWidget {
   final Product product;
 
   const ProductDisplay({
+    super.key,
     required this.product,
   });
   @override
@@ -19,8 +20,8 @@ class ProductDisplay extends StatelessWidget {
             child: Container(
                 width: MediaQuery.of(context).size.width / 1.5,
                 height: 85,
-                padding: EdgeInsets.only(right: 24),
-                decoration: new BoxDecoration(
+                padding: const EdgeInsets.only(right: 24),
+                decoration: const BoxDecoration(
                     color: darkGrey,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8.0),
@@ -32,30 +33,30 @@ class ProductDisplay extends StatelessWidget {
                           blurRadius: 6.0),
                     ]),
                 child: Align(
-                  alignment: Alignment(1, 0),
+                  alignment: const Alignment(1, 0),
                   child: RichText(
                       text: TextSpan(children: [
                     TextSpan(
                         text: '\$ ${product.price}',
                         style: const TextStyle(
-                            color: const Color(0xFFFFFFFF),
+                            color: Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400,
                             fontFamily: "Montserrat",
                             fontSize: 36.0)),
-                    TextSpan(
+                    const TextSpan(
                         text: '.58',
-                        style: const TextStyle(
-                            color: const Color(0xFFFFFFFF),
+                        style: TextStyle(
+                            color: Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400,
                             fontFamily: "Montserrat",
                             fontSize: 18.0))
                   ])),
                 ))),
         Align(
-          alignment: Alignment(-1, 0),
+          alignment: const Alignment(-1, 0),
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0, left: 20.0),
-            child: Container(
+            child: SizedBox(
               height: screenAwareSize(220, context),
               child: Stack(
                 children: <Widget>[
@@ -63,15 +64,13 @@ class ProductDisplay extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       bottom: 18.0,
                     ),
-                    child: Container(
-                      child: Hero(
-                        tag: product.image,
-                        child: Image.asset(
-                          product.image,
-                          fit: BoxFit.contain,
-                          height: 230,
-                          width: 230,
-                        ),
+                    child: Hero(
+                      tag: product.image,
+                      child: Image.asset(
+                        product.image,
+                        fit: BoxFit.contain,
+                        height: 230,
+                        width: 230,
                       ),
                     ),
                   )

@@ -9,6 +9,8 @@ import '../../../utilities/models/product.dart';
 import 'ProductController.dart';
 
 class ProductEntryPage extends StatefulWidget {
+  const ProductEntryPage({super.key});
+
   @override
   _ProductEntryPageState createState() => _ProductEntryPageState();
 }
@@ -91,7 +93,7 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Entrée de produit'),
+        title: const Text('Entrée de produit'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -107,16 +109,16 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            leading: Icon(Icons.photo_library),
-                            title: Text('Galerie'),
+                            leading: const Icon(Icons.photo_library),
+                            title: const Text('Galerie'),
                             onTap: () {
                               Navigator.pop(context);
                               _chooseImage(ImageSource.gallery);
                             },
                           ),
                           ListTile(
-                            leading: Icon(Icons.camera_alt),
-                            title: Text('Appareil photo'),
+                            leading: const Icon(Icons.camera_alt),
+                            title: const Text('Appareil photo'),
                             onTap: () {
                               Navigator.pop(context);
                               _chooseImage(ImageSource.camera);
@@ -137,29 +139,29 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                 ),
                 child: _imageFile != null
                     ? Image.file(_imageFile!, fit: BoxFit.cover)
-                    : Icon(Icons.add_a_photo, color: Colors.white),
+                    : const Icon(Icons.add_a_photo, color: Colors.white),
               ),
             ),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Nom',
               ),
             ),
             TextField(
               controller: _descriptionController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Description',
               ),
             ),
             TextField(
               controller: _priceController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Prix',
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
                 final String name = _nameController.text;
@@ -180,7 +182,7 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                   await controller.createProduct(product);
                 }
               },
-              child: Text('Enregistrer'),
+              child: const Text('Enregistrer'),
             ),
           ],
         ),

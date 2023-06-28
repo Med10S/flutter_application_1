@@ -10,9 +10,9 @@ class NotificationsPage extends StatelessWidget {
       child: SafeArea(
         child: Container(
             margin: const EdgeInsets.only(top: kToolbarHeight),
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(children: <Widget>[
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
@@ -33,14 +33,14 @@ class NotificationsPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(16.0),
                       margin: const EdgeInsets.symmetric(vertical: 4.0),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                       child: Column(
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundImage: AssetImage(
                                   'assets/background.jpg',
                                 ),
@@ -51,7 +51,7 @@ class NotificationsPage extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0),
                                   child: RichText(
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: Colors.black,
@@ -96,7 +96,7 @@ class NotificationsPage extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              Row(
+                              const Row(
                                 children: <Widget>[
                                   Icon(
                                     Icons.cancel,
@@ -104,8 +104,8 @@ class NotificationsPage extends StatelessWidget {
                                     color: Color(0xffF94D4D),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Text('Decline',
                                         style: TextStyle(
                                             color: Color(0xffF94D4D))),
@@ -121,14 +121,14 @@ class NotificationsPage extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4.0),
                       padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                       child: Column(
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundImage: AssetImage(
                                   'assets/background.jpg',
                                 ),
@@ -139,7 +139,7 @@ class NotificationsPage extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0),
                                   child: RichText(
-                                    text: TextSpan(
+                                    text: const TextSpan(
                                         style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           color: Colors.black,
@@ -184,7 +184,7 @@ class NotificationsPage extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              Row(
+                              const Row(
                                 children: <Widget>[
                                   Icon(
                                     Icons.cancel,
@@ -192,8 +192,8 @@ class NotificationsPage extends StatelessWidget {
                                     color: Color(0xffF94D4D),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Text('Decline',
                                         style: TextStyle(
                                             color: Color(0xffF94D4D))),
@@ -208,7 +208,7 @@ class NotificationsPage extends StatelessWidget {
                     // Share your feedback.
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4.0),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                       child: Column(
@@ -245,7 +245,7 @@ class NotificationsPage extends StatelessWidget {
                                   )
                                 ]),
                               ),
-                              Flexible(
+                              const Flexible(
                                 child: Column(children: [
                                   Text(
                                       'Boat Rockerz 350 On-Ear Bluetooth Headphones',
@@ -267,12 +267,12 @@ class NotificationsPage extends StatelessWidget {
                                     builder: (_) => RatingPage())),*/
                             child: Container(
                                 padding: const EdgeInsets.all(14.0),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: yellow,
                                     borderRadius: BorderRadius.only(
                                         bottomRight: Radius.circular(5.0),
                                         bottomLeft: Radius.circular(5.0))),
-                                child: Align(
+                                child: const Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
                                       'Share your feedback',
@@ -288,7 +288,7 @@ class NotificationsPage extends StatelessWidget {
                     // Track the product.
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4.0),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                       child: Column(
@@ -325,7 +325,7 @@ class NotificationsPage extends StatelessWidget {
                                   )
                                 ]),
                               ),
-                              Flexible(
+                              const Flexible(
                                 child: Column(children: [
                                   Text(
                                       'Boat Rockerz 440 On-Ear Bluetooth Headphones',
@@ -347,12 +347,12 @@ class NotificationsPage extends StatelessWidget {
                                     builder: (_) => TrackingPage())),*/
                             child: Container(
                                 padding: const EdgeInsets.all(14.0),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: yellow,
                                     borderRadius: BorderRadius.only(
                                         bottomRight: Radius.circular(5.0),
                                         bottomLeft: Radius.circular(5.0))),
-                                child: Align(
+                                child: const Align(
                                     alignment: Alignment.centerRight,
                                     child: Text(
                                       'Track the product',

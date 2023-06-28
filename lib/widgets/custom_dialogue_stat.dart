@@ -12,7 +12,8 @@ class CustomDialogStat extends StatelessWidget {
   final String date;
   final String userIdFinal;
   final Image image;
-  const CustomDialogStat({super.key, 
+  const CustomDialogStat({
+    super.key,
     required this.isDark,
     required this.date,
     required this.userIdFinal,
@@ -39,7 +40,7 @@ class CustomDialogStat extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          padding:const  EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 16,
             bottom: 16,
             left: 16,
@@ -65,7 +66,7 @@ class CustomDialogStat extends StatelessWidget {
                 "votre consomation pour : ${date == DateFormat('yyyy-MM-dd').format(DateTime.now()) ? "Auj" : date}",
                 textAlign: TextAlign.center,
               ),
-              FutureBuilder<List<quatitedechet>>(
+              FutureBuilder<List<QuatiteDechet>>(
                 future: getchardata(date),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -82,15 +83,16 @@ class CustomDialogStat extends StatelessWidget {
                           overflowMode: LegendItemOverflowMode.wrap,
                           position: LegendPosition.bottom),
                       series: <CircularSeries>[
-                        RadialBarSeries<quatitedechet, String>(
+                        RadialBarSeries<QuatiteDechet, String>(
                           maximumValue: 300,
                           dataSource: chartData,
                           legendIconType: LegendIconType.seriesType,
                           cornerStyle: CornerStyle.bothCurve,
-                          xValueMapper: (quatitedechet data, _) => data.produit,
-                          yValueMapper: (quatitedechet data, _) =>
+                          xValueMapper: (QuatiteDechet data, _) => data.produit,
+                          yValueMapper: (QuatiteDechet data, _) =>
                               data.quantite,
-                          dataLabelSettings: const DataLabelSettings(isVisible: true),
+                          dataLabelSettings:
+                              const DataLabelSettings(isVisible: true),
                         )
                       ],
                     );
@@ -101,34 +103,32 @@ class CustomDialogStat extends StatelessWidget {
               )
             ],
           ),
-        ), Positioned(
-      top: -Dimenssion.height32dp,
-      left: 16,
-      right: 16,
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 60,
-        child: ClipRRect(
-         
-          child: image,
         ),
-      ),
-    ),
-
+        Positioned(
+          top: -Dimenssion.height32dp,
+          left: 16,
+          right: 16,
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: 60,
+            child: ClipRRect(
+              child: image,
+            ),
+          ),
+        ),
       ],
-      
     );
   }
 
-  Future<List<quatitedechet>> getchardata(String day) async {
+  Future<List<QuatiteDechet>> getchardata(String day) async {
     DechetModel stas = await getusesstat(day);
 
     final chartData = [
-      quatitedechet("platique", stas.plastique),
-      quatitedechet("verre", stas.verre),
-      quatitedechet("metalle", stas.metale),
-      quatitedechet("organique", stas.organique),
-      quatitedechet("carton", stas.carton),
+      QuatiteDechet("platique", stas.plastique),
+      QuatiteDechet("verre", stas.verre),
+      QuatiteDechet("metalle", stas.metale),
+      QuatiteDechet("organique", stas.organique),
+      QuatiteDechet("carton", stas.carton),
     ];
 
     return chartData;

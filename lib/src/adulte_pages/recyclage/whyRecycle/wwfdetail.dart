@@ -7,12 +7,12 @@ class WWFDetailsPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-        title: Text('Détails - WWF'),
-        backgroundColor: Colors.orange,
-      ),
+          title: const Text('Détails - WWF'),
+          backgroundColor: Colors.orange,
+        ),
         body: Column(
           children: [
-            Container(
+            SizedBox(
               height: 200, // Hauteur raisonnable pour la photo
               child: Image.asset(
                 'images/wwf_photo.png',
@@ -21,11 +21,11 @@ class WWFDetailsPage extends StatelessWidget {
             ),
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'WWF Maroc',
                       style: TextStyle(
                         fontSize: 24,
@@ -33,16 +33,16 @@ class WWFDetailsPage extends StatelessWidget {
                         color: Colors.green,
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text(
+                    const SizedBox(height: 16),
+                    const Text(
                       'WWF Maroc est l\'antenne locale de l\'organisation internationale de protection de la nature, le World Wide Fund for Nature (WWF). Nous nous engageons pour la conservation de la biodiversité et la protection de l\'environnement au Maroc. Notre objectif est de préserver les écosystèmes naturels, de promouvoir des pratiques durables et de sensibiliser le public aux enjeux environnementaux. Nous travaillons en partenariat avec les communautés locales, les autorités et les autres acteurs pour assurer un avenir durable pour les générations futures.',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text(
+                    const SizedBox(height: 16),
+                    const Text(
                       'Site web:',
                       style: TextStyle(
                         fontSize: 18,
@@ -50,12 +50,12 @@ class WWFDetailsPage extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     GestureDetector(
                       onTap: () {
                         // Gérer l'ouverture du site web du WWF Maroc
                       },
-                      child: Text(
+                      child: const Text(
                         'www.worldwildlife.org',
                         style: TextStyle(
                           fontSize: 16,

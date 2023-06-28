@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../signup_admin/signup_admin_screen.dart';
 
-
 class LoginFooterWidget extends StatelessWidget {
   const LoginFooterWidget({
     Key? key,
@@ -13,11 +12,13 @@ class LoginFooterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        onPressed: () {Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (_) => SignUpScreen_admin(),
-                            ));},
+        onPressed: () {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (_) => SignUpScreenAdmin(),
+              ));
+        },
         child: Text.rich(
           TextSpan(
               text: "Don't Have An Account ",

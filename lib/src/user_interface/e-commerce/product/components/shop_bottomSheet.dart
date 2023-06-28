@@ -29,21 +29,14 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 1.5,
-        padding: EdgeInsets.symmetric(vertical: 20.0),
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
         margin: EdgeInsets.only(
             bottom: MediaQuery.of(context).padding.bottom == 0
                 ? 20
                 : MediaQuery.of(context).padding.bottom),
-        child: Center(
-            child: new Text("Confirm",
-                style: const TextStyle(
-                    color: const Color(0xfffefefe),
-                    fontWeight: FontWeight.w600,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 20.0))),
         decoration: BoxDecoration(
             gradient: mainButton,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
                 offset: Offset(0, 5),
@@ -51,11 +44,18 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
               )
             ],
             borderRadius: BorderRadius.circular(9.0)),
+        child: const Center(
+            child: Text("Confirm",
+                style: TextStyle(
+                    color: Color(0xfffefefe),
+                    fontWeight: FontWeight.w600,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 20.0))),
       ),
     );
 
     return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Color.fromRGBO(255, 255, 255, 0.9),
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(24), topLeft: Radius.circular(24))),
@@ -93,11 +93,11 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
                           },
                         ),
                         index == 4
-                            ? SizedBox()
+                            ? const SizedBox()
                             : Container(
                                 width: 2,
                                 height: 200,
-                                color: Color.fromRGBO(100, 100, 100, 0.1))
+                                color: const Color.fromRGBO(100, 100, 100, 0.1))
                       ],
                     );
                   }),

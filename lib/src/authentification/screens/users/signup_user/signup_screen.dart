@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/form_header_widget.dart';
@@ -16,8 +15,8 @@ class SignUpScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(25),
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 FormHeaderWidget(
                   image: "images/Group2.png",
                   title: "Get on Board",

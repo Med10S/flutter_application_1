@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/authentification/screens/users/login_user/widgets/login_header_widget.dart';
 
@@ -17,9 +16,9 @@ class LoginScreen_admin extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(25),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 LoginHeaderWidget(),
                 LoginForm(),
                 LoginFooterWidget(),

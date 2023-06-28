@@ -1,5 +1,4 @@
-import 'dart:io';
-import 'dart:ui';
+// ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,26 +11,25 @@ class Updatedata extends GetxController {
   static UserRepository get instance => Get.find();
   final _db1 = FirebaseFirestore.instance;
 
- updateDataProgress(context,List<String> chunks) async {
-  if(chunks.isEmpty){
-    return;
-  }
+  updateDataProgress(context, List<String> chunks) async {
+    if (chunks.isEmpty) {
+      return;
+    }
     ProgressDialog pd = ProgressDialog(context: context);
-    
+
     /// show the state of preparation first.
     pd.show(
         max: chunks.length,
         msg: 'mise a jour en cours...',
         progressType: ProgressType.valuable,
-        backgroundColor: Color(0xff212121),
-        progressValueColor: Color(0xff3550B4),
+        backgroundColor: const Color(0xff212121),
+        progressValueColor: const Color(0xff3550B4),
         progressBgColor: Colors.white70,
-
         msgColor: Colors.white,
         valueColor: Colors.white);
 
     /// Added to test late loading starts
-    await Future.delayed(Duration(milliseconds: 3000));
+    await Future.delayed(const Duration(milliseconds: 3000));
 
     for (int i = 0; i < chunks.length; i++) {
 // Get a reference to the document you want to update
@@ -47,31 +45,28 @@ class Updatedata extends GetxController {
               as int; // Cast the value to an int if necessary
 
           final newPoints = chunks[i].split(";")[2].substring(7);
-          int intValue=0;
+          int intValue = 0;
           try {
-            intValue =
-                int.parse(newPoints); // Convert the string to an integer
-            print(intValue); 
+            intValue = int.parse(newPoints); // Convert the string to an integer
+            print(intValue);
           } catch (e) {
             print(
                 'Error: $e'); // Output: Error: FormatException: Invalid radix-10 number
           }
           final newData = {
-            'points':
-                currentPoints + intValue
+            'points': currentPoints + intValue
           }; // Replace with the new value for the 'points' field
           await docRef.update(newData).then((value) async {
-            
-            pd.update(value: (i+1), msg: 'File Downloading...');
-            
-            await Future.delayed(Duration(milliseconds: 1000));
+            pd.update(value: (i + 1), msg: 'File Downloading...');
+
+            await Future.delayed(const Duration(milliseconds: 1000));
             // Update successful
           }).catchError((error) {
-            Get.snackbar("mise a jours info", "erreur !! ", 
-            borderRadius: 20,
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: const Color.fromARGB(255, 255, 72, 72),
-            colorText: Colors.black);
+            Get.snackbar("mise a jours info", "erreur !! ",
+                borderRadius: 20,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: const Color.fromARGB(255, 255, 72, 72),
+                colorText: Colors.black);
             return;
             // Handle errors here
           });
@@ -82,9 +77,8 @@ class Updatedata extends GetxController {
         // Handle errors here
       });
     }
-      /// You can indicate here that the download has started.
-    pd.close();
 
+    /// You can indicate here that the download has started.
+    pd.close();
   }
- 
 }

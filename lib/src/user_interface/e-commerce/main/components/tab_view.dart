@@ -7,38 +7,38 @@ import 'recommended_list.dart';
 class TabView extends StatelessWidget {
   List<Category> categories = [
     Category(
-      Color.fromARGB(255, 165, 84, 241),
-      Color.fromARGB(255, 255, 189, 227),
+      const Color.fromARGB(255, 165, 84, 241),
+      const Color.fromARGB(255, 255, 189, 227),
       'Tableaux',
       'assets/tableau1.jpg',
     ),
     Category(
-      Color(0xffF749A2),
-      Color(0xffFF7375),
+      const Color(0xffF749A2),
+      const Color(0xffFF7375),
       'Plantes',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xff00E9DA),
-      Color(0xff5189EA),
+      const Color(0xff00E9DA),
+      const Color(0xff5189EA),
       'Fashion',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xffAF2D68),
-      Color(0xff632376),
+      const Color(0xffAF2D68),
+      const Color(0xff632376),
       'Home',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xff36E892),
-      Color(0xff33B2B9),
+      const Color(0xff36E892),
+      const Color(0xff33B2B9),
       'Beauty',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xffF123C4),
-      Color(0xff668CEA),
+      const Color(0xffF123C4),
+      const Color(0xff668CEA),
       'Appliances',
       'assets/jeans_5.png',
     ),
@@ -54,50 +54,48 @@ class TabView extends StatelessWidget {
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.height / 9);
     return TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: <Widget>[
-          Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                    margin: EdgeInsets.all(8.0),
-                    height: MediaQuery.of(context).size.height / 9,
-                    width: MediaQuery.of(context).size.width,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: categories.length,
-                        itemBuilder: (_, index) => CategoryCard(
-                              category: categories[index],
-                            ))),
-                SizedBox(
-                  height: 16.0,
-                ),
-                Flexible(child: RecommendedList()),
-              ],
-            ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                  margin: const EdgeInsets.all(8.0),
+                  height: MediaQuery.of(context).size.height / 9,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories.length,
+                      itemBuilder: (_, index) => CategoryCard(
+                            category: categories[index],
+                          ))),
+              const SizedBox(
+                height: 16.0,
+              ),
+              Flexible(child: RecommendedList()),
+            ],
           ),
           Column(children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 16.0,
             ),
             Flexible(child: RecommendedList())
           ]),
           Column(children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 16.0,
             ),
             Flexible(child: RecommendedList())
           ]),
           Column(children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 16.0,
             ),
             Flexible(child: RecommendedList())
           ]),
           Column(children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 16.0,
             ),
             Flexible(child: RecommendedList())

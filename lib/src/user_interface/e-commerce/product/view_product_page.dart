@@ -17,7 +17,7 @@ class ViewProductPage extends StatefulWidget {
 }
 
 class _ViewProductPageState extends State<ViewProductPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int active = 0;
 
@@ -39,7 +39,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
               child: Card(
                 elevation: 3,
                 color: Colors.primaries[i],
-                child: SizedBox(
+                child: const SizedBox(
                   height: 32,
                   width: 32,
                 ),
@@ -61,7 +61,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
         maxLines: 5,
         semanticsLabel: '...',
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.6)),
+        style: const TextStyle(color: Color.fromRGBO(255, 255, 255, 0.6)),
       ),
     );
 
@@ -71,10 +71,10 @@ class _ViewProductPageState extends State<ViewProductPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: darkGrey),
+          iconTheme: const IconThemeData(color: darkGrey),
           actions: <Widget>[
             IconButton(
-              icon: new SvgPicture.asset(
+              icon: SvgPicture.asset(
                 'assets/icons/search_icon.svg',
                 fit: BoxFit.scaleDown,
               ),
@@ -82,9 +82,9 @@ class _ViewProductPageState extends State<ViewProductPage> {
                   .push(MaterialPageRoute(builder: (_) => SearchPage())),
             )
           ],
-          title: Text(
+          title: const Text(
             'Headphones',
-            style: const TextStyle(
+            style: TextStyle(
                 color: darkGrey,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Montserrat",

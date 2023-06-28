@@ -13,6 +13,8 @@ import 'components/product_list.dart';
 import 'components/tab_view.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -54,7 +56,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    Widget appBar = Container(
+    Widget appBar = SizedBox(
       height: kToolbarHeight + MediaQuery.of(context).padding.top,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,19 +114,19 @@ class _MainPageState extends State<MainPage>
         ));
 
     Widget tabBar = TabBar(
-      tabs: [
+      tabs: const [
         Tab(text: 'Trending'),
         Tab(text: 'Sports'),
         Tab(text: 'Headsets'),
         Tab(text: 'Wireless'),
         Tab(text: 'Bluetooth'),
       ],
-      labelStyle: TextStyle(fontSize: 16.0),
-      unselectedLabelStyle: TextStyle(
+      labelStyle: const TextStyle(fontSize: 16.0),
+      unselectedLabelStyle: const TextStyle(
         fontSize: 14.0,
       ),
       labelColor: darkGrey,
-      unselectedLabelColor: Color.fromRGBO(0, 0, 0, 0.5),
+      unselectedLabelColor: const Color.fromRGBO(0, 0, 0, 0.5),
       isScrollable: true,
       controller: tabController,
     );

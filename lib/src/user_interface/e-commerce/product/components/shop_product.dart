@@ -15,7 +15,7 @@ class ShopProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         width: MediaQuery.of(context).size.width / 2,
         child: Column(
           children: <Widget>[
@@ -28,7 +28,7 @@ class ShopProduct extends StatelessWidget {
               child: Text(
                 product.name,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: darkGrey,
                 ),
               ),
@@ -36,7 +36,7 @@ class ShopProduct extends StatelessWidget {
             Text(
               '\$${product.price}',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   color: darkGrey, fontWeight: FontWeight.bold, fontSize: 18.0),
             ),
           ],
@@ -74,7 +74,7 @@ class ShopProductDisplay extends StatelessWidget {
               height: 80,
               width: 80,
               child: Image.asset(
-                '${product.image}',
+                product.image,
                 fit: BoxFit.contain,
               )),
         ),

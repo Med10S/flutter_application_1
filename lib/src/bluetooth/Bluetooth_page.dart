@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,8 +51,6 @@ class _BluetoothPageState extends State<BluetoothPage>
   List<String> lines = [];
   final _Update = Get.put(Updatedata());
   final userRepo = Get.put(UserRepository());
-
-  final _db = FirebaseFirestore.instance;
 
   Future<String> getRoleUser() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();

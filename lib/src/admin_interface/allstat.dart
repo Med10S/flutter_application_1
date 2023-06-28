@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text("Admin Statistiques"),
+        title: const Text("Admin Statistiques"),
       ),
       body: Center(
         child: SizedBox(
@@ -108,7 +110,7 @@ déchets en respectant une réponse de moins de 300 mots ?"
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold)),
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

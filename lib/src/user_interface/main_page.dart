@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../colors/colors.dart';
 import '../../utilities/status_bar_controller.dart';
-import '../../widgets/models_ui/1_item_nav_bar.dart';
+import '../../widgets/models_ui/1ItemNavBar.dart';
 import 'code_scanner.dart';
 
 import 'compte.dart';

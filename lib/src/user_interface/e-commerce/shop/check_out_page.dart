@@ -7,6 +7,8 @@ import 'components/credit_card.dart';
 import 'components/shop_item_list.dart';
 
 class CheckOutPage extends StatefulWidget {
+  const CheckOutPage({super.key});
+
   @override
   _CheckOutPageState createState() => _CheckOutPageState();
 }
@@ -33,7 +35,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
         width: MediaQuery.of(context).size.width / 1.5,
         decoration: BoxDecoration(
             gradient: mainButton,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.16),
                 offset: Offset(0, 5),
@@ -41,10 +43,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
               )
             ],
             borderRadius: BorderRadius.circular(9.0)),
-        child: Center(
+        child: const Center(
           child: Text("Check Out",
-              style: const TextStyle(
-                  color: const Color(0xfffefefe),
+              style: TextStyle(
+                  color: Color(0xfffefefe),
                   fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.normal,
                   fontSize: 20.0)),
@@ -57,7 +59,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: darkGrey),
+        iconTheme: const IconThemeData(color: darkGrey),
         actions: <Widget>[
           IconButton(
               icon: Image.asset('assets/icons/denied_wallet.png'),
@@ -66,7 +68,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 .push(MaterialPageRoute(builder: (_) => UnpaidPage())),*/
               )
         ],
-        title: Text(
+        title: const Text(
           'Checkout',
           style: TextStyle(
               color: darkGrey, fontWeight: FontWeight.w500, fontSize: 18.0),
@@ -74,20 +76,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
       ),
       body: LayoutBuilder(
         builder: (_, constraints) => SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 32.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
                   height: 48.0,
                   color: yellow,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Subtotal',
                         style: TextStyle(
                             color: Colors.white,
@@ -96,7 +98,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       ),
                       Text(
                         products.length.toString() + ' items',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
@@ -120,8 +122,8 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Payment',
                     style: TextStyle(
@@ -144,7 +146,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     fade: 0.7,
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Center(
                     child: Padding(
                   padding: EdgeInsets.only(
@@ -165,13 +167,11 @@ class _CheckOutPageState extends State<CheckOutPage> {
 class Scroll extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
-
-    LinearGradient grT = LinearGradient(
+    LinearGradient grT = const LinearGradient(
         colors: [Colors.transparent, Colors.black26],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter);
-    LinearGradient grB = LinearGradient(
+    LinearGradient grB = const LinearGradient(
         colors: [Colors.transparent, Colors.black26],
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter);
@@ -182,7 +182,7 @@ class Scroll extends CustomPainter {
           ..shader = grT.createShader(Rect.fromLTRB(0, 0, size.width, 30)));
 
     canvas.drawRect(Rect.fromLTRB(0, 30, size.width, size.height - 40),
-        Paint()..color = Color.fromRGBO(50, 50, 50, 0.4));
+        Paint()..color = const Color.fromRGBO(50, 50, 50, 0.4));
 
     canvas.drawRect(
         Rect.fromLTRB(0, size.height - 40, size.width, size.height),
@@ -193,7 +193,6 @@ class Scroll extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
     return false;
   }
 }

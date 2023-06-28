@@ -7,7 +7,7 @@ import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-import '../../widgets/models_ui/1_item_nav_bar.dart';
+import '../../widgets/models_ui/1ItemNavBar.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/dechet_model.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
@@ -28,8 +28,8 @@ class ChartDays extends StatefulWidget {
 }
 
 class ChartDaysState extends State<ChartDays> {
-  late List<quatitedechet> chartData;
-  late Future<List<quatitedechet>> _chartDataFuture;
+  late List<QuatiteDechet> chartData;
+  late Future<List<QuatiteDechet>> _chartDataFuture;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class ChartDaysState extends State<ChartDays> {
           Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (_) => QRScan(extraction: false),
+                builder: (_) => const QRScan(extraction: false),
               ));
         },
         backgroundColor: Theme.of(context).primaryColor,
@@ -83,9 +83,9 @@ class ChartDaysState extends State<ChartDays> {
             ),
             OneItemNavBar(
               push: true,
-              widget: Column(
+              widget: const Column(
                 children: [
-                  Stack(children: const [
+                  Stack(children: [
                     Icon(
                       Icons.calendar_month_outlined,
                       size: 40,
@@ -166,7 +166,7 @@ class ChartDaysState extends State<ChartDays> {
                       day == DateFormat('yyyy-MM-dd').format(DateTime.now())
                           ? "Auj"
                           : day,
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+                      style: const TextStyle(fontSize: 20, color: Colors.black),
                       textAlign: TextAlign.start,
                     ),
                     InkWell(
@@ -181,7 +181,7 @@ class ChartDaysState extends State<ChartDays> {
                         child: const Icon(Icons.calendar_month_outlined))
                   ],
                 )),
-            FutureBuilder<List<quatitedechet>>(
+            FutureBuilder<List<QuatiteDechet>>(
               future: _chartDataFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -199,14 +199,15 @@ class ChartDaysState extends State<ChartDays> {
                         overflowMode: LegendItemOverflowMode.wrap,
                         position: LegendPosition.bottom),
                     series: <CircularSeries>[
-                      RadialBarSeries<quatitedechet, String>(
+                      RadialBarSeries<QuatiteDechet, String>(
                         maximumValue: 300,
                         dataSource: _chartData,
                         legendIconType: LegendIconType.seriesType,
                         cornerStyle: CornerStyle.bothCurve,
-                        xValueMapper: (quatitedechet data, _) => data.produit,
-                        yValueMapper: (quatitedechet data, _) => data.quantite,
-                        dataLabelSettings: DataLabelSettings(isVisible: true),
+                        xValueMapper: (QuatiteDechet data, _) => data.produit,
+                        yValueMapper: (QuatiteDechet data, _) => data.quantite,
+                        dataLabelSettings:
+                            const DataLabelSettings(isVisible: true),
                       )
                     ],
                   );
@@ -227,23 +228,23 @@ class ChartDaysState extends State<ChartDays> {
     return data;
   }
 
-  Future<List<quatitedechet>> getchardata(String day) async {
+  Future<List<QuatiteDechet>> getchardata(String day) async {
     DechetModel stas = await getusesstat(day);
 
     final chartData = [
-      quatitedechet("platique", stas.plastique),
-      quatitedechet("verre", stas.verre),
-      quatitedechet("metalle", stas.metale),
-      quatitedechet("organique", stas.organique),
-      quatitedechet("carton", stas.carton),
+      QuatiteDechet("platique", stas.plastique),
+      QuatiteDechet("verre", stas.verre),
+      QuatiteDechet("metalle", stas.metale),
+      QuatiteDechet("organique", stas.organique),
+      QuatiteDechet("carton", stas.carton),
     ];
 
     return chartData;
   }
 }
 
-class quatitedechet {
-  quatitedechet(this.produit, this.quantite);
+class QuatiteDechet {
+  QuatiteDechet(this.produit, this.quantite);
   final String produit;
   final double quantite;
 }
