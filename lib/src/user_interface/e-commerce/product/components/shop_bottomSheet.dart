@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/admin_interface/e-admin/ProductController.dart';
+import 'package:get/get.dart';
 
 import '../../../../../utilities/app_properties.dart';
+import '../../../../../utilities/models/cartProduct.dart';
 import '../../../../../utilities/models/product.dart';
 import 'shop_product.dart';
 
 class ShopBottomSheet extends StatefulWidget {
+  const ShopBottomSheet({super.key});
+
   @override
   _ShopBottomSheetState createState() => _ShopBottomSheetState();
 }
 
 class _ShopBottomSheetState extends State<ShopBottomSheet> {
-  List<Product> products = [
-    Product('assets/headphones.png',
-        'Boat roackerz 400 On-Ear Bluetooth Headphones', 'description', 45.3),
-    Product('assets/headphones_2.png',
-        'Boat roackerz 100 On-Ear Bluetooth Headphones', 'description', 22.3),
-    Product('assets/headphones_3.png',
-        'Boat roackerz 300 On-Ear Bluetooth Headphones', 'description', 58.3)
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
+
     Widget confirmButton = InkWell(
       onTap: () async {
         Navigator.of(context).pop();
@@ -76,31 +74,50 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
                 iconSize: 48,
               ),
             ),
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: products.length,
-                  itemBuilder: (_, index) {
-                    return Row(
-                      children: <Widget>[
-                        ShopProduct(
-                          products[index],
-                          onRemove: () {
-                            setState(() {
-                              products.remove(products[index]);
-                            });
-                          },
-                        ),
-                        index == 4
-                            ? const SizedBox()
-                            : Container(
-                                width: 2,
-                                height: 200,
-                                color: const Color.fromRGBO(100, 100, 100, 0.1))
-                      ],
-                    );
-                  }),
+            FutureBuilder<List<CartProduct>>(
+              future: productController.getCartProducts(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Lorsque le Future est en cours de chargement
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  // Lorsqu'une erreur s'est produite lors de la récupération des données
+                  return Text('Une erreur s\'est produite : ${snapshot.error}');
+                } else {
+                  // Lorsque les données ont été récupérées avec succès
+                  List<CartProduct> products = snapshot.data!;
+
+                  return SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: products.length,
+                      itemBuilder: (_, index) {
+                        return Row(
+                          children: <Widget>[
+                            ShopProduct(
+                              products[index],
+                              onRemove: () {
+                                setState(() {
+                                  products.remove(products[index]);
+                                });
+                              },
+                            ),
+                            index == 4
+                                ? const SizedBox()
+                                : Container(
+                                    width: 2,
+                                    height: 200,
+                                    color: const Color.fromRGBO(
+                                        100, 100, 100, 0.1),
+                                  ),
+                          ],
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
             ),
             confirmButton
           ],

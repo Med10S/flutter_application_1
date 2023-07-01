@@ -10,7 +10,7 @@ import '../authentification/models/dechet_model.dart';
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'AI_generation/chatapi.dart';
-import 'admin_repository.dart';
+import 'repo/admin_repository.dart';
 
 final today = DateUtils.dateOnly(DateTime.now());
 List<DateTime> iterateDatesBetween(DateTime startDate, DateTime endDate) {

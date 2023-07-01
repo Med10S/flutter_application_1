@@ -8,16 +8,36 @@ import '../../product/product_page.dart';
 // ignore: must_be_immutable
 class RecommendedList extends StatelessWidget {
   List<Product> products = [
-    Product('assets/bag_1.png', 'Bag', 'Beautiful bag', 2.33),
-    Product('assets/cap_5.png', 'Cap', 'Cap with beautiful design', 10),
-    Product('assets/jeans_1.png', 'Jeans', 'Jeans for you', 20),
-    Product('assets/womanshoe_3.png', 'Woman Shoes',
-        'Shoes with special discount', 30),
-    Product('assets/bag_10.png', 'Bag Express', 'Bag for your shops', 40),
+    Product(
+        id: "123",
+        image: 'assets/bag_1.png',
+        name: 'Bag',
+        description: 'Beautiful bag',
+        price: 2.33),
+    Product(
+        id: "123",
+        image: 'assets/cap_5.png',
+        name: 'Cap',
+        description: 'Cap with beautiful design',
+        price: 10),
+    Product(
+        id: "123",
+        image: 'assets/jeans_1.png',
+        name: 'Jeans',
+        description: 'Jeans for you',
+        price: 20),
+    Product(
+        id: "123",
+        image: 'assets/womanshoe_3.png',
+        name: 'Woman Shoes',
+        description: 'Shoes with special discount',
+        price: 30),
+    /*Product('assets/bag_10.png', 'Bag Express', 'Bag for your shops', 40),
     Product('assets/jeans_3.png', 'Jeans', 'Beautiful Jeans', 102.33),
     Product('assets/ring_1.png', 'Silver Ring', 'Description', 52.33),
     Product('assets/shoeman_7.png', 'Shoes', 'Description', 62.33),
     Product('assets/headphone_9.png', 'Headphones', 'Description', 72.33),
+  */
   ];
 
   RecommendedList({super.key});

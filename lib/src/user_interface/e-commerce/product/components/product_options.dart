@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/admin_interface/e-admin/ProductController.dart';
+import 'package:get/get.dart';
 
 import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/product.dart';
@@ -9,18 +11,20 @@ class ProductOption extends StatelessWidget {
   final Product product;
   const ProductOption(
     this.scaffoldKey, {
+    super.key,
     required this.product,
   });
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
     return SizedBox(
       height: 200,
       child: Stack(
         children: <Widget>[
           Positioned(
             left: 16.0,
-            child: Image.asset(
+            child: Image.network(
               product.image,
               height: 200,
               width: 200,
@@ -70,7 +74,9 @@ class ProductOption extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await productController.saveCartProduct(product);
+
                       scaffoldKey.currentState!.showBottomSheet((context) {
                         return ShopBottomSheet();
                       });

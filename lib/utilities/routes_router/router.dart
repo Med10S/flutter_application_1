@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/src/admin_interface/e-admin/productentry.dart';
 import 'package:flutter_application_1/src/adulte_pages/pollution/nature_pollution/nature.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/duree_recyclage.dart';
 import 'package:flutter_application_1/src/adulte_pages/recyclage/poubelle.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_application_1/utilities/routes_router/routes.dart';
 
 import '../../src/Apropos_Pages/pageDePassage.dart';
 import '../../src/admin_interface/allstat.dart';
+import '../../src/admin_interface/liaison_pages.dart';
 import '../../src/adulte_pages/first_page.dart';
 import '../../src/adulte_pages/pollution/sourse_pollution/Sources.dart';
 import '../../src/adulte_pages/pollution/definition/definition.dart';
@@ -43,11 +45,15 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.mainuserpage:
       return CupertinoPageRoute(builder: (_) => const UserMainPage());
     case AppRoutes.apropos:
-      return CupertinoPageRoute(builder: (_) => Apropos());
+      return CupertinoPageRoute(builder: (_) => const Apropos());
     case AppRoutes.education:
       return CupertinoPageRoute(builder: (_) => const Education());
     case AppRoutes.allDataLevel:
       return CupertinoPageRoute(builder: (_) => const AllDataLevel());
+    case AppRoutes.liaisonPages:
+      return CupertinoPageRoute(builder: (_) => const LiaisonPages());
+    case AppRoutes.productEntryPage:
+      return CupertinoPageRoute(builder: (_) => const ProductEntryPage());
 
     default:
       return CupertinoPageRoute(

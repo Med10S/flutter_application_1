@@ -1,16 +1,23 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/models/product.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 
-class ProductController {
+import '../../../utilities/models/cartProduct.dart';
+
+class ProductController extends GetxController {
+  static ProductController get instance => Get.find();
   final _db = FirebaseFirestore.instance;
   createProduct(Product product) async {
     await _db
         .collection("Products")
-        .add(product.toJson())
+        .doc(product.id)
+        .set(product.toJson())
         .whenComplete(() => Get.snackbar(
             "Success", "Your Product has been Added",
             snackPosition: SnackPosition.BOTTOM,
@@ -63,13 +70,55 @@ class ProductController {
     List<Product> products = [];
 
     final snapshot = await _db.collection("Products").get();
-    //for (var doc in snapshot.docs) {
-    final product = snapshot.docs.map((e) => Product.fromSnapshot(e)).single;
-    products.add(product);
-    // }
+    for (var doc in snapshot.docs) {
+      Product product = Product.fromSnapshot(doc);
+      products.add(product);
+    }
 
     print("Extraction des produits terminée.");
 
     return products;
+  }
+
+  Future<void> saveCartProduct(Product product) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Convertir le cartProduct en un Map
+    Map<String, dynamic> cartProductData = {
+      'productImage': product.image,
+      'productId': product.id,
+      'productName': product.name,
+      'productPrice': product.price,
+      'quantity': 1,
+    };
+
+    // Sauvegarder le cartProductData dans SharedPreferences
+    await prefs.setString(product.id, json.encode(cartProductData));
+  }
+
+  Future<List<CartProduct>> getCartProducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Récupérer la liste de cartProductsData depuis SharedPreferences
+    String? cartProductsData = prefs.getString('cartProducts');
+
+    if (cartProductsData != null) {
+      // Convertir la liste de Map en une liste de cartProducts
+      List<dynamic> decodedData = json.decode(cartProductsData);
+      List<CartProduct> cartProducts = decodedData.map((data) {
+        return CartProduct(
+          productImage: data['productImage'],
+          productId: data['productId'],
+          productName: data['productName'],
+          productPrice: data['productPrice'],
+          quantity: data['quantity'],
+        );
+      }).toList();
+
+      return cartProducts;
+    } else {
+      // Aucune donnée trouvée, retourner une liste vide
+      return [];
+    }
   }
 }

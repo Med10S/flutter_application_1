@@ -64,14 +64,11 @@ class ProductDisplay extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       bottom: 18.0,
                     ),
-                    child: Hero(
-                      tag: product.image,
-                      child: Image.asset(
-                        product.image,
-                        fit: BoxFit.contain,
-                        height: 230,
-                        width: 230,
-                      ),
+                    child: Image.network(
+                      product.image,
+                      fit: BoxFit.contain,
+                      height: 230,
+                      width: 230,
                     ),
                   )
                 ],

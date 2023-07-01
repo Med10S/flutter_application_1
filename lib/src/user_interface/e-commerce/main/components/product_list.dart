@@ -5,13 +5,16 @@ import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/product.dart';
 import '../../product/product_page.dart';
 
+/*cette class me permet d'afficher les produit dans
+ la page main_page_store premier possition */
+
 // ignore: must_be_immutable
 class ProductList extends StatelessWidget {
   List<Product> products;
 
   final SwiperController swiperController = SwiperController();
 
-  ProductList({required this.products});
+  ProductList({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +104,7 @@ class ProductCard extends StatelessWidget {
   final double width;
 
   const ProductCard({
+    super.key,
     required this.product,
     required this.height,
     required this.width,
@@ -168,14 +172,11 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            child: Hero(
-              tag: product.image,
-              child: Image.asset(
-                product.image,
-                height: height / 1.6,
-                width: width / 1.4,
-                fit: BoxFit.contain,
-              ),
+            child: Image.network(
+              product.image,
+              height: height / 1.6,
+              width: width / 1.4,
+              fit: BoxFit.contain,
             ),
           ),
         ],

@@ -10,7 +10,7 @@ import 'components/product_options.dart';
 class ViewProductPage extends StatefulWidget {
   final Product product;
 
-  ViewProductPage({required this.product});
+  const ViewProductPage({super.key, required this.product});
 
   @override
   _ViewProductPageState createState() => _ViewProductPageState();

@@ -242,9 +242,9 @@ class _UserMainPageState extends State<UserMainPage> {
                         userData.role == "admin"
                             ? OneItemNavBar(
                                 push: true,
-                                widget: Column(
+                                widget: const Column(
                                   children: [
-                                    Stack(children: const [
+                                    Stack(children: [
                                       Icon(
                                         Icons.admin_panel_settings,
                                         color: Color.fromRGBO(255, 182, 76, 1),
@@ -268,10 +268,10 @@ class _UserMainPageState extends State<UserMainPage> {
                               )
                             : OneItemNavBar(
                                 push: true,
-                                widget: Column(
+                                widget: const Column(
                                   children: [
                                     Stack(
-                                      children: const [
+                                      children: [
                                         Icon(
                                           Icons.store,
                                           size: 40,

@@ -45,7 +45,7 @@ class _ProductPageState extends State<ProductPage> {
             ],
             borderRadius: BorderRadius.circular(9.0)),
         child: const Center(
-          child: Text("View Product",
+          child: Text("View Product2",
               style: TextStyle(
                   color: Color(0xfffefefe),
                   fontWeight: FontWeight.w600,

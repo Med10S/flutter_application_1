@@ -19,7 +19,6 @@ import '../authentification/models/user_model.dart';
 import '../authentification/screens/users/upadate_data/updatedatascren.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
 import 'chart2.dart';
-import 'code_scanner.dart';
 import 'e-commerce/main/main_page_store.dart';
 import 'main_page.dart';
 
@@ -243,34 +242,37 @@ class _AccountScreenState extends State<AccountScreen> {
                 ? const Padding(
                     padding: EdgeInsets.all(4.0),
                     child: CustomButton(
-                      text: "Tout les statistique",
-                      root: "/AllDataLevel",
-                      icon: FontAwesomeIcons.database,
+                      text: "Admin espace",
+                      root: "/LiaisonPages",
+                      widget: Icon(
+                        Icons.admin_panel_settings_rounded,
+                        color: Colors.black,
+                        size: 40,
+                      ),
                     ),
                   )
                 : const Padding(padding: EdgeInsets.all(4.0), child: null),
             const Padding(
               padding: EdgeInsets.all(4.0),
               child: CustomButton(
-                text: "Acceuil",
-                root: "/mainuserpage",
-                icon: FontAwesomeIcons.house,
-              ),
+                  text: "Acceuil",
+                  root: "/mainuserpage",
+                  widget: Icon(FontAwesomeIcons.house, color: Colors.black)),
             ),
             const Padding(
               padding: EdgeInsets.all(4.0),
               child: CustomButton(
-                text: "A propos de nous",
-                root: "/Apropos",
-                icon: FontAwesomeIcons.info,
-              ),
+                  text: "A propos de nous",
+                  root: "/Apropos",
+                  widget: Icon(FontAwesomeIcons.info, color: Colors.black)),
             ),
             const Padding(
               padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4),
               child: CustomButton(
                   text: "Education",
                   root: "/Education",
-                  icon: FontAwesomeIcons.graduationCap),
+                  widget: Icon(FontAwesomeIcons.graduationCap,
+                      color: Colors.black)),
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
