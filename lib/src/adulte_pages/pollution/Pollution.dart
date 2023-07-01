@@ -2,13 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 
-import '../../../colors/colors.dart';
 import '../../../widgets/botton.dart';
 import '../../../utilities/string.dart';
 import '../first_page.dart';
-import 'definition/definition.dart';
-import 'nature_pollution/nature.dart';
-import 'type_pollution/types.dart';
+
 //done
 class Pollution extends StatelessWidget {
   const Pollution({super.key});
@@ -63,11 +60,22 @@ class Pollution extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const CustomButton(text: "Définiton",root: "/Pdeffintion",),
-                    CustomButton(text: Strings.naturePollution,root: "/NaturePollution",),
-                    const CustomButton(text: "Source de pollution",root: "/Psourse",),
-                    const CustomButton(text: "type de pollution",root: "/Ptype",),
-
+                    const CustomButton(
+                      text: "Définiton",
+                      root: "/Pdeffintion",
+                    ),
+                    CustomButton(
+                      text: Strings.naturePollution,
+                      root: "/NaturePollution",
+                    ),
+                    const CustomButton(
+                      text: "Source de pollution",
+                      root: "/Psourse",
+                    ),
+                    const CustomButton(
+                      text: "type de pollution",
+                      root: "/Ptype",
+                    ),
                   ],
                 ),
               ),

@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
                 borderSide:
                     const BorderSide(color: Color.fromRGBO(47, 103, 23, 1)))),
       ),
-      home: MyScreen(),
+      home: const MyScreen(),
     );
   }
 }

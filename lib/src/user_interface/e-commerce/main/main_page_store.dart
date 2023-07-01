@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../../../../utilities/app_properties.dart';
 import '../../../../utilities/custom_background.dart';
 import '../../../../utilities/models/product.dart';
-import '../../e-admin/productentry.dart';
+import '../../../admin_interface/e-admin/ProductController.dart';
+import '../../../admin_interface/e-admin/productentry.dart';
 import '../category/category_list_page.dart';
 import '../screens/notifications_page.dart';
 import '../screens/search_page.dart';
@@ -12,11 +14,11 @@ import 'components/custom_bottom_bar.dart';
 import 'components/product_list.dart';
 import 'components/tab_view.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class EcommerceMainPage extends StatefulWidget {
+  const EcommerceMainPage({super.key});
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _EcommerceMainPageState createState() => _EcommerceMainPageState();
 }
 
 List<String> timelines = [
@@ -42,16 +44,25 @@ List<Product> products = [
       152.99),
 ];
 
-class _MainPageState extends State<MainPage>
-    with TickerProviderStateMixin<MainPage> {
+class _EcommerceMainPageState extends State<EcommerceMainPage>
+    with TickerProviderStateMixin<EcommerceMainPage> {
   late TabController tabController;
   late TabController bottomTabController;
+  final productController = Get.put(ProductController());
+  List<Product> allProducts = [];
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 5, vsync: this);
+    extracterAllProducts();
     bottomTabController = TabController(length: 4, vsync: this);
+  }
+
+  extracterAllProducts() async {
+    await productController.extractAllProducts().then((value) {
+      print('last product image path :${value.last.image}');
+    });
   }
 
   @override

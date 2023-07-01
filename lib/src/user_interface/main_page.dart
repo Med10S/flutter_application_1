@@ -17,7 +17,6 @@ import '../../widgets/models_ui/1ItemNavBar.dart';
 import 'code_scanner.dart';
 
 import 'compte.dart';
-import 'e-commerce/main/main_page.dart';
 
 class UserMainPage extends StatefulWidget {
   const UserMainPage({super.key});
@@ -234,8 +233,7 @@ class _UserMainPageState extends State<UserMainPage> {
                         OneItemNavBar(
                           push: true,
                           imagepath: "images/chart.png",
-                          page:
-                              MainPage(), //ChartDays(userIdFinal: userData.id!),
+                          page: ChartDays(userIdFinal: userData.id!),
                           left: 5,
                           right: 20,
                           top: 10,

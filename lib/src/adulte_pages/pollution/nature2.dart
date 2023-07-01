@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 
 import '../../../utilities/dimention.dart';
-import 'Pollution.dart';
 import 'definition/definition.dart'; //init
+
 //done
 // ignore: camel_case_types
 class naturePollution extends StatelessWidget {

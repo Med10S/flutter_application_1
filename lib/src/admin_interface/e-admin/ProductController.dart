@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/models/product.dart';
 import 'package:get/get.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 class ProductController {
@@ -23,7 +21,7 @@ class ProductController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
-      print(error.toString());
+      //print(error.toString());
     });
   }
 
@@ -59,5 +57,19 @@ class ProductController {
       );
       return "";
     }
+  }
+
+  Future<List<Product>> extractAllProducts() async {
+    List<Product> products = [];
+
+    final snapshot = await _db.collection("Products").get();
+    //for (var doc in snapshot.docs) {
+    final product = snapshot.docs.map((e) => Product.fromSnapshot(e)).single;
+    products.add(product);
+    // }
+
+    print("Extraction des produits terminée.");
+
+    return products;
   }
 }

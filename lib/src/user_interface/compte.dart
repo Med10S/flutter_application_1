@@ -20,6 +20,7 @@ import '../authentification/screens/users/upadate_data/updatedatascren.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
 import 'chart2.dart';
 import 'code_scanner.dart';
+import 'e-commerce/main/main_page_store.dart';
 import 'main_page.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -74,6 +75,7 @@ class _AccountScreenState extends State<AccountScreen> {
         bottomNavigationBar: BottomAppBar(
           notchMargin: 5,
           shape: const CircularNotchedRectangle(),
+          shadowColor: Colors.black,
           color: Theme.of(context).primaryColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -130,12 +132,13 @@ class _AccountScreenState extends State<AccountScreen> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => const QRScan(
-                                  extraction: false,
-                                ),
-                              ));
+                                  builder: (_) => const EcommerceMainPage()));
                         },
-                        child: Image.asset('images/QR.png')),
+                        child: Icon(
+                          Icons.store_rounded,
+                          size: 40,
+                          color: const Color.fromARGB(255, 255, 180, 50),
+                        )),
                   ],
                 ),
               ),
