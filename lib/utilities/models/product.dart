@@ -1,10 +1,16 @@
-class Product {
-  String image;
-  String name;
-  String description;
-  double price;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Product(this.image, this.name, this.description, this.price);
+class Product {
+  final String image;
+  final String name;
+  final String description;
+  final double price;
+
+  Product(
+      {required this.image,
+      required this.name,
+      required this.description,
+      required this.price});
 
   Map<String, dynamic> toJson() {
     return {
@@ -15,7 +21,8 @@ class Product {
     };
   }
 
-  factory Product.fromSnapshot(Map<String, dynamic> snapshot) {
+  factory Product.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
     return Product(
       snapshot['image'],
       snapshot['name'],
