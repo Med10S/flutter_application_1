@@ -1,8 +1,10 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../utilities/app_properties.dart';
-import '../../../../utilities/models/product.dart';
+import '../../../../utilities/models/cartProduct.dart';
+import '../../../admin_interface/e-admin/ProductController.dart';
 import 'components/credit_card.dart';
 import 'components/shop_item_list.dart';
 
@@ -15,16 +17,17 @@ class CheckOutPage extends StatefulWidget {
 
 class _CheckOutPageState extends State<CheckOutPage> {
   SwiperController swiperController = SwiperController();
+  final productController = Get.put(ProductController());
 
-  List<Product> products = [
-    Product(
+  List<CartProduct> products = [
+    /*Product(
         id: "123",
         image: 'assets/headphones_2.png',
         name: 'Skullcandy headset L325',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
         price: 102.99),
-    /*Product('assets/headphones_2.png',
+    Product('assets/headphones_2.png',
         'Boat roackerz 100 On-Ear Bluetooth Headphones', 'description', 22.3),
     Product('assets/headphones_3.png',
         'Boat roackerz 300 On-Ear Bluetooth Headphones', 'description', 58.3)
@@ -61,112 +64,127 @@ class _CheckOutPageState extends State<CheckOutPage> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        iconTheme: const IconThemeData(color: darkGrey),
-        actions: <Widget>[
-          IconButton(
-              icon: Image.asset('assets/icons/denied_wallet.png'),
-              onPressed:
-                  () {} /*Navigator.of(context)
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          iconTheme: const IconThemeData(color: darkGrey),
+          actions: <Widget>[
+            IconButton(
+                icon: Image.asset('assets/icons/denied_wallet.png'),
+                onPressed:
+                    () {} /*Navigator.of(context)
                 .push(MaterialPageRoute(builder: (_) => UnpaidPage())),*/
-              )
-        ],
-        title: const Text(
-          'Checkout',
-          style: TextStyle(
-              color: darkGrey, fontWeight: FontWeight.w500, fontSize: 18.0),
+                )
+          ],
+          title: const Text(
+            'Checkout',
+            style: TextStyle(
+                color: darkGrey, fontWeight: FontWeight.w500, fontSize: 18.0),
+          ),
         ),
-      ),
-      body: LayoutBuilder(
-        builder: (_, constraints) => SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                  height: 48.0,
-                  color: yellow,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const Text(
-                        'Subtotal',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
-                      Text(
-                        products.length.toString() + ' items',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 300,
-                  child: Scrollbar(
-                    child: ListView.builder(
-                      itemBuilder: (_, index) => ShopItemList(
-                        products[index],
-                        onRemove: () {
-                          setState(() {
-                            products.remove(products[index]);
-                          });
-                        },
-                      ),
-                      itemCount: products.length,
+        body: FutureBuilder<List<CartProduct>>(
+          future: productController.getCartProducts(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<CartProduct> products = snapshot.data!;
+
+              return LayoutBuilder(
+                builder: (_, constraints) => SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: ConstrainedBox(
+                    constraints:
+                        BoxConstraints(minHeight: constraints.maxHeight),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                          height: 48.0,
+                          color: yellow,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              const Text(
+                                'Subtotal',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                              Text(
+                                products.length.toString() + ' items',
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 300,
+                          child: Scrollbar(
+                            child: ListView.builder(
+                              itemBuilder: (_, index) => ShopItemList(
+                                products[index],
+                                onRemove: () {
+                                  setState(() {
+                                    products.remove(products[index]);
+                                  });
+                                },
+                              ),
+                              itemCount: products.length,
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            'Payment',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: darkGrey,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 250,
+                          child: Swiper(
+                            itemCount: 2,
+                            itemBuilder: (_, index) {
+                              return CreditCard();
+                            },
+                            scale: 0.8,
+                            controller: swiperController,
+                            viewportFraction: 0.6,
+                            loop: false,
+                            fade: 0.7,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Center(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                bottom: MediaQuery.of(context).padding.bottom ==
+                                        0
+                                    ? 20
+                                    : MediaQuery.of(context).padding.bottom),
+                            child: checkOutButton,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Payment',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: darkGrey,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 250,
-                  child: Swiper(
-                    itemCount: 2,
-                    itemBuilder: (_, index) {
-                      return CreditCard();
-                    },
-                    scale: 0.8,
-                    controller: swiperController,
-                    viewportFraction: 0.6,
-                    loop: false,
-                    fade: 0.7,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Center(
-                    child: Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).padding.bottom == 0
-                          ? 20
-                          : MediaQuery.of(context).padding.bottom),
-                  child: checkOutButton,
-                ))
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+              );
+            } else if (snapshot.hasError) {
+              return Text('Une erreur s\'est produite : ${snapshot.error}');
+            } else {
+              return CircularProgressIndicator();
+            }
+          },
+        ));
   }
 }
 

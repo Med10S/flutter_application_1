@@ -75,8 +75,8 @@ class ProductOption extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () async {
+                      //await productController.clearCartProducts();
                       await productController.saveCartProduct(product);
-
                       scaffoldKey.currentState!.showBottomSheet((context) {
                         return ShopBottomSheet();
                       });

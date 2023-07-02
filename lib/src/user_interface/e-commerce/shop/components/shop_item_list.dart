@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 import '../../../../../utilities/app_properties.dart';
-import '../../../../../utilities/models/product.dart';
+import '../../../../../utilities/models/cartProduct.dart';
 import '../../product/components/color_list.dart';
 import '../../product/components/shop_product.dart';
 
 class ShopItemList extends StatefulWidget {
-  final Product product;
+  final CartProduct product;
   final VoidCallback onRemove;
 
-  ShopItemList(this.product, {required this.onRemove});
+  const ShopItemList(this.product, {super.key, required this.onRemove});
 
   @override
   _ShopItemListState createState() => _ShopItemListState();
@@ -46,13 +46,20 @@ class _ShopItemListState extends State<ShopItemList> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              widget.product.name,
-                              textAlign: TextAlign.right,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: darkGrey,
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                width: 110,
+                                padding: const EdgeInsets.only(left: 32.0),
+                                child: Text(
+                                  widget.product.productName,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                    color: darkGrey,
+                                  ),
+                                ),
                               ),
                             ),
                             Align(
@@ -67,7 +74,7 @@ class _ShopItemListState extends State<ShopItemList> {
                                   children: <Widget>[
                                     const ColorOption(Colors.red),
                                     Text(
-                                      '\$${widget.product.price}',
+                                      '\$${widget.product.productPrice}',
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           color: darkGrey,

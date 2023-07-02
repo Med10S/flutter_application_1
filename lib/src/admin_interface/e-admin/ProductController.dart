@@ -79,6 +79,10 @@ class ProductController extends GetxController {
 
     return products;
   }
+Future<void> clearCartProducts() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('cartProducts');
+}
 
   Future<void> saveCartProduct(Product product) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -92,14 +96,33 @@ class ProductController extends GetxController {
       'quantity': 1,
     };
 
-    // Sauvegarder le cartProductData dans SharedPreferences
-    await prefs.setString(product.id, json.encode(cartProductData));
+    // Récupérer la liste de cartProducts depuis SharedPreferences
+    String? cartProductsData = prefs.getString('cartProducts');
+    List<Map<String, dynamic>> cartProducts = [];
+
+    if (cartProductsData != null) {
+      // Si des données existent déjà, les récupérer et les ajouter à la liste
+      List<dynamic> decodedData = json.decode(cartProductsData);
+      cartProducts = decodedData.cast<Map<String, dynamic>>();
+    }
+
+    // Vérifier si le produit existe déjà dans le panier
+    bool productExists =
+        cartProducts.any((item) => item['productId'] == product.id);
+
+    if (!productExists) {
+      // Ajouter le nouveau cartProduct à la liste
+      cartProducts.add(cartProductData);
+
+      // Sauvegarder la liste mise à jour dans SharedPreferences
+      prefs.setString('cartProducts', json.encode(cartProducts));
+    }
   }
 
   Future<List<CartProduct>> getCartProducts() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // Récupérer la liste de cartProductsData depuis SharedPreferences
+    // Récupérer la liste de cartProducts depuis SharedPreferences
     String? cartProductsData = prefs.getString('cartProducts');
 
     if (cartProductsData != null) {
