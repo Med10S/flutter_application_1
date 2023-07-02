@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class GreenpeaceDetailsPage extends StatelessWidget {
+  const GreenpeaceDetailsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar:  AppBar(
-        title: Text('Détails - Greenpeace'),
-        backgroundColor: Colors.green,
-      ),
+        appBar: AppBar(
+          title: const Text('Détails - Greenpeace'),
+          backgroundColor: Colors.green,
+        ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(

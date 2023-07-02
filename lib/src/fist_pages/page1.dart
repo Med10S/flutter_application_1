@@ -1,13 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_application_1/src/fist_pages/page2.dart';
 
 import '../../utilities/dimention.dart';
 
 class Page1 extends StatefulWidget {
-  Page1({super.key});
+  const Page1({super.key});
 
   @override
   State<Page1> createState() => _Page1State();
@@ -25,23 +21,21 @@ class _Page1State extends State<Page1> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset(
-                      'images/back.png',
-                      width: Dimenssion.screenWidth,
-                      fit: BoxFit.fitWidth,
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'images/back.png',
+                    width: Dimenssion.screenWidth,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  SizedBox(
+                    height: Dimenssion.FirstPagesImageHeight,
+                    child: Image.asset(
+                      'images/groupe1.png',
                     ),
-                    Container(
-                      height: Dimenssion.FirstPagesImageHeight,
-                      child: Image.asset(
-                        'images/groupe1.png',
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Column(
                 children: [

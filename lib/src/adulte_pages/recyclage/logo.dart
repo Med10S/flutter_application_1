@@ -7,6 +7,7 @@ import 'package:flutter_application_1/utilities/string.dart';
 import '../../../colors/colors.dart';
 import '../../../widgets/custum_dialog.dart';
 import '../../../utilities/dimention.dart';
+
 //done
 class CustomButton2 extends StatelessWidget {
   final String buttonText;
@@ -14,14 +15,13 @@ class CustomButton2 extends StatelessWidget {
   final Image image;
   final bool? icon;
 
- const CustomButton2({
+  const CustomButton2({
     Key? key,
     required this.buttonText,
     required this.onPressed,
     required this.image,
     this.icon,
-
-}) : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +37,16 @@ class CustomButton2 extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          if(icon==true)
-            Container(alignment: Alignment.topRight,child: const Text("❌"),),
-          if (image != null) // Vérifie si l'image a été fournie
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: image
+          if (icon == true)
+            Container(
+              alignment: Alignment.topRight,
+              child: const Text("❌"),
             ),
+          // ignore: unnecessary_null_comparison
+          if (image != null) // Vérifie si l'image a été fournie
+            Padding(padding: const EdgeInsets.only(right: 8.0), child: image),
           Text(
-            buttonText, 
+            buttonText,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: isDark ? Colors.white : Colors.black,
@@ -60,7 +61,6 @@ class CustomButton2 extends StatelessWidget {
 }
 
 class LogoRecyclage extends StatelessWidget {
-
   final List<String> buttonTitles = [
     'Triman',
     'Triangle de Mobius',
@@ -69,15 +69,15 @@ class LogoRecyclage extends StatelessWidget {
     'Point Vert',
     'Tidyman'
   ];
-   final List<String> interpretation = [
+  final List<String> interpretation = [
     Strings.triman,
     Strings.triangledeMobius,
     Strings.consignesIntroTri,
     Strings.poubellebarree,
     Strings.pointVert,
     Strings.tidyman
-      ];
-  final List<String> buttonImages =  [
+  ];
+  final List<String> buttonImages = [
     'images/triman.png',
     'images/recycle.png',
     'images/consignes_intro_tri.png',
@@ -112,8 +112,10 @@ class LogoRecyclage extends StatelessWidget {
                     fontSize: Dimenssion.width24dp,
                     color: Mcolors.couleurSecondaire,
                   )),
-              const Text("❌ Les faux-amis des symboles de recyclage*",style: TextStyle(color: Colors.red),),
-          
+              const Text(
+                "❌ Les faux-amis des symboles de recyclage*",
+                style: TextStyle(color: Colors.red),
+              ),
               SizedBox(
                 height: Dimenssion.height40dp * 10,
                 child: GridView.builder(
@@ -136,13 +138,20 @@ class LogoRecyclage extends StatelessWidget {
                                 title: buttonTitles[index],
                                 description: interpretation[index],
                                 buttonText: 'Close',
-                                image:  Image.asset(buttonImages[index],height: Dimenssion.height55dp,color:isDark ? Colors.white : null,),
+                                image: Image.asset(
+                                  buttonImages[index],
+                                  height: Dimenssion.height55dp,
+                                  color: isDark ? Colors.white : null,
+                                ),
                                 isDark: isDark);
                           },
                         );
                       },
-                      image: Image.asset(buttonImages[index],height: Dimenssion.height55dp,),
-                      icon:  index==4||index==5 ? true:false ,
+                      image: Image.asset(
+                        buttonImages[index],
+                        height: Dimenssion.height55dp,
+                      ),
+                      icon: index == 4 || index == 5 ? true : false,
                     );
                   },
                 ),
@@ -152,10 +161,8 @@ class LogoRecyclage extends StatelessWidget {
                 children: [
                   InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (_) => const R_3()));
+                        Navigator.push(context,
+                            CupertinoPageRoute(builder: (_) => const R_3()));
                         // Fonction appelée lors du clic sur le bouton
                       },
                       child: Icon(
@@ -168,7 +175,7 @@ class LogoRecyclage extends StatelessWidget {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                                builder: (_) =>const PoubelleRecyclage()));
+                                builder: (_) => const PoubelleRecyclage()));
                         // Fonction appelée lors du clic sur le bouton
                       },
                       child: Icon(
@@ -178,7 +185,6 @@ class LogoRecyclage extends StatelessWidget {
                       )),
                 ],
               )
-            
             ],
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 class UserModel {
   final String? id;
   final String fullName;
@@ -9,18 +9,16 @@ class UserModel {
   final String? role;
   final String? niveau;
 
-
-  const UserModel( {
+  const UserModel({
     this.id,
     required this.email,
     required this.password,
     required this.fullName,
-     this.points,
-     this.role,
-     this.niveau,
+    this.points,
+    this.role,
+    this.niveau,
   });
-    
-    
+
   toJson() {
     return {
       "FullName": fullName,
@@ -31,6 +29,7 @@ class UserModel {
       "niveau": niveau,
     };
   }
+
   factory UserModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
@@ -41,6 +40,6 @@ class UserModel {
         role: data["role"],
         fullName: data["FullName"],
         points: data["points"],
-        niveau:data["niveau"]);
+        niveau: data["niveau"]);
   }
 }

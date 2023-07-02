@@ -22,16 +22,16 @@ class _ShopItemListState extends State<ShopItemList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       height: 130,
       child: Stack(
         children: <Widget>[
           Align(
-            alignment: Alignment(0, 0.8),
+            alignment: const Alignment(0, 0.8),
             child: Container(
                 height: 100,
-                margin: EdgeInsets.symmetric(horizontal: 16.0),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     boxShadow: shadow,
                     borderRadius: BorderRadius.only(
@@ -41,7 +41,7 @@ class _ShopItemListState extends State<ShopItemList> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 12.0, right: 12.0),
+                        padding: const EdgeInsets.only(top: 12.0, right: 12.0),
                         width: 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class _ShopItemListState extends State<ShopItemList> {
                             Text(
                               widget.product.name,
                               textAlign: TextAlign.right,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
                                 color: darkGrey,
@@ -65,11 +65,11 @@ class _ShopItemListState extends State<ShopItemList> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    ColorOption(Colors.red),
+                                    const ColorOption(Colors.red),
                                     Text(
                                       '\$${widget.product.price}',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: darkGrey,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18.0),
@@ -83,14 +83,14 @@ class _ShopItemListState extends State<ShopItemList> {
                       ),
                       Theme(
                           data: ThemeData(
-                              accentColor: Colors.black,
+                              hintColor: Colors.black,
                               textTheme: TextTheme(
-                                headline6: TextStyle(
+                                titleLarge: const TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 14,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
-                                bodyText1: TextStyle(
+                                bodyLarge: TextStyle(
                                   fontFamily: 'Montserrat',
                                   fontSize: 12,
                                   color: Colors.grey[400],

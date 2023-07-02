@@ -1,18 +1,15 @@
 // ignore_for_file: slash_for_doc_comments
 import 'dart:developer';
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/bluetooth/Bluetooth_page.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/models_ui/1_item_nav_bar.dart';
+import '../../widgets/models_ui/1ItemNavBar.dart';
 import '../authentification/controllers/profil_controller.dart';
 import '../authentification/models/user_model.dart';
-import '../repository/authentification_repository/authentification_repository.dart';
-import 'compte.dart';
 import 'main_page.dart';
 import 'dart:async';
 
@@ -28,7 +25,6 @@ class _QRScanState extends State<QRScan> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  final _db = FirebaseFirestore.instance;
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
 

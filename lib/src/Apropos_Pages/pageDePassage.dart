@@ -5,10 +5,16 @@ import 'package:flutter_application_1/src/Apropos_Pages/objective.dart';
 import 'package:flutter_application_1/src/Apropos_Pages/stategie.dart';
 
 // Définissez une liste de widgets pour chaque page
-final List<Widget> pages = [const Equipe(), const Objective(), const Strategie()];
+final List<Widget> pages = [
+  const Equipe(),
+  const Objective(),
+  const Strategie()
+];
 
 // Dans le widget de votre écran, ajoutez un PageView et un DotsIndicator
 class Apropos extends StatefulWidget {
+  const Apropos({super.key});
+
   @override
   _MyScreenState createState() => _MyScreenState();
 }
@@ -33,8 +39,7 @@ class _MyScreenState extends State<Apropos> {
           ),
           Container(
             width: double.infinity,
-            decoration:
-                BoxDecoration(color:Theme.of(context).primaryColor),
+            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             child: DotsIndicator(
               dotsCount: pages.length,
               position: _currentPageIndex.toDouble(),

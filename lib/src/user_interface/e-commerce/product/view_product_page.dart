@@ -4,22 +4,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../utilities/app_properties.dart';
 import '../../../../utilities/models/product.dart';
 import '../screens/search_page.dart';
-import 'components/color_list.dart';
 import 'components/more_products.dart';
 import 'components/product_options.dart';
-import 'components/rating_bottomSheet.dart';
 
 class ViewProductPage extends StatefulWidget {
   final Product product;
 
-  ViewProductPage({required this.product});
+  const ViewProductPage({super.key, required this.product});
 
   @override
   _ViewProductPageState createState() => _ViewProductPageState();
 }
 
 class _ViewProductPageState extends State<ViewProductPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int active = 0;
 
@@ -41,7 +39,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
               child: Card(
                 elevation: 3,
                 color: Colors.primaries[i],
-                child: SizedBox(
+                child: const SizedBox(
                   height: 32,
                   width: 32,
                 ),
@@ -63,7 +61,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
         maxLines: 5,
         semanticsLabel: '...',
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.6)),
+        style: const TextStyle(color: Color.fromRGBO(255, 255, 255, 0.6)),
       ),
     );
 
@@ -73,10 +71,10 @@ class _ViewProductPageState extends State<ViewProductPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: darkGrey),
+          iconTheme: const IconThemeData(color: darkGrey),
           actions: <Widget>[
             IconButton(
-              icon: new SvgPicture.asset(
+              icon: SvgPicture.asset(
                 'assets/icons/search_icon.svg',
                 fit: BoxFit.scaleDown,
               ),
@@ -84,9 +82,9 @@ class _ViewProductPageState extends State<ViewProductPage> {
                   .push(MaterialPageRoute(builder: (_) => SearchPage())),
             )
           ],
-          title: Text(
+          title: const Text(
             'Headphones',
-            style: const TextStyle(
+            style: TextStyle(
                 color: darkGrey,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Montserrat",

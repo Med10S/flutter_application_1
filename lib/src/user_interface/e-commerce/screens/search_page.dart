@@ -7,6 +7,8 @@ import '../../../../utilities/models/product.dart';
 import '../product/view_product_page.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -19,11 +21,13 @@ class _SearchPageState extends State<SearchPage>
 
   List<Product> products = [
     Product(
-        'assets/headphones_2.png',
-        'Skullcandy headset L325',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-        102.99),
-    Product(
+        id: "123",
+        image: 'assets/headphones_2.png',
+        name: 'Skullcandy headset L325',
+        description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
+        price: 102.99),
+    /* Product(
         'assets/headphones_3.png',
         'Skullcandy headset X25',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
@@ -32,7 +36,7 @@ class _SearchPageState extends State<SearchPage>
         'assets/headphones.png',
         'Blackzy PRO hedphones M003',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id porta nibh. Orci porta non pulvinar neque laoreet suspendisse. Id nibh tortor id aliquet. Dui sapien eget mi proin. Viverra vitae congue eu consequat ac felis donec. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Vulputate mi sit amet mauris commodo quis imperdiet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Sit amet cursus sit amet dictum sit amet justo. Mattis pellentesque id nibh tortor. Sed blandit libero volutpat sed cras ornare arcu dui. Fermentum et sollicitudin ac orci phasellus. Ipsum nunc aliquet bibendum enim facilisis gravida. Viverra suspendisse potenti nullam ac tortor. Dapibus ultrices in iaculis nunc sed. Nisi porta lorem mollis aliquam ut porttitor leo a. Phasellus egestas tellus rutrum tellus pellentesque. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Eros in cursus turpis massa. Eget mauris pharetra et ultrices neque.',
-        152.99),
+        152.99),*/
   ];
 
   List<String> timeFilter = [
@@ -71,13 +75,8 @@ class _SearchPageState extends State<SearchPage>
         halfBoundValue: AnimationControllerValue(percentage: 0.4),
         upperBoundValue: AnimationControllerValue(percentage: 0.4),
         lowerBoundValue: AnimationControllerValue(pixel: 50),
-        duration: Duration(milliseconds: 200));
+        duration: const Duration(milliseconds: 200));
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   void _expand() {
@@ -89,7 +88,7 @@ class _SearchPageState extends State<SearchPage>
       margin: const EdgeInsets.only(top: kToolbarHeight),
       child: Column(
         children: <Widget>[
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,8 +106,8 @@ class _SearchPageState extends State<SearchPage>
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.0),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            decoration: const BoxDecoration(
                 border:
                     Border(bottom: BorderSide(color: Colors.orange, width: 1))),
             child: TextField(
@@ -116,11 +115,11 @@ class _SearchPageState extends State<SearchPage>
               onChanged: (value) {
                 if (value.isNotEmpty) {
                   List<Product> tempList = [];
-                  products.forEach((product) {
+                  for (var product in products) {
                     if (product.name.toLowerCase().contains(value)) {
                       tempList.add(product);
                     }
-                  });
+                  }
                   setState(() {
                     searchResults.clear();
                     searchResults.addAll(tempList);
@@ -146,7 +145,7 @@ class _SearchPageState extends State<SearchPage>
                     searchController.clear();
                     searchResults.clear();
                   },
-                  child: Text(
+                  child: const Text(
                     'Clear',
                     style: TextStyle(color: Colors.red),
                   ),
@@ -160,7 +159,7 @@ class _SearchPageState extends State<SearchPage>
               child: ListView.builder(
                   itemCount: searchResults.length,
                   itemBuilder: (_, index) => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: ListTile(
                         onTap: () =>
                             Navigator.of(context).push(MaterialPageRoute(
@@ -178,7 +177,7 @@ class _SearchPageState extends State<SearchPage>
 
   Widget _getUpperLayer() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           boxShadow: [
             BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.05),
@@ -189,7 +188,7 @@ class _SearchPageState extends State<SearchPage>
               topRight: Radius.circular(24), topLeft: Radius.circular(24)),
           color: Colors.white),
       child: ListView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
 //          controller: _scrollController,
         children: <Widget>[
           Align(
@@ -202,23 +201,22 @@ class _SearchPageState extends State<SearchPage>
               ),
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 32.0, top: 16.0, bottom: 16.0),
+              padding: EdgeInsets.only(left: 32.0, top: 16.0, bottom: 16.0),
               child: Text(
                 'Sort By',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: 50,
             child: ListView.builder(
               itemBuilder: (_, index) => Center(
                   child: Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 8.0,
                 ),
                 child: InkWell(
@@ -228,29 +226,29 @@ class _SearchPageState extends State<SearchPage>
                       });
                     },
                     child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 20.0),
                         decoration: selectedPeriod == timeFilter[index]
-                            ? BoxDecoration(
+                            ? const BoxDecoration(
                                 color: Color(0xffFDB846),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(45)))
-                            : BoxDecoration(),
+                            : const BoxDecoration(),
                         child: Text(
                           timeFilter[index],
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ))),
               )),
               itemCount: timeFilter.length,
               scrollDirection: Axis.horizontal,
             ),
           ),
-          Container(
+          SizedBox(
             height: 50,
             child: ListView.builder(
               itemBuilder: (_, index) => Center(
                   child: Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 8.0,
                 ),
                 child: InkWell(
@@ -260,29 +258,29 @@ class _SearchPageState extends State<SearchPage>
                       });
                     },
                     child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 20.0),
                         decoration: selectedCategory == categoryFilter[index]
-                            ? BoxDecoration(
+                            ? const BoxDecoration(
                                 color: Color(0xffFDB846),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(45)))
-                            : BoxDecoration(),
+                            : const BoxDecoration(),
                         child: Text(
                           categoryFilter[index],
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ))),
               )),
               itemCount: categoryFilter.length,
               scrollDirection: Axis.horizontal,
             ),
           ),
-          Container(
+          SizedBox(
             height: 50,
             child: ListView.builder(
               itemBuilder: (_, index) => Center(
                   child: Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 8.0,
                 ),
                 child: InkWell(
@@ -292,17 +290,17 @@ class _SearchPageState extends State<SearchPage>
                       });
                     },
                     child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 20.0),
                         decoration: selectedPrice == priceFilter[index]
-                            ? BoxDecoration(
+                            ? const BoxDecoration(
                                 color: Color(0xffFDB846),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(45)))
-                            : BoxDecoration(),
+                            : const BoxDecoration(),
                         child: Text(
                           priceFilter[index],
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ))),
               )),
               itemCount: priceFilter.length,

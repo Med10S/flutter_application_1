@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,9 +9,8 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import '../authentification/models/dechet_model.dart';
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:http/http.dart' as http;
 import 'AI_generation/chatapi.dart';
-import 'admin_repository.dart';
+import 'repo/admin_repository.dart';
 
 final today = DateUtils.dateOnly(DateTime.now());
 List<DateTime> iterateDatesBetween(DateTime startDate, DateTime endDate) {
@@ -54,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final ChatApi chatApi = ChatApi();
   String _response = '';
   bool isListening = false;
-  String? firstDate,lastDate;
-  DechetModel?  stats;
+  String? firstDate, lastDate;
+  DechetModel? stats;
   final _responseController = StreamController<String>();
   Stream<String> get responseStream => _responseController.stream;
 
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text("Admin Statistiques"),
+        title: const Text("Admin Statistiques"),
       ),
       body: Center(
         child: SizedBox(
@@ -77,20 +77,20 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView(
             children: <Widget>[
               _buildCalendarWithActionButtons(),
-            
               ElevatedButton(
                 onPressed: () {
-                  if(stats==null||(firstDate==""&&lastDate=="")){
+                  if (stats == null || (firstDate == "" && lastDate == "")) {
                     Fluttertoast.showToast(
-        msg: "veuillez attentdre que vous visualiser le graphe en premier",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-                  }else{
-String message ="""
+                      msg:
+                          "veuillez attentdre que vous visualiser le graphe en premier",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  } else {
+                    String message = """
 "En tant que membre de l'établissement universitaire, 
 voici les données de poids de mes poubelles de tri entre le $firstDate et le $lastDate  : 
 papier (${stats!.carton} kg), plastique (${stats!.plastique} kg), 
@@ -101,18 +101,16 @@ déchets en respectant une réponse de moins de 300 mots ?"
                     print("carton $message bool $isListening ");
                     _sendMessage(message);
                   }
-                    
-                 
                 },
                 child: const Text('donne moi des conseils'),
               ),
               Text("SUggestions".toUpperCase(),
                   textAlign: TextAlign.center,
-                  style:const TextStyle(
+                  style: const TextStyle(
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold)),
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -147,8 +145,8 @@ déchets en respectant une réponse de moins de 300 mots ?"
             ? values[1].toString().replaceAll('00:00:00.000', '')
             : 'null';
 
-        firstDate= startDate;
-        lastDate =endDate; 
+        firstDate = startDate;
+        lastDate = endDate;
         try {
           dates = iterateDatesBetween(values[0]!, values[1]!);
         } catch (e) {
@@ -283,9 +281,7 @@ déchets en respectant une réponse de moins de 300 mots ?"
                                           ),
                                         ),
                                       ),
-                                    )
-                                  
-                                    );
+                                    ));
                               } else {
                                 return const Text('No data available');
                               }
@@ -310,7 +306,6 @@ déchets en respectant une réponse de moins de 300 mots ?"
       String response = await chatApi.completeChat(message);
       setState(() {
         _response = response;
-        
       });
       _responseController.add(response);
     }

@@ -6,6 +6,8 @@ import '../../../../utilities/models/category.dart';
 import 'components/staggered_category_card.dart';
 
 class CategoryListPage extends StatefulWidget {
+  const CategoryListPage({super.key});
+
   @override
   _CategoryListPageState createState() => _CategoryListPageState();
 }
@@ -13,38 +15,38 @@ class CategoryListPage extends StatefulWidget {
 class _CategoryListPageState extends State<CategoryListPage> {
   List<Category> categories = [
     Category(
-      Color(0xffFCE183),
-      Color(0xffF68D7F),
+      const Color(0xffFCE183),
+      const Color(0xffF68D7F),
       'Gadgets',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xffF749A2),
-      Color(0xffFF7375),
+      const Color(0xffF749A2),
+      const Color(0xffFF7375),
       'Clothes',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xff00E9DA),
-      Color(0xff5189EA),
+      const Color(0xff00E9DA),
+      const Color(0xff5189EA),
       'Fashion',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xffAF2D68),
-      Color(0xff632376),
+      const Color(0xffAF2D68),
+      const Color(0xff632376),
       'Home',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xff36E892),
-      Color(0xff33B2B9),
+      const Color(0xff36E892),
+      const Color(0xff33B2B9),
       'Beauty',
       'assets/jeans_5.png',
     ),
     Category(
-      Color(0xffF123C4),
-      Color(0xff668CEA),
+      const Color(0xffF123C4),
+      const Color(0xff668CEA),
       'Appliances',
       'assets/jeans_5.png',
     ),
@@ -62,14 +64,14 @@ class _CategoryListPageState extends State<CategoryListPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color(0xffF9F9F9),
+      color: const Color(0xffF9F9F9),
       child: Container(
         margin: const EdgeInsets.only(top: kToolbarHeight),
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Align(
+            const Align(
               alignment: Alignment(-1, 0),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -84,8 +86,8 @@ class _CategoryListPageState extends State<CategoryListPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(left: 16.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.only(left: 16.0),
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 color: Colors.white,
               ),
@@ -124,7 +126,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
               child: ListView.builder(
                 itemCount: searchResults.length,
                 itemBuilder: (_, index) => Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 16.0,
                   ),
                   child: StaggeredCardCard(

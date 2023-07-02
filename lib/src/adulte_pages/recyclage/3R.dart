@@ -1,4 +1,3 @@
-// ignore: camel_case_types
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/cupertino.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import '../../../colors/colors.dart';
 import 'definiton_R/definition.dart';
 import 'logo.dart';
+
 //done
 class R_3 extends StatefulWidget {
   const R_3({super.key});
@@ -28,11 +28,11 @@ class _R_3State extends State<R_3> {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              height: Dimenssion.screenHeight,
-                  alignment: Alignment.centerLeft,
-                  color: Theme.of(context).primaryColor,
-                  child: Column(
+        child: Container(
+          height: Dimenssion.screenHeight,
+          alignment: Alignment.centerLeft,
+          color: Theme.of(context).primaryColor,
+          child: Column(
             children: [
               Stack(
                 alignment: Alignment.center,
@@ -70,12 +70,14 @@ class _R_3State extends State<R_3> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Theme.of(context).canvasColor),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
                             if (states.contains(MaterialState.disabled)) {
                               return Colors.grey;
@@ -115,12 +117,14 @@ class _R_3State extends State<R_3> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Theme.of(context).canvasColor),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
                             if (states.contains(MaterialState.disabled)) {
                               return Colors.grey;
@@ -157,12 +161,14 @@ class _R_3State extends State<R_3> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Theme.of(context).canvasColor),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        foregroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
                           (Set<MaterialState> states) {
                             if (states.contains(MaterialState.disabled)) {
                               return Colors.grey;
@@ -203,7 +209,6 @@ class _R_3State extends State<R_3> {
                 ),
               ),
               Row(
-                
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
@@ -224,7 +229,7 @@ class _R_3State extends State<R_3> {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                                builder: (_) =>LogoRecyclage()));
+                                builder: (_) => LogoRecyclage()));
                         // Fonction appelée lors du clic sur le bouton
                       },
                       child: Icon(
@@ -235,9 +240,9 @@ class _R_3State extends State<R_3> {
                 ],
               )
             ],
-                  ),
-                ),
-          )),
+          ),
+        ),
+      )),
     );
   }
 

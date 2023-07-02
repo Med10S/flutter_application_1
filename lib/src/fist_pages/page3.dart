@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
-import 'package:flutter_application_1/src/Apropos_Pages/pageDePassage.dart';
-import 'package:flutter_application_1/src/fist_pages/page2.dart';
-import 'package:flutter_application_1/src/fist_pages/pageDePassage.dart';
 import 'package:flutter_application_1/src/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -68,7 +63,8 @@ class Page3 extends StatelessWidget {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () async {
-                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
                           await prefs.setBool('isFirstRun', false);
                           Navigator.push(
                               context,

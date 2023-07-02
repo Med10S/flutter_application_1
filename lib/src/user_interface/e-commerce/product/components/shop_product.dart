@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../utilities/app_properties.dart';
-import '../../../../../utilities/models/product.dart';
+import '../../../../../utilities/models/cartProduct.dart';
 
 class ShopProduct extends StatelessWidget {
-  final Product product;
+  final CartProduct product;
   final VoidCallback onRemove;
 
   const ShopProduct(
@@ -15,7 +15,7 @@ class ShopProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         width: MediaQuery.of(context).size.width / 2,
         child: Column(
           children: <Widget>[
@@ -26,17 +26,17 @@ class ShopProduct extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                product.name,
+                product.productName,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: darkGrey,
                 ),
               ),
             ),
             Text(
-              '\$${product.price}',
+              '\$${product.productPrice}',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   color: darkGrey, fontWeight: FontWeight.bold, fontSize: 18.0),
             ),
           ],
@@ -45,7 +45,7 @@ class ShopProduct extends StatelessWidget {
 }
 
 class ShopProductDisplay extends StatelessWidget {
-  final Product product;
+  final CartProduct product;
   final VoidCallback onPressed;
 
   const ShopProductDisplay(this.product, {required this.onPressed});
@@ -73,8 +73,8 @@ class ShopProductDisplay extends StatelessWidget {
           child: SizedBox(
               height: 80,
               width: 80,
-              child: Image.asset(
-                '${product.image}',
+              child: Image.network(
+                product.productImage,
                 fit: BoxFit.contain,
               )),
         ),

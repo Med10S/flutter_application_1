@@ -5,13 +5,14 @@ import 'amaedatails.dart';
 import 'greenspaceD.dart';
 import 'wwfdetail.dart';
 
-
 class WhyRecyclage extends StatelessWidget {
+  const WhyRecyclage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Organismes environnementaux'),
+        title: const Text('Organismes environnementaux'),
         backgroundColor: Colors.green,
         elevation: 0,
       ),
@@ -20,15 +21,15 @@ class WhyRecyclage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.green,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),
                 ),
               ),
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 24),
-              child: Column(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
@@ -50,8 +51,8 @@ class WhyRecyclage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 32),
-            Padding(
+            const SizedBox(height: 32),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 'Organismes engagés dans la lutte contre le réchauffement climatique et la protection de l\'environnement :',
@@ -61,7 +62,7 @@ class WhyRecyclage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildOrganizationCard(
               context,
               'Greenpeace',
@@ -137,24 +138,24 @@ class WhyRecyclage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => APEMDetailsPage(),
+                    builder: (context) => const APEMDetailsPage(),
                   ),
                 );
               },
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildOrganizationCard(
-      BuildContext context, String title, String description, Color color, IconData iconData, VoidCallback onTap) {
+  Widget _buildOrganizationCard(BuildContext context, String title,
+      String description, Color color, IconData iconData, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -162,12 +163,13 @@ class WhyRecyclage extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           leading: Container(
             width: 60,
             height: 60,
@@ -183,21 +185,16 @@ class WhyRecyclage extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black
-            ),
+            style: const TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           subtitle: Text(
             description,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.grey
-            ),
+            style: const TextStyle(color: Colors.grey),
           ),
-          trailing: Icon(Icons.arrow_forward_ios),
+          trailing: const Icon(Icons.arrow_forward_ios),
         ),
       ),
     );
@@ -206,18 +203,17 @@ class WhyRecyclage extends StatelessWidget {
 
 // Exemple de page détaillée pour Greenpeace
 
-
-
-
 //  page détaillée pour le APEM
 
 class APEMDetailsPage extends StatelessWidget {
+  const APEMDetailsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: 200, // Hauteur raisonnable pour la photo
             child: Image.asset(
               'images/apem_photo.png',
@@ -226,11 +222,11 @@ class APEMDetailsPage extends StatelessWidget {
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Association de Protection de l\'Environnement au Maroc',
                     style: TextStyle(
                       fontSize: 24,
@@ -238,16 +234,16 @@ class APEMDetailsPage extends StatelessWidget {
                       color: Colors.green,
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'L\'Association de Protection de l\'Environnement au Maroc (APEM) est dédiée à la préservation et à la protection de l\'environnement au Maroc. Elle mène des actions pour la sensibilisation, la conservation de la biodiversité, la gestion des déchets et la promotion des énergies renouvelables. L\'APEM travaille en étroite collaboration avec les communautés locales, les autorités et les autres acteurs pour promouvoir des pratiques durables et une meilleure qualité de vie.',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Site web:',
                     style: TextStyle(
                       fontSize: 18,
@@ -255,12 +251,12 @@ class APEMDetailsPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   GestureDetector(
                     onTap: () {
                       // Gérer l'ouverture du site web de l'APEM
                     },
-                    child: Text(
+                    child: const Text(
                       'www.apem.ma',
                       style: TextStyle(
                         fontSize: 16,

@@ -7,6 +7,7 @@ class Dimenssion {
   static double screenHeight = Get.context!.height;
   static double screenWidth = Get.context!.width;
 //640/
+  // ignore: non_constant_identifier_names
   static double FirstPagesImageHeight = screenHeight / 1.9;
   static double height5dp = screenHeight / 128;
   static double height20dp = screenHeight / 32;

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/dimention.dart';
-import '../welcome.dart';
 
 class Strategie extends StatelessWidget {
   const Strategie({super.key});

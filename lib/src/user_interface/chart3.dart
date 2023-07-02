@@ -74,7 +74,6 @@ class _ChartCalendareState extends State<ChartCalendare> {
                               ));
                         },
                         child: Image.asset("images/home.png")),
-                    
                   ],
                 ),
               ),
@@ -93,7 +92,6 @@ class _ChartCalendareState extends State<ChartCalendare> {
                               ));
                         },
                         child: Image.asset("images/chart.png")),
-                    
                   ],
                 ),
               ),
@@ -102,14 +100,14 @@ class _ChartCalendareState extends State<ChartCalendare> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    InkWell(onTap: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (_) => const AccountScreen()));
-                      },
-                    child: Image.asset("images/info_client.png")),
-                    
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (_) => const AccountScreen()));
+                        },
+                        child: Image.asset("images/info_client.png")),
                   ],
                 ),
               ),
@@ -118,18 +116,17 @@ class _ChartCalendareState extends State<ChartCalendare> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                   InkWell(
-                      onTap: () {
-                        AuthentificationRepository.instance.logout();
-                        Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (_) => PrivacyPolicyPage(), //LoginScreen(),
-                    ));
-                      },
-                      child: const Icon(Icons.logout,color: Colors.red )
-                      ),
-                   
+                    InkWell(
+                        onTap: () {
+                          AuthentificationRepository.instance.logout();
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (_) =>
+                                    PrivacyPolicyPage(), //LoginScreen(),
+                              ));
+                        },
+                        child: const Icon(Icons.logout, color: Colors.red)),
                   ],
                 ),
               ),
@@ -138,18 +135,20 @@ class _ChartCalendareState extends State<ChartCalendare> {
         ),
         body: Column(
           children: [
-            SizedBox(height: Dimenssion.height20dp/2,),
+            SizedBox(
+              height: Dimenssion.height20dp / 2,
+            ),
             Image.asset('images/logo.png'),
             Container(
               margin: const EdgeInsets.all(10),
               height: Dimenssion.FirstPagesImageHeight,
-               decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Theme.of(context).cardColor,
-            ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).cardColor,
+              ),
               child: CalendarCarousel(
-                height:Dimenssion.FirstPagesImageHeight,
-                todayButtonColor:Colors.green,
+                height: Dimenssion.FirstPagesImageHeight,
+                todayButtonColor: Colors.green,
                 dayButtonColor: Theme.of(context).focusColor,
                 onDayPressed: (DateTime date, List<dynamic> events) {
                   String day3 = DateFormat('yyyy-MM-dd').format(date);
@@ -179,48 +178,61 @@ class _ChartCalendareState extends State<ChartCalendare> {
                   DateTime day,
                 ) {
                   String date = DateFormat('yyyy-MM-dd').format(day);
-                  return FutureBuilder<List<quatitedechet>>(
-                future: getchardata(date),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else {
-                    final chartData = snapshot.data!;
-bool allNonZero = chartData.every((element) => element.quantite == 0.0);
-      
-      if (allNonZero) {
-        return Center(child: Text('${day.day}'));
-      } else {
-        // Traitez le cas où au moins un élément est égal à zéro
-        return Center(child: Text('${day.day}',style: const TextStyle(color: Colors.red),));
-      }
+                  return FutureBuilder<List<QuatiteDechet>>(
+                    future: getchardata(date),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      } else {
+                        final chartData = snapshot.data!;
+                        bool allNonZero = chartData
+                            .every((element) => element.quantite == 0.0);
 
-                    }
-                },
-              );
+                        if (allNonZero) {
+                          return Center(child: Text('${day.day}'));
+                        } else {
+                          // Traitez le cas où au moins un élément est égal à zéro
+                          return Center(
+                              child: Text(
+                            '${day.day}',
+                            style: const TextStyle(color: Colors.red),
+                          ));
+                        }
+                      }
+                    },
+                  );
                 },
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [const Text("Click sur n'importe quelle journée\npour visualiser tes statistiques !!"),Image.asset('images/click.png',scale: 10,color: Colors.red,)],),
-          
+              children: [
+                const Text(
+                    "Click sur n'importe quelle journée\npour visualiser tes statistiques !!"),
+                Image.asset(
+                  'images/click.png',
+                  scale: 10,
+                  color: Colors.red,
+                )
+              ],
+            ),
           ],
         ),
       ),
     );
   }
-  Future<List<quatitedechet>> getchardata(String day) async {
+
+  Future<List<QuatiteDechet>> getchardata(String day) async {
     DechetModel stas = await getusesstat(day);
 
     final chartData = [
-      quatitedechet("platique", stas.plastique),
-      quatitedechet("verre", stas.verre),
-      quatitedechet("metalle", stas.metale),
-      quatitedechet("organique", stas.organique),
-      quatitedechet("carton", stas.carton),
+      QuatiteDechet("platique", stas.plastique),
+      QuatiteDechet("verre", stas.verre),
+      QuatiteDechet("metalle", stas.metale),
+      QuatiteDechet("organique", stas.organique),
+      QuatiteDechet("carton", stas.carton),
     ];
 
     return chartData;

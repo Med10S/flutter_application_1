@@ -5,12 +5,16 @@ import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/product.dart';
 import '../../product/product_page.dart';
 
+/*cette class me permet d'afficher les produit dans
+ la page main_page_store premier possition */
+
+// ignore: must_be_immutable
 class ProductList extends StatelessWidget {
   List<Product> products;
 
   final SwiperController swiperController = SwiperController();
 
-  ProductList({required this.products});
+  ProductList({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class ProductList extends StatelessWidget {
 
             if (config.indicatorLayout != PageIndicatorLayout.NONE &&
                 config.layout == SwiperLayout.DEFAULT) {
-              return new PageIndicator(
+              return PageIndicator(
                 count: config.itemCount,
                 controller: config.pageController!,
                 layout: config.indicatorLayout,
@@ -100,6 +104,7 @@ class ProductCard extends StatelessWidget {
   final double width;
 
   const ProductCard({
+    super.key,
     required this.product,
     required this.height,
     required this.width,
@@ -116,7 +121,7 @@ class ProductCard extends StatelessWidget {
             margin: const EdgeInsets.only(left: 30),
             height: height,
             width: width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(24)),
               color: mediumYellow,
             ),
@@ -125,7 +130,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.favorite_border),
+                  icon: const Icon(Icons.favorite_border),
                   onPressed: () {},
                   color: Colors.white,
                 ),
@@ -137,8 +142,8 @@ class ProductCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             product.name,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 16.0),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16.0),
                           ),
                         )),
                     Align(
@@ -146,7 +151,7 @@ class ProductCard extends StatelessWidget {
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 12.0),
                         padding: const EdgeInsets.fromLTRB(8.0, 4.0, 12.0, 4.0),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10)),
@@ -154,7 +159,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         child: Text(
                           '\$${product.price}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
@@ -167,14 +172,11 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            child: Hero(
-              tag: product.image,
-              child: Image.asset(
-                product.image,
-                height: height / 1.6,
-                width: width / 1.4,
-                fit: BoxFit.contain,
-              ),
+            child: Image.network(
+              product.image,
+              height: height / 1.6,
+              width: width / 1.4,
+              fit: BoxFit.contain,
             ),
           ),
         ],

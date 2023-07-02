@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../authentification/controllers/profil_controller.dart';
-import '../authentification/models/dechet_model.dart';
+import '../../authentification/controllers/profil_controller.dart';
+import '../../authentification/models/dechet_model.dart';
 
 class UserStatsExtractor {
   final FirebaseFirestore _db = FirebaseFirestore.instance;

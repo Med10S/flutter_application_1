@@ -1,13 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/colors/colors.dart';
 import 'package:flutter_application_1/src/authentification/controllers/loging_controller.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
-import '../../../../../user_interface/main_page.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -33,17 +29,19 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             TextFormField(
               controller: controller.email,
-
-              decoration:  InputDecoration(
-                  prefixIcon: Icon(Icons.person_outline_outlined,color: Mcolors.couleurPrincipal,),
+              decoration: const InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.person_outline_outlined,
+                    color: Mcolors.couleurPrincipal,
+                  ),
                   labelText: "Email",
                   hintText: "Email",
-                  border:const OutlineInputBorder()),
+                  border: OutlineInputBorder()),
             ),
             const SizedBox(height: 30 - 20),
             TextFormField(
               controller: controller.password,
-              obscureText:_obscureText,
+              obscureText: _obscureText,
               validator: (value) {
                 // Validation de la valeur du champ de texte
                 if (value == '') {
@@ -54,43 +52,53 @@ class _LoginFormState extends State<LoginForm> {
                 // Retourne null si la validation est réussie
                 return null;
               },
-              decoration:  InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint,color: Mcolors.couleurPrincipal),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.fingerprint,
+                    color: Mcolors.couleurPrincipal),
                 labelText: "Password",
                 hintText: "Password",
-                border:const OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   onPressed: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
-          icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
-        ),
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off),
+                ),
               ),
             ),
             const SizedBox(height: 30 - 20),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                  onPressed: () {Fluttertoast.showToast(
-        msg: "pas encore!!",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );}, child: const Text("Forget Password")),
+                  onPressed: () {
+                    Fluttertoast.showToast(
+                      msg: "pas encore!!",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  },
+                  child: const Text("Forget Password")),
             ),
             SizedBox(
               width: double.infinity,
               height: Dimenssion.height45dp,
               child: ElevatedButton(
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor), // Définir la couleur de fond du bouton
- ),
-                onPressed: () {                
-                  LoginController.instance.loginUser(controller.email.text.trim(),controller.password.text.trim());
-},
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(
+                          context)
+                      .primaryColor), // Définir la couleur de fond du bouton
+                ),
+                onPressed: () {
+                  LoginController.instance.loginUser(
+                      controller.email.text.trim(),
+                      controller.password.text.trim());
+                },
                 child: Text("Login".toUpperCase()),
               ),
             ),

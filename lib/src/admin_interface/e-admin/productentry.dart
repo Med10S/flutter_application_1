@@ -1,14 +1,19 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../colors/colors.dart';
+import '../../../utilities/dimention.dart';
 import '../../../utilities/models/product.dart';
 import 'ProductController.dart';
 
 class ProductEntryPage extends StatefulWidget {
+  const ProductEntryPage({super.key});
+
   @override
   _ProductEntryPageState createState() => _ProductEntryPageState();
 }
@@ -91,11 +96,12 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Entrée de produit'),
+        title: const Text('Entrée de produit'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             GestureDetector(
               onTap: () {
@@ -107,16 +113,16 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            leading: Icon(Icons.photo_library),
-                            title: Text('Galerie'),
+                            leading: const Icon(Icons.photo_library),
+                            title: const Text('Galerie'),
                             onTap: () {
                               Navigator.pop(context);
                               _chooseImage(ImageSource.gallery);
                             },
                           ),
                           ListTile(
-                            leading: Icon(Icons.camera_alt),
-                            title: Text('Appareil photo'),
+                            leading: const Icon(Icons.camera_alt),
+                            title: const Text('Appareil photo'),
                             onTap: () {
                               Navigator.pop(context);
                               _chooseImage(ImageSource.camera);
@@ -137,29 +143,47 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                 ),
                 child: _imageFile != null
                     ? Image.file(_imageFile!, fit: BoxFit.cover)
-                    : Icon(Icons.add_a_photo, color: Colors.white),
+                    : const Icon(Icons.add_a_photo, color: Colors.white),
               ),
             ),
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Nom',
-              ),
+            SizedBox(
+              height: Dimenssion.height20dp / 2,
             ),
-            TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(
-                labelText: 'Description',
-              ),
-            ),
-            TextField(
+            TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.person_outline_outlined,
+                      color: Mcolors.couleurPrincipal,
+                    ),
+                    labelText: 'Nom',
+                    hintText: "Nom",
+                    border: OutlineInputBorder())),
+            //TODO:add #6 categirie emplacement
+            TextFormField(
+                controller: _descriptionController,
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.person_outline_outlined,
+                      color: Mcolors.couleurPrincipal,
+                    ),
+                    labelText: 'Description',
+                    hintText: "Description",
+                    border: OutlineInputBorder())),
+            TextFormField(
               controller: _priceController,
-              decoration: InputDecoration(
-                labelText: 'Prix',
-              ),
+              decoration: const InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.person_outline_outlined,
+                    color: Mcolors.couleurPrincipal,
+                  ),
+                  labelText: 'Prix',
+                  hintText: "Prix",
+                  border: OutlineInputBorder()),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 16.0),
+
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
                 final String name = _nameController.text;
@@ -170,17 +194,28 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
                   // L'utilisateur a sélectionné une image
                   String imageUrl =
                       await controller.uploadImageToFirebase(_imageFile!);
+                  DateTime now = DateTime.now();
+                  int milliseconds = now.millisecondsSinceEpoch;
                   // Utilisez l'URL de l'image comme vous le souhaitez
-                  final Product product =
-                      Product(imageUrl, name, description, price);
+                  final Product product = Product(
+                      id: milliseconds.toString(),
+                      image: imageUrl,
+                      name: name,
+                      description: description,
+                      price: price);
                   await controller.createProduct(product);
                 } else {
                   // L'utilisateur n'a pas sélectionné d'image
-                  final Product product = Product('', name, description, price);
+                  final Product product = Product(
+                      id: TimeOfDay.now().toString(),
+                      image: '',
+                      name: name,
+                      description: description,
+                      price: price);
                   await controller.createProduct(product);
                 }
               },
-              child: Text('Enregistrer'),
+              child: const Text('Enregistrer'),
             ),
           ],
         ),

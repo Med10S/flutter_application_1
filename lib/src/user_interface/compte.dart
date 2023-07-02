@@ -1,9 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_application_1/src/welcome.dart';
 import 'package:flutter_application_1/utilities/dimention.dart';
 import 'package:flutter_application_1/utilities/string.dart';
@@ -19,7 +19,7 @@ import '../authentification/models/user_model.dart';
 import '../authentification/screens/users/upadate_data/updatedatascren.dart';
 import '../repository/authentification_repository/authentification_repository.dart';
 import 'chart2.dart';
-import 'code_scanner.dart';
+import 'e-commerce/main/main_page_store.dart';
 import 'main_page.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -34,9 +34,8 @@ class _AccountScreenState extends State<AccountScreen> {
   final controller = Get.put(AuthentificationRepository());
   final profcontoller = Get.put(ProfileController());
   UserModel? _userModel;
-    Brightness platformBrightness = Brightness.light;
+  Brightness platformBrightness = Brightness.light;
 
-  final _db = FirebaseFirestore.instance;
   String userInput = ''; // Variable to store user input
   @override
   void initState() {
@@ -46,11 +45,13 @@ class _AccountScreenState extends State<AccountScreen> {
       setState(() {
         platformBrightness = brightness;
         statusController.setStatusBarColor(
-          platformBrightness,const Color.fromARGB(255, 236, 236, 236),
-          const Color.fromRGBO(14, 77, 89, 1));
+            platformBrightness,
+            const Color.fromARGB(255, 236, 236, 236),
+            const Color.fromRGBO(14, 77, 89, 1));
       });
     });
   }
+
   Future<void> userInformation() async {
     final userModel = await ProfileController().getUserData();
     setState(() {
@@ -58,15 +59,13 @@ class _AccountScreenState extends State<AccountScreen> {
     });
   }
 
-  Future<String> getdata_from_here() async {
+  Future<String> GetdataFRomHere() async {
     Future<dynamic> clientinfo = ProfileController().getUserData();
     UserModel user2 = await clientinfo;
     String id = user2.id!;
     //print("user id is :$id");
     return id;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +74,7 @@ class _AccountScreenState extends State<AccountScreen> {
         bottomNavigationBar: BottomAppBar(
           notchMargin: 5,
           shape: const CircularNotchedRectangle(),
+          shadowColor: Colors.black,
           color: Theme.of(context).primaryColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -104,7 +104,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   children: [
                     InkWell(
                         onTap: () {
-                          Future<String> usedId = getdata_from_here();
+                          Future<String> usedId = GetdataFRomHere();
                           usedId.then((value) async {
                             String userIdFinal = value;
                             //debugPrint('user id : $userIdFinal');
@@ -131,12 +131,13 @@ class _AccountScreenState extends State<AccountScreen> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                builder: (_) => const QRScan(
-                                  extraction: false,
-                                ),
-                              ));
+                                  builder: (_) => const EcommerceMainPage()));
                         },
-                        child: Image.asset('images/QR.png')),
+                        child: Icon(
+                          Icons.store_rounded,
+                          size: 40,
+                          color: const Color.fromARGB(255, 255, 180, 50),
+                        )),
                   ],
                 ),
               ),
@@ -173,7 +174,6 @@ class _AccountScreenState extends State<AccountScreen> {
     final password = TextEditingController();
     final oldpassword = TextEditingController();
 
-
     return SingleChildScrollView(
       child: Form(
         key: _forKey,
@@ -199,7 +199,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       fontSize: Dimenssion.width16dp * 1.5,
                     ),
                   ),
-                   SizedBox(height: Dimenssion.height20dp),
+                  SizedBox(height: Dimenssion.height20dp),
                   Container(
                     padding: EdgeInsets.symmetric(
                         horizontal: Dimenssion.height20dp / 1.2),
@@ -218,13 +218,13 @@ class _AccountScreenState extends State<AccountScreen> {
                           ],
                         ),
                         InkWell(
-                        onTap: () {
-                        Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (_) => UpdateDataAll(userModel:_userModel!), 
-                        ));
-                            
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (_) =>
+                                      UpdateDataAll(userModel: _userModel!),
+                                ));
                           },
                           child: CircleAvatar(
                             backgroundColor: Theme.of(context).focusColor,
@@ -238,39 +238,41 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
             ),
             const SizedBox(height: 20.0),
-            _userModel!.role == 'admin' ? const Padding(
+            _userModel!.role == 'admin'
+                ? const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: CustomButton(
+                      text: "Admin espace",
+                      root: "/LiaisonPages",
+                      widget: Icon(
+                        Icons.admin_panel_settings_rounded,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                    ),
+                  )
+                : const Padding(padding: EdgeInsets.all(4.0), child: null),
+            const Padding(
               padding: EdgeInsets.all(4.0),
               child: CustomButton(
-                text: "Tout les statistique",
-                root: "/AllDataLevel",
-                icon: FontAwesomeIcons.database,
-              ),
-            ): const Padding(
-              padding: EdgeInsets.all(4.0),
-              child: null
+                  text: "Acceuil",
+                  root: "/mainuserpage",
+                  widget: Icon(FontAwesomeIcons.house, color: Colors.black)),
             ),
             const Padding(
               padding: EdgeInsets.all(4.0),
               child: CustomButton(
-                text: "Acceuil",
-                root: "/mainuserpage",
-                icon: FontAwesomeIcons.house,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(4.0),
-              child: CustomButton(
-                text: "A propos de nous",
-                root: "/Apropos",
-                icon: FontAwesomeIcons.info,
-              ),
+                  text: "A propos de nous",
+                  root: "/Apropos",
+                  widget: Icon(FontAwesomeIcons.info, color: Colors.black)),
             ),
             const Padding(
               padding: EdgeInsets.only(top: 4.0, left: 4.0, right: 4),
               child: CustomButton(
                   text: "Education",
                   root: "/Education",
-                  icon: FontAwesomeIcons.graduationCap),
+                  widget: Icon(FontAwesomeIcons.graduationCap,
+                      color: Colors.black)),
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
@@ -284,50 +286,51 @@ class _AccountScreenState extends State<AccountScreen> {
                         return AlertDialog(
                           title: const Text('modifier votre clé '),
                           content: Column(
-                            mainAxisSize:MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               TextFormField(
-                    controller: oldpassword,
-                    validator: (value) {
-                      // Validation de la valeur du champ de texte
-                      if (value == '') {
-                        return 'Le champ est vide'; // Message d'erreur en cas de champ vide
-                      } else if (value!.length < 6) {
-                        return 'il doit contenir au moin 6 caracter';
-                      }
-                      // Retourne null si la validation est réussie
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.fingerprint,
-                              color: Mcolors.couleurPrincipal),
-                      labelText: "Old Password ",
-                      hintText: "Old Password",
-                      border: OutlineInputBorder(),
-                      
-                    ),
-                  ),SizedBox(height: Dimenssion.height20dp/2,),
+                                controller: oldpassword,
+                                validator: (value) {
+                                  // Validation de la valeur du champ de texte
+                                  if (value == '') {
+                                    return 'Le champ est vide'; // Message d'erreur en cas de champ vide
+                                  } else if (value!.length < 6) {
+                                    return 'il doit contenir au moin 6 caracter';
+                                  }
+                                  // Retourne null si la validation est réussie
+                                  return null;
+                                },
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.fingerprint,
+                                      color: Mcolors.couleurPrincipal),
+                                  labelText: "Old Password ",
+                                  hintText: "Old Password",
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              SizedBox(
+                                height: Dimenssion.height20dp / 2,
+                              ),
                               TextFormField(
-                    controller: password,
-                    validator: (value) {
-                      // Validation de la valeur du champ de texte
-                      if (value == '') {
-                        return 'Le champ est vide'; // Message d'erreur en cas de champ vide
-                      } else if (value!.length < 6) {
-                        return 'il doit contenir au moin 6 caracter';
-                      }
-                      // Retourne null si la validation est réussie
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.fingerprint,
-                              color: Mcolors.couleurPrincipal),
-                      labelText: "Password",
-                      hintText: "Password",
-                      border: OutlineInputBorder(),
-                      
-                    ),
-                  ),
+                                controller: password,
+                                validator: (value) {
+                                  // Validation de la valeur du champ de texte
+                                  if (value == '') {
+                                    return 'Le champ est vide'; // Message d'erreur en cas de champ vide
+                                  } else if (value!.length < 6) {
+                                    return 'il doit contenir au moin 6 caracter';
+                                  }
+                                  // Retourne null si la validation est réussie
+                                  return null;
+                                },
+                                decoration: const InputDecoration(
+                                  prefixIcon: Icon(Icons.fingerprint,
+                                      color: Mcolors.couleurPrincipal),
+                                  labelText: "Password",
+                                  hintText: "Password",
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
                             ],
                           ),
                           actions: <Widget>[
@@ -335,9 +338,12 @@ class _AccountScreenState extends State<AccountScreen> {
                               child: const Text('OK'),
                               onPressed: () {
                                 if (!(password.text.trim().length < 6)) {
-                                  print("old:${oldpassword.text} new${password.text}");
-                                  controller.updatepassowrd(password.text.trim(),
-                                      _userModel!.email, oldpassword.text.trim());
+                                  print(
+                                      "old:${oldpassword.text} new${password.text}");
+                                  controller.updatepassowrd(
+                                      password.text.trim(),
+                                      _userModel!.email,
+                                      oldpassword.text.trim());
                                   profcontoller.updatedatapassword(
                                       password.text.trim(), _userModel!.id!);
                                   Navigator.of(context).pop();
