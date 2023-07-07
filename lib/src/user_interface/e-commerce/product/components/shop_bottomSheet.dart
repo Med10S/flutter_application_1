@@ -99,7 +99,13 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
                               products[index],
                               onRemove: () {
                                 setState(() {
-                                  products.remove(products[index]);
+                                  //products.remove(products[index]);
+                                  /*productController.clearCartProducts();*/
+                                  productController
+                                      .removeProductFromSharedPreferences(
+                                          products[index].productId);
+                                  print(
+                                      'product removed left : ${products.length}');
                                 });
                               },
                             ),

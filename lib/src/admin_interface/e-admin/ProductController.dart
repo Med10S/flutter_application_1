@@ -79,10 +79,11 @@ class ProductController extends GetxController {
 
     return products;
   }
-Future<void> clearCartProducts() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.remove('cartProducts');
-}
+
+  Future<void> clearCartProducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('cartProducts');
+  }
 
   Future<void> saveCartProduct(Product product) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -143,5 +144,30 @@ Future<void> clearCartProducts() async {
       // Aucune donnée trouvée, retourner une liste vide
       return [];
     }
+  }
+
+// Supprime un produit de la liste SharedPreferences
+  Future<void> removeProductFromSharedPreferences(String productId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Récupérer la liste actuelle de produits depuis SharedPreferences
+    List<CartProduct> cartProducts = await getCartProducts();
+
+    // Supprimer le produit de la liste
+    cartProducts.removeWhere((p) => p.productId == productId);
+
+    // Convertir la liste de cartProducts en une liste de Map
+    List<Map<String, dynamic>> encodedData = cartProducts.map((p) {
+      return {
+        'productImage': p.productImage,
+        'productId': p.productId,
+        'productName': p.productName,
+        'productPrice': p.productPrice,
+        'quantity': p.quantity,
+      };
+    }).toList();
+
+    // Enregistrer la nouvelle liste dans SharedPreferences
+    await prefs.setString('cartProducts', json.encode(encodedData));
   }
 }

@@ -62,7 +62,7 @@ class _MyScreenState extends State<MyScreen> {
           ),
           child: DotsIndicator(
             dotsCount: pages.length,
-            position: _currentPageIndex.toDouble(),
+            position: _currentPageIndex,
             decorator: const DotsDecorator(
               color: Colors.grey, // Couleur des points inactifs
               activeColor:

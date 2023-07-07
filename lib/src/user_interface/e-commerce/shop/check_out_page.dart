@@ -1,5 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utilities/dimention.dart';
+import 'package:flutter_blue/gen/flutterblue.pbserver.dart';
 import 'package:get/get.dart';
 
 import '../../../../utilities/app_properties.dart';
@@ -37,7 +39,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   @override
   Widget build(BuildContext context) {
     Widget checkOutButton = InkWell(
-      /* onTap: () => Navigator.of(context)
+      /*onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (_) => AddAddressPage())),*/
       child: Container(
         height: 80,
@@ -130,7 +132,10 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                 products[index],
                                 onRemove: () {
                                   setState(() {
-                                    products.remove(products[index]);
+                                    //products.remove(products[index]);
+                                    productController
+                                        .removeProductFromSharedPreferences(
+                                            products[index].productId);
                                   });
                                 },
                               ),
@@ -138,28 +143,15 @@ class _CheckOutPageState extends State<CheckOutPage> {
                             ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(16.0),
+                        Container(
+                          width: Dimenssion.screenWidth,
                           child: Text(
                             'Payment',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 20,
                                 color: darkGrey,
                                 fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 250,
-                          child: Swiper(
-                            itemCount: 2,
-                            itemBuilder: (_, index) {
-                              return CreditCard();
-                            },
-                            scale: 0.8,
-                            controller: swiperController,
-                            viewportFraction: 0.6,
-                            loop: false,
-                            fade: 0.7,
                           ),
                         ),
                         const SizedBox(height: 24),

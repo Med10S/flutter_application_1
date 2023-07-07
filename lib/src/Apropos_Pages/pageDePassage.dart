@@ -42,7 +42,7 @@ class _MyScreenState extends State<Apropos> {
             decoration: BoxDecoration(color: Theme.of(context).primaryColor),
             child: DotsIndicator(
               dotsCount: pages.length,
-              position: _currentPageIndex.toDouble(),
+              position: _currentPageIndex,
               decorator: const DotsDecorator(
                 color: Colors.grey, // Couleur des points inactifs
                 activeColor:
