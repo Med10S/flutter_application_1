@@ -6,12 +6,16 @@ class Product {
   final String name;
   final String description;
   final double price;
+  final String categorie;
+  final int quatite;
 
   Product(
       {required this.image,
       required this.name,
       required this.description,
       required this.id,
+      required this.categorie,
+      required this.quatite,
       required this.price});
 
   Map<String, dynamic> toJson() {
@@ -21,6 +25,8 @@ class Product {
       'name': name,
       'description': description,
       'price': price,
+      'categorie': categorie,
+      'quatite': quatite
     };
   }
 
@@ -34,6 +40,8 @@ class Product {
       description: data['description'],
       price: data['price'].toDouble(),
       id: data['id'],
+      categorie: data['categorie'],
+      quatite: data['quatite'],
     );
   }
 }

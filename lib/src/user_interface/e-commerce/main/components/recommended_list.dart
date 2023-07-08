@@ -9,24 +9,32 @@ import '../../product/product_page.dart';
 class RecommendedList extends StatelessWidget {
   List<Product> products = [
     Product(
+        categorie: 'test',
+        quatite: 2,
         id: "123",
         image: 'assets/bag_1.png',
         name: 'Bag',
         description: 'Beautiful bag',
         price: 2.33),
     Product(
+        categorie: 'test',
+        quatite: 2,
         id: "123",
         image: 'assets/cap_5.png',
         name: 'Cap',
         description: 'Cap with beautiful design',
         price: 10),
     Product(
+        categorie: 'test',
+        quatite: 2,
         id: "123",
         image: 'assets/jeans_1.png',
         name: 'Jeans',
         description: 'Jeans for you',
         price: 20),
     Product(
+        categorie: 'test',
+        quatite: 2,
         id: "123",
         image: 'assets/womanshoe_3.png',
         name: 'Woman Shoes',

@@ -8,6 +8,8 @@ import '../../main/components/product_list.dart';
 class MoreProducts extends StatelessWidget {
   final List<Product> products = [
     Product(
+        categorie: 'test',
+        quatite: 2,
         id: "123",
         image:
             'https://firebasestorage.googleapis.com/v0/b/garbeco-f0f8b.appspot.com/o/images%2F1688222332626?alt=media&token=a22666d3-0753-4bb2-af84-09189c87830d',

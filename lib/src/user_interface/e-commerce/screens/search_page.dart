@@ -21,6 +21,8 @@ class _SearchPageState extends State<SearchPage>
 
   List<Product> products = [
     Product(
+        categorie: 'test',
+        quatite: 2,
         id: "123",
         image: 'assets/headphones_2.png',
         name: 'Skullcandy headset L325',
