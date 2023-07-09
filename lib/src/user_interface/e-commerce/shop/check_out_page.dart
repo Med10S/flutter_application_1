@@ -5,7 +5,11 @@ import 'package:get/get.dart';
 
 import '../../../../utilities/app_properties.dart';
 import '../../../../utilities/models/cartProduct.dart';
+import '../../../../utilities/status_bar_controller.dart';
 import '../../../admin_interface/e-admin/ProductController.dart';
+import '../../../authentification/controllers/profil_controller.dart';
+import '../../../authentification/models/user_model.dart';
+import '../payment/payment_controller.dart';
 import 'components/check_passage.dart';
 import 'components/shop_item_list.dart';
 
@@ -19,11 +23,63 @@ class CheckOutPage extends StatefulWidget {
 class _CheckOutPageState extends State<CheckOutPage> {
   SwiperController swiperController = SwiperController();
   final productController = Get.put(ProductController());
+  final payementController = Get.put(PaymentController());
+
+  String? location;
+  List<CartProduct>? cartproducts;
+  UserModel? _userModel;
+  final statusController = Get.put(Statusbarcontroller());
+  Brightness platformBrightness = Brightness.light;
+
+  Future<void> userInformation() async {
+    final userModel = await ProfileController().getUserData();
+    setState(() {
+      _userModel = userModel;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    userInformation();
+    statusController.getPlatformBrightness().then((brightness) {
+      setState(() {
+        platformBrightness = brightness;
+        statusController.setStatusBarColor(
+            platformBrightness,
+            const Color.fromARGB(255, 236, 236, 236),
+            const Color.fromRGBO(14, 77, 89, 1));
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    bool soldeVerficarion = false;
     Widget checkOutButton = InkWell(
-      onTap: () => CustomPopup.show(context),
+      onTap: () async {
+        soldeVerficarion = false;
+        location = await CustomPopup.show(context);
+        if (location != null) {
+          soldeVerficarion =
+              payementController.checkSolde(_userModel!.points!, cartproducts);
+          print(soldeVerficarion);
+          if (soldeVerficarion) {
+            Get.snackbar("solde verification", "opperation reusite",
+                borderRadius: 20,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Color.fromARGB(255, 112, 243, 121),
+                colorText: Colors.black);
+            payementController.enregisterCommande(_userModel!, cartproducts);
+          } else {
+            Get.snackbar("solde verification", "solde de points insuffisant ",
+                borderRadius: 20,
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Color.fromARGB(255, 255, 59, 59),
+                colorText: Colors.black);
+          }
+        }
+      },
       child: Container(
         height: 80,
         width: MediaQuery.of(context).size.width / 1.5,
@@ -72,7 +128,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
           future: productController.getCartProducts(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<CartProduct> products = snapshot.data!;
+              cartproducts = snapshot.data!;
 
               return LayoutBuilder(
                 builder: (_, constraints) => SingleChildScrollView(
@@ -87,23 +143,49 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 32.0),
                           height: 48.0,
                           color: yellow,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              const Text(
-                                'Subtotal',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  const Text(
+                                    'Subtotal',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  Text(
+                                    '${cartproducts!.length} items',
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  )
+                                ],
                               ),
-                              Text(
-                                products.length.toString() + ' items',
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              )
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  const Text(
+                                    'votre solde :',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  Text(
+                                    '${_userModel?.points ?? "Loading..."} points',
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -112,16 +194,16 @@ class _CheckOutPageState extends State<CheckOutPage> {
                           child: Scrollbar(
                             child: ListView.builder(
                               itemBuilder: (_, index) => ShopItemList(
-                                products[index],
+                                cartproducts![index],
                                 onRemove: () {
                                   setState(() {
                                     productController
                                         .removeProductFromSharedPreferences(
-                                            products[index].productId);
+                                            cartproducts![index].productId);
                                   });
                                 },
                               ),
-                              itemCount: products.length,
+                              itemCount: cartproducts!.length,
                             ),
                           ),
                         ),

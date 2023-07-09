@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/cartProduct.dart';
-import '../../../../../utilities/models/product.dart';
 import '../../shop/check_out_page.dart';
 import 'shop_product.dart';
 
@@ -24,7 +23,7 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
       onTap: () async {
         Navigator.of(context).pop();
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => CheckOutPage()));
+            .push(MaterialPageRoute(builder: (_) => const CheckOutPage()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 1.5,

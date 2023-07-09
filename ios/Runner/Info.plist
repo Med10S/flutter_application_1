@@ -11,11 +11,14 @@
   <string>sms</string>
   <string>file</string>
 </array>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>La localisation est requise pour afficher votre position actuelle.</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>La localisation est requise pour afficher votre position actuelle.</string>
 <key>NSCameraUsageDescription</key>
 <string>This app requires access to the camera.</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>This app requires access to the photo library.</string>
-
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

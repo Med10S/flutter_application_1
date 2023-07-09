@@ -4,7 +4,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CustomPopup {
-  static Future<void> show(BuildContext context) async {
+  static Future<String?> show(BuildContext context) async {
+    String? location;
+
     await showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -13,7 +15,7 @@ class CustomPopup {
             'Lieu de livraison',
             textAlign: TextAlign.center,
           ),
-          content: Container(
+          content: SizedBox(
             height: Dimenssion.height40dp,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -27,22 +29,23 @@ class CustomPopup {
                               await Geolocator.getCurrentPosition(
                             desiredAccuracy: LocationAccuracy.high,
                           );
-                          print('Latitude: ${position.latitude}');
-                          print('Longitude: ${position.longitude}');
+                          location =
+                              "${position.latitude};${position.longitude}";
+                          Navigator.of(context).pop();
                         } else {
-                          print(
+                          debugPrint(
                               'L\'autorisation d\'accès à la localisation a été refusée.');
                         }
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.gps_fixed,
                         color: Colors.blue,
                       ),
                     ),
-                    Text('automatique')
+                    const Text('automatique')
                   ],
                 ),
-                Column(
+                const Column(
                   children: [
                     InkWell(
                       child: Icon(
@@ -59,6 +62,7 @@ class CustomPopup {
         );
       },
     );
+    return location;
   }
 
   static Future<bool> _requestPermission() async {

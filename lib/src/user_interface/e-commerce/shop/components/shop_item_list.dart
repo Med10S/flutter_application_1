@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/cartProduct.dart';
+import '../../../../admin_interface/e-admin/ProductController.dart';
 import '../../product/components/color_list.dart';
 import '../../product/components/shop_product.dart';
 
@@ -104,12 +106,15 @@ class _ShopItemListState extends State<ShopItemList> {
                                 ),
                               )),
                           child: NumberPicker(
-                            value: quantity,
+                            value: widget.product.quantity,
                             minValue: 1,
-                            maxValue: 10,
+                            maxValue: widget.product.stock,
                             onChanged: (value) {
                               setState(() {
+                                widget.product.quantity = value;
                                 quantity = value;
+                                updateQuantite(
+                                    widget.product.productId, quantity);
                               });
                             },
                           ))
@@ -124,5 +129,11 @@ class _ShopItemListState extends State<ShopItemList> {
         ],
       ),
     );
+  }
+
+  Future<void> updateQuantite(String productId, int quantite) async {
+    final productController = Get.put(ProductController());
+    await productController.updateProductFromSharedPreferences(
+        productId, quantite);
   }
 }

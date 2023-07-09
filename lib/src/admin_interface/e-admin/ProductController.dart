@@ -95,6 +95,7 @@ class ProductController extends GetxController {
       'productName': product.name,
       'productPrice': product.price,
       'quantity': 1,
+      'stock': product.quatite
     };
 
     // Récupérer la liste de cartProducts depuis SharedPreferences
@@ -131,6 +132,7 @@ class ProductController extends GetxController {
       List<dynamic> decodedData = json.decode(cartProductsData);
       List<CartProduct> cartProducts = decodedData.map((data) {
         return CartProduct(
+          stock: data['stock'],
           productImage: data['productImage'],
           productId: data['productId'],
           productName: data['productName'],
@@ -164,6 +166,41 @@ class ProductController extends GetxController {
         'productName': p.productName,
         'productPrice': p.productPrice,
         'quantity': p.quantity,
+        'stock': p.stock,
+      };
+    }).toList();
+
+    // Enregistrer la nouvelle liste dans SharedPreferences
+    await prefs.setString('cartProducts', json.encode(encodedData));
+  }
+
+  Future<void> updateProductFromSharedPreferences(
+      String productId, int quantity) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Récupérer la liste actuelle de produits depuis SharedPreferences
+    List<CartProduct> cartProducts = await getCartProducts();
+
+    // Parcourir la liste pour trouver le produit correspondant à l'ID fourni
+    for (int i = 0; i < cartProducts.length; i++) {
+      if (cartProducts[i].productId == productId) {
+        // Mettre à jour la quantité du produit
+        cartProducts[i].quantity = quantity;
+        debugPrint('aslae ${cartProducts[i].quantity}');
+
+        break;
+      }
+    }
+
+    // Convertir la liste de cartProducts en une liste de Map
+    List<Map<String, dynamic>> encodedData = cartProducts.map((p) {
+      return {
+        'productImage': p.productImage,
+        'productId': p.productId,
+        'productName': p.productName,
+        'productPrice': p.productPrice,
+        'quantity': p.quantity,
+        'stock': p.stock,
       };
     }).toList();
 
