@@ -5,7 +5,7 @@ class UserModel {
   final String fullName;
   final String email;
   final String password;
-  final int? points;
+  final double? points;
   final String? role;
   final String? niveau;
 

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 
 import '../../../utilities/models/cartProduct.dart';
+import '../../user_interface/e-commerce/payment/payment_controller.dart';
 
 class ProductController extends GetxController {
   static ProductController get instance => Get.find();
@@ -177,6 +178,7 @@ class ProductController extends GetxController {
   Future<void> updateProductFromSharedPreferences(
       String productId, int quantity) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final PaymentController paymentController = Get.put(PaymentController());
 
     // Récupérer la liste actuelle de produits depuis SharedPreferences
     List<CartProduct> cartProducts = await getCartProducts();
@@ -187,6 +189,7 @@ class ProductController extends GetxController {
         // Mettre à jour la quantité du produit
         cartProducts[i].quantity = quantity;
         debugPrint('aslae ${cartProducts[i].quantity}');
+        paymentController.updateTotalPrice(cartProducts);
 
         break;
       }

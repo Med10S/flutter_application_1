@@ -5,14 +5,21 @@ import 'package:numberpicker/numberpicker.dart';
 import '../../../../../utilities/app_properties.dart';
 import '../../../../../utilities/models/cartProduct.dart';
 import '../../../../admin_interface/e-admin/ProductController.dart';
+import '../../payment/payment_controller.dart';
 import '../../product/components/color_list.dart';
 import '../../product/components/shop_product.dart';
 
 class ShopItemList extends StatefulWidget {
   final CartProduct product;
   final VoidCallback onRemove;
+  final List<CartProduct>? cartproducts;
 
-  const ShopItemList(this.product, {super.key, required this.onRemove});
+  const ShopItemList(
+    this.product,
+    this.cartproducts, {
+    super.key,
+    required this.onRemove,
+  });
 
   @override
   _ShopItemListState createState() => _ShopItemListState();
@@ -20,6 +27,7 @@ class ShopItemList extends StatefulWidget {
 
 class _ShopItemListState extends State<ShopItemList> {
   int quantity = 1;
+  final PaymentController paymentController = Get.put(PaymentController());
 
   @override
   Widget build(BuildContext context) {

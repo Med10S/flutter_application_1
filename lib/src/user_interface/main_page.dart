@@ -100,7 +100,7 @@ class _UserMainPageState extends State<UserMainPage> {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               UserModel userData = snapshot.data as UserModel;
-              int sum = val + userData.points!;
+              double sum = val + userData.points!;
               return Scaffold(
                   backgroundColor: Theme.of(context).primaryColor,
                   body: Column(
@@ -119,7 +119,7 @@ class _UserMainPageState extends State<UserMainPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                sum.toString(),
+                                double.parse(sum.toString()).toStringAsFixed(2),
                                 style: TextStyle(
                                     fontSize: Dimenssion.width20dp * 4,
                                     color:

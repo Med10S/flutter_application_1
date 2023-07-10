@@ -24,7 +24,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
   SwiperController swiperController = SwiperController();
   final productController = Get.put(ProductController());
   final payementController = Get.put(PaymentController());
-
+  final PaymentController paymentController2 = Get.put(PaymentController());
   String? location;
   List<CartProduct>? cartproducts;
   UserModel? _userModel;
@@ -63,14 +63,25 @@ class _CheckOutPageState extends State<CheckOutPage> {
         if (location != null) {
           soldeVerficarion =
               payementController.checkSolde(_userModel!.points!, cartproducts);
-          print(soldeVerficarion);
+          debugPrint('solde verification :$soldeVerficarion');
           if (soldeVerficarion) {
             Get.snackbar("solde verification", "opperation reusite",
                 borderRadius: 20,
                 snackPosition: SnackPosition.BOTTOM,
                 backgroundColor: Color.fromARGB(255, 112, 243, 121),
                 colorText: Colors.black);
-            payementController.enregisterCommande(_userModel!, cartproducts);
+            payementController
+                .enregisterCommande(_userModel!, cartproducts)
+                .then((value) {
+              if (value) {
+                payementController
+                    .deductionSolde(cartproducts, _userModel!)
+                    .then((value) {
+                  debugPrint('deduction verification :$value');
+                  setState(() {});
+                });
+              }
+            });
           } else {
             Get.snackbar("solde verification", "solde de points insuffisant ",
                 borderRadius: 20,
@@ -141,7 +152,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                       children: <Widget>[
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                          height: 48.0,
+                          height: 57,
                           color: yellow,
                           child: Column(
                             children: [
@@ -170,6 +181,29 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   const Text(
+                                    'Total :',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  Obx(() => Text(
+                                        cartproducts!.isNotEmpty
+                                            ? '${paymentController2.totalPrice.value.toStringAsFixed(2)} points'
+                                            : '0 points',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ))
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  const Text(
                                     'votre solde :',
                                     style: TextStyle(
                                         color: Colors.white,
@@ -177,7 +211,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                         fontSize: 16),
                                   ),
                                   Text(
-                                    '${_userModel?.points ?? "Loading..."} points',
+                                    '${_userModel?.points!.toStringAsFixed(2) ?? "Loading..."} points',
                                     style: TextStyle(
                                       color: Colors.green,
                                       fontWeight: FontWeight.bold,
@@ -202,6 +236,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                             cartproducts![index].productId);
                                   });
                                 },
+                                cartproducts,
                               ),
                               itemCount: cartproducts!.length,
                             ),
