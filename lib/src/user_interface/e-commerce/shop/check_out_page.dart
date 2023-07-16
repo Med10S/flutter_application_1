@@ -56,11 +56,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
   @override
   Widget build(BuildContext context) {
     bool soldeVerficarion = false;
+
     Widget checkOutButton = InkWell(
       onTap: () async {
         soldeVerficarion = false;
         location = await CustomPopup.show(context);
-        if (location != null) {
+        if (location != null && cartproducts!.isNotEmpty) {
           soldeVerficarion =
               payementController.checkSolde(_userModel!.points!, cartproducts);
           debugPrint('solde verification :$soldeVerficarion');
@@ -68,7 +69,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
             Get.snackbar("solde verification", "opperation reusite",
                 borderRadius: 20,
                 snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Color.fromARGB(255, 112, 243, 121),
+                backgroundColor: const Color.fromARGB(255, 112, 243, 121),
                 colorText: Colors.black);
             payementController
                 .enregisterCommande(_userModel!, cartproducts)
@@ -78,17 +79,60 @@ class _CheckOutPageState extends State<CheckOutPage> {
                     .deductionSolde(cartproducts, _userModel!)
                     .then((value) {
                   debugPrint('deduction verification :$value');
-                  setState(() {});
+                  setState(() {
+                    payementController
+                        .saveTransaction(location!, _userModel!, cartproducts,
+                            soldeVerficarion)
+                        .then((value) {
+                      debugPrint('transaction verfication save :$value');
+                      if (value) {
+                        Get.snackbar(
+                            "Success", "votre commande est enregistrer",
+                            icon: const Icon(
+                              Icons.check,
+                              color: Colors.green,
+                            ),
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.green.withOpacity(0.1),
+                            colorText: Colors.green);
+                      } else {
+                        Get.snackbar("Erreur", "Erreur de transaction",
+                            snackPosition: SnackPosition.BOTTOM,
+                            icon: const Icon(
+                              Icons.warning,
+                              color: Colors.red,
+                            ),
+                            backgroundColor:
+                                const Color.fromARGB(255, 175, 76, 76)
+                                    .withOpacity(0.1),
+                            colorText: const Color.fromARGB(255, 0, 0, 0));
+                      }
+                    });
+                  });
                 });
               }
             });
           } else {
             Get.snackbar("solde verification", "solde de points insuffisant ",
+                icon: const Icon(
+                  Icons.warning,
+                  color: Colors.red,
+                ),
                 borderRadius: 20,
                 snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Color.fromARGB(255, 255, 59, 59),
+                backgroundColor: const Color.fromARGB(255, 255, 59, 59),
                 colorText: Colors.black);
           }
+        } else {
+          Get.snackbar("Erreur", "aucun produits",
+              icon: const Icon(
+                Icons.warning,
+                color: Colors.red,
+              ),
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor:
+                  const Color.fromARGB(255, 255, 0, 0).withOpacity(0.1),
+              colorText: const Color.fromARGB(255, 0, 0, 0));
         }
       },
       child: Container(
@@ -115,7 +159,20 @@ class _CheckOutPageState extends State<CheckOutPage> {
       ),
     );
 
-    return Scaffold(
+    Widget subTot = Obx(() => Text(
+          cartproducts!.isNotEmpty
+              ? '${paymentController2.totalPrice.value.toStringAsFixed(2)} points'
+              : '0 points',
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ));
+
+    return GetX<ProductController>(
+      init: ProductController(),
+      builder: (cartController) => Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -123,16 +180,19 @@ class _CheckOutPageState extends State<CheckOutPage> {
           iconTheme: const IconThemeData(color: darkGrey),
           actions: <Widget>[
             IconButton(
-                icon: Image.asset('assets/icons/denied_wallet.png'),
-                onPressed:
-                    () {} /*Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => UnpaidPage())),*/
-                )
+              icon: Image.asset('assets/icons/denied_wallet.png'),
+              onPressed: () {
+                // Faites quelque chose lorsque l'icône est cliquée
+              },
+            )
           ],
           title: const Text(
             'Checkout',
             style: TextStyle(
-                color: darkGrey, fontWeight: FontWeight.w500, fontSize: 18.0),
+              color: darkGrey,
+              fontWeight: FontWeight.w500,
+              fontSize: 18.0,
+            ),
           ),
         ),
         body: FutureBuilder<List<CartProduct>>(
@@ -145,8 +205,9 @@ class _CheckOutPageState extends State<CheckOutPage> {
                 builder: (_, constraints) => SingleChildScrollView(
                   physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
-                    constraints:
-                        BoxConstraints(minHeight: constraints.maxHeight),
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -161,19 +222,21 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   const Text(
-                                    'Subtotal',
+                                    'subtotal',
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                   Text(
                                     '${cartproducts!.length} items',
                                     style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  )
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
@@ -183,20 +246,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   const Text(
                                     'Total :',
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                  Obx(() => Text(
-                                        cartproducts!.isNotEmpty
-                                            ? '${paymentController2.totalPrice.value.toStringAsFixed(2)} points'
-                                            : '0 points',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ))
+                                  subTot
                                 ],
                               ),
                               Row(
@@ -206,18 +261,19 @@ class _CheckOutPageState extends State<CheckOutPage> {
                                   const Text(
                                     'votre solde :',
                                     style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                   Text(
                                     '${_userModel?.points!.toStringAsFixed(2) ?? "Loading..."} points',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.green,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ],
@@ -244,26 +300,27 @@ class _CheckOutPageState extends State<CheckOutPage> {
                         ),
                         Container(
                           width: Dimenssion.screenWidth,
-                          child: Text(
+                          child: const Text(
                             'Payment',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 20,
-                                color: darkGrey,
-                                fontWeight: FontWeight.bold),
+                              fontSize: 20,
+                              color: darkGrey,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 24),
                         Center(
                           child: Padding(
                             padding: EdgeInsets.only(
-                                bottom: MediaQuery.of(context).padding.bottom ==
-                                        0
-                                    ? 20
-                                    : MediaQuery.of(context).padding.bottom),
+                              bottom: MediaQuery.of(context).padding.bottom == 0
+                                  ? 20
+                                  : MediaQuery.of(context).padding.bottom,
+                            ),
                             child: checkOutButton,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -272,10 +329,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
             } else if (snapshot.hasError) {
               return Text('Une erreur s\'est produite : ${snapshot.error}');
             } else {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           },
-        ));
+        ),
+      ),
+    );
   }
 }
 
