@@ -6,12 +6,13 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../utilities/models/cartProduct.dart';
+import '../../../../utilities/models/transaction.dart';
 import '../../../admin_interface/e-admin/ProductController.dart';
 
-class PaymentController extends GetxController {
+class PaymentController {
   final _db = FirebaseFirestore.instance;
 
-  static PaymentController get instance => Get.find();
+  //static PaymentController get instance => Get.find();
   RxDouble totalPrice = 0.0.obs;
 
   bool checkSolde(double solde, List<CartProduct>? products) {
@@ -59,16 +60,8 @@ class PaymentController extends GetxController {
         await docRef.update({
           '$milliseconds;${product.productId}': product.toJson()
         }).whenComplete(() {
-          Get.snackbar("Success", "votre commande est enregistrer",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green.withOpacity(0.1),
-              colorText: Colors.green);
           verification = true;
         }).catchError((error, StackTrace) {
-          Get.snackbar("Error", "Something went wrong. Please try again",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.redAccent.withOpacity(0.1),
-              colorText: Colors.red);
           verification = false;
         });
       } else {
@@ -77,16 +70,8 @@ class PaymentController extends GetxController {
         await docRef.set({
           '$milliseconds;${product.productId}': product.toJson()
         }).whenComplete(() {
-          Get.snackbar("Success", "votre commande est enregistrer",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.green.withOpacity(0.1),
-              colorText: Colors.green);
           verification = true;
         }).catchError((error, StackTrace) {
-          Get.snackbar("Error", "Something went wrong. Please try again",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.redAccent.withOpacity(0.1),
-              colorText: Colors.red);
           verification = false;
         });
       }
@@ -128,11 +113,68 @@ class PaymentController extends GetxController {
           // Handle errors here
         });
       } else {
-        // Document does not exist
+        // Document does not; exist
       }
     }).catchError((error) {
       // Handle errors here
     });
     return resulta;
+  }
+
+  Future<bool> saveTransaction(String localisation, UserModel userModel,
+      List<CartProduct>? products, bool soldeVerfication) async {
+    DateTime maintenant = DateTime.now();
+    int milliseconds = maintenant.millisecondsSinceEpoch;
+
+    final day = DateFormat('yyyy-MM-dd').format(maintenant);
+    bool verification = false;
+    final transaction = TransactionModel(
+        totalItems: products!.length,
+        localisation: localisation,
+        soldeVerfication: soldeVerfication,
+        userID: userModel.id!,
+        time: day,
+        destination: 'Garbeco');
+    final docRef = _db.collection("Transactions").doc(day);
+    final docSnapshot = await docRef.get();
+    if (products.isEmpty) {
+      return false;
+    }
+    if (docSnapshot.exists) {
+      // Le jour existe déjà, effectuer une mise à jour
+
+      await docRef.update(
+          {milliseconds.toString(): transaction.toJson()}).whenComplete(() {
+        Get.snackbar("Success", "votre commande est enregistrer",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green.withOpacity(0.1),
+            colorText: Colors.green);
+        verification = true;
+      }).catchError((error, StackTrace) {
+        Get.snackbar("Error", "Something went wrong. Please try again",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+        verification = false;
+      });
+    } else {
+      // Le jour n'existe pas, effectuer un nouvel enregistrement
+
+      await docRef.set(
+          {milliseconds.toString(): transaction.toJson()}).whenComplete(() {
+        Get.snackbar("Success", "votre commande est enregistrer",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green.withOpacity(0.1),
+            colorText: Colors.green);
+        verification = true;
+      }).catchError((error, StackTrace) {
+        Get.snackbar("Error", "Something went wrong. Please try again",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.redAccent.withOpacity(0.1),
+            colorText: Colors.red);
+        verification = false;
+      });
+    }
+    return verification;
   }
 }
