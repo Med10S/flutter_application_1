@@ -11,15 +11,12 @@ import '../../product/components/shop_product.dart';
 
 class ShopItemList extends StatefulWidget {
   final CartProduct product;
-  final VoidCallback onRemove;
+  final VoidCallback? onRemove;
   final List<CartProduct>? cartproducts;
+  final bool fromcart;
 
-  const ShopItemList(
-    this.product,
-    this.cartproducts, {
-    super.key,
-    required this.onRemove,
-  });
+  const ShopItemList(this.product, this.cartproducts,
+      {super.key, this.onRemove, required this.fromcart});
 
   @override
   _ShopItemListState createState() => _ShopItemListState();
@@ -82,14 +79,16 @@ class _ShopItemListState extends State<ShopItemList> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    const ColorOption(Colors.red),
-                                    Text(
-                                      '\$${widget.product.productPrice}',
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          color: darkGrey,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.0),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 60),
+                                      child: Text(
+                                        '\$${widget.product.productPrice}',
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                            color: darkGrey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -113,19 +112,38 @@ class _ShopItemListState extends State<ShopItemList> {
                                   color: Colors.grey[400],
                                 ),
                               )),
-                          child: NumberPicker(
-                            value: widget.product.quantity,
-                            minValue: 1,
-                            maxValue: widget.product.stock,
-                            onChanged: (value) {
-                              setState(() {
-                                widget.product.quantity = value;
-                                quantity = value;
-                                updateQuantite(
-                                    widget.product.productId, quantity);
-                              });
-                            },
-                          ))
+                          child: widget.fromcart
+                              ? NumberPicker(
+                                  value: widget.product.quantity,
+                                  minValue: 1,
+                                  maxValue: widget.product.stock,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      widget.product.quantity = value;
+                                      quantity = value;
+                                      updateQuantite(
+                                          widget.product.productId, quantity);
+                                    });
+                                  },
+                                )
+                              : Container(
+                                  height: 100,
+                                  width: 50,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Qte :',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '${widget.product.quantity}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  )))
                     ])),
           ),
           Positioned(
@@ -133,7 +151,8 @@ class _ShopItemListState extends State<ShopItemList> {
               child: ShopProductDisplay(
                 widget.product,
                 onPressed: widget.onRemove,
-              )),
+                fromcart: widget.fromcart,
+              ))
         ],
       ),
     );

@@ -7,6 +7,7 @@ import '../../../../utilities/models/product.dart';
 import '../../../admin_interface/e-admin/ProductController.dart';
 import '../../../admin_interface/e-admin/productentry.dart';
 import '../category/category_list_page.dart';
+import '../screens/deliveryItems.dart';
 import '../screens/notifications_page.dart';
 import '../screens/search_page.dart';
 import '../shop/check_out_page.dart';
@@ -218,7 +219,7 @@ class _EcommerceMainPageState extends State<EcommerceMainPage>
             ),
             CategoryListPage(),
             CheckOutPage(),
-            ProductEntryPage(),
+            DeliveryItems()
           ],
         ),
       ),

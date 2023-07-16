@@ -91,6 +91,7 @@ class ProductController extends GetxController {
 
     // Convertir le cartProduct en un Map
     Map<String, dynamic> cartProductData = {
+      'status': 'attente',
       'productImage': product.image,
       'productId': product.id,
       'productName': product.name,
@@ -133,6 +134,7 @@ class ProductController extends GetxController {
       List<dynamic> decodedData = json.decode(cartProductsData);
       List<CartProduct> cartProducts = decodedData.map((data) {
         return CartProduct(
+          status: data['status'],
           stock: data['stock'],
           productImage: data['productImage'],
           productId: data['productId'],
@@ -168,6 +170,7 @@ class ProductController extends GetxController {
         'productPrice': p.productPrice,
         'quantity': p.quantity,
         'stock': p.stock,
+        'status': p.status,
       };
     }).toList();
 
@@ -204,6 +207,7 @@ class ProductController extends GetxController {
         'productPrice': p.productPrice,
         'quantity': p.quantity,
         'stock': p.stock,
+        'status': p.status,
       };
     }).toList();
 

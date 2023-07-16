@@ -6,10 +6,12 @@ import '../../../../../utilities/models/cartProduct.dart';
 class ShopProduct extends StatelessWidget {
   final CartProduct product;
   final VoidCallback onRemove;
+  final bool fromcart;
 
   const ShopProduct(
     this.product, {
     required this.onRemove,
+    required this.fromcart,
   });
 
   @override
@@ -21,6 +23,7 @@ class ShopProduct extends StatelessWidget {
           children: <Widget>[
             ShopProductDisplay(
               product,
+              fromcart: fromcart,
               onPressed: onRemove,
             ),
             Padding(
@@ -46,9 +49,11 @@ class ShopProduct extends StatelessWidget {
 
 class ShopProductDisplay extends StatelessWidget {
   final CartProduct product;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final bool fromcart;
 
-  const ShopProductDisplay(this.product, {required this.onPressed});
+  const ShopProductDisplay(this.product,
+      {required this.onPressed, required this.fromcart});
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +83,18 @@ class ShopProductDisplay extends StatelessWidget {
                 fit: BoxFit.contain,
               )),
         ),
-        Positioned(
-          right: 40 ,
-          bottom: 25,
-          child: Align(
-            child: IconButton(
-              icon: Image.asset('assets/red_clear.png'),
-              onPressed: onPressed,
-            ),
-          ),
-        )
+        fromcart
+            ? Positioned(
+                right: 40,
+                bottom: 25,
+                child: Align(
+                  child: IconButton(
+                    icon: Image.asset('assets/red_clear.png'),
+                    onPressed: onPressed,
+                  ),
+                ),
+              )
+            : Positioned(child: Text(''))
       ]),
     );
   }

@@ -60,6 +60,17 @@ class LiaisonPages extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(4.0),
+          child: CustomButton(
+            text: "nouveaux produit",
+            root: "/ProductEntryPage",
+            widget: Icon(
+              FontAwesomeIcons.circlePlus,
+              color: Colors.black,
+            ),
+          ),
         )
       ],
     );

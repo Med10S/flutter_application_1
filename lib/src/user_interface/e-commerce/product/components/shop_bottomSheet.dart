@@ -108,6 +108,7 @@ class _ShopBottomSheetState extends State<ShopBottomSheet> {
                                       'product removed left : ${products.length}');
                                 });
                               },
+                              fromcart: true,
                             ),
                             index == 4
                                 ? const SizedBox()
