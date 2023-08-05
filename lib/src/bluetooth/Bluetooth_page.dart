@@ -254,7 +254,7 @@ class _BluetoothPageState extends State<BluetoothPage>
     if (_buffer.contains('&')) {
       final message = _buffer.replaceAll('\r', '').replaceAll('\n', '');
       _buffer = '';
-// ici je dois ajouter la logique qui vas extaire les autres données Total des poubelles 
+// ici je dois ajouter la logique qui vas extaire les autres données Total des poubelles même chose pour l'admin 
       Get.snackbar("Message", message,
           borderRadius: 20,
           snackPosition: SnackPosition.TOP,
